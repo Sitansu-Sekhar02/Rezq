@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:gravity="center"
+       android:orientation="vertical">
+       <ImageView
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:layout_gravity="center"
+           android:src="@drawable/logo_ac"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/free_membership"
+           android:textSize="14dp"
+           android:textStyle="bold"
+           android:layout_marginTop="50dp"
+           android:textColor="#3B3B3B"/>
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="@string/membership_free"
+           android:textSize="24dp"
+           android:textStyle="bold"
+           android:layout_marginTop="10dp"
+           android:textColor="#1B9090"/>
+
+   </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/red"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="@string/upgrade"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

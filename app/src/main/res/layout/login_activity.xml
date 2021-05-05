@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/wecome"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_welcome"
+            android:layout_centerInParent="true"/>
+        <TextView
+            android:id="@+id/textwel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/welcome"
+            android:layout_below="@+id/wecome"
+            android:layout_centerInParent="true"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:textColor="#171717"
+            android:textSize="24dp"/>
+
+            <TextView
+                android:id="@+id/txtmobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textwel"
+                android:layout_marginTop="100dp"
+                android:text="@string/enter_mobileno"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:textColor="#758591"
+                android:textSize="14dp" />
+
+            <EditText
+                android:id="@+id/etNumber"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/txtmobile"
+                android:backgroundTint="@color/holo_green"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:inputType="number"
+                android:hint="+971 xxxxxxxxxx"
+                android:layout_marginTop="8dp"
+                android:layout_height="wrap_content" >
+        </EditText>
+
+            <Button
+                android:id="@+id/btnLogin"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:layout_below="@id/etNumber"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="25dp"
+                android:backgroundTint="#1B9090"
+                android:textColor="@color/white"
+                android:text="@string/login"
+                android:textSize="14dp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
