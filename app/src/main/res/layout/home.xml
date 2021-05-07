@@ -72,6 +72,7 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/TvseeAllCategory"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="@color/red"
@@ -80,8 +81,15 @@
                             android:text="@string/seeall" />
 
                     </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:id="@+id/Rvcategory"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                     <HorizontalScrollView
+                        android:visibility="gone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:fillViewport="true">
@@ -276,6 +284,7 @@
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
+                        android:id="@+id/Rvtrending"
                         android:layout_height="wrap_content">
 
                     </androidx.recyclerview.widget.RecyclerView>
@@ -312,6 +321,7 @@
                     </LinearLayout>
                     <androidx.recyclerview.widget.RecyclerView
                         android:layout_width="match_parent"
+                        android:id="@+id/Rvplaces"
                         android:layout_height="wrap_content"/>
                     </LinearLayout>
 

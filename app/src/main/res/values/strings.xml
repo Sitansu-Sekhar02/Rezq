@@ -59,4 +59,12 @@
     <string name="nearby_km">Nearby distance 100km</string>
     <string name="get_offer">Get best offers before others</string>
     <string name="unblock_daily">Unlock 2 deals a day</string>
+    <string name="marina">Carlucciao\'s- Dubai Marina mall</string>
+    <string name="off_percent">10% off on total bill</string>
+    <string name="dubai_mall">Urban Bar <br></br>Kitchen- UBK</string>
+    <string name="al_qaim">Al Mansalauun</string>
+    <string name="drink_on">First drink on the house</string>
+    <string name="pizza"><![CDATA[Broccoli pizza & pasta]]></string>
+    <string name="off">50% off</string>
+    <string name="buy_one_get">Buy 1 get 1</string>
 </resources>
