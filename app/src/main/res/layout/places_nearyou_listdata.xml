@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/mainlnr"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/food"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_height="match_parent">
+            <ImageView
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:src="@drawable/food"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_toRightOf="@+id/food"
+            android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="25dp"
+            android:gravity="center_vertical"
+            android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tvFood"
+                android:layout_width="wrap_content"
+                android:text="@string/dinner"
+                android:textColor="#848484"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:textColor="#374646"
+                android:textSize="14dp"
+                android:text="@string/pizza_pasta"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvoff"
+                android:layout_width="wrap_content"
+                android:text="@string/off"
+                android:textColor="@color/holo_green"
+                android:textAllCaps="true"
+                android:textSize="12dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="15dp"
+            android:layout_height="match_parent">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textAllCaps="true"
+                android:textSize="12dp"
+                android:textColor="#8D8D8D"
+                android:text="@string/one_offers" />
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/mainlnr"
+        android:background="@color/grey"/>
+
+
+</RelativeLayout>

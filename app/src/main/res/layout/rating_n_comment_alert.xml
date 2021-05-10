@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_trans">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <RelativeLayout
+            android:background="@drawable/dialog_ratings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvAlertMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="@string/rate_your_exp"
+                android:textColor="#171717"
+                android:textSize="14dp" />
+            <LinearLayout
+                android:id="@+id/hotel"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvAlertMsg"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_group_al"/>
+                <TextView
+                    android:id="@+id/Tvvendor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/dubai_mall"
+                    android:textColor="#171717"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@+id/hotel">
+
+                <RatingBar
+                    android:id="@+id/ratingBar1"
+                    style="@style/Widget.AppCompat.RatingBar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:progressTint="#FFB400"
+                    android:rating="4"
+                    android:stepSize="1" />
+
+            </RelativeLayout>
+            <TextView
+                android:id="@+id/tvComment"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rr"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:text="@string/comments"/>
+            <com.sa.rezq.customecomponent.CustomEdittext
+                android:id="@+id/etComment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="25dp"
+                android:layout_marginLeft="25dp"
+                android:layout_below="@id/tvComment"/>
+
+
+
+            <Button
+                android:layout_marginTop="40dp"
+                android:id="@+id/btnReedem"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="30dp"
+                android:layout_height="@dimen/_35sdp"
+                android:gravity="center"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:text="@string/submit"
+                android:background="@drawable/button_border"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_below="@+id/etComment" />
+
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

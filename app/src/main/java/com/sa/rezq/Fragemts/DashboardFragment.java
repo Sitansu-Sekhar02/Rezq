@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -23,6 +24,8 @@ import com.sa.rezq.Models.TrendingModelClass;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.CardPagerAdapter;
 import com.sa.rezq.adapter.CategoryAdapter;
+import com.sa.rezq.adapter.ExtraAdapter;
+import com.sa.rezq.adapter.PopularPlacesAdapter;
 import com.sa.rezq.extra.AppSettings;
 
 import java.util.ArrayList;
@@ -58,6 +61,7 @@ public class DashboardFragment extends Fragment {
     ArrayList<TrendingModelClass> trendingList;
     ArrayList<PopularPlacesModelClass> popularList;
 
+
     RecyclerView CategoryRecyclerView, TrendingRecyclerView,PopularplacesRecyclerview;
 
     int[] icons = {R.drawable.food,R.drawable.ic_bar,R.drawable.flight,R.drawable.ic_cinema};
@@ -78,6 +82,8 @@ public class DashboardFragment extends Fragment {
         PopularplacesRecyclerview =view.findViewById(R.id.Rvplaces);
         seeAll=view.findViewById(R.id.TvseeAllCategory);
 
+
+
         seeAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,8 +101,6 @@ public class DashboardFragment extends Fragment {
         CategoryItems();
         TrendingItems();
         PopularPlaces();
-
-
 
 
 
@@ -150,6 +154,7 @@ public class DashboardFragment extends Fragment {
 
         PopularPlacesAdapter adapter = new PopularPlacesAdapter(getActivity(), popularList);
         PopularplacesRecyclerview.setAdapter(adapter);*/
+
     }
 
     private void TrendingItems() {
