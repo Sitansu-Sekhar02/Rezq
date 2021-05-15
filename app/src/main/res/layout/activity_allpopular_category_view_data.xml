@@ -29,6 +29,7 @@
                 android:id="@+id/tvFood"
                 android:layout_width="wrap_content"
                 android:text="@string/food"
+                android:textAllCaps="true"
                 android:textColor="#171717"
                 android:layout_height="wrap_content"/>
             <TextView

@@ -2,10 +2,13 @@ package com.sa.rezq.Fragemts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -25,38 +28,38 @@ import com.sa.rezq.adapter.CategoryAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllCategoryFragment extends Fragment {
-    View view;
+public class RecentCouponFragment extends Fragment {
+
     ArrayList<String> categoryList;
     private List<CategoryModelClass> movieList = new ArrayList<>();
-    private ExtraAdapter mAdapter;
+    private RecentCouponAdapter mAdapter;
     CategoryAdapter adapter;
     RecyclerView recyclerView;
-
-
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_recyclerview_category, container, false);
+        view = inflater.inflate(R.layout.recent_coupons_activity, container, false);
 
         categoryList = new ArrayList<>();
-
         CategoryModelClass movie = new CategoryModelClass("FOOD");
         movieList.add(movie);
 
         movie = new CategoryModelClass("BAR");
         movieList.add(movie);
+// set up the RecyclerView
+        recyclerView = view.findViewById(R.id.RecyclerToday);
 
-
-        // set up the RecyclerView
-        recyclerView = view.findViewById(R.id.categoryRecyclerview);
-
-        mAdapter = new ExtraAdapter(movieList);
+        mAdapter = new RecentCouponAdapter(movieList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+
+        //findview By id
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -77,9 +80,10 @@ public class AllCategoryFragment extends Fragment {
         });
 
         MainActivity.ivHome.setVisibility(View.VISIBLE);
-        MainActivity.ivHome.setText(getString(R.string.popular_category));
+        MainActivity.ivHome.setText(getString(R.string.recent));
         MainActivity.iv_menu.setImageResource(R.drawable.ic_group_back);
         MainActivity.searchView.setVisibility(View.GONE);
+        MainActivity.EtsearchRecent.setVisibility(View.VISIBLE);
         MainActivity.tvLocation.setVisibility(View.GONE);
         MainActivity.Crprofile.setVisibility(View.GONE);
         MainActivity.tvHeaderText.setVisibility(View.GONE);
@@ -92,37 +96,49 @@ public class AllCategoryFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
             }
         });
+
+        MainActivity.EtsearchRecent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         return  view;
+    }
+    public void replaceFragmentWithAnimation(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
     }
 
 
     //*Recyclerview Adapter*//
 
 
-    public class ExtraAdapter extends RecyclerView.Adapter<ExtraAdapter.MyViewHolder> {
+    public class RecentCouponAdapter extends RecyclerView.Adapter<RecentCouponAdapter.MyViewHolder> {
 
         private List<CategoryModelClass> moviesList;
 
         public class MyViewHolder extends RecyclerView.ViewHolder {
             TextView title;
-            RelativeLayout mainItemClick;
 
             public MyViewHolder(View view) {
                 super(view);
                 title = (TextView) view.findViewById(R.id.tvFood);
-                mainItemClick = view.findViewById(R.id.mainlnr);
             }
         }
 
 
-        public ExtraAdapter(List<CategoryModelClass> moviesList) {
+        public RecentCouponAdapter(List<CategoryModelClass> moviesList) {
             this.moviesList = moviesList;
         }
 
         @Override
         public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_allpopular_category_view_data, parent, false);
+                    .inflate(R.layout.recent_coupon_dataview, parent, false);
 
             return new MyViewHolder(itemView);
         }
@@ -130,15 +146,8 @@ public class AllCategoryFragment extends Fragment {
         @Override
         public void onBindViewHolder(MyViewHolder holder, int position) {
             CategoryModelClass movie = moviesList.get(position);
-          //  holder.title.setText(movie.getCategory_name());
-            holder.mainItemClick.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    replaceFragmentWithAnimation(new FoodAndOffersFragments());
+            //holder.title.setText(movie.getCategory_name());
 
-
-                }
-            });
         }
 
         @Override

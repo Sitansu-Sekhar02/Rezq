@@ -1,5 +1,6 @@
 package com.sa.rezq.Fragemts;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -19,44 +20,48 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.Models.CategoryModelClass;
+import com.sa.rezq.Models.FavouriteCategoryModel;
+import com.sa.rezq.Models.PopularPlacesModelClass;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AllCategoryFragment extends Fragment {
-    View view;
+public class FavouriteFragment extends Fragment {
     ArrayList<String> categoryList;
-    private List<CategoryModelClass> movieList = new ArrayList<>();
-    private ExtraAdapter mAdapter;
-    CategoryAdapter adapter;
+    private List<FavouriteCategoryModel> movieList = new ArrayList<>();
+    private FavouriteAdapter mAdapter;
     RecyclerView recyclerView;
 
 
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_recyclerview_category, container, false);
+        view = inflater.inflate(R.layout.favourite_fragment, container, false);
 
         categoryList = new ArrayList<>();
 
-        CategoryModelClass movie = new CategoryModelClass("FOOD");
+
+        FavouriteCategoryModel movie = new FavouriteCategoryModel("All");
         movieList.add(movie);
 
-        movie = new CategoryModelClass("BAR");
+        movie = new FavouriteCategoryModel("Food");
         movieList.add(movie);
 
 
         // set up the RecyclerView
-        recyclerView = view.findViewById(R.id.categoryRecyclerview);
+        recyclerView = view.findViewById(R.id.favouriteTitle);
 
-        mAdapter = new ExtraAdapter(movieList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new FavouriteAdapter(movieList);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
+
+
 
         view.setFocusableInTouchMode(true);
         view.requestFocus();
@@ -68,7 +73,6 @@ public class AllCategoryFragment extends Fragment {
                         Intent i = new Intent(getActivity(), MainActivity.class);
                         startActivity(i);
                         getActivity().overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
-
                         return true;
                     }
                 }
@@ -77,7 +81,7 @@ public class AllCategoryFragment extends Fragment {
         });
 
         MainActivity.ivHome.setVisibility(View.VISIBLE);
-        MainActivity.ivHome.setText(getString(R.string.popular_category));
+        MainActivity.ivHome.setText(getString(R.string.favourites));
         MainActivity.iv_menu.setImageResource(R.drawable.ic_group_back);
         MainActivity.searchView.setVisibility(View.GONE);
         MainActivity.tvLocation.setVisibility(View.GONE);
@@ -92,53 +96,38 @@ public class AllCategoryFragment extends Fragment {
                 getActivity().overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
             }
         });
+
+
+
         return  view;
     }
+    public void replaceFragmentWithAnimation(Fragment fragment) {
+        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
+        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
+        transaction.replace(R.id.fragment_container, fragment);
+        transaction.commit();
+    }
 
+    //*RecyclerView Adapter*//
+    public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.viewHolder> {
 
-    //*Recyclerview Adapter*//
+        private List<FavouriteCategoryModel> moviesList;
 
-
-    public class ExtraAdapter extends RecyclerView.Adapter<ExtraAdapter.MyViewHolder> {
-
-        private List<CategoryModelClass> moviesList;
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView title;
-            RelativeLayout mainItemClick;
-
-            public MyViewHolder(View view) {
-                super(view);
-                title = (TextView) view.findViewById(R.id.tvFood);
-                mainItemClick = view.findViewById(R.id.mainlnr);
-            }
-        }
-
-
-        public ExtraAdapter(List<CategoryModelClass> moviesList) {
+        public FavouriteAdapter(List<FavouriteCategoryModel> moviesList) {
             this.moviesList = moviesList;
         }
 
+        @NonNull
         @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.activity_allpopular_category_view_data, parent, false);
-
-            return new MyViewHolder(itemView);
+        public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourite_single_datatitle, parent, false);
+            return new viewHolder(view);
         }
 
         @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            CategoryModelClass movie = moviesList.get(position);
-          //  holder.title.setText(movie.getCategory_name());
-            holder.mainItemClick.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    replaceFragmentWithAnimation(new FoodAndOffersFragments());
+        public void onBindViewHolder(@NonNull viewHolder holder, int position) {
 
 
-                }
-            });
         }
 
         @Override
@@ -146,11 +135,13 @@ public class AllCategoryFragment extends Fragment {
             return moviesList.size();
         }
 
-        public void replaceFragmentWithAnimation(Fragment fragment) {
-            FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-            transaction.replace(R.id.fragment_container, fragment);
-            transaction.commit();
+        public class viewHolder extends RecyclerView.ViewHolder {
+
+            public viewHolder(@NonNull View itemView) {
+                super(itemView);
+
+
+            }
         }
     }
 }

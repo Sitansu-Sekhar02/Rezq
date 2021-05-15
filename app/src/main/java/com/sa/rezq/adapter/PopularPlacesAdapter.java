@@ -37,9 +37,7 @@ public class PopularPlacesAdapter extends RecyclerView.Adapter<PopularPlacesAdap
     @Override
     public void onBindViewHolder(@NonNull PopularPlacesAdapter.viewHolder holder, int position) {
         holder.iconName.setText(arrayList.get(position).getCategory_place_name());
-        Glide.with(context)
-                .load(arrayList.get(position).getCategory_image())
-                .into(holder.icon);
+
     }
 
     @Override
@@ -52,8 +50,7 @@ public class PopularPlacesAdapter extends RecyclerView.Adapter<PopularPlacesAdap
         TextView iconName;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
-            icon = (ImageView) itemView.findViewById(R.id.categoryImage);
-            iconName = (TextView) itemView.findViewById(R.id.TvCategoryName);
+            iconName = (TextView) itemView.findViewById(R.id.tvPercentOff);
         }
     }
 }

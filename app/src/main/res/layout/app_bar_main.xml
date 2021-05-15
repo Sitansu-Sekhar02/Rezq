@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="15dp">
+        android:padding="10dp">
 
         <RelativeLayout
             android:id="@+id/rr_header"
@@ -23,7 +23,7 @@
 
             <ImageView
                 android:id="@+id/iv_menu"
-                android:layout_width="@dimen/_30sdp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/_7sdp"
@@ -31,14 +31,25 @@
                 app:srcCompat="@drawable/ic_group_menu"
                 tools:ignore="VectorDrawableCompat" />
 
-            <ImageView
-                android:id="@+id/ivHome"
-                android:layout_width="@dimen/_20sdp"
-                android:layout_height="@dimen/_20sdp"
+            <TextView
+                android:id="@+id/ivHomeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/_5sdp"
+                android:layout_toRightOf="@+id/iv_menu"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:gravity="center_vertical"
                 android:visibility="gone"
-                tools:ignore="VectorDrawableCompat" />
+                android:textStyle="bold"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="#171717" />
+            <SearchView
+                android:id="@+id/Etsearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_7sdp"
+                android:visibility="gone"
+                android:layout_alignParentRight="true" />
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -92,8 +103,7 @@
             android:layout_marginTop="10dp"
             android:background="#ffffff"
             android:iconifiedByDefault="false"
-            android:queryHint="@string/search"
-            app:queryHint="@string/search" />
+            android:queryHint="@string/search" />
 
     </LinearLayout>
 

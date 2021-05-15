@@ -43,7 +43,7 @@
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="15dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:orientation="horizontal">
@@ -52,36 +52,49 @@
                         android:id="@+id/tvRating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/ic_baseline_star_rate_24"
+                        android:drawableRight="@drawable/ic_path_star"
                         android:drawablePadding="5dp"
                         android:text="4.8"
+                        android:gravity="center"
                         android:textColor="#FFB400"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginTop="5dp"
-                        android:text="@string/reating"
-                        android:textAllCaps="true"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
                         android:layout_toRightOf="@+id/tvRating"
+                        android:text="@string/reating"
+                        android:layout_marginTop="3dp"
+                        android:textAllCaps="true"
+                        android:gravity="center"
                         android:textColor="#171717"
                         android:textSize="12dp" />
-                    <TextView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/Favourite"
-                        android:gravity="center_vertical"
-                        android:textAllCaps="true"
-                        android:textColor="#2B2626"
-                        android:textStyle="bold"
-                        android:drawablePadding="5dp"
-                        android:drawableLeft="@drawable/ic_fav"
-                        android:layout_alignParentRight="true"
-                        android:textSize="12dp" />
+                        android:layout_alignParentRight="true">
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toLeftOf="@+id/tvFav"
+                            android:src="@drawable/ic_like"/>
+
+                        <TextView
+                            android:id="@+id/tvFav"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/Favourite"
+                            android:gravity="center_vertical"
+                            android:textAllCaps="true"
+                            android:textColor="#2B2626"
+                            android:textStyle="bold"
+                            android:layout_alignParentRight="true"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
                 </RelativeLayout>
             <View
                 android:layout_width="match_parent"
@@ -104,7 +117,7 @@
                 <TextView
                     android:id="@+id/tvDesc"
                     android:layout_marginTop="5dp"
-                    android:layout_width="wrap_content"
+                    android:layout_width="211dp"
                     android:layout_height="wrap_content"
                     android:text="@string/Neque_porro"
                     android:textColor="#171717"
@@ -151,8 +164,9 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content">
+                    android:layout_height="220dp">
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/Lockedofferrecylerview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -160,6 +174,7 @@
 
                 </LinearLayout>
                 <TextView
+                    android:id="@+id/TvseeLockedOffers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/hotel"
@@ -184,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
             <TextView
-                android:id="@+id/tvratings"
+                android:id="@+id/rate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -194,17 +209,49 @@
                 android:text="@string/ratings"
                 android:textColor="#8D8D8D"
                 android:textSize="12dp" />
+                <LinearLayout
+                    android:id="@+id/contentRate"
+                    android:layout_below="@+id/rate"
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:id="@+id/tvratings"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/rate"
+                        android:drawableRight="@drawable/ic_path_star"
+                        android:drawablePadding="5dp"
+                        android:text="4.8"
+                        android:gravity="center"
+                        android:textColor="#FFB400"
+                        android:textSize="16dp"
+                        android:textStyle="bold"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="8dp"
+                        android:text="@string/reating"
+                        android:textAllCaps="true"
+                        android:gravity="center"
+                        android:layout_toRightOf="@+id/tvratings"
+                        android:textColor="#171717"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
             <LinearLayout
                 android:id="@+id/tvRatings"
                 android:layout_width="match_parent"
-                android:layout_below="@+id/tvratings"
+                android:layout_below="@+id/contentRate"
                 android:orientation="vertical"
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/reviewnRatingRecycler"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="220dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
 

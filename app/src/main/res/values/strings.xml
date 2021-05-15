@@ -3,7 +3,7 @@
     <string name="search">Search for offers,categories etc.</string>
     <string name="popular_category">Popular Categories</string>
     <string name="seeall">SEE ALL</string>
-    <string name="food">FOOD</string>
+    <string name="food">Food</string>
     <string name="bar">BAR</string>
     <string name="travel">TRAVEL</string>
     <string name="cinema">CINEMA</string>
@@ -21,7 +21,7 @@
     <string name="enter_lastname">enter last name</string>
     <string name="contact">Contact</string>
     <string name="enter_contact">contact number</string>
-    <string name="email">Email</string>
+    <string name="email">Enter Email ID</string>
     <string name="enter_email">enter  email ID</string>
     <string name="signup">CONTINUE</string>
     <string name="freemember">Free Member</string>
@@ -50,7 +50,7 @@
     <string name="valid_to">Valid till</string>
     <string name="date_from">12 Aug 2021</string>
     <string name="day_to">24 Aug 2022</string>
-    <string name="upgrate_to_premium">Upgrade to<br></br>rezq prime</string>
+    <string name="upgrate_to_premium">Upgrade to <br></br>rezq prime</string>
     <string name="unblock_offer">Unlock best offers</string>
     <string name="subscribe">Subscribe</string>
     <string name="sar">Sar 200/month</string>
@@ -90,10 +90,10 @@
     <string name="prime_members">Become a prime member<br></br>To unlock offers</string>
     <string name="prime_offer">Rezq prime offers</string>
     <string name="dinner">Dinner | Takeaway | Bar</string>
-    <string name="dubai_marina">Carlucciao\'s- Dubai Marina mall</string>
+    <string name="dubai_marina">Carlucciaos- Dubai Marina mall</string>
     <string name="Favourite">Favourite</string>
     <string name="address">Address</string>
-    <string name="Neque_porro">Neque porro quisquam est qui<br></br>dolorem ipsum quia dolor.</string>
+    <string name="Neque_porro">Neque porro quisquam est qui <br></br>dolorem ipsum quia dolor.</string>
     <string name="open_map">Open map</string>
     <string name="offers">Offers</string>
     <string name="seeall_locked_offer">See all Locked offers</string>
@@ -110,4 +110,20 @@
     <string name="fishland">Fish Land</string>
     <string name="recent_visited">Recently Visited</string>
     <string name="top_offers">Top offers &amp; deals</string>
+    <string name="my_membership">My membership</string>
+    <string name="upgrade_membership">Upgrade membership</string>
+    <string name="today">Today</string>
+    <string name="broklin">Broccoli pizza &amp; pasta</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="recent">Recent</string>
+    <string name="favourites">Favourites</string>
+    <string name="all">All</string>
+    <string name="whoisusing">Who is using?</string>
+    <string name="select_account">Select the account which you want to access</string>
+    <string name="abdul">Abdul</string>
+    <string name="guest">Guest</string>
+    <string name="add">Add</string>
+    <string name="addnewaccount">Add new Account</string>
+    <string name="entername">Enter name</string>
+    <string name="coninue">Continue</string>
 </resources>

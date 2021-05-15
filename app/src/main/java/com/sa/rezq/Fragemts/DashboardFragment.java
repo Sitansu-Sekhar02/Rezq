@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
@@ -24,7 +24,6 @@ import com.sa.rezq.Models.TrendingModelClass;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.CardPagerAdapter;
 import com.sa.rezq.adapter.CategoryAdapter;
-import com.sa.rezq.adapter.ExtraAdapter;
 import com.sa.rezq.adapter.PopularPlacesAdapter;
 import com.sa.rezq.extra.AppSettings;
 
@@ -38,6 +37,7 @@ public class DashboardFragment extends Fragment {
     TabLayout tabLayout;
     int currentPage = 0;
     TextView seeAll;
+    CardView cardViewItem;
 
 
     //SearchView searchView;
@@ -78,9 +78,18 @@ public class DashboardFragment extends Fragment {
         tabLayout = view.findViewById(R.id.tabDots);
 
         CategoryRecyclerView = view.findViewById(R.id.Rvcategory);
-        TrendingRecyclerView = view.findViewById(R.id.Rvtrending);
+        //TrendingRecyclerView = view.findViewById(R.id.Rvtrending);
         PopularplacesRecyclerview =view.findViewById(R.id.Rvplaces);
         seeAll=view.findViewById(R.id.TvseeAllCategory);
+        cardViewItem=view.findViewById(R.id.cardItem);
+
+        cardViewItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                replaceFragmentWithAnimation(new RestaurantAndOfferDetailsFragment());
+
+            }
+        });
 
 
 
@@ -142,18 +151,17 @@ public class DashboardFragment extends Fragment {
     }
 
     private void PopularPlaces() {
-        /*LinearLayoutManager linearLayoutManager
+        LinearLayoutManager linearLayoutManager
                 = new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
         PopularplacesRecyclerview.setLayoutManager(linearLayoutManager);
         for (int i = 0; i < icons.length; i++) {
             PopularPlacesModelClass itemModel = new PopularPlacesModelClass();
-            itemModel.setCategory_image(icons[i]);
             itemModel.setCategory_place_name(iconsName[i]);
             popularList.add(itemModel);
         }
 
         PopularPlacesAdapter adapter = new PopularPlacesAdapter(getActivity(), popularList);
-        PopularplacesRecyclerview.setAdapter(adapter);*/
+        PopularplacesRecyclerview.setAdapter(adapter);
 
     }
 
@@ -193,4 +201,6 @@ public class DashboardFragment extends Fragment {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
+
+
 }

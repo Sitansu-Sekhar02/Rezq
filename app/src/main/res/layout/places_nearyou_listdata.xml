@@ -17,7 +17,7 @@
                 android:layout_width="56dp"
                 android:layout_height="56dp"
                 android:layout_gravity="center"
-                android:src="@drawable/food"/>
+                android:src="@drawable/ic_group_al"/>
         </LinearLayout>
         <LinearLayout
             android:layout_toRightOf="@+id/food"

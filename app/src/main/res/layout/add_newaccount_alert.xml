@@ -1,0 +1,107 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_trans">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <RelativeLayout
+            android:background="@drawable/dialog_bg"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/newAccount"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/tvAlertMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/addnewaccount"
+                    android:textColor="#171717"
+                    android:textSize="18dp" />
+                <LinearLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_below="@+id/tvAlertMsg"
+                    android:background="@drawable/layout_add_account_bg">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:layout_width="31dp"
+                        android:layout_height="33dp"
+                        android:src="@drawable/ic_guest_profile"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newAccount">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="14dp"
+                        android:inputType="text"
+                        android:textColor="#171717"
+                        android:backgroundTint="@color/holo_green"
+                        android:hint="@string/entername" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+
+
+            <Button
+                android:layout_marginTop="40dp"
+                android:id="@+id/btnReedem"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="30dp"
+                android:layout_height="@dimen/_35sdp"
+                android:gravity="center"
+                android:layout_marginRight="40dp"
+                android:layout_marginLeft="40dp"
+                android:text="@string/coninue"
+                android:background="@drawable/button_rezq"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_below="@+id/rr"
+                />
+
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

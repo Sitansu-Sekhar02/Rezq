@@ -3,15 +3,20 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
    <LinearLayout
+       android:id="@+id/linearMain"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
        android:gravity="center"
        android:orientation="vertical">
        <ImageView
            android:layout_width="150dp"
            android:layout_height="150dp"
-           android:layout_gravity="center"
            android:src="@drawable/logo_ac"/>
        <TextView
            android:layout_width="wrap_content"
@@ -29,18 +34,20 @@
            android:textStyle="bold"
            android:layout_marginTop="10dp"
            android:textColor="#1B9090"/>
+       <Button
+           android:id="@+id/btnUpgrade"
+           android:layout_width="match_parent"
+           android:layout_height="48dp"
+           android:background="@drawable/button_border"
+           android:layout_marginLeft="30dp"
+           android:layout_marginRight="30dp"
+           android:text="@string/upgrade"
+           android:layout_marginTop="80dp"
+           android:textColor="@color/white"
+           android:textSize="14dp" />
 
    </LinearLayout>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginBottom="80dp"
-        android:background="@color/red"
-        android:layout_marginLeft="30dp"
-        android:layout_marginRight="30dp"
-        android:text="@string/upgrade"
-        android:textColor="@color/white"
-        android:textSize="14dp"
-        android:layout_alignParentBottom="true"/>
+
+    </ScrollView>
 
 </RelativeLayout>

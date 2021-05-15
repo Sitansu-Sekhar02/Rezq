@@ -15,7 +15,11 @@ import androidx.fragment.app.FragmentTransaction;
 import android.Manifest;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -25,12 +29,14 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -48,6 +54,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.sa.rezq.Fragemts.DashboardFragment;
+import com.sa.rezq.Fragemts.FavouriteFragment;
+import com.sa.rezq.Fragemts.MembershipFragment;
+import com.sa.rezq.Fragemts.RecentCouponFragment;
 import com.sa.rezq.R;
 import com.sa.rezq.extra.Preferences;
 
@@ -61,12 +70,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         GoogleApiClient.OnConnectionFailedListener {
 
 
-    public static ImageView iv_menu, ivHome;
+    public static ImageView iv_menu;
 
     DrawerLayout drawer;
 
     public static LinearLayout llmain;
-    public static RelativeLayout rlsearchview;
     GoogleApiClient mGoogleApiClient;
     LocationRequest mLocationRequest;
     Location mLastLocation;
@@ -77,16 +85,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static TextView tvHeaderText;
 
     public  static SearchView searchView;
-    public  static TextView tvLocation;
+    public  static TextView tvLocation,ivHome;
     public  static CircleImageView Crprofile;
+    public  static SearchView EtsearchRecent;
 
 
 
     public static NavigationView navigationView;
 
-
     Preferences preferences;
 
+    //Langauge Textview
+    TextView tvArabic,tvEnglish;
 
     //other
     public static int backPressed = 0;
@@ -128,6 +138,32 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         }
 
+        //Change language
+        tvEnglish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocaleHelper.setLocale(MainActivity.this,"en"); //for english;
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                /*Intent refresh = new Intent(this, MainActivity.class);
+                finish();
+                startActivity(refresh);*/
+            }
+        });
+        tvArabic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                LocaleHelper.setLocale(MainActivity.this,"ar-rSA"); //for arabic;
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+
+            }
+        });
+
+
+
+
+
         // setvalue
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -140,12 +176,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         if (navigationView != null) {
             Menu menu = navigationView.getMenu();
-            if (preferences.get("login").equalsIgnoreCase("yes")) {
+            /*if (preferences.get("login").equalsIgnoreCase("yes")) {
 
                 menu.findItem(R.id.nav_logout).setTitle("Login");
             } else {
                 menu.findItem(R.id.nav_logout).setTitle("Logout");
-            }
+            }*/
             navigationView.setNavigationItemSelectedListener(this);
 
         }
@@ -196,24 +232,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     private String getCompleteAddressString() {
-        /*String strAdd = "";
-        Geocoder geocoder = new Geocoder(this, Locale.getDefault());
-        try {
-            List<Address> addresses = geocoder.getFromLocation(latitute, longitute, 1);
-            if (addresses != null) {
-                Address returnedAddress = addresses.get(0);
-                StringBuilder strReturnedAddress = new StringBuilder("");
-
-                for (int i = 0; i <= returnedAddress.getMaxAddressLineIndex(); i++) {
-                    strReturnedAddress.append(returnedAddress.getAddressLine(i)).append("\n");
-                }
-                strAdd = strReturnedAddress.toString();
-            } else {
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return strAdd;*/
         String strAdd = "";
         Geocoder geocoder = new Geocoder(this,
                 Locale.getDefault());
@@ -241,6 +259,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvHeaderText = findViewById(R.id.tvHeaderText);
         tvLocation = findViewById(R.id.tvlocation);
         Crprofile = findViewById(R.id.userProf);
+        tvArabic=findViewById(R.id.Tvlang_arabic);
+        tvEnglish=findViewById(R.id.Tvlang_english);
+        ivHome=findViewById(R.id.ivHomeText);
+        EtsearchRecent=findViewById(R.id.Etsearch);
+
 
         //imageview
         iv_menu = findViewById(R.id.iv_menu);
@@ -289,12 +312,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (id == R.id.nav_home) {
             replaceFragmentWithAnimation( new DashboardFragment());
         } else if (id == R.id.nav_recentCoupon) {
+            replaceFragmentWithAnimation(new RecentCouponFragment());
 
         }
         else if (id == R.id.nav_fav) {
+            replaceFragmentWithAnimation(new FavouriteFragment());
 
         }
         else if (id == R.id.nav_membership) {
+            replaceFragmentWithAnimation(new MembershipFragment());
 
         }
         else if (id == R.id.nav_account) {
@@ -403,5 +429,61 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
+    }
+    public static class LocaleHelper {
+
+        private static final String SELECTED_LANGUAGE = "Locale.Helper.Selected.Language";
+
+        public static void onCreate(Context context) {
+
+            String lang;
+            if(getLanguage(context).isEmpty()){
+                lang = getPersistedData(context, Locale.getDefault().getLanguage());
+            }else {
+                lang = getLanguage(context);
+            }
+
+            setLocale(context, lang);
+        }
+
+        public static void onCreate(Context context, String defaultLanguage) {
+            String lang = getPersistedData(context, defaultLanguage);
+            setLocale(context, lang);
+        }
+
+        public static String getLanguage(Context context) {
+            return getPersistedData(context, Locale.getDefault().getLanguage());
+        }
+
+        public static void setLocale(Context context, String language) {
+            persist(context, language);
+            updateResources(context, language);
+        }
+
+        private static String getPersistedData(Context context, String defaultLanguage) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            return preferences.getString(SELECTED_LANGUAGE, defaultLanguage);
+        }
+
+        private static void persist(Context context, String language) {
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+            SharedPreferences.Editor editor = preferences.edit();
+
+            editor.putString(SELECTED_LANGUAGE, language);
+            editor.apply();
+        }
+
+        private static void updateResources(Context context, String language) {
+            Locale locale = new Locale(language);
+            Locale.setDefault(locale);
+
+            Resources resources = context.getResources();
+
+            Configuration configuration = resources.getConfiguration();
+            configuration.locale = locale;
+
+            resources.updateConfiguration(configuration, resources.getDisplayMetrics());
+
+        }
     }
 }

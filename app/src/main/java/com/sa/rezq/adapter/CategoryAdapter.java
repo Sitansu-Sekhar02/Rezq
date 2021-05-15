@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.sa.rezq.Fragemts.AllCategoryFragment;
 import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.R;
 
@@ -31,7 +30,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.viewHo
     @NonNull
     @Override
     public CategoryAdapter.viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.category_recyclerview_data, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.activity_category_recyclerview_data, parent, false);
         return new viewHolder(view);
     }
 

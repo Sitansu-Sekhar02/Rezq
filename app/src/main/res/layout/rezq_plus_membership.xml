@@ -6,17 +6,17 @@
         android:id="@+id/rezqplus"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="15dp"
         android:layout_height="wrap_content">
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="326dp"
+            android:layout_height="181dp"
             android:src="@drawable/reqq_plus"/>
     </RelativeLayout>
     <LinearLayout
+        android:id="@+id/lnrMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
         android:layout_margin="30dp"
         android:orientation="vertical"
         android:layout_below="@id/rezqplus">
@@ -119,15 +119,19 @@
 
     </LinearLayout>
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/TvupgradePrime"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="100dp"
+        android:layout_below="@id/lnrMain"
         android:text="@string/upgrate_to_premium"
         android:textStyle="bold"
         android:textSize="14dp"
+        android:gravity="center"
+        android:layout_marginTop="100dp"
         android:textColor="@color/red"
         android:textAllCaps="true"
-       android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"/>
+
 
 </RelativeLayout>

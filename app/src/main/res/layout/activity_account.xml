@@ -77,7 +77,7 @@
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_margin="@dimen/_10sdp"
+                        android:layout_margin="@dimen/_15sdp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
@@ -88,25 +88,24 @@
                             android:layout_weight="1"
                             android:orientation="vertical">
 
-                            <com.sa.rezq.customecomponent.CustomTextView
-                                style="@style/general_lable_style"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
                                 android:paddingStart="@dimen/_3sdp"
-                                android:text="@string/firstname"
-                                android:textSize="@dimen/_12sdp"
-                                app:font_name="NunitoBold.ttf"
-                                android:paddingLeft="@dimen/_3sdp" />
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:layout_height="match_parent">
 
-                            <com.sa.rezq.customecomponent.CustomEdittext
-                                android:id="@+id/etName"
-                                android:drawableLeft="@drawable/ic_baseline_person_24"
-                                android:drawablePadding="@dimen/_5sdp"
-                                style="@style/general_edittext_style"
-                                android:hint="@string/enter_your_name"
-                                android:inputType="text"
-                                android:backgroundTint="@color/holo_green"
-                                android:textColor="@color/myblack"
-                                android:textSize="@dimen/_14sdp"
-                                app:font_name="NunitoLight.ttf" />
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etFirstName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14dp"
+                                    android:textColor="#171717"
+                                    android:inputType="text"
+                                    android:textColorHint="@color/black"
+                                    android:backgroundTint="@color/holo_green"
+                                    android:hint="@string/firstname" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
                         <LinearLayout
@@ -116,26 +115,24 @@
                             android:layout_marginTop="10dp"
                             android:orientation="vertical">
 
-                            <com.sa.rezq.customecomponent.CustomTextView
-                                style="@style/general_lable_style"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
                                 android:paddingStart="@dimen/_3sdp"
-                                android:textSize="@dimen/_12sdp"
-                                android:text="@string/lastname"
-                                app:font_name="NunitoBold.ttf"
-                                android:paddingLeft="@dimen/_3sdp" />
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:layout_height="match_parent">
 
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etLastName"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14dp"
+                                    android:inputType="text"
+                                    android:textColor="#171717"
+                                    android:textColorHint="@color/black"
+                                    android:backgroundTint="@color/holo_green"
+                                    android:hint="@string/lastname" />
 
-                            <com.sa.rezq.customecomponent.CustomEdittext
-                                android:id="@+id/etEmail"
-                                style="@style/general_edittext_style"
-                                android:drawableLeft="@drawable/ic_baseline_person_add_24"
-                                android:drawablePadding="@dimen/_5sdp"
-                                android:hint="@string/enter_lastname"
-                                android:inputType="text"
-                                android:textColor="@color/myblack"
-                                android:backgroundTint="@color/holo_green"
-                                android:textSize="@dimen/_14sdp"
-                                app:font_name="NunitoLight.ttf" />
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -143,27 +140,25 @@
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
                             android:orientation="vertical">
-                            <com.sa.rezq.customecomponent.CustomTextView
-                                style="@style/general_lable_style"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
                                 android:paddingStart="@dimen/_3sdp"
-                                android:text="@string/contact"
-                                app:font_name="NunitoBold.ttf"
-                                android:textSize="@dimen/_12sdp"
-                                android:paddingLeft="@dimen/_3sdp" />
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:layout_height="match_parent">
 
-                            <com.sa.rezq.customecomponent.CustomEdittext
-                                style="@style/general_edittext_style"
-                                android:hint="@string/enter_contact"
-                                android:drawableLeft="@drawable/ic_baseline_call_24"
-                                android:drawablePadding="@dimen/_5sdp"
-                                android:id="@+id/etContact"
-                                android:textColor="@color/myblack"
-                                android:backgroundTint="@color/holo_green"
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etContact"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14dp"
+                                    android:inputType="number"
+                                    android:textColor="#171717"
+                                    android:maxLength="10"
+                                    android:textColorHint="@color/black"
+                                    android:backgroundTint="@color/holo_green"
+                                    android:hint="@string/contact" />
 
-                                android:inputType="phone"
-                                android:maxLength="10"
-                                app:font_name="NunitoLight.ttf"
-                                android:textSize="@dimen/_14sdp"/>
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                         <LinearLayout
@@ -171,28 +166,26 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:layout_marginTop="10dp"
-
                             android:orientation="vertical">
 
-                            <com.sa.rezq.customecomponent.CustomTextView
-                                style="@style/general_lable_style"
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:layout_width="match_parent"
                                 android:paddingStart="@dimen/_3sdp"
-                                android:text="@string/email"
-                                app:font_name="NunitoBold.ttf"
-                                android:textSize="@dimen/_12sdp"
-                                android:paddingLeft="@dimen/_3sdp" />
+                                android:paddingLeft="@dimen/_3sdp"
+                                android:layout_height="match_parent">
 
-                            <com.sa.rezq.customecomponent.CustomEdittext
-                                android:id="@+id/etAddress"
-                                style="@style/general_edittext_style"
-                                android:hint="@string/enter_email"
-                                android:drawableLeft="@drawable/ic_baseline_email_24"
-                                android:drawablePadding="@dimen/_5sdp"
-                                android:textColor="@color/myblack"
-                                android:backgroundTint="@color/holo_green"
-                                android:inputType="textEmailAddress"
-                                app:font_name="NunitoLight.ttf"
-                                android:textSize="@dimen/_14sdp"/>
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:textSize="14dp"
+                                    android:inputType="textEmailAddress"
+                                    android:textColor="#171717"
+                                    android:textColorHint="@color/black"
+                                    android:backgroundTint="@color/holo_green"
+                                    android:hint="@string/email" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
 
@@ -200,12 +193,12 @@
                         android:id="@+id/tvRegisterButton"
                         android:layout_width="match_parent"
                         android:layout_marginBottom="@dimen/_10sdp"
-                        android:layout_height="60dp"
+                        android:layout_height="48dp"
                         android:layout_below="@+id/tvForgotPassword"
                         android:layout_marginLeft="25dp"
                         android:layout_marginTop="25dp"
                         android:layout_marginRight="25dp"
-                        android:background="@color/holo_green"
+                        android:background="@drawable/button_rezq"
                         android:gravity="center"
                         android:text="@string/signup"
                         android:textColor="@color/white"

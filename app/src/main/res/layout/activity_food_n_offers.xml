@@ -42,16 +42,23 @@
                 android:text="@string/popular_places"
                 android:textSize="14dp"
                 android:textStyle="bold"/>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerPlaces"
                 android:layout_width="match_parent"
-                android:layout_marginTop="10dp"
+                android:layout_height="250dp"
                 android:layout_below="@+id/TvPlaces"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="8dp">
 
             </androidx.recyclerview.widget.RecyclerView>
 
 
         </RelativeLayout>
+            <View
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,6 +75,7 @@
                     android:textSize="14dp"
                     android:textStyle="bold"/>
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerPopularFoods"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/TvPopularfood"
@@ -77,6 +85,11 @@
 
 
             </RelativeLayout>
+            <View
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,10 +106,11 @@
                     android:textSize="14dp"
                     android:textStyle="bold"/>
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerMostVisited"
                     android:layout_width="match_parent"
                     android:layout_marginTop="10dp"
                     android:layout_below="@+id/TvMostvisited"
-                    android:layout_height="wrap_content">
+                    android:layout_height="200dp">
 
                 </androidx.recyclerview.widget.RecyclerView>
 
