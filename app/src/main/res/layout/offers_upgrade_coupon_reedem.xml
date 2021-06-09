@@ -1,136 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF">
-    <ScrollView
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_detail" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
         android:fillViewport="true">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_group_al"/>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="16dp"
-                    android:textColor="#171717"
-                    android:text="@string/dubai_mall"/>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="16dp"
-                        android:textColor="#FFB400"
-                        android:drawableRight="@drawable/ic_baseline_star_rate_24"
-                        android:drawablePadding="5dp"
-                        android:textStyle="bold"
-                        android:text="4.8"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="12dp"
-                        android:textColor="#171717"
-                        android:text="@string/reating"/>
-                </LinearLayout>
-            </LinearLayout>
-
-
-        </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="25dp">
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="vertical">
-                <TextView
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:textColor="#898989"
-                    android:gravity="center"
-                    android:text="@string/unlock_raza"
-                    android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="52dp"
-                android:layout_marginTop="20dp"
-                android:textColor="#747474"
-                android:gravity="center"
-                android:text="@string/off"
-                android:drawableStart="@drawable/ic_group_lock"
-                android:background="@drawable/off_border"
-                android:layout_height="52dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginTop="20dp"
-                android:textColor="#171717"
-                android:gravity="center"
-                android:text="@string/upto_50_off"
-                android:textSize="16dp"
-                android:layout_height="wrap_content" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_marginTop="5dp"
-                android:textColor="#898989"
-                android:gravity="center"
-                android:text="@string/applicable_onselectitem"
-                android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/ic_group_al" />
+
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:background="@drawable/ic_rectangle_green"
-                    android:layout_height="wrap_content">
-                    <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:orientation="vertical">
+
+                    <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-                        android:text="@string/premium_members_only"
-                        android:layout_height="wrap_content" />
-                    <Button
-                        android:id="@+id/btnUpgrade"
-                        android:layout_width="91dp"
-                        android:layout_marginTop="15dp"
-                        android:textColor="#FF5C5C"
-                        android:textSize="12dp"
-                        android:background="@drawable/off_border"
-                        android:text="@string/upgrade"
-                        android:layout_height="26dp" />
+                        android:layout_height="wrap_content"
+                        android:text="@string/dubai_mall"
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableRight="@drawable/ic_baseline_star_rate_24"
+                            android:drawablePadding="5dp"
+                            android:text="4.8"
+                            android:textColor="#FFB400"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/reating"
+                            android:textColor="#171717"
+                            android:textSize="12dp" />
+                    </LinearLayout>
                 </LinearLayout>
 
 
-        </LinearLayout>
-        </LinearLayout>
+            </LinearLayout>
 
-    </LinearLayout>
-    </ScrollView>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/unlock_raza"
+                        android:textColor="#898989" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/off_border"
+                        android:drawableStart="@drawable/ic_group_lock"
+                        android:gravity="center"
+                        android:text="@string/off"
+                        android:textColor="#747474" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/upto_50_off"
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/applicable_onselectitem"
+                        android:textColor="#898989" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/ic_rectangle_green"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/premium_members_only"
+                            android:textColor="@color/white"
+                            android:textSize="14dp" />
+
+                        <com.sa.rezq.view.AppButton
+                            android:id="@+id/btnUpgrade"
+                            android:layout_width="91dp"
+                            android:layout_height="26dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/off_border"
+                            android:text="@string/upgrade"
+                            android:textColor="@color/red"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 
 </RelativeLayout>

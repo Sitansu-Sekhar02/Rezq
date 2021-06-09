@@ -9,21 +9,20 @@
 
     <ImageView
         android:id="@+id/logorezq"
-        android:background="@drawable/rezq_logo"
-        android:layout_centerInParent="true"
         android:layout_width="171dp"
-        android:layout_height="150dp" />
-
-
-    <TextView
-        android:layout_below="@+id/logorezq"
-        android:gravity="center"
+        android:layout_height="150dp"
         android:layout_centerInParent="true"
+        android:background="@drawable/rezq_logo_white" />
+
+
+    <com.sa.rezq.view.AppTextView
         android:id="@+id/textView"
-        android:textSize="31dp"
-        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/logorezq"
+        android:layout_centerInParent="true"
+        android:gravity="center"
         android:text="تسهل حياتك"
-        />
+        android:textColor="@color/white"
+        android:textSize="31dp" />
 </RelativeLayout>

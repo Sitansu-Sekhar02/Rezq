@@ -25,7 +25,6 @@ import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 ;
 import com.google.android.gms.maps.model.LatLng;
-import com.sa.rezq.extra.Preferences;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +44,6 @@ public final class GPSTracker extends Service implements LocationListener {
     // flag for GPS status
    // private LocationRepository locationRepository;
     public boolean isGPSEnabled = false;
-    Preferences preferences;
 
     // flag for network status
     boolean isNetworkEnabled = false;
@@ -159,7 +157,6 @@ public final class GPSTracker extends Service implements LocationListener {
                         }
 
                         //locationRepository = new LocationRepository(mContext);
-                        preferences=new Preferences(mContext);
 
 
                       /*  if (locationRepository != null) {
@@ -347,7 +344,6 @@ public final class GPSTracker extends Service implements LocationListener {
             }
 
         }
-
 
     }
 

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="190dp"
     android:id="@+id/llHeader">
     <View
         android:layout_width="match_parent"
@@ -15,26 +15,27 @@
 
 
     <LinearLayout
-        android:id="@+id/button"
+        android:id="@+id/header_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:layout_marginRight="15dp"
         android:layout_marginLeft="15dp"
-        android:layout_marginTop="30dp">
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/profile_image"
-                android:layout_width="80dp"
-                app:shapeAppearanceOverlay="@style/roundedCornersImageView"
-                android:src="@drawable/rectangle_image"
-                android:layout_height="@dimen/_80sdp" />
+        android:layout_marginTop="40dp">
+
+        <ImageView
+            android:id="@+id/nav_profile_image"
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_guest_profile"
+            app:shapeAppearanceOverlay="@style/roundedCornersImageView" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:layout_marginLeft="20dp">
-                <TextView
-                    android:id="@+id/tvUsefullname"
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_nav_fullname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Mohamed Rizwan"
@@ -47,18 +48,17 @@
                     android:layout_width="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_height="wrap_content">
-                    <TextView
+                    <com.sa.rezq.view.AppTextView
                         android:id="@+id/tvmember"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/freemember"
                         android:textColor="#8D8D8D"
-                        android:visibility="gone"
                         android:textStyle="bold"
                         android:singleLine="true"
                         android:textSize="12dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
-                    <TextView
+                    <com.sa.rezq.view.AppTextView
                         android:id="@+id/TvseeProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,31 +67,34 @@
                         android:layout_alignParentRight="true"/>
                 </RelativeLayout>
 
-                <Button
+                <com.sa.rezq.view.AppTextView
                     android:layout_width="90dp"
                     android:layout_height="32dp"
                     android:text="@string/rezq_mem"
+                    android:gravity="center"
+                    android:visibility="gone"
                     android:textColor="@color/white"
                     android:textSize="12dp"
                     android:layout_margin="5dp"
                     android:background="@drawable/button_rezq"/>
-                <TextView
+                <com.sa.rezq.view.AppTextView
                     android:layout_marginTop="5dp"
                     android:layout_width="wrap_content"
                     android:textSize="12dp"
+                    android:visibility="gone"
                     android:layout_marginLeft="10dp"
                     android:textColor="#171717"
                     android:layout_height="wrap_content"
                     android:text="@string/from_to"/>
-                <com.sa.rezq.customecomponent.CustomButton
-                    android:visibility="gone"
+                <com.sa.rezq.view.AppTextView
                     android:layout_width="90dp"
                     android:layout_height="32dp"
                     android:background="@drawable/button_border"
                     android:textColor="#FFFFFF"
+                    android:gravity="center"
+                    android:textAllCaps="true"
                     android:textSize="12dp"
                     android:layout_marginTop="10dp"
-                    android:layout_marginLeft="10dp"
                     android:text="@string/upgrade"/>
 
             </LinearLayout>

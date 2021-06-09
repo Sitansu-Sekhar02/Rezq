@@ -7,25 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.sa.rezq.Activity.MainActivity;
-import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.CategoryAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class OfferDetailsFragment extends Fragment {
 
@@ -81,7 +69,7 @@ public class OfferDetailsFragment extends Fragment {
         btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               replaceFragmentWithAnimation(new ReddemOfferFragment());
+               //replaceFragmentWithAnimation(new ReddemOfferFragment());
 
             }
         });
@@ -92,12 +80,12 @@ public class OfferDetailsFragment extends Fragment {
 
         return  view;
     }
-    public void replaceFragmentWithAnimation(Fragment fragment) {
+   /* public void replaceFragmentWithAnimation(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
-    }
+    }*/
 
 
 

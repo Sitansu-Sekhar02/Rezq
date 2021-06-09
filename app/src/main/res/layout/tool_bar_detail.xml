@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:contentInsetStart="0dp"
+    app:contentInsetStartWithNavigation="0dp"
+    android:background="@color/white"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
+    android:elevation="4dp"
+    app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:src="@drawable/ic_back"
+            android:id="@+id/tool_bar_back_icon"
+            android:layout_gravity="left"/>
+
+        <com.sa.rezq.view.AppTextView_Title
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textAppearance="@style/MediumText"
+            android:layout_toRightOf="@+id/tool_bar_back_icon"
+            android:textStyle="bold"
+            android:visibility="visible"
+            android:gravity="center"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:layout_gravity="center"
+            android:id="@+id/toolbar_title"/>
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.appcompat.widget.Toolbar>

@@ -3,15 +3,15 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="5dp"
+    android:id="@+id/click_item"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="100dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
         android:background="@color/white"
-        app:cardCornerRadius="5dp"
-        app:cardElevation="5dp">
+        app:cardCornerRadius="5dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -22,10 +22,9 @@
                 android:id="@+id/categoryImage"
                 android:layout_width="50dp"
                 android:layout_height="80dp"
-                android:layout_gravity="center"
-                android:src="@drawable/food" />
+                android:layout_gravity="center" />
 
-            <TextView
+            <com.sa.rezq.view.AppTextView
                 android:id="@+id/TvCategoryName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -34,14 +33,29 @@
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
-
-            <TextView
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="15 Places"
-                android:textColor="@color/black"
-                android:textSize="13dp" />
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_total__places"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="15"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+                <com.sa.rezq.view.AppTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Places"
+                    android:layout_marginLeft="4dp"
+                    android:textColor="@color/black"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+
+
 
         </LinearLayout>
 

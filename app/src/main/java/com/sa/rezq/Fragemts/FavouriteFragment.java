@@ -1,29 +1,22 @@
 package com.sa.rezq.Fragemts;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sa.rezq.Activity.MainActivity;
-import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.Models.FavouriteCategoryModel;
-import com.sa.rezq.Models.PopularPlacesModelClass;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.CategoryAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,13 +94,13 @@ public class FavouriteFragment extends Fragment {
 
         return  view;
     }
-    public void replaceFragmentWithAnimation(Fragment fragment) {
+    /*public void replaceFragmentWithAnimation(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
     }
-
+*/
     //*RecyclerView Adapter*//
     public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.viewHolder> {
 

@@ -11,20 +11,61 @@
     <color name="grey_light">#F5F5F5</color>
     <color name="red">#FF3B3B</color>
     <color name="holo_green">#009393</color>
-    <color name="colorPrimary">#F89504</color>
-    <color name="colorPrimaryDark">#CD8BC34A</color>
+    <color name="colorPrimary">#FF018786</color>
+    <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#03DAC5</color>
     <color name="appbgcolor">#ff8000</color>
     <color name="appthemecolor">#18AB14</color>
     <color name="hint_color">#802c2c4c</color>
-    <color name="black_trans">#99000000</color>
-    <color name="myblack">#414a4c</color>
-    <color name="icons">#FFFFFF</color>
-    <color name="colorPrimaryLight">#b3e5fc</color>
-    <color name="greenprice">#4CAF50</color>
-    <color name="dark_grey">#9d9b9b</color>
-    <color name="white_off">#F5F5F5</color>
-    <color name="colorfont1">#000015</color>
-    <color name="textcolor">#717171</color>
+    <color name="transparent">#00aaaaaa</color>
+    <color name="orange">@color/colorPrimary</color>
+    <array name="loader_colors">
+        <item>@color/colorPrimary</item>
+        <item>@color/colorPrimaryDark</item>
+        <item>@color/colorAccent</item>
+    </array>
+    <color name="login_text">#2C2B2B</color>
 
+
+
+    <color name="yellow_deep">#FFB400</color>
+    <color name="ColorStatusBar">@color/colorAccent</color>
+
+    <color name="app_fontColor_dark">#ffffff</color>
+    <color name="app_fontColor">#e6575757</color>
+    <color name="app_fontBlackColor">#000000</color>
+    <color name="app_fontColor_hint">#b85f5f5f</color>
+
+    <color name="blue">#02136b</color>
+    <color name="yellow">#eac90e</color>
+    <color name="green">#30c40f</color>
+
+    <color name="green_light">#1a8701</color>
+
+    <color name="send">#8B8CA4</color>
+    <color name="sends">#989ABE</color>
+    <color name="black_trans">#99000000</color>
+    <color name="dark_grey">#9d9b9b</color>
+
+
+    <color name="navigation_bg">@color/colorAccent</color>
+    <color name="navigation_seperator_color">#D9C6C8</color>
+
+
+    <color name="app_light_gray">#767676</color>
+
+    <color name="app_primary">#9192AA</color>
+
+    <color name="fab_color_normal">#d83430</color>
+
+    <color name="ColorDropdownBright">#62637A</color>
+    <color name="ColorDropdownBrighter">#26293F</color>
+
+    <color name="app_color_splash">#FCF5EB</color>
+    <color name="app_color_background">#FAFAFA</color>
+    <color name="grey_intermediate">#939598</color>
+
+    <color name="button_bg_color">@color/colorAccent</color>
+
+    <color name="yellow_bright">#FDD303</color>
 </resources>

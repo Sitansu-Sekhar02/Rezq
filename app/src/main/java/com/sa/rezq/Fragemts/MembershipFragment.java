@@ -67,7 +67,7 @@ public class MembershipFragment extends Fragment {
         btUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragmentWithAnimation(new MembershipPrimeFragment());
+                //replaceFragmentWithAnimation(new MembershipPrimeFragment());
 
             }
         });
@@ -75,10 +75,10 @@ public class MembershipFragment extends Fragment {
 
         return  view;
     }
-    public void replaceFragmentWithAnimation(Fragment fragment) {
+   /* public void replaceFragmentWithAnimation(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
-    }
+    }*/
 }

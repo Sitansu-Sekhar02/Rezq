@@ -44,7 +44,7 @@ public class ReddemOfferFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                     replaceFragmentWithAnimation(new OfferDetailsFragment());
+                    // replaceFragmentWithAnimation(new OfferDetailsFragment());
                         return true;
                     }
                 }
@@ -65,7 +65,7 @@ public class ReddemOfferFragment extends Fragment {
         MainActivity.iv_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                replaceFragmentWithAnimation(new OfferDetailsFragment());
+              //  replaceFragmentWithAnimation(new OfferDetailsFragment());
 
             }
         });
@@ -107,19 +107,19 @@ public class ReddemOfferFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 dialog.cancel();
-                replaceFragmentWithAnimation(new CopyCouponFragment() );
+                //replaceFragmentWithAnimation(new CopyCouponFragment() );
             }
         });
 
 
     }
 
-    public void replaceFragmentWithAnimation(Fragment fragment) {
+   /* public void replaceFragmentWithAnimation(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
-    }
+    }*/
 
 
 

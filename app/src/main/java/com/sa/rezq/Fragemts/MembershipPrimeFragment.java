@@ -40,7 +40,7 @@ public class MembershipPrimeFragment extends Fragment {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 if (event.getAction() == KeyEvent.ACTION_DOWN) {
                     if (keyCode == KeyEvent.KEYCODE_BACK) {
-                        replaceFragmentWithAnimation(new MembershipFragment());
+                       // replaceFragmentWithAnimation(new MembershipFragment());
 
                         return true;
                     }
@@ -60,13 +60,13 @@ public class MembershipPrimeFragment extends Fragment {
         MainActivity.iv_menu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               replaceFragmentWithAnimation(new MembershipFragment());
+               //replaceFragmentWithAnimation(new MembershipFragment());
             }
         });
         upgradePrime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                replaceFragmentWithAnimation(new UpgradeMembershipFragment());
+                //replaceFragmentWithAnimation(new UpgradeMembershipFragment());
 
             }
         });
@@ -74,10 +74,10 @@ public class MembershipPrimeFragment extends Fragment {
 
         return  view;
     }
-    public void replaceFragmentWithAnimation(Fragment fragment) {
+   /* public void replaceFragmentWithAnimation(Fragment fragment) {
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
         transaction.replace(R.id.fragment_container, fragment);
         transaction.commit();
-    }
+    }*/
 }
