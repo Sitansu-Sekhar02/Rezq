@@ -533,6 +533,14 @@ public class ServicesMethodsManager {
             } else {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
+        }
+        else if (obj instanceof VendorStoreMainModel) {
+            VendorStoreMainModel model = new VendorStoreMainModel();
+            if (model.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(model);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+            }
         } else if (obj instanceof OfferModel) {
             OfferModel offerModel = new OfferModel();
             if (offerModel.toObject(resp.toString())) {

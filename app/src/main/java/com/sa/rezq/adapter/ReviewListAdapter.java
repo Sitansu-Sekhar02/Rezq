@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -60,10 +61,14 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.vi
                 holder.user_name.setText( fullName );
 
         if (model.getRating() != null) {
-            holder.tv_rating.setText((model.getRating()));
-        }if (model.getCreated_on() != null) {
+            holder.tv_rating.setRating(Float.parseFloat((model.getRating())));
+        }if (GlobalFunctions.isNotNullValue(model.getCreated_on())) {
+            holder.created_on.setText(GlobalFunctions.getDateFormat(model.getCreated_on()));
+        }
+
+       /* if (model.getCreated_on() != null) {
             holder.created_on.setText((model.getCreated_on()));
-        }if (model.getComment() != null) {
+        }*/if (model.getComment() != null) {
             holder.tv_comment.setText((model.getComment()));
         }
 
@@ -91,9 +96,9 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.vi
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
-        CircleImageView product_image;
+        ImageView product_image;
         TextView user_name;
-        TextView tv_rating;
+        RatingBar tv_rating;
         TextView created_on;
         TextView tv_comment;
         RelativeLayout click_item;
@@ -102,7 +107,7 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.vi
 
             product_image = itemView.findViewById(R.id.profile_image);
             user_name = (TextView) itemView.findViewById(R.id.Tv_user_name);
-            tv_rating = (TextView) itemView.findViewById(R.id.tv_rating);
+            tv_rating = (RatingBar) itemView.findViewById(R.id.tv_rating);
             created_on = (TextView) itemView.findViewById(R.id.Tv_date_time);
             tv_comment = (TextView) itemView.findViewById(R.id.tv_comment);
             //click_item = itemView.findViewById(R.id.click_item);

@@ -359,6 +359,7 @@
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_all_trending"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/seeall"
@@ -552,6 +553,7 @@
                             android:textStyle="bold" />
 
                         <com.sa.rezq.view.AppTextView
+                            android:id="@+id/tv_all_nearby"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/seeall"

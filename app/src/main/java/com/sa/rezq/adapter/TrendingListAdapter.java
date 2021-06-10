@@ -78,6 +78,8 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.product_discount_title.setText((model.getOffer_title()));
         } if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
+            holder.product_image.setAlpha(0.5f);
+
         }
 
         if (model.getVendor_name() != null) {
@@ -90,6 +92,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.first_product_discount.setText((model.getOffer_discount()));
         }  if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.first_product_image);
+            holder.first_product_image.setAlpha(0.5f);
         }
 
 
@@ -103,30 +106,49 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.second_product_discount_title.setText((model.getOffer_title()));
         }if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.second_product_image);
+            holder.second_product_image.setAlpha(0.5f);
+
         }
 
         holder.single_imageview_main_rl.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(model.getCount().equalsIgnoreCase("1")){
+                    Intent intent = VendorListDetailsActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }else {
+                    Intent intent = VendorStoreListActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }
 
-                Intent intent = VendorStoreListActivity.newInstance( activity, model );
-                activity.startActivity( intent );
+                //Intent intent = VendorStoreListActivity.newInstance( activity, model );
+               // activity.startActivity( intent );
             }
         });
         holder.first_card_item_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(model.getCount().equalsIgnoreCase("1")){
+                    Intent intent = VendorListDetailsActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }else {
+                    Intent intent = VendorStoreListActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }
 
-                Intent intent = VendorStoreListActivity.newInstance( activity, model );
-                activity.startActivity( intent );
             }
         });
         holder.second_card_item_click.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = VendorStoreListActivity.newInstance( activity, model );
-                activity.startActivity( intent );
+                if(model.getCount().equalsIgnoreCase("1")){
+                    Intent intent = VendorListDetailsActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }else {
+                    Intent intent = VendorStoreListActivity.newInstance( activity, model );
+                    activity.startActivity( intent );
+                }
             }
         });
 

@@ -12,7 +12,7 @@ public class CategoryModel implements Serializable {
     private final String TAG = "CategoryModel";
 
     private final String
-            ID = "vendor_id",
+            ID = "id",
             NAME = "title",
             ICON = "image",
             COUNT = "count",

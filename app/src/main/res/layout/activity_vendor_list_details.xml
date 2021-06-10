@@ -251,6 +251,7 @@
                 android:textColor="#8D8D8D"
                 android:textSize="12dp" />
                 <LinearLayout
+                    android:visibility="gone"
                     android:id="@+id/contentRate"
                     android:layout_below="@+id/rate"
                     android:layout_width="match_parent"

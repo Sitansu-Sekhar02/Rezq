@@ -1,77 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/relative_unlocked_offer">
 
-    <TextView
-        android:id="@+id/tv_first_offer"
-        android:layout_width="52dp"
-        android:textColor="#747474"
-        android:gravity="center"
-        android:text="@string/happy_hourse"
-        android:drawableBottom="@drawable/ic_group_lock"
-        android:background="@drawable/off_border"
-        android:layout_height="52dp" />
-    <TextView
-        android:id="@+id/tv_first_offer_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_toRightOf="@id/tv_first_offer"
-        android:textColor="#171717"
-        android:textSize="16dp"
-        android:text="@string/buy_two_get_one"/>
-    <TextView
-        android:id="@+id/tv_first_offer_applicable"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/tv_first_offer"
-        android:textColor="#898989"
-        android:layout_marginLeft="20dp"
-        android:textSize="12dp"
-        android:text="@string/applicable_onselectitem"
-        android:layout_below="@id/tv_first_offer_title"/>
+    <RelativeLayout
+        android:id="@+id/relative_unlocked_offer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_offer_image"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:background="@drawable/rezq_logo"
+            android:gravity="center" />
+
+        <com.sa.rezq.view.AppTextView
+            android:id="@+id/tv_first_offer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_offer_image"
+            android:text="@string/buy_two_get_one"
+            android:textColor="#171717"
+            android:textSize="16dp" />
+
+        <com.sa.rezq.view.AppTextView
+            android:id="@+id/tv_first_offer_applicable"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_first_offer_title"
+            android:layout_marginLeft="20dp"
+            android:layout_toRightOf="@id/iv_offer_image"
+            android:text="@string/applicable_onselectitem"
+            android:textColor="#898989"
+            android:textSize="12dp" />
     </RelativeLayout>
 
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/relative_unlocked_offer"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/tv_offer"
+        android:layout_marginTop="8dp"
+        android:visibility="gone">
+
+        <ImageView
             android:layout_width="52dp"
-            android:textColor="#FFFFFF"
-            android:gravity="center"
-            android:text="@string/happy_hourse"
-            android:background="@drawable/hours_border"
-            android:layout_height="52dp" />
-        <TextView
+            android:layout_height="52dp"
+            android:background="@drawable/rezq_logo"
+            android:gravity="center" />
+
+        <com.sa.rezq.view.AppTextView
             android:id="@+id/tv_offer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/tv_offer"
+            android:text="@string/buy_two_get_one"
             android:textColor="#171717"
-            android:textSize="16dp"
-            android:text="@string/buy_two_get_one"/>
-        <TextView
+            android:textSize="16dp" />
+
+        <com.sa.rezq.view.AppTextView
             android:id="@+id/tv_applicable"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/tv_offer"
-            android:textColor="#898989"
+            android:layout_below="@id/tv_offer_title"
             android:layout_marginLeft="20dp"
-            android:textSize="12dp"
             android:text="@string/applicable_onselectitem"
-            android:layout_below="@id/tv_offer_title"/>
+            android:textColor="#898989"
+            android:textSize="12dp" />
 
     </RelativeLayout>
 

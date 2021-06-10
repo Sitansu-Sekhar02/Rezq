@@ -23,7 +23,7 @@ public class VendorStoreListModel implements Serializable {
 
 
     String
-            id               = null,
+            id              = null,
             name           = null,
             logo            = null,
             address          = null,

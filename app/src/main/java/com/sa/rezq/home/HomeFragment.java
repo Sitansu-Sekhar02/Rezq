@@ -58,6 +58,7 @@ import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingListModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.sa.rezq.services.model.VariantModel;
+import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.sa.rezq.view.CustomSliderTextView;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -130,7 +131,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     Timer timer;
     TabLayout tabLayout;
     int currentPage = 0;
-    TextView seeAllPopular_category;
+    TextView seeAllPopular_category,tv_all_trending,tv_all_nearby;
     CardView cardViewItem;
 
     SeeAllCategoryModel listModel;
@@ -174,6 +175,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         trending_RecyclerView = view.findViewById(R.id.recycler_trending);
         nearbyRecyclerView =view.findViewById(R.id.recycler_places_near_you);
         seeAllPopular_category=view.findViewById(R.id.TvseeAllCategory);
+        tv_all_trending=view.findViewById(R.id.tv_all_trending);
+        tv_all_nearby=view.findViewById(R.id.tv_all_nearby);
         cardViewItem=view.findViewById(R.id.cardItem);
 
         locationintent = new Intent(activity, LocationMonitoringService.class);
@@ -202,6 +205,22 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             public void onClick(View v) {
                 Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
                 activity.startActivity( intent );
+            }
+        });
+
+        tv_all_trending.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
+               // activity.startActivity( intent );
+            }
+        });
+        tv_all_nearby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               // Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
+                //activity.startActivity( intent );
             }
         });
 
@@ -525,9 +544,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onSliderClick(BaseSliderView slider) {
         BannerModel bannerClickedModel = (BannerModel) slider.getBundle().getSerializable("data");
         if (bannerClickedModel != null) {
-           /* if (bannerClickedModel.getType() != null && bannerClickedModel.getId() != null) {
+           /* if (bannerClickedModel.getVendor_id() != null && bannerClickedModel.getId() != null) {
                 if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_CATEGORY)) {
-                    Intent intent = ProductListActivity.newInstance(activity, bannerClickedModel.getId(), null, null);
+                    Intent intent = VendorStoreListActivity.newInstance(activity, bannerClickedModel.getVendor_id(), null, null);
                     activity.startActivity(intent);
                 }  else if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_OFFER)) {
                     Intent intent = ProductListActivity.newInstance(activity, null, null, bannerClickedModel.getId());

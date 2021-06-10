@@ -18,7 +18,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.Models.PopularPlacesModelClass;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.PlacesNearyouListAdapter;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class FoodAndOffersFragments extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.activity_food_n_offers, container, false);
+        view = inflater.inflate(R.layout.activity_category_list_details, container, false);
 
 
         RlPlaces=view.findViewById(R.id.recyclerPlaces);

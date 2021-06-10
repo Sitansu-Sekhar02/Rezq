@@ -13,6 +13,7 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardItem"
+            app:cardBackgroundColor="@color/black_trans"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:cardCornerRadius="10dp">
@@ -88,6 +89,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/first_card_item"
                 android:layout_width="158dp"
+                app:cardBackgroundColor="@color/black_trans"
                 android:layout_height="80dp"
                 app:cardCornerRadius="10dp">
 
@@ -145,6 +147,7 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/second_card_item"
                 android:layout_width="158dp"
+                app:cardBackgroundColor="@color/black_trans"
                 android:layout_marginTop="10dp"
                 android:layout_height="80dp"
                 app:cardCornerRadius="10dp">

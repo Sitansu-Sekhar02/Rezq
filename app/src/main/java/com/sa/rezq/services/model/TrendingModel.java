@@ -19,6 +19,7 @@ public class TrendingModel implements Serializable {
             ICON = "image",
             VENDOR_NAME = "vendor_name",
             OFFER_DISCOUNT = "offer_discount",
+            COUNT = "count",
             SERVICES = "service";
 
     String
@@ -28,6 +29,7 @@ public class TrendingModel implements Serializable {
             offer_applicable = null,
             vendor_name = null,
             offer_discount = null,
+            count = null,
             icon = null;
 
     ServicesListModel
@@ -106,6 +108,14 @@ public class TrendingModel implements Serializable {
         this.offer_discount = offer_discount;
     }
 
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     public int getImageResourceID() {
         /*if (this.id.equalsIgnoreCase(GlobalVariables.CATEGORY_VALUE_FOR_FACE)) {
             return R.drawable.face_bg;
@@ -135,6 +145,7 @@ public class TrendingModel implements Serializable {
             if (json.has(OFFER_APPLICABLE)) offer_applicable = json.getString(OFFER_APPLICABLE);
             if (json.has(OFFER_DISCOUNT)) offer_discount = json.getString(OFFER_DISCOUNT);
             if (json.has(VENDOR_NAME)) vendor_name = json.getString(VENDOR_NAME);
+            if (json.has(COUNT)) count = json.getString(COUNT);
 
 
             if (json.has(SERVICES)) {
@@ -167,6 +178,7 @@ public class TrendingModel implements Serializable {
             jsonMain.put(OFFER_APPLICABLE, offer_applicable);
             jsonMain.put(OFFER_DISCOUNT, offer_discount);
             jsonMain.put(VENDOR_NAME, vendor_name);
+            jsonMain.put(COUNT, count);
 
             jsonMain.put(SERVICES, servicesListModel != null ? new JSONArray(servicesListModel.toString(true)) : new JSONArray());
             returnString = jsonMain.toString();

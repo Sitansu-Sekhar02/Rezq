@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.sa.rezq.view.AppTextView
                 android:id="@+id/tvAlertMsg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,7 +41,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_group_al"/>
-                <TextView
+                <com.sa.rezq.view.AppTextView
                     android:id="@+id/Tvvendor"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -71,7 +71,7 @@
                     android:stepSize="1" />
 
             </RelativeLayout>
-            <TextView
+            <com.sa.rezq.view.AppTextView
                 android:id="@+id/tvComment"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
@@ -80,7 +80,7 @@
                 android:layout_marginLeft="25dp"
                 android:layout_marginRight="25dp"
                 android:text="@string/comments"/>
-            <com.sa.rezq.customecomponent.CustomEdittext
+            <com.sa.rezq.view.AppEditTextView
                 android:id="@+id/etComment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -90,7 +90,7 @@
 
 
 
-            <Button
+            <com.sa.rezq.view.AppButton
                 android:layout_marginTop="40dp"
                 android:id="@+id/btnReedem"
                 android:layout_width="match_parent"

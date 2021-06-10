@@ -41,6 +41,7 @@ import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.sa.rezq.services.model.VendorDetailsMainModel;
 import com.sa.rezq.services.model.VendorModel;
+import com.sa.rezq.services.model.VendorStoreListModel;
 import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -50,7 +51,9 @@ import java.util.List;
 public class VendorListDetailsActivity extends AppCompatActivity {
 
     public static final String TAG = "VendorListDetailsActivity",
-            BUNDLE_VENDOR_LIST_DETAILS = "VendorListDetailsActivity";
+            BUNDLE_VENDOR_LIST_DETAILS = "VendorListDetailsActivity",
+            BUNDLE_VENDOR_STORE_LIST_DETAILS = "VendorStoreListDetailsActivity";
+
 
     View view;
     TextView AllLockedOffer;
@@ -79,6 +82,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     ProgressLinearLayout offerprogressActivity;
     RecyclerView offer_list_recyclerview;
     SwipeRefreshLayout swipe_container;
+    OfferModel offerModel;
 
 
     ReviewListAdapter reviewListAdapter;
@@ -97,6 +101,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
     String vendor_id = null;
     TrendingModel trendingModel = null;
+    VendorStoreListModel vendorStoreListModel = null;
 
     FirebaseStorage storage;
     StorageReference storageReference;
@@ -109,6 +114,13 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         return intent;
     }
 
+    public static Intent newInstance(Activity activity, VendorStoreListModel vendorStoreListModel) {
+        Intent intent = new Intent(activity, VendorListDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_VENDOR_STORE_LIST_DETAILS, vendorStoreListModel);
+        intent.putExtras(bundle);
+        return intent;
+    }
 
     @SuppressLint("LongLogTag")
     @Override
@@ -134,6 +146,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
         vendor_list_image=findViewById(R.id.vendor_list_image);
+       // vendor_list_image.setAlpha(0.75f);
+
         iv_favourite=findViewById(R.id.iv_favourite);
 
         tv_vendor_name=findViewById(R.id.tv_vendor_name);
@@ -162,6 +176,19 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 vendor_id = trendingModel.getId();
             }
         }
+
+        if (getIntent().hasExtra(BUNDLE_VENDOR_STORE_LIST_DETAILS)) {
+            vendorStoreListModel = (VendorStoreListModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_STORE_LIST_DETAILS);
+        } else {
+            vendorStoreListModel = null;
+        }
+
+        if (vendorStoreListModel != null) {
+            if (GlobalFunctions.isNotNullValue(vendorStoreListModel.getId())) {
+                Log.d(TAG,vendorStoreListModel.getId());
+                vendor_id = vendorStoreListModel.getId();
+            }
+        }
        /* if (trendingModel != null) {
             if (GlobalFunctions.isNotNullValue(orderStatus.getId())) {
                 status = orderStatus.getId();
@@ -181,32 +208,46 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         });
 
-        setTitle(getString(R.string.offers), 0, 0);
-
-        tv_open_map.setOnClickListener(new View.OnClickListener() {
+        Tv_allLockedOffers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                tackAddress();
 
             }
         });
 
+       /* tv_open_map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tackAddress(vendorModel);
+
+            }
+        });
+*/
+        setTitle(getString(R.string.offers), 0, 0);
+
+
         loadVendorlistDetails();
+
+      /*  if (offerModel.getAllow().equalsIgnoreCase("1")) {
+            getOfferList();
+        }
+*/
 
         getOfferList();
 
         getReviews();
 
+
     }
 
     private void getReviews() {
-        GlobalFunctions.showProgress(context, getString(R.string.loading));
+        //GlobalFunctions.showProgress(context, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.getVendorDetails(context, String.valueOf(100), new ServerResponseInterface() {
             @SuppressLint("LongLogTag")
             @Override
             public void OnSuccessFromServer(Object arg0) {
-                GlobalFunctions.hideProgress();
+                //GlobalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
                 VendorDetailsMainModel vendorMainModel = (VendorDetailsMainModel) arg0;
                 VendorModel vendorModel = vendorMainModel.getVendorModel();
@@ -220,7 +261,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void OnFailureFromServer(String msg) {
-                GlobalFunctions.hideProgress();
+                //GlobalFunctions.hideProgress();
 
                 Log.d(TAG, "Failure : " + msg);
                 GlobalFunctions.displayMessaage(context, mainView, msg);
@@ -229,7 +270,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void OnError(String msg) {
-                GlobalFunctions.hideProgress();
+               // GlobalFunctions.hideProgress();
                 Log.d(TAG, "Error : " + msg);
                 GlobalFunctions.displayMessaage(context, mainView, msg);
             }
@@ -268,7 +309,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         }
     }
     private void reviewRecyclerView() {
-        review_list_recyclerview.setLayoutManager(linearLayoutManager);
+        review_list_recyclerview.setLayoutManager(reviewLinear);
         review_list_recyclerview.setHasFixedSize(true);
         reviewListAdapter = new ReviewListAdapter(activity, reviewModels);
         review_list_recyclerview.setAdapter(reviewListAdapter);
@@ -276,7 +317,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
     private void getOfferList() {
-        GlobalFunctions.showProgress(context, getString(R.string.loading));
+       // GlobalFunctions.showProgress(context, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.getVendorDetails(context, String.valueOf(100), new ServerResponseInterface() {
             @SuppressLint("LongLogTag")
@@ -296,7 +337,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void OnFailureFromServer(String msg) {
-                GlobalFunctions.hideProgress();
+               // GlobalFunctions.hideProgress();
 
                 Log.d(TAG, "Failure : " + msg);
                 GlobalFunctions.displayMessaage(context, mainView, msg);
@@ -305,7 +346,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void OnError(String msg) {
-                GlobalFunctions.hideProgress();
+              //  GlobalFunctions.hideProgress();
                 Log.d(TAG, "Error : " + msg);
                 GlobalFunctions.displayMessaage(context, mainView, msg);
             }
@@ -351,21 +392,25 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     }
 
 
-    private void tackAddress() {
-        try {
-            Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + "" + "/" + vendorModel.getAddress());
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setPackage("com.google.android.apps.maps");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-        } catch (ActivityNotFoundException e) {
-            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
-            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
+    private void tackAddress(VendorModel vendorModel) {
 
-        }
+
+          try {
+              Uri uri = Uri.parse("https://www.google.co.in/maps/dir/" + "" + "/" + vendorModel.getAddress());
+              Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+              intent.setPackage("com.google.android.apps.maps");
+              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+          } catch (ActivityNotFoundException e) {
+              Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
+              Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+              intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+              startActivity(intent);
+
+          }
+
     }
+
 
     private void loadVendorlistDetails() {
         GlobalFunctions.showProgress(context, getString(R.string.loading));
@@ -378,9 +423,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 Log.d(TAG, "Response : " + arg0.toString());
                 VendorDetailsMainModel vendorMainModel = (VendorDetailsMainModel) arg0;
                 VendorModel vendorModel = vendorMainModel.getVendorModel();
-                //  OrderModel orderModel=(OrderModel)arg0;
-                // orderModel.setOrder_id(orderModel.getOrder_vendor_product_id());
-                //   OrderListModel orderListModel=orderModel.getOrder_id();
+
 
                 if (vendorModel != null) {
                     setVendorDetails(vendorModel);
@@ -414,14 +457,20 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
             }
-
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {
                 tv_vendor_name.setText(vendorModel.getName());
 
             }  if (GlobalFunctions.isNotNullValue(vendorModel.getAddress())) {
                 tv_address.setText(vendorModel.getAddress());
+              /*  tv_open_map.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        tackAddress(vendorModel);
 
-            }  if (GlobalFunctions.isNotNullValue(vendorModel.getRating_count())) {
+                    }
+                });*/
+            }
+            if (GlobalFunctions.isNotNullValue(vendorModel.getRating_count())) {
                 tvRating.setText(vendorModel.getAvg_rating());
 
             }if (GlobalFunctions.isNotNullValue(vendorModel.getRating_count())) {
@@ -528,104 +577,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             super.onDestroy();
         }
 
-//
-//        //*Recyclerview Adapter*//
-//        public class LockedOfferAdapter extends RecyclerView.Adapter<LockedOfferAdapter.MyViewHolder> {
-//
-//            private List<CategoryModelClass> moviesList;
-//
-//            public class MyViewHolder extends RecyclerView.ViewHolder {
-//                TextView title;
-//                RelativeLayout lockedOffer;
-//
-//                public MyViewHolder(View view) {
-//                    super(view);
-//                    title = (TextView) view.findViewById(R.id.tvFood);
-//                    lockedOffer = view.findViewById(R.id.lockedOffer);
-//                }
-//            }
-//
-//
-//            public LockedOfferAdapter(List<CategoryModelClass> moviesList) {
-//                this.moviesList = moviesList;
-//            }
-//
-//            @Override
-//            public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                View itemView = LayoutInflater.from(parent.getContext())
-//                        .inflate(R.layout.rezq_plus_offer_dataview, parent, false);
-//
-//                return new MyViewHolder(itemView);
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(MyViewHolder holder, int position) {
-//                CategoryModelClass movie = moviesList.get(position);
-//                holder.lockedOffer.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        //  replaceFragmentWithAnimation(new OfferDetailsFragment());
-//
-//                    }
-//                });
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return moviesList.size();
-//            }
-//
-//        /*public void replaceFragmentWithAnimation(Fragment fragment) {
-//            FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-//            transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-//            transaction.replace(R.id.fragment_container, fragment);
-//            transaction.commit();
-//        }*/
-//        }
 
-
-//        //*Recyclerview All locked offer list*//
-//
-//        public class AllLockedList extends RecyclerView.Adapter<AllLockedList.MyViewHolder> {
-//
-//            private List<CategoryModelClass> moviesList;
-//
-//            public class MyViewHolder extends RecyclerView.ViewHolder {
-//                TextView title;
-//                RelativeLayout lockedOffer;
-//
-//                public MyViewHolder(View view) {
-//                    super(view);
-//                    title = (TextView) view.findViewById(R.id.tvFood);
-//                    lockedOffer = view.findViewById(R.id.lockedOffer);
-//                }
-//            }
-//
-//
-//            public AllLockedList(List<CategoryModelClass> moviesList) {
-//                this.moviesList = moviesList;
-//            }
-//
-//            @Override
-//            public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-//                View itemView = LayoutInflater.from(parent.getContext())
-//                        .inflate(R.layout.rezq_plus_offer_dataview, parent, false);
-//
-//                return new MyViewHolder(itemView);
-//            }
-//
-//            @Override
-//            public void onBindViewHolder(MyViewHolder holder, int position) {
-//
-//            }
-//
-//            @Override
-//            public int getItemCount() {
-//                return moviesList.size();
-//            }
-//
-//        }
 
 
     }

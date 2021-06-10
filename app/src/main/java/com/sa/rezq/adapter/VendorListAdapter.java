@@ -63,6 +63,8 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
             holder.product_discount.setText((model.getDistance()));
         }  if (model.getLogo() != null) {
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
+            holder.product_image.setAlpha(0.5f);
+
         }
 
 
@@ -70,8 +72,8 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
             @Override
             public void onClick(View v) {
 
-              //  Intent intent = VendorListDetailsActivity.newInstance( activity, model );
-                //activity.startActivity( intent );
+                Intent intent = VendorListDetailsActivity.newInstance( activity, model );
+                activity.startActivity( intent );
             }
         });
 
