@@ -23,8 +23,7 @@
                 android:id="@+id/vendor_list_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/black_trans"
-                android:src="@drawable/mask_grp"/>
+                android:background="@color/black_trans" />
             <com.sa.rezq.view.AppTextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -32,7 +31,7 @@
                 android:textSize="10dp"
                 android:layout_above="@+id/tv_vendor_name"
                 android:layout_marginLeft="25dp"
-                android:text="@string/dinner"/>
+                android:text=""/>
             <com.sa.rezq.view.AppTextView
                 android:id="@+id/tv_vendor_name"
                 android:layout_width="match_parent"
@@ -43,7 +42,7 @@
                 android:layout_alignParentBottom="true"
                 android:textSize="16dp"
                 android:layout_marginBottom="15dp"
-                android:text="@string/dubai_marina"/>
+                android:text=""/>
             </RelativeLayout>
 
                 <RelativeLayout
@@ -59,7 +58,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:drawablePadding="5dp"
-                        android:text="4.8"
+                        android:text=""
                         android:gravity="center"
                         android:textColor="@color/yellow"
                         android:textSize="16dp"
@@ -105,8 +104,8 @@
                             android:id="@+id/iv_favourite"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_toLeftOf="@+id/tvFav"
                             android:src="@drawable/ic_like"/>
+
 
                         <com.sa.rezq.view.AppTextView
                             android:id="@+id/tvFav"
@@ -146,7 +145,7 @@
                     android:layout_marginTop="5dp"
                     android:layout_width="211dp"
                     android:layout_height="wrap_content"
-                    android:text="@string/Neque_porro"
+                    android:text=""
                     android:textColor="#171717"
                     android:textSize="14dp"
                     android:layout_below="@id/TvAddress"/>
@@ -192,7 +191,7 @@
                     android:orientation="vertical"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_height="220dp">
+                    android:layout_height="wrap_content">
                     <com.vlonjatg.progressactivity.ProgressLinearLayout
                         android:id="@+id/details_progressActivity"
                         android:layout_width="match_parent"

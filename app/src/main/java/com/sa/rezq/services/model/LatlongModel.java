@@ -27,16 +27,18 @@ public class LatlongModel implements Serializable {
         return latitude;
     }
 
-    public void setLatitude(String latitude) {
+    public String setLatitude(String latitude) {
         this.latitude = latitude;
+        return latitude;
     }
 
     public String getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(String longitude) {
+    public String setLongitude(String longitude) {
         this.longitude = longitude;
+        return longitude;
     }
 
 

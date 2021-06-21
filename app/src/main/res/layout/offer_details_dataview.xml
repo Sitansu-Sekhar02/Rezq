@@ -13,7 +13,6 @@
             android:id="@+id/iv_offer_image"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:background="@drawable/rezq_logo"
             android:gravity="center" />
 
         <com.sa.rezq.view.AppTextView
@@ -37,6 +36,11 @@
             android:textColor="#898989"
             android:textSize="12dp" />
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/grey_light"
+        android:layout_below="@+id/relative_unlocked_offer"/>
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"

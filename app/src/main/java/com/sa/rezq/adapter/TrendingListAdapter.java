@@ -32,7 +32,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
 
 
 
-
     private final List<TrendingModel> list;
     private final Activity activity;
     private GlobalVariables globalVariables;
@@ -58,7 +57,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
     @Override
     public void onBindViewHolder(@NonNull TrendingListAdapter.viewHolder holder, int position) {
         final TrendingModel model = list.get(position);
-        Log.e("catgory id",""+list.get(position).getId());
 
         if (position%2==0){
             holder.single_imageview_main_rl.setVisibility(View.VISIBLE);
@@ -78,7 +76,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.product_discount_title.setText((model.getOffer_title()));
         } if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
-            holder.product_image.setAlpha(0.5f);
 
         }
 
@@ -92,7 +89,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.first_product_discount.setText((model.getOffer_discount()));
         }  if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.first_product_image);
-            holder.first_product_image.setAlpha(0.5f);
         }
 
 
@@ -106,7 +102,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.second_product_discount_title.setText((model.getOffer_title()));
         }if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.second_product_image);
-            holder.second_product_image.setAlpha(0.5f);
 
         }
 
@@ -121,8 +116,6 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
                     activity.startActivity( intent );
                 }
 
-                //Intent intent = VendorStoreListActivity.newInstance( activity, model );
-               // activity.startActivity( intent );
             }
         });
         holder.first_card_item_click.setOnClickListener(new View.OnClickListener() {

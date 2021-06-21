@@ -195,12 +195,13 @@ public class LocationMonitoringService extends Service implements
 
         //LIVE
         //locationUpdateModel.setOrder_vendor_product_id(orderId);
-        latlongModel.setLatitude(lat);
-        latlongModel.setLongitude(lng);
+       String latitude= latlongModel.setLatitude(lat);
+        String longitude=latlongModel.setLongitude(lng);
+
 
 //        GlobalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.updateLatLong(context,latlongModel, new ServerResponseInterface() {
+        servicesMethodsManager.updateLatLong(context,latitude,longitude, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
                 // GlobalFunctions.hideProgress();

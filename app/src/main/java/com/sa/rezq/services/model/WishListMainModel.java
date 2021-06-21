@@ -2,6 +2,7 @@ package com.sa.rezq.services.model;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
@@ -11,13 +12,18 @@ public class WishListMainModel implements Serializable {
 
     private final String
             STATUS                     = "status",
-            RESPONSE                   = "response";
+            MESSAGE                     = "message",
+            RESPONSE                    = "response";
 
     private String
-            status                    = null;
+            status                    = null,
+            message                    = null;
 
     WishListSubMainModel
             wishListSubMainModel   = null;
+    WishListModel
+            wishListModel             = null;
+
 
     public WishListMainModel(){}
 
@@ -29,6 +35,14 @@ public class WishListMainModel implements Serializable {
         this.status = status;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
     public WishListSubMainModel getWishListSubMainModel() {
         return wishListSubMainModel;
     }
@@ -37,11 +51,20 @@ public class WishListMainModel implements Serializable {
         this.wishListSubMainModel = wishListSubMainModel;
     }
 
+    public WishListModel getWishListModel() {
+        return wishListModel;
+    }
+
+    public void setWishListModel(WishListModel wishListModel) {
+        this.wishListModel = wishListModel;
+    }
+
     public boolean toObject(String jsonObjectString){
         try{
             JSONObject json = new JSONObject(jsonObjectString);
 
             if(json.has(STATUS)){this.status = json.getString(STATUS);}
+            if(json.has(MESSAGE)){this.message = json.getString(MESSAGE);}
 
 
             if(json.has(RESPONSE)){
@@ -50,6 +73,11 @@ public class WishListMainModel implements Serializable {
                 jsonObject1 = json.getJSONObject(RESPONSE);
                 if(jsonObject1 != null){statusModel.toObject(jsonObject1.toString());}
                 wishListSubMainModel = statusModel;
+
+             /*   JSONArray array = json.getJSONArray(RESPONSE);
+                WishListModel listModelLocal = new WishListModel();
+                if(listModelLocal.toObject(array)){this.wishListModel = listModelLocal;}
+                else{this.wishListModel = null;}*/
             }
 
 
@@ -65,6 +93,9 @@ public class WishListMainModel implements Serializable {
         try{
             JSONObject jsonMain = new JSONObject();
             jsonMain.put(STATUS, status);
+            jsonMain.put(MESSAGE, message);
+           // jsonMain.put(RESPONSE, wishListModel!=null?new JSONArray(wishListModel.toString(true)):null);
+
             jsonMain.put(RESPONSE, wishListSubMainModel != null ? new JSONObject(this.wishListSubMainModel.toString()) : new JSONObject());
             returnString = jsonMain.toString();
         }

@@ -2,7 +2,6 @@ package com.sa.rezq.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,9 +16,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.offers.RedeemOfferActivity;
 import com.sa.rezq.services.model.OfferModel;
-import com.sa.rezq.services.model.TrendingModel;
-import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
+import com.sa.rezq.services.model.VendorModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -35,11 +34,15 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
     private GlobalVariables globalVariables;
     private GlobalFunctions globalFunctions;
     String minimumQuantity = "0";
+    String vendor_id= null;
     boolean isProductVertical = false;
+    VendorModel vendorModel=null;
 
-    public OfferListAdapter(Activity activity, List<OfferModel> list) {
+    public OfferListAdapter(Activity activity, String vendor_id,VendorModel vendorModel,List<OfferModel> list) {
         this.activity = activity;
         this.list = list;
+        this.vendor_id = vendor_id;
+        this.vendorModel = vendorModel;
 
     }
 
@@ -62,8 +65,18 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
             if (model.getOffer_applicable() != null) {
                 holder.product_applicable.setText((model.getOffer_applicable()));
             }   if (model.getOffer_image() != null) {
-               // Picasso.with(activity).load(model.getOffer_image()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
+                 Picasso.with(activity).load(model.getOffer_image()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
             }
+
+        holder.relative_unlocked_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                 model.setStoreId(vendor_id);
+                 Intent intent = RedeemOfferActivity.newInstance( activity, model,vendorModel);
+                 activity.startActivity( intent );
+            }
+        });
 
 
     }
@@ -78,7 +91,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
         TextView product_title,tv_offer_title,second_product_title;
         TextView product_applicable,tv_applicable,second_product_discount;
         TextView product_discount_title,first_product_discount_title,second_product_discount_title;
-        RelativeLayout click_item,single_imageview_main_rl,double_imageview_main_rl;
+        RelativeLayout relative_unlocked_offer,single_imageview_main_rl,double_imageview_main_rl;
         CardView first_card_item_click,second_card_item_click;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
@@ -88,8 +101,8 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
             product_applicable = (TextView) itemView.findViewById(R.id.tv_first_offer_applicable);
 
             tv_offer_title = (TextView) itemView.findViewById(R.id.tv_offer_title);
-
             tv_applicable = (TextView) itemView.findViewById(R.id.tv_applicable);
+            relative_unlocked_offer = (RelativeLayout) itemView.findViewById(R.id.relative_unlocked_offer);
 
         }
     }

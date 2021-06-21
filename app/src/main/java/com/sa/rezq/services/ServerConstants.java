@@ -22,17 +22,20 @@ public class ServerConstants {
     public static final String URL_GetOrderList           = SERVER_URL + "select_orders.php";
     public static final String URL_OrderStatusUpdate           = SERVER_URL + "order_status_update.php";
     public static final String URL_LatlongUpdate           = SERVER_URL + "update_lat_long.php";
-    public static final String URL_Homepage           = SERVER_URL + "homepage.php";
-    public static final String URL_Vendorlist           = SERVER_URL + "vendor_store_detail.php";
-    public static final String URL_Vendor_Store_list           = SERVER_URL + "vendor_store_list.php";
-    public static final String URL_Reviewlist           = SERVER_URL + "review_list.php";
-    public static final String URL_Insertreview           = SERVER_URL + "insert_review.php";
-    public static final String URL_Wishlist           = SERVER_URL + "wishlist.php";
-    public static final String URL_Places_Nearby           = SERVER_URL + "near_by.php";
+    public static final String URL_Homepage                = SERVER_URL + "homepage.php";
+    public static final String URL_Vendorlist              = SERVER_URL + "vendor_store_detail.php";
+    public static final String URL_Vendor_Store_list         = SERVER_URL + "vendor_store_list.php";
+    public static final String URL_Reviewlist               = SERVER_URL + "review_list.php";
+    public static final String URL_InsertReview           = SERVER_URL + "insert_review.php";
+    public static final String URL_Wishlist                = SERVER_URL + "wishlist.php";
+    public static final String URL_GetAccountList           = SERVER_URL + "user_account_list.php";
     public static final String URL_Check_wishlist           = SERVER_URL + "check_wishlist.php";
     public static final String URL_check_redeme_code          = SERVER_URL + "check_redeme_code.php";
     public static final String URL_membership_list         = SERVER_URL + "membership_list.php";
     public static final String URL_insert_membership         = SERVER_URL + "insert_membership.php";
+    public static final String URL_insert_User_account         = SERVER_URL + "insert_user_account.php";
+    public static final String URL_insert_Recent_Coupon         = SERVER_URL + "insert_recent_viewed.php";
+    public static final String URL_insert_Coupon_list         = SERVER_URL + "recent_views.php";
 
     public static final String URL_UpdateProfile        = SERVER_URL + "get_profile.php";
     public static final String URL_GetProfile           = SERVER_URL + "get_profile.php";
@@ -54,7 +57,7 @@ public class ServerConstants {
 
     public static final String URL_GetNotifications     = BASE_URL + "get_notifications.php";
     public static final String URL_ForgotPassword       = BASE_URL + "forgot_password.php";
-    public static final String URL_PushNotification     = BASE_URL + "push.php";
+    public static final String URL_PushNotification     = SERVER_URL + "push.php";
 
     public static final String URL_GetMyPlansList       = BASE_URL + "";
 

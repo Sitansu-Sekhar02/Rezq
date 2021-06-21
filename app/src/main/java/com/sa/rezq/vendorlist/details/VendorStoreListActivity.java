@@ -2,10 +2,8 @@ package com.sa.rezq.vendorlist.details;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,7 +14,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -24,28 +21,21 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sa.rezq.Activity.AppController;
-import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.OfferListAdapter;
-import com.sa.rezq.adapter.ReviewListAdapter;
 import com.sa.rezq.adapter.VendorListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
-import com.sa.rezq.services.model.OfferListModel;
-import com.sa.rezq.services.model.OfferModel;
-import com.sa.rezq.services.model.ReviewListModel;
-import com.sa.rezq.services.model.ReviewModel;
-import com.sa.rezq.services.model.SeeAllCategoryListMainModel;
-import com.sa.rezq.services.model.SeeAllCategoryListModel;
+import com.sa.rezq.services.model.BannerModel;
+import com.sa.rezq.services.model.CategoryModel;
+import com.sa.rezq.services.model.NearbyModel;
+import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingModel;
-import com.sa.rezq.services.model.VendorDetailsMainModel;
 import com.sa.rezq.services.model.VendorModel;
 import com.sa.rezq.services.model.VendorRTModel;
-import com.sa.rezq.services.model.VendorStoreListModel;
+import com.sa.rezq.services.model.VendorStoreModel;
 import com.sa.rezq.services.model.VendorStoreMainModel;
-import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -54,7 +44,13 @@ import java.util.List;
 public class VendorStoreListActivity extends AppCompatActivity {
 
     public static final String TAG = "VendorStoreListActivity",
-            BUNDLE_VENDOR_STORE_LIST_DETAILS = "VendorStoreListActivity";
+            BUNDLE_VENDOR_STORE_LIST_DETAILS = "VendorStoreListActivity",
+            BUNDLE_TRENDING_DETAILS = "TrendingDetails",
+            BUNDLE_BANNER_LIST = "BannerList",
+            BUNDLE_ALL_CATEGORY_LIST = "AllCategoryList",
+            BUNDLE_SHOW_TRENDING_LIST = "ShowTrendingList",
+            BUNDLE_NEARBY_PLACES = "NearByPlaces",
+          BUNDLE_CATEGORY_LIST = "CategoryList";
 
     View view;
     TextView AllLockedOffer;
@@ -74,11 +70,14 @@ public class VendorStoreListActivity extends AppCompatActivity {
     static TextView toolbar_title;
     static ImageView toolbar_logo, tool_bar_back_icon;
 
-    int id=100;
+    String vendor_id = null;
+    String category_id = null;
+    NearbyModel nearbyModel=null;
+
 
 
     VendorListAdapter vendorListAdapter;
-    List<VendorStoreListModel> vendorStoreListModels = new ArrayList<>();
+    List<VendorStoreModel> vendorStoreModels = new ArrayList<>();
     LinearLayoutManager storelistLinear;
     ProgressLinearLayout reviewprogressActivity;
     RecyclerView vendor_store_list_recyclerview;
@@ -91,24 +90,67 @@ public class VendorStoreListActivity extends AppCompatActivity {
     GlobalFunctions globalFunctions;
     Window window = null;
 
-    String vendor_id = null;
     TrendingModel trendingModel = null;
+    CategoryModel categoryModel=null;
+    BannerModel bannerModel=null;
+    SeeAllCategoryModel allCategoryModel=null;
 
     FirebaseStorage storage;
     StorageReference storageReference;
 
+    String sort=null;
+
+
     public static Intent newInstance(Activity activity, TrendingModel model) {
         Intent intent = new Intent(activity, VendorStoreListActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(BUNDLE_VENDOR_STORE_LIST_DETAILS, model);
+        bundle.putSerializable(BUNDLE_TRENDING_DETAILS, model);
         intent.putExtras(bundle);
         return intent;
     }
 
-    public static Intent newInstance(Activity activity, String vendor_id, Object o, Object o1) {
+    /*public static Intent newInstance(Activity activity,VendorStoreListModel vendorStoreListModel) {
         Intent intent = new Intent(activity, VendorStoreListActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(BUNDLE_VENDOR_STORE_LIST_DETAILS, vendor_id);
+        bundle.putSerializable(BUNDLE_VENDOR_STORE_LIST_DETAILS, vendorStoreListModel);
+        intent.putExtras(bundle);
+        return intent;
+    }*/
+    public static Intent newInstance(Activity activity, CategoryModel categoryModel) {
+        Intent intent = new Intent(activity, VendorStoreListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_CATEGORY_LIST, categoryModel);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    public static Intent newInstance(Activity activity, BannerModel bannerClickedModel) {
+        Intent intent = new Intent(activity, VendorStoreListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_BANNER_LIST, bannerClickedModel);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    public static Intent newInstance(Activity activity, SeeAllCategoryModel model) {
+        Intent intent = new Intent(activity, VendorStoreListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_ALL_CATEGORY_LIST, model);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    public static Intent newInstance(Activity activity, NearbyModel model) {
+        Intent intent = new Intent(activity, VendorStoreListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_NEARBY_PLACES, model);
+        intent.putExtras(bundle);
+        return intent;
+    }
+    public static Intent newInstance(Activity activity, String sort) {
+        Intent intent = new Intent(activity, VendorStoreListActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putString(BUNDLE_SHOW_TRENDING_LIST, sort);
         intent.putExtras(bundle);
         return intent;
     }
@@ -139,8 +181,10 @@ public class VendorStoreListActivity extends AppCompatActivity {
         mainView=vendor_store_list_recyclerview;
 
 
-        if (getIntent().hasExtra(BUNDLE_VENDOR_STORE_LIST_DETAILS)) {
-            trendingModel = (TrendingModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_STORE_LIST_DETAILS);
+        //trending list
+        if (getIntent().hasExtra(BUNDLE_TRENDING_DETAILS)) {
+
+            trendingModel = (TrendingModel) getIntent().getSerializableExtra(BUNDLE_TRENDING_DETAILS);
         } else {
             trendingModel = null;
         }
@@ -151,11 +195,69 @@ public class VendorStoreListActivity extends AppCompatActivity {
                 vendor_id = trendingModel.getId();
             }
         }
-       /* if (trendingModel != null) {
-            if (GlobalFunctions.isNotNullValue(orderStatus.getId())) {
-                status = orderStatus.getId();
+        //bnner list
+        if (getIntent().hasExtra(BUNDLE_BANNER_LIST)) {
+
+            bannerModel = (BannerModel) getIntent().getSerializableExtra(BUNDLE_BANNER_LIST);
+        } else {
+            bannerModel = null;
+        }
+
+        if (bannerModel != null) {
+            if (GlobalFunctions.isNotNullValue(bannerModel.getVendor_id())) {
+                Log.d(TAG,bannerModel.getVendor_id());
+                vendor_id = bannerModel.getVendor_id();
             }
-        }*/
+        }
+
+        if (getIntent().hasExtra(BUNDLE_ALL_CATEGORY_LIST)) {
+
+            allCategoryModel = (SeeAllCategoryModel) getIntent().getSerializableExtra(BUNDLE_ALL_CATEGORY_LIST);
+        } else {
+            allCategoryModel = null;
+        }
+        if (allCategoryModel != null) {
+            if (GlobalFunctions.isNotNullValue(allCategoryModel.getCategori_id())) {
+                category_id = allCategoryModel.getCategori_id();
+            }
+        }
+
+        if (getIntent().hasExtra(BUNDLE_NEARBY_PLACES)) {
+
+            nearbyModel = (NearbyModel) getIntent().getSerializableExtra(BUNDLE_NEARBY_PLACES);
+        } else {
+            nearbyModel = null;
+        }
+
+        if (nearbyModel != null) {
+            if (GlobalFunctions.isNotNullValue(nearbyModel.getId())) {
+                Log.d(TAG,nearbyModel.getId());
+                vendor_id = nearbyModel.getId();
+            }
+        }
+
+        //category list
+        if (getIntent().hasExtra(BUNDLE_CATEGORY_LIST)) {
+
+            categoryModel = (CategoryModel) getIntent().getSerializableExtra(BUNDLE_CATEGORY_LIST);
+        } else {
+            categoryModel = null;
+        }
+        if (categoryModel != null) {
+            if (GlobalFunctions.isNotNullValue(categoryModel.getId())) {
+                Log.d(TAG,categoryModel.getId());
+                category_id = categoryModel.getId();
+            }
+        }
+
+        if (getIntent().hasExtra(BUNDLE_SHOW_TRENDING_LIST)) {
+
+            sort = (String) getIntent().getStringExtra(BUNDLE_SHOW_TRENDING_LIST);
+        } else {
+            sort= null;
+        }
+
+
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
@@ -174,6 +276,7 @@ public class VendorStoreListActivity extends AppCompatActivity {
 
 
         getOfferList();
+
         review_swipe_container.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -182,12 +285,10 @@ public class VendorStoreListActivity extends AppCompatActivity {
         } );
 
     }
-
-
     private void getOfferList() {
         GlobalFunctions.showProgress(context, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.getVendorStoreList(context, String.valueOf(2), String.valueOf(108), new ServerResponseInterface() {
+        servicesMethodsManager.getVendorStoreList(context, vendor_id,sort,category_id, new ServerResponseInterface() {
             @SuppressLint("LongLogTag")
             @Override
             public void OnSuccessFromServer(Object arg0) {
@@ -231,15 +332,15 @@ public class VendorStoreListActivity extends AppCompatActivity {
     }
 
     private void setThisPage(VendorRTModel vendorStoreListModel) {
-        if (vendorStoreListModel != null && vendorStoreListModels != null) {
-            vendorStoreListModels.clear();
-            vendorStoreListModels.addAll( vendorStoreListModel.getVendorListModels() );
+        if (vendorStoreListModel != null && vendorStoreModels != null) {
+            vendorStoreModels.clear();
+            vendorStoreModels.addAll( vendorStoreListModel.getVendorListModels() );
             if (vendorListAdapter != null) {
                 synchronized (vendorListAdapter) {
                     vendorListAdapter.notifyDataSetChanged();
                 }
             }
-            if (vendorStoreListModels.size() <= 0) {
+            if (vendorStoreModels.size() <= 0) {
                 showOfferEmptyPage();
             } else {
                 showOfferContent();
@@ -256,9 +357,9 @@ public class VendorStoreListActivity extends AppCompatActivity {
     }
 
     private void offerRecyclerView() {
-        vendor_store_list_recyclerview.setLayoutManager(new GridLayoutManager(this, 2));
+        vendor_store_list_recyclerview.setLayoutManager(storelistLinear);
         vendor_store_list_recyclerview.setHasFixedSize(true);
-        vendorListAdapter = new VendorListAdapter(activity, vendorStoreListModels);
+        vendorListAdapter = new VendorListAdapter(activity, vendorModel, vendorStoreModels);
         vendor_store_list_recyclerview.setAdapter(vendorListAdapter);
     }
 
@@ -267,7 +368,6 @@ public class VendorStoreListActivity extends AppCompatActivity {
             reviewprogressActivity.showContent();
         }
     }
-
 
 
         @Override

@@ -13,10 +13,10 @@ public class SeeAllCategoryModel implements Serializable {
     private final String TAG = "SeeAllCategoryListModel";
 
     private final String
-            CATEGORY_ID = "categori_id",
+            CATEGORY_ID = "category_id",
             NAME = "name",
             ICON = "image",
-            VENDOR_COUNT = "vendor_count",
+            VENDOR_COUNT = "count",
             ACCOUNT = "account",
             SERVICES = "service";
 

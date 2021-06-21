@@ -40,6 +40,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
+import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.addon.PasswordValidator;
 import com.sa.rezq.login.LoginActivity;
 import com.sa.rezq.login.OtpActivity;
@@ -50,6 +51,7 @@ import com.sa.rezq.services.model.AddressModel;
 import com.sa.rezq.services.model.CountryModel;
 import com.sa.rezq.services.model.KeyValueListModel;
 import com.sa.rezq.services.model.NotificationSettingsModel;
+import com.sa.rezq.services.model.OfferModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.view.AlertDialog;
 import com.sa.rezq.view.ProgressDialog;
@@ -1082,6 +1084,7 @@ public class GlobalFunctions {
         headers.put(GlobalVariables.ACCEPT_LANGUAGE, getLanguage(context).toString());
         headers.put("Cache-Control", "no-cache");
         headers.put("Token", getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN));
+        headers.put("Account", getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID));
         Log.d(TAG, "Header : "+headers);
         return headers;
     }
@@ -1094,6 +1097,7 @@ public class GlobalFunctions {
         headers.put(GlobalVariables.ACCEPT_LANGUAGE, getLanguage(context).toString());
         headers.put("Cache-Control", "no-cache");
         headers.put("Token", getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN));
+        headers.put("Account", getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID));
         Log.d(TAG, "Header : "+headers);
         return headers;
     }
@@ -1137,9 +1141,10 @@ public class GlobalFunctions {
       //  CitySelectingActivity.closeThisActivity();
         MainActivity.closeThisActivity();
         OtpActivity.closeThisActivity();
+       AccountActivity.closeThisActivity();
 
         RegisterActivity.closeThisActivity();
-        LoginActivity.closeThisActivity();
+       // LoginActivity.closeThisActivity();
 
     }
 
@@ -1474,5 +1479,32 @@ public class GlobalFunctions {
             result = false;
         }
         return result;
+    }
+
+    public static List<OfferModel> getOfferList(List<OfferModel> list, boolean isAllow) {
+        List<OfferModel> updatedList;
+        updatedList=new ArrayList<>();
+        updatedList.clear();
+        try {
+            if (list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    OfferModel offerModel = list.get(i);
+                    if (isAllow){
+                        if (isNotNullValue(offerModel.getAllow()) && offerModel.getAllow().equalsIgnoreCase("1")) {
+                            updatedList.add(offerModel);
+                        }
+
+                    }else {
+                        if (isNotNullValue(offerModel.getAllow()) && offerModel.getAllow().equalsIgnoreCase("0")) {
+                            updatedList.add(offerModel);
+                        }
+                    }
+                }
+            }
+        } catch (Exception e) {
+            return updatedList;
+        }
+
+        return updatedList;
     }
 }

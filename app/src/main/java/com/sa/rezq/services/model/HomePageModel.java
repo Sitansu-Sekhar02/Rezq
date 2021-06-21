@@ -14,7 +14,7 @@ public class HomePageModel {
             SUB_CATEGORY             = "sub_category",
             TRENDING                 = "trending",
             NEAR_BY                  = "near_by",
-            LOCATION                = "location",
+            LOCATION                 = "location",
             TOP_CATEGORY             = "top_category",
             SECTION1                 = "section1",
             SECTION2                 = "section2";

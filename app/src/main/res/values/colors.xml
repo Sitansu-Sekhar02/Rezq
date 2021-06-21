@@ -32,7 +32,7 @@
     <color name="ColorStatusBar">@color/colorAccent</color>
 
     <color name="app_fontColor_dark">#ffffff</color>
-    <color name="app_fontColor">#e6575757</color>
+    <color name="app_fontColor">#AABBC7</color>
     <color name="app_fontBlackColor">#000000</color>
     <color name="app_fontColor_hint">#b85f5f5f</color>
 
@@ -45,6 +45,7 @@
     <color name="send">#8B8CA4</color>
     <color name="sends">#989ABE</color>
     <color name="black_trans">#99000000</color>
+    <color name="transparent_image">#5C000000</color>
     <color name="dark_grey">#9d9b9b</color>
 
 

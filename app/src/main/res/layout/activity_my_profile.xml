@@ -40,6 +40,7 @@
                     android:textSize="14dp" />
 
                 <com.sa.rezq.view.AppTextView
+                    android:visibility="gone"
                     android:layout_width="76dp"
                     android:layout_height="20dp"
                     android:text="@string/rezq_mem"
@@ -178,6 +179,7 @@
 
 
                 <com.sa.rezq.view.AppButton
+                    android:id="@+id/btn_update_profile"
                     android:layout_width="288dp"
                     android:layout_height="48dp"
                     android:layout_below="@id/linearProfile_details"

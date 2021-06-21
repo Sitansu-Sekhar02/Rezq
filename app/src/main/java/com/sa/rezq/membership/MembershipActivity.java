@@ -3,6 +3,7 @@ package com.sa.rezq.membership;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.storage.FirebaseStorage;
@@ -103,6 +106,13 @@ public class MembershipActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
+        }
+
         setTitle(getString(R.string.my_membership), 0, 0);
 
 
@@ -178,60 +188,6 @@ public class MembershipActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-   /* public void replaceFragmentWithAnimation(Fragment fragment) {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
-    }*/
 
 
-    //*Recyclerview Adapter*//
-
-
-    public class RecentCouponAdapter extends RecyclerView.Adapter<RecentCouponAdapter.MyViewHolder> {
-
-        private List<CategoryModelClass> moviesList;
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView title;
-
-            public MyViewHolder(View view) {
-                super(view);
-                title = (TextView) view.findViewById(R.id.tvFood);
-            }
-        }
-
-
-        public RecentCouponAdapter(List<CategoryModelClass> moviesList) {
-            this.moviesList = moviesList;
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recent_coupon_dataview, parent, false);
-
-            return new MyViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            CategoryModelClass movie = moviesList.get(position);
-            //holder.title.setText(movie.getCategory_name());
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return moviesList.size();
-        }
-
-        /*public void replaceFragmentWithAnimation(Fragment fragment) {
-            FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-            transaction.replace(R.id.fragment_container, fragment);
-            transaction.commit();
-        }*/
-    }
 }

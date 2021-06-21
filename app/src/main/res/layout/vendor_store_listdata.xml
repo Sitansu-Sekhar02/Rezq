@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/vendor_store_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/food"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <ImageView
+                android:id="@+id/iv_vendor_logo"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_group_al" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_toRightOf="@+id/food"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_facilities"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/dinner"
+                android:textColor="#848484" />
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_vendor_name"
+                android:layout_width="140dp"
+                android:layout_marginTop="4dp"
+                android:layout_height="wrap_content"
+                android:text="@string/pizza_pasta"
+                android:textColor="#374646"
+                android:textSize="14dp" />
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tvoff"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/off"
+                android:textAllCaps="true"
+                android:textColor="@color/holo_green"
+                android:textSize="12dp"
+                android:visibility="gone" />
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/tv_rating"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:progressTint="@color/yellow"
+                android:rating="4"
+                android:stepSize="1" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="15dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_offer_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textAllCaps="true"
+                android:textColor="#8D8D8D"
+                android:textSize="12dp" />
+
+            <com.sa.rezq.view.AppTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/offers"
+                android:textAllCaps="true"
+                android:layout_marginLeft="4dp"
+                android:textColor="#8D8D8D"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/vendor_store_list"
+        android:background="@color/grey" />
+
+</RelativeLayout>

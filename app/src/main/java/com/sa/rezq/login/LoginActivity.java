@@ -25,6 +25,7 @@ import com.hbb20.CountryCodePicker;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
+import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.registration.RegisterActivity;
@@ -338,7 +339,7 @@ public class LoginActivity  extends AppCompatActivity {
             }
         });
 
-        alertDialog.setNegativeButton(getString(R.string.cancel), new View.OnClickListener() {
+        alertDialog.setNegativeButton(getString(R.string.ok), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
@@ -362,7 +363,7 @@ public class LoginActivity  extends AppCompatActivity {
                     ProfileModel profileModel = profileMainModel.getProfileModel();
                     GlobalFunctions.setProfile(context, profileModel);
                     closeThisActivity();
-                    Intent intent = new Intent(activity, MainActivity.class);
+                    Intent intent = new Intent(activity, AccountActivity.class);
                     startActivity(intent);
                 }
             }

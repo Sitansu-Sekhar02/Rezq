@@ -633,6 +633,7 @@ public class GlobalVariables {
 
     public static String SHARED_PREFERENCE_GCM_TOKEN            =  "SharedPreferenceGCMTOKEN";
 
+    public static String SHARED_PREFERENCE_ACCOUNT_ID           =  "SharedPreferenceAccountId";
     public static String SHARED_PREFERENCE_CART_COUNT           =  "SharedPreferenceCartCount";
     public static String SHARED_PREFERENCE_NOTIFICATION_COUNT   =  "SharedPreferenceNotificationCount";
 

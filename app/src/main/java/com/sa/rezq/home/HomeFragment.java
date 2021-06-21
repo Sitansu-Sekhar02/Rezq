@@ -44,6 +44,8 @@ import com.sa.rezq.category.AllCategoryListActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.location_service.LocationMonitoringService;
+import com.sa.rezq.membership.UpgradeMembershipActivity;
+import com.sa.rezq.search.SearchActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.BannerListModel;
@@ -58,8 +60,10 @@ import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingListModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.sa.rezq.services.model.VariantModel;
+import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.sa.rezq.view.CustomSliderTextView;
+import com.sa.rezq.wishlist.WishListActivity;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -131,8 +135,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     Timer timer;
     TabLayout tabLayout;
     int currentPage = 0;
+
     TextView seeAllPopular_category,tv_all_trending,tv_all_nearby;
+    TextView upgrade_membership;
     CardView cardViewItem;
+    CardView search_card_view;
 
     SeeAllCategoryModel listModel;
    // Window window = null;
@@ -141,12 +148,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private boolean mAlreadyStartedService = false;
 
 
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.home_fragment, container, false);
-
 
 
         activity = getActivity();
@@ -177,25 +182,37 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         seeAllPopular_category=view.findViewById(R.id.TvseeAllCategory);
         tv_all_trending=view.findViewById(R.id.tv_all_trending);
         tv_all_nearby=view.findViewById(R.id.tv_all_nearby);
+        upgrade_membership=view.findViewById(R.id.tv_upgrade_membership);
         cardViewItem=view.findViewById(R.id.cardItem);
+        search_card_view=view.findViewById(R.id.search_card_view);
 
         locationintent = new Intent(activity, LocationMonitoringService.class);
 
         loadMenu(context);
 
-        cardViewItem.setOnClickListener(new View.OnClickListener() {
+        search_card_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //replaceFragmentWithAnimation(new RestaurantAndOfferDetailsFragment());
+                Intent intent = new Intent(activity, SearchActivity.class);
+                activity.startActivity(intent);
+            }
+        });
+
+        upgrade_membership.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(activity, UpgradeMembershipActivity.class);
+                activity.startActivity(intent);
 
             }
         });
+
 
         if (!mAlreadyStartedService) {
             startStep1();
         } else {
             //Intent intent = new Intent(activity, LocationMonitoringService.class);
-           // activity.stopService(locationintent);
+            // activity.stopService(locationintent);
             // stopService(new Intent(SummaryActivity.this, LocationMonitoringService.class));
             //mAlreadyStartedService = false;
         }
@@ -212,15 +229,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onClick(View v) {
 
-                //Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
-               // activity.startActivity( intent );
+                Intent intent = VendorStoreListActivity.newInstance( activity, "1" );
+                activity.startActivity( intent );
             }
         });
         tv_all_nearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
-                //activity.startActivity( intent );
+               Intent intent = VendorStoreListActivity.newInstance( activity, "2" );
+               activity.startActivity( intent );
             }
         });
 
@@ -544,8 +561,16 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onSliderClick(BaseSliderView slider) {
         BannerModel bannerClickedModel = (BannerModel) slider.getBundle().getSerializable("data");
         if (bannerClickedModel != null) {
-           /* if (bannerClickedModel.getVendor_id() != null && bannerClickedModel.getId() != null) {
-                if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_CATEGORY)) {
+            if (bannerClickedModel.getVendor_id() != null) {
+
+                if(bannerClickedModel.getCount().equalsIgnoreCase("1")){
+                    Intent intent = VendorListDetailsActivity.newInstance( activity, bannerClickedModel );
+                    activity.startActivity( intent );
+                }else {
+                    Intent intent = VendorStoreListActivity.newInstance( activity, bannerClickedModel );
+                    activity.startActivity( intent );
+                }
+               /* if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_CATEGORY)) {
                     Intent intent = VendorStoreListActivity.newInstance(activity, bannerClickedModel.getVendor_id(), null, null);
                     activity.startActivity(intent);
                 }  else if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_OFFER)) {
@@ -560,9 +585,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                             e.printStackTrace();
                         }
                     }
-                }
+                }*/
 
-            }*/
+            }
         }
     }
 

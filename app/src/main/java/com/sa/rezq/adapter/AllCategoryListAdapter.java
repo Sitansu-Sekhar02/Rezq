@@ -1,6 +1,7 @@
 package com.sa.rezq.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
+import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -51,7 +53,7 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
         if (model.getName() != null) {
             holder.title_tv.setText(model.getName());
         } if (model.getVendor_count() != null) {
-            holder.product_count.setText(model.getVendor_count());
+            holder.vendor_count.setText(model.getVendor_count());
         }if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.item_image);
         }
@@ -61,8 +63,8 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
             @Override
             public void onClick(View v) {
 
-                //Intent intent = ProductDetailsActivity.newInstance( activity, model );
-               //activity.startActivity( intent );
+                Intent intent = VendorStoreListActivity.newInstance( activity, model );
+                activity.startActivity( intent );
 
             }
         });
@@ -76,15 +78,15 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
 
     public class ViewHolder extends RecyclerView.ViewHolder {
          ImageView item_image, item_viv;
-         TextView title_tv, product_count;
+         TextView title_tv, vendor_count;
          RelativeLayout click_item;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             item_image = itemView.findViewById(R.id.category_image);
-            product_count = itemView.findViewById(R.id.vendor_count);
+            vendor_count = itemView.findViewById(R.id.vendor_count);
             title_tv = itemView.findViewById(R.id.tv_category_title);
-            click_item = itemView.findViewById(R.id.click_item);
+            click_item = itemView.findViewById(R.id.category_click_item);
 
         }
     }

@@ -21,6 +21,7 @@ import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.home.ProductDetailsActivity;
 import com.sa.rezq.services.model.CategoryModel;
 
+import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -68,8 +69,8 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
             @Override
             public void onClick(View v) {
 
-                //Intent intent = ProductDetailsActivity.newInstance( activity, model );
-               // activity.startActivity( intent );
+                Intent intent = VendorStoreListActivity.newInstance( activity, model );
+                activity.startActivity( intent );
 
             }
         });

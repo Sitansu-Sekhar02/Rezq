@@ -1,6 +1,7 @@
 package com.sa.rezq.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.model.NearbyModel;
+import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
+import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -63,8 +66,8 @@ public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyou
             @Override
             public void onClick(View v) {
 
-                //Intent intent = ProductDetailsActivity.newInstance( activity, model );
-                // activity.startActivity( intent );
+                Intent intent = VendorListDetailsActivity.newInstance( activity, model );
+                activity.startActivity( intent );
 
             }
         });

@@ -25,11 +25,12 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:id="@+id/iv_restro_image"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/ic_group_al" />
+                    android:src="@drawable/ic_baseline_image_24" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,9 +39,10 @@
                     android:orientation="vertical">
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_restro_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/dubai_mall"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="16dp" />
 
@@ -51,14 +53,17 @@
                         android:orientation="horizontal">
 
                         <com.sa.rezq.view.AppTextView
+                            android:id="@+id/restro_avg_rating"
+
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
-                            android:text="4.8"
+                            android:text=""
                             android:textColor="#FFB400"
                             android:textSize="16dp"
                             android:textStyle="bold" />
                         <com.sa.rezq.view.AppTextView
+                            android:id="@+id/restro_rating_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_baseline_star_rate_24"
@@ -93,16 +98,16 @@
                     android:gravity="center"
                     android:orientation="vertical">
 
-                    <com.sa.rezq.view.AppTextView
+                    <ImageView
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:layout_marginTop="20dp"
-                        android:background="@drawable/hours_border"
-                        android:gravity="center"
-                        android:text="@string/happy_hourse"
-                        android:textColor="@color/white" />
+                        android:id="@+id/image_offer"
+                        android:gravity="center" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/offer_title"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -112,6 +117,7 @@
                         android:textSize="16dp" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/offer_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -120,6 +126,7 @@
                         android:textColor="#898989" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_show_coupon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -139,6 +146,7 @@
                         android:textColor="#898989" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_copy_couponcode"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="80dp"

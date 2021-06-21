@@ -10,20 +10,26 @@ public class OfferModel implements Serializable {
     private final String TAG = "OfferModel";
     private final String
             ID                       = "offer_store_id",
+            STORE_ID                 = "store_id",
             TITLE                    = "title",
             ALLOW                    = "allow",
             MEMBERSHIP_TITLE          = "membership_title",
             OFFER_APPLICABLE          = "offer_applicable",
             OFFER_DISCOUNT           = "offer_discount",
+
+            COUPON_CODE             = "coupon_code",
+
             OFFER_IMAGE              = "offer_image";
 
     private String
-            id          = null,
-            title       = null,
-            allow       = null,
-            membership_title         = null,
-            offer_applicable    = null,
-            offer_image    = null,
+            id                    = null,
+            title                 = null,
+            allow                  = null,
+            membership_title       = null,
+            offer_applicable      = null,
+            offer_image            = null,
+            coupon_code             = null,
+            storeId                = null,
             offer_discount        = null;
 
     public OfferModel(){}
@@ -84,6 +90,22 @@ public class OfferModel implements Serializable {
         this.offer_discount = offer_discount;
     }
 
+    public String getCoupon_code() {
+        return coupon_code;
+    }
+
+    public void setCoupon_code(String coupon_code) {
+        this.coupon_code = coupon_code;
+    }
+
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
     public boolean toObject(String jsonObject){
         try{
 
@@ -94,7 +116,9 @@ public class OfferModel implements Serializable {
             if (json.has(MEMBERSHIP_TITLE)) membership_title = json.getString(MEMBERSHIP_TITLE);
             if (json.has(OFFER_APPLICABLE)) offer_applicable = json.getString(OFFER_APPLICABLE);
             if (json.has(OFFER_DISCOUNT)) offer_discount = json.getString(OFFER_DISCOUNT);
+            if (json.has(COUPON_CODE)) coupon_code = json.getString(COUPON_CODE);
             if (json.has(OFFER_IMAGE)) offer_image = json.getString(OFFER_IMAGE);
+            if (json.has(STORE_ID)) storeId = json.getString(STORE_ID);
 
             return true;
         }catch(Exception ex){
@@ -114,7 +138,9 @@ public class OfferModel implements Serializable {
             jsonMain.put(MEMBERSHIP_TITLE, membership_title);
             jsonMain.put(OFFER_APPLICABLE, offer_applicable);
             jsonMain.put(OFFER_DISCOUNT, offer_discount);
+            jsonMain.put(COUPON_CODE, coupon_code);
             jsonMain.put(OFFER_IMAGE, offer_image);
+            jsonMain.put(STORE_ID, storeId);
 
             returnString = jsonMain.toString();
         }

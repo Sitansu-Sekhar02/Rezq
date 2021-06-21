@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
+            <com.sa.rezq.view.AppTextView
                 android:id="@+id/tvAlertMsg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
                 android:layout_below="@+id/Tvvendor">
 
                 <com.mukesh.OtpView
-                    android:id="@+id/otp_view"
+                    android:id="@+id/redeem_offer_insert"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -61,11 +61,11 @@
                     android:lineHeight="0.2dp"
                     android:text=""
                     android:textColor="@color/app_fontBlackColor"
-                    android:textSize="14dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
                     android:visibility="visible"
                     app:itemCount="6"
-                    app:itemSpacing="@dimen/_10sdp"
+                    app:itemSpacing="@dimen/_8sdp"
                     app:itemWidth="@dimen/_35sdp"
                     app:lineColor="@color/holo_green"
                     app:viewType="line" />
@@ -76,7 +76,7 @@
 
             <com.sa.rezq.view.AppButton
                 android:layout_marginTop="40dp"
-                android:id="@+id/btnReedem"
+                android:id="@+id/btn_continue_redeem"
                 android:layout_width="220dp"
                 android:layout_marginBottom="30dp"
                 android:layout_height="48dp"

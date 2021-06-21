@@ -29,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@string/food"
+                android:text=""
                 android:textAllCaps="true"
                 android:textColor="@color/black"
                 android:textSize="15dp" />
@@ -42,20 +42,17 @@
                     android:id="@+id/tv_total__places"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="15"
+                    android:text=""
                     android:textColor="@color/black"
                     android:textSize="13dp" />
                 <com.sa.rezq.view.AppTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Places"
+                    android:text="@string/places"
                     android:layout_marginLeft="4dp"
                     android:textColor="@color/black"
                     android:textSize="13dp" />
             </LinearLayout>
-
-
-
 
         </LinearLayout>
 

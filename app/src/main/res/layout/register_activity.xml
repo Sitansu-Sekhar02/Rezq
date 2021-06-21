@@ -32,7 +32,7 @@
                         android:layout_height="120dp"
                         android:src="@drawable/logo_ac" />
 
-                    <TextView
+                    <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"

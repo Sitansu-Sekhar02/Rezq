@@ -13,6 +13,47 @@
         android:layout_height="match_parent"
         android:background="#F5F5F5"
         android:orientation="vertical">
+        <SearchView
+            android:visibility="gone"
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@color/white"
+            android:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            android:queryHint="@string/search" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/search_card_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/_8sdp"
+            android:background="@color/white"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="@dimen/_8sdp"
+            app:cardElevation="3dp"
+            app:cardPreventCornerOverlap="false"
+            app:cardUseCompatPadding="false">
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/search_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/transparent"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:gravity="left|center"
+                android:padding="@dimen/_8sdp"
+                android:text="@string/search"
+                android:textAllCaps="false"
+                android:textAppearance="@style/MediumText"
+                android:textColor="@color/app_fontColor"
+                android:textStyle="bold" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
@@ -29,16 +70,6 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <SearchView
-                    android:visibility="gone"
-                    android:id="@+id/searchView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/_8sdp"
-                    android:background="@color/white"
-                    android:iconifiedByDefault="false"
-                    android:queryBackground="@color/transparent"
-                    android:queryHint="@string/search" />
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -127,7 +158,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="5dp">
+                    android:padding="10dp">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
@@ -141,7 +172,8 @@
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/TvseeAllCategory"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="8dp"
                         android:text="@string/seeall"
                         android:textColor="@color/red"
                         android:textSize="16dp"
@@ -361,9 +393,11 @@
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/tv_all_trending"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="@string/seeall"
                         android:textColor="@color/red"
+                        android:layout_marginRight="8dp"
+
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -372,7 +406,7 @@
                     android:id="@+id/details_progressActivity_trending"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@color/white"
+                    android:background="#F5F5F5"
                     app:emptyTitleTextColor="@color/green_light"
                     app:errorContentTextColor="@color/app_fontColor"
                     app:errorTitleTextColor="@color/app_fontColor"
@@ -555,8 +589,9 @@
                         <com.sa.rezq.view.AppTextView
                             android:id="@+id/tv_all_nearby"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:text="@string/seeall"
+                            android:layout_marginRight="8dp"
                             android:textColor="@color/red"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -589,6 +624,7 @@
                     android:background="@drawable/ic_group_getextra">
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_upgrade_membership"
                         android:layout_width="211dp"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"

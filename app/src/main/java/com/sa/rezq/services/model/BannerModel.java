@@ -12,6 +12,7 @@ public class BannerModel implements Serializable {
             ID          = "id",
             TITLE       = "title",
             VENDOR_ID   = "vendor_id",
+            COUNT        = "count",
             MASTER_ID   = "master_id",
             IMAGE       = "image",
             URL         = "url",
@@ -23,6 +24,8 @@ public class BannerModel implements Serializable {
             image       = null,
             url         = null,
             vendor_id    = null,
+            count       = null,
+
             type        = null;
 
     public BannerModel(){}
@@ -71,6 +74,14 @@ public class BannerModel implements Serializable {
         return vendor_id;
     }
 
+    public String getCount() {
+        return count;
+    }
+
+    public void setCount(String count) {
+        this.count = count;
+    }
+
     public void setVendor_id(String vendor_id) {
         this.vendor_id = vendor_id;
     }
@@ -83,6 +94,7 @@ public class BannerModel implements Serializable {
             if (json.has(TITLE)) title = json.getString(TITLE);
             if (json.has(IMAGE)) image = json.getString(IMAGE);
             if (json.has(VENDOR_ID)) vendor_id = json.getString(VENDOR_ID);
+            if (json.has(COUNT)) count = json.getString(COUNT);
             if (json.has(URL)) url = json.getString(URL);
             if (json.has(TYPE)) type = json.getString(TYPE);
 
@@ -102,6 +114,7 @@ public class BannerModel implements Serializable {
             jsonMain.put(TITLE, title);
             jsonMain.put(IMAGE, image);
             jsonMain.put(VENDOR_ID, vendor_id);
+            jsonMain.put(COUNT, count);
             jsonMain.put(URL, url);
             jsonMain.put(TYPE, type);
 

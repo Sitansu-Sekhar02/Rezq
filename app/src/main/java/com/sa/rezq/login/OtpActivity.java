@@ -33,6 +33,7 @@ import com.mukesh.OtpView;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
+import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.registration.RegisterActivity;
@@ -97,8 +98,8 @@ public class OtpActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.otpverification_activity);
 
         mAuth = FirebaseAuth.getInstance();
@@ -109,12 +110,12 @@ public class OtpActivity extends AppCompatActivity {
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+    /*    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.ColorStatusBar));
-        }
+        }*/
 
         otpView = (OtpView) findViewById(R.id.otp_view);
        // mobile_number_tv = (OtpView) findViewById(R.id.otp_view);
@@ -459,7 +460,7 @@ public class OtpActivity extends AppCompatActivity {
                     ProfileModel profileModel = profileMainModel.getProfileModel();
                     GlobalFunctions.setProfile(context, profileModel);
                     closeThisActivity();
-                    Intent intent = new Intent(activity, MainActivity.class);
+                    Intent intent = new Intent(activity, AccountActivity.class);
                     startActivity(intent);
                 }
             }

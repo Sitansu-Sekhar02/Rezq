@@ -10,6 +10,8 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -30,11 +32,18 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 
 import com.facebook.FacebookSdk;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
+import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.image_picker.ImagePickerActivity;
 import com.sa.rezq.login.LoginActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
@@ -57,6 +66,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,6 +81,7 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
     public static final String BUNDLE_CITY_MODEL = "BundleCityModel";
 
     private static final int PERMISSION_REQUEST_CODE = 200;
+    public static final int REQUEST_IMAGE = 100;
 
     Context context;
     private static Activity activity;
@@ -118,7 +129,6 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.register_activity);
@@ -135,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.ColorStatusBar));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
 
 
@@ -184,12 +194,7 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
         edit_profile_image_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (checkPermission()) {
-                    //write your main code to execute, It will execute if the permission is already given.
                     openCropFuctionalImage();
-                } else {
-//                        requestPermission();
-                }
             }
         });
 
@@ -367,10 +372,94 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
     }
 
     private void openCropFuctionalImage() {
-        CropImage.activity()
+     /*   CropImage.activity()
                 .setCropShape(CropImageView.CropShape.RECTANGLE)
                 .setAspectRatio(2, 2)
-                .start(activity);
+                .start(activity);*/
+
+        Dexter.withActivity(this)
+                .withPermissions(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                .withListener(new MultiplePermissionsListener() {
+                    @Override
+                    public void onPermissionsChecked(MultiplePermissionsReport report) {
+                        if (report.areAllPermissionsGranted()) {
+                            showImagePickerOptions();
+                        }
+
+                        if (report.isAnyPermissionPermanentlyDenied()) {
+                            showSettingsDialog();
+                        }
+                    }
+
+                    @Override
+                    public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                        token.continuePermissionRequest();
+                    }
+                }).check();
+    }
+
+
+    private void showImagePickerOptions() {
+        ImagePickerActivity.showImagePickerOptions(this, new ImagePickerActivity.PickerOptionListener() {
+            @Override
+            public void onTakeCameraSelected() {
+                launchCameraIntent();
+            }
+
+            @Override
+            public void onChooseGallerySelected() {
+                launchGalleryIntent();
+            }
+        });
+    }
+
+    private void showSettingsDialog() {
+        androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(activity);
+        builder.setTitle(getString(R.string.dialog_permission_title));
+        builder.setMessage(getString(R.string.dialog_permission_message));
+        builder.setPositiveButton(getString(R.string.go_to_settings), (dialog, which) -> {
+            dialog.cancel();
+            openSettings();
+        });
+        builder.setNegativeButton(getString(android.R.string.cancel), (dialog, which) -> dialog.cancel());
+        builder.show();
+
+    }
+
+    // navigating user to app settings
+    private void openSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        Uri uri = Uri.fromParts("package", getPackageName(), null);
+        intent.setData(uri);
+        startActivityForResult(intent, 101);
+    }
+
+    private void launchCameraIntent() {
+        Intent intent = new Intent(activity, ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_IMAGE_CAPTURE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+
+        // setting maximum bitmap width and height
+        intent.putExtra(ImagePickerActivity.INTENT_SET_BITMAP_MAX_WIDTH_HEIGHT, true);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_WIDTH, 1000);
+        intent.putExtra(ImagePickerActivity.INTENT_BITMAP_MAX_HEIGHT, 1000);
+
+        startActivityForResult(intent, REQUEST_IMAGE);
+    }
+
+    private void launchGalleryIntent() {
+        Intent intent = new Intent(activity, ImagePickerActivity.class);
+        intent.putExtra(ImagePickerActivity.INTENT_IMAGE_PICKER_OPTION, ImagePickerActivity.REQUEST_GALLERY_IMAGE);
+
+        // setting aspect ratio
+        intent.putExtra(ImagePickerActivity.INTENT_LOCK_ASPECT_RATIO, true);
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_X, 1); // 16x9, 1x1, 3:4, 3:2
+        intent.putExtra(ImagePickerActivity.INTENT_ASPECT_RATIO_Y, 1);
+        startActivityForResult(intent, REQUEST_IMAGE);
     }
 
     @Override
@@ -410,6 +499,16 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
             } catch (Exception exccc) {
                 globalFunctions.displayMessaage(context, mainView, getString(R.string.something_went_wrong_message));
             }
+        }else if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE) {
+            Uri uri = data.getParcelableExtra("path");
+            try {
+                // You can update this bitmap to your server
+                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
+                selectUri = uri;
+                setProfileImageToModel(bitmap,selectUri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -444,7 +543,7 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
 
 
     private void goToMainActivity() {
-        Intent intent = new Intent(activity, MainActivity.class);
+        Intent intent = new Intent(activity, AccountActivity.class);
         activity.startActivity(intent);
         closeThisActivity();
     }

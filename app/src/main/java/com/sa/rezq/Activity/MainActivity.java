@@ -56,6 +56,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+import com.sa.rezq.account.SwitchAccountActivity;
 import com.sa.rezq.coupons.RecentCouponActivity;
 import com.sa.rezq.home.HomeFragment;
 import com.sa.rezq.R;
@@ -74,8 +75,8 @@ import com.sa.rezq.services.model.PushNotificationModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.services.model.UpdateLanguageModel;
 import com.sa.rezq.view.AlertDialog;
+import com.sa.rezq.wishlist.WishListActivity;
 import com.squareup.picasso.Picasso;
-import com.yalantis.ucrop.view.CropImageView;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -782,22 +783,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_home) {
-          //  replaceFragmentWithAnimation( new DashboardFragment());
+
         } else if (id == R.id.nav_recentCoupon) {
-            //replaceFragmentWithAnimation(new RecentCouponFragment());
             Intent intent = new Intent(activity, RecentCouponActivity.class);
             activity.startActivity(intent);
         }
         else if (id == R.id.nav_fav) {
-            //replaceFragmentWithAnimation(new FavouriteFragment());
-
+            Intent intent = new Intent(activity, WishListActivity.class);
+            activity.startActivity(intent);
         }
         else if (id == R.id.nav_membership) {
-            //replaceFragmentWithAnimation(new MembershipFragment());
             Intent intent = new Intent(activity, MembershipActivity.class);
             activity.startActivity(intent);
         }
         else if (id == R.id.nav_account) {
+            Intent intent = new Intent(activity, SwitchAccountActivity.class);
+            activity.startActivity(intent);
 
         }else if (id == R.id.nav_logout) {
             if (GlobalFunctions.isLoggedIn(activity)) {

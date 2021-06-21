@@ -16,15 +16,15 @@ public class VendorRTModel implements Serializable {
     private final String RESPONSE = "response";
 
 
-    List<VendorStoreListModel> vendorListModels = new ArrayList<VendorStoreListModel>();
+    List<VendorStoreModel> vendorListModels = new ArrayList<VendorStoreModel>();
 
     public VendorRTModel(){}
 
-    public List<VendorStoreListModel> getVendorListModels() {
+    public List<VendorStoreModel> getVendorListModels() {
         return vendorListModels;
     }
 
-    public void setVendorListModels(List<VendorStoreListModel> vendorListModels) {
+    public void setVendorListModels(List<VendorStoreModel> vendorListModels) {
         this.vendorListModels = vendorListModels;
     }
 
@@ -32,10 +32,10 @@ public class VendorRTModel implements Serializable {
         try{
             JSONObject json = new JSONObject(jsonObjectString);
             JSONArray array = json.getJSONArray(RESPONSE);
-            List<VendorStoreListModel> list = new ArrayList<VendorStoreListModel>();
+            List<VendorStoreModel> list = new ArrayList<VendorStoreModel>();
             for (int i=0;i<array.length();i++){
                 JSONObject jsonObject = array.getJSONObject(i);
-                VendorStoreListModel model = new VendorStoreListModel();
+                VendorStoreModel model = new VendorStoreModel();
                 model.toObject(jsonObject.toString());
                 list.add(model);
             }
@@ -48,10 +48,10 @@ public class VendorRTModel implements Serializable {
 
     public boolean toObject(JSONArray jsonArray){
         try{
-            List<VendorStoreListModel> list = new ArrayList<VendorStoreListModel>();
+            List<VendorStoreModel> list = new ArrayList<VendorStoreModel>();
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                VendorStoreListModel model = new VendorStoreListModel();
+                VendorStoreModel model = new VendorStoreModel();
                 model.toObject(jsonObject.toString());
                 list.add(model);
             }
@@ -68,7 +68,7 @@ public class VendorRTModel implements Serializable {
         try{
             JSONObject jsonMain = new JSONObject();
             JSONArray jsonArray = new JSONArray();
-            List<VendorStoreListModel> list = this.vendorListModels;
+            List<VendorStoreModel> list = this.vendorListModels;
             for(int i=0;i<list.size();i++){
                 jsonArray.put(new JSONObject(list.get(i).toString()));
             }
@@ -84,7 +84,7 @@ public class VendorRTModel implements Serializable {
         try{
             JSONObject jsonMain = new JSONObject();
             JSONArray jsonArray = new JSONArray();
-            List<VendorStoreListModel> list = this.vendorListModels;
+            List<VendorStoreModel> list = this.vendorListModels;
             for(int i=0;i<list.size();i++){
                 jsonArray.put(new JSONObject(list.get(i).toString()));
             }

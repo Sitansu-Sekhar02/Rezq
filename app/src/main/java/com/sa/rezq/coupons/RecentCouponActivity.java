@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -33,9 +35,20 @@ import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.R;
+import com.sa.rezq.adapter.AccountListAdapter;
 import com.sa.rezq.adapter.AllCategoryListAdapter;
+import com.sa.rezq.adapter.CouponListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.services.ServerResponseInterface;
+import com.sa.rezq.services.ServicesMethodsManager;
+import com.sa.rezq.services.model.AccountListModel;
+import com.sa.rezq.services.model.AccountMainModel;
+import com.sa.rezq.services.model.AccountModel;
+import com.sa.rezq.services.model.InsertAccountModel;
+import com.sa.rezq.services.model.RecentCouponListModel;
+import com.sa.rezq.services.model.RecentCouponMainModel;
+import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
@@ -73,11 +86,19 @@ public class RecentCouponActivity extends AppCompatActivity {
     Menu menu;
     String account = String.valueOf(1);
 
+    ProgressLinearLayout progressActivity;
+    GlobalFunctions globalFunctions;
+    GlobalVariables globalVariables;
+    SwipeRefreshLayout swipe_container;
+    List <RecentCouponModel> recentCouponModels = new ArrayList <>();
+    LinearLayoutManager linearLayoutManager;
+
+    CouponListAdapter listAdapter;
+
 
     private boolean shouldRefreshOnResume = false;
 
-    GlobalVariables globalVariables;
-    GlobalFunctions globalFunctions;
+
     Window window = null;
     ImageView vendor_list_image,iv_favourite;
     TextView tv_vendor_name,tvRating,tv_address,tv_open_map,tv_rating_count;
@@ -105,10 +126,116 @@ public class RecentCouponActivity extends AppCompatActivity {
        // progressActivity = findViewById(R.id.details_progressActivity);
        // swipe_container = findViewById(R.id.swipe_container);
 
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        //toolbar.setPadding(0, GlobalFunctions.getStatusBarHeight(context), 0, 0);
+        //toolbar.setNavigationIcon(R.drawable.ic_back_draw);
+        //toolbar.setContentInsetsAbsolute(0,0);
+        toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
+        tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
+        tool_bar_back_icon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+
+        recyclerView = findViewById(R.id.recent_list_recyclerview);
+
+        linearLayoutManager = new LinearLayoutManager( activity );
+        progressActivity = findViewById( R.id.recent_progressActivity );
+        swipe_container =findViewById( R.id.swipe_container );
+
+        mainView = recyclerView;
+        loadRecentList();
+
+        swipe_container.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadRecentList();
+            }
+        } );
+
+
+
+        setSupportActionBar(toolbar);
+        actionBar = getSupportActionBar();
         setTitle(getString(R.string.recent), 0, 0);
 
 
     }
+
+    private void loadRecentList() {
+        GlobalFunctions.showProgress( context, getString( R.string.loading ));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.getRecentCouponList( context, new ServerResponseInterface() {
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+                GlobalFunctions.hideProgress();
+                if (swipe_container.isRefreshing()) {
+                    swipe_container.setRefreshing( false );
+                }
+                Log.d( TAG, "Response : " + arg0.toString() );
+                RecentCouponMainModel recentCouponMainModel = (RecentCouponMainModel) arg0;
+                if (recentCouponMainModel!=null && recentCouponMainModel.getRecentCouponListModel()!=null){
+                    RecentCouponListModel listModel = recentCouponMainModel.getRecentCouponListModel();
+                    setThisPage(listModel);
+                }
+            }
+
+            @Override
+            public void OnFailureFromServer(String msg) {
+                GlobalFunctions.hideProgress();
+                if (swipe_container.isRefreshing()) {
+                    swipe_container.setRefreshing( false );
+                }
+                Log.d( TAG, "Failure : " + msg );
+                GlobalFunctions.displayMessaage( context, mainView, msg );
+            }
+
+            @Override
+            public void OnError(String msg) {
+                GlobalFunctions.hideProgress();
+                if (swipe_container.isRefreshing()) {
+                    swipe_container.setRefreshing( false );
+                }
+                Log.d( TAG, "Error : " + msg );
+                GlobalFunctions.displayMessaage( context, mainView, msg );
+            }
+        }, "Recent List" );
+    }
+
+    private void setThisPage(RecentCouponListModel listModel) {
+
+        if (listModel != null && recentCouponModels != null) {
+            recentCouponModels.clear();
+            recentCouponModels.addAll(listModel.getRecentCouponModels());
+            if (listAdapter != null) {
+                synchronized (listAdapter) {
+                    listAdapter.notifyDataSetChanged();
+                }
+            }
+
+            if (recentCouponModels.size() > 0) {
+                showContent();
+                initRecyclerView();
+            }
+        }
+    }
+    private void showContent() {
+        if (progressActivity != null) {
+            progressActivity.showContent();
+        }
+    }
+
+    private void initRecyclerView() {
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setHasFixedSize(true);
+        listAdapter = new CouponListAdapter(activity, recentCouponModels);
+        recyclerView.setAdapter(listAdapter);
+    }
+
+
 
     @Override
     public void onStop () {
@@ -180,60 +307,4 @@ public class RecentCouponActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-   /* public void replaceFragmentWithAnimation(Fragment fragment) {
-        FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
-        transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-        transaction.replace(R.id.fragment_container, fragment);
-        transaction.commit();
-    }*/
-
-
-    //*Recyclerview Adapter*//
-
-
-    public class RecentCouponAdapter extends RecyclerView.Adapter<RecentCouponAdapter.MyViewHolder> {
-
-        private List<CategoryModelClass> moviesList;
-
-        public class MyViewHolder extends RecyclerView.ViewHolder {
-            TextView title;
-
-            public MyViewHolder(View view) {
-                super(view);
-                title = (TextView) view.findViewById(R.id.tvFood);
-            }
-        }
-
-
-        public RecentCouponAdapter(List<CategoryModelClass> moviesList) {
-            this.moviesList = moviesList;
-        }
-
-        @Override
-        public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.recent_coupon_dataview, parent, false);
-
-            return new MyViewHolder(itemView);
-        }
-
-        @Override
-        public void onBindViewHolder(MyViewHolder holder, int position) {
-            CategoryModelClass movie = moviesList.get(position);
-            //holder.title.setText(movie.getCategory_name());
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return moviesList.size();
-        }
-
-        /*public void replaceFragmentWithAnimation(Fragment fragment) {
-            FragmentTransaction transaction =getActivity().getSupportFragmentManager().beginTransaction();
-            transaction.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
-            transaction.replace(R.id.fragment_container, fragment);
-            transaction.commit();
-        }*/
-    }
 }

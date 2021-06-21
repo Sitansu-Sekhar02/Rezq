@@ -114,7 +114,7 @@
     <string name="today">Today</string>
     <string name="broklin">Broccoli pizza &amp; pasta</string>
     <string name="yesterday">Yesterday</string>
-    <string name="recent">Recent</string>
+    <string name="recent">Recent Coupons</string>
     <string name="favourites">Favourites</string>
     <string name="all">All</string>
     <string name="whoisusing">Who is using?</string>
@@ -409,7 +409,7 @@
     <string name="verification_code_sent_text">A verification code has been sent to your mobile no.</string>
     <string name="otp_max_attempt">You exceeded OTP request max attempt. Please try after some time.</string>
     <string name="invalid_otp">Invalid OTP</string>
-    <string name="please_enetr_valid_number">Please enetr a valid number</string>
+    <string name="please_enetr_valid_number">Please enter a valid number</string>
     <string name="something_went_wrong_message">Something went wrong</string>
     <string name="please_continue">Continue</string>
     <string name="distance">Distance</string>
@@ -418,5 +418,28 @@
     <string name="places">PLACES</string>
     <string name="no_data_show">No data to show</string>
     <string name="no_reviews">No Review found</string>
+    <string name="saerch_item">Search</string>
+    <string name="no_offers">No offers</string>
+    <string name="enter_first_name">Enter first name</string>
+    <string name="show_warning">Sorry!You can\'t add more then 4 account</string>
+
+    <string name="dialog_permission_title">Grant Permissions</string>
+    <string name="dialog_permission_message">This app needs permission to use this feature. You can grant them in app settings.</string>
+    <string name="go_to_settings">GOTO SETTINGS</string>
+    <string name="msg_error_unable_select_profile_pic">Unable to set profile image. Please try again!</string>
+    <string name="lbl_set_profile_photo">Select image</string>
+    <string name="lbl_take_camera_picture">Take a picture</string>
+    <string name="lbl_choose_from_gallery">Choose from gallery</string>
+    <string name="toast_image_intent_null"></string>
+    <string name="select_image">Select Image</string>
+    <string name="please_enter_valid_code">Please enter a valid code</string>
+    <string name="switch_account">Switch Accounts</string>
+    <string name="copy_coupon_code">"Coupon copied "</string>
+    <string name="no_search_found">No result found for</string>
+    <string name="search_phrase_missing">Type something to search</string>
+    <string name="save_and_update"><![CDATA[Save & Update]]></string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="enter_mendatory_field">*Please eneter mendatory fields</string>
+    <string name="updating_profile">Updating profile...</string>
 
 </resources>

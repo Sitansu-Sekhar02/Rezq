@@ -2,7 +2,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black_trans">
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:background="@color/black_trans"
+    android:id="@+id/bottom_sheet"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -50,13 +55,25 @@
                     android:layout_below="@+id/rezqplus"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
+                    <com.vlonjatg.progressactivity.ProgressLinearLayout
+                        android:id="@+id/locked_progressActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:emptyTitleTextColor="@color/green_light"
+                        app:errorContentTextColor="@color/app_fontColor"
+                        app:errorTitleTextColor="@color/app_fontColor"
+                        progressActivity:emptyBackgroundColor="@color/transparent"
+                        progressActivity:errorBackgroundColor="@color/transparent"
+                        progressActivity:loadingBackgroundColor="@color/transparent"
+                        progressActivity:loadingProgressBarColor="@color/green_light">
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerRezqplus"
+                        android:id="@+id/recyclerview_Rezqplus_offer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                     </androidx.recyclerview.widget.RecyclerView>
+                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
 
                 </LinearLayout>
 
@@ -82,7 +99,7 @@
                         android:textStyle="bold" />
 
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerPrimeOffer"
+                        android:id="@+id/recyclerview_rezq_PrimeOffer"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@id/primeOffer"
@@ -111,7 +128,7 @@
                         android:textSize="14dp" />
 
                     <com.sa.rezq.view.AppButton
-                        android:id="@+id/btnReedem"
+                        android:id="@+id/btn_upgrade_prime_offer"
                         android:layout_width="91dp"
                         android:layout_height="26dp"
                         android:layout_alignParentRight="true"

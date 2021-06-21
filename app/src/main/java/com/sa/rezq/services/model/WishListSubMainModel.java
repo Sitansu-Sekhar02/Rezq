@@ -12,7 +12,7 @@ public class WishListSubMainModel implements Serializable {
 
     private final String
             AMOUNT                     = "balance",
-            RESPONSE                   = "product_list";
+            RESPONSE                   = "response";
 
     private String
             amount                   = null;

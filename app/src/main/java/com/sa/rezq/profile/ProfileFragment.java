@@ -2,11 +2,13 @@ package com.sa.rezq.profile;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
+import com.sa.rezq.profile.activities.EditProfileActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.ProfileMainModel;
@@ -40,6 +43,7 @@ public class ProfileFragment extends Fragment {
     TextView tv_userfullName, therapist_tv, update_button, email_ev;
     TextView first_name_etv, last_name_etv, mobile_etv, email_etv, password_etv, confirm_password_etv;
     CircleImageView profile_image;
+    Button btn_update_profile;
 
     View view;
     ProfileModel detail = null;
@@ -78,11 +82,20 @@ public class ProfileFragment extends Fragment {
         mobile_etv =  view.findViewById( R.id.tv_mobileNumber );
         email_etv = view.findViewById( R.id.tv_emailId );
         tv_userfullName = view.findViewById( R.id.tv_userfullName );
+        btn_update_profile = view.findViewById( R.id.btn_update_profile );
         //email_ev = view.findViewById( R.id.email_ev );
      /*   password_etv = ( EditText ) view.findViewById( R.id.password_etv );
         confirm_password_etv = ( EditText ) view.findViewById( R.id.confirm_password_etv );*/
 
         profile_image = view.findViewById( R.id.ivProfimeImage );
+        btn_update_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                activity.startActivity(new Intent(activity, EditProfileActivity.class));
+
+            }
+        });
 
 
         getProfile();
@@ -160,7 +173,7 @@ public class ProfileFragment extends Fragment {
 
                 try {
                     if (detail.getProfileImg() != null || !detail.getProfileImg().equals( "null" ) || !detail.getProfileImg().equalsIgnoreCase( "" )) {
-                        Picasso.with( context ).load( detail.getProfileImg() ).placeholder( R.drawable.ic_baseline_person_24 ).into((Target) profile_image);
+                        Picasso.with( context ).load( detail.getProfileImg() ).placeholder( R.drawable.ic_baseline_person_24 ).into( profile_image);
                     }
                 } catch (Exception e) {
                 }
