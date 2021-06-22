@@ -3,6 +3,7 @@ package com.sa.rezq.membership;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -30,6 +32,7 @@ import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.model.TrendingModel;
+import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,6 +70,7 @@ public class MembershipActivity extends AppCompatActivity {
     GlobalFunctions globalFunctions;
     Window window = null;
     ImageView vendor_list_image,iv_favourite;
+    Button btnUpgrade;
     TextView tv_vendor_name,tvRating,tv_address,tv_open_map,tv_rating_count;
 
     String vendor_id = null;
@@ -88,9 +92,9 @@ public class MembershipActivity extends AppCompatActivity {
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
-        //linearLayoutManager = new LinearLayoutManager(activity);
+       // linearLayoutManager = new LinearLayoutManager(activity);
        // progressActivity = findViewById(R.id.details_progressActivity);
-       // swipe_container = findViewById(R.id.swipe_container);
+        btnUpgrade = findViewById(R.id.btnUpgrade);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         //toolbar.setPadding(0, GlobalFunctions.getStatusBarHeight(context), 0, 0);
         //toolbar.setNavigationIcon(R.drawable.ic_back_draw);
@@ -112,6 +116,14 @@ public class MembershipActivity extends AppCompatActivity {
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
+
+        btnUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MembershipActivity.this,UpgradeMembershipActivity.class);
+                activity.startActivity( intent );
+            }
+        });
 
         setTitle(getString(R.string.my_membership), 0, 0);
 

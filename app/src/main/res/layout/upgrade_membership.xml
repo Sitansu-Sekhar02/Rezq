@@ -24,60 +24,19 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_banner_list"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_8sdp"
+                android:background="@drawable/slider_border"
                 app:cardCornerRadius="15dp">
-
-
-                <RelativeLayout
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/membership_banner_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="180dp"
-                    android:layout_gravity="center"
-                    android:background="@color/white"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:visibility="visible"
-                    app:tabBackground="@drawable/slider_border">
+                    android:layout_height="wrap_content">
 
-                    <com.daimajia.slider.library.SliderLayout
-                        android:id="@+id/shop_main_fragment_top_slider"
-                        android:layout_width="match_parent"
-                        android:layout_height="180dp"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:focusableInTouchMode="true"
-                        android:scaleType="centerCrop"
-                        custom:auto_cycle="false"
-                        custom:indicator_visibility="visible"
-                        custom:pager_animation="ZoomOutSlide"
-                        custom:pager_animation_span="1100" />
+                </androidx.recyclerview.widget.RecyclerView>
 
-                    <com.daimajia.slider.library.Indicators.PagerIndicator
-                        android:id="@+id/shop_main_fragment_top_slider_custom_indicator"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_centerHorizontal="true"
-                        android:layout_marginBottom="8dp"
-                        android:gravity="center"
-                        custom:selected_color="@color/red"
-                        custom:selected_drawable="@drawable/slider_selector"
-                        custom:selected_height="2dp"
-                        custom:selected_padding_left="12dp"
-                        custom:selected_padding_right="12dp"
-                        custom:selected_width="3dp"
-                        custom:shape="oval"
-                        custom:unselected_color="@color/app_fontColor_hint"
-                        custom:unselected_drawable="@drawable/slider_unselector"
-                        custom:unselected_height="2dp"
-                        custom:unselected_padding_left="12dp"
-                        custom:unselected_padding_right="12dp"
-                        custom:unselected_width="3dp" />
 
-                </RelativeLayout>
             </androidx.cardview.widget.CardView>
 
 
@@ -119,7 +78,7 @@
                     android:layout_marginTop="15dp"
                     android:orientation="vertical">
                     <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/membership_list_recyclerview"
+                        android:id="@+id/membership_child_list_recyclerview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
@@ -142,7 +101,7 @@
         android:layout_alignParentBottom="true">
 
         <com.sa.rezq.view.AppTextView
-            android:id="@+id/tvSAR"
+            android:id="@+id/price"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -155,7 +114,7 @@
             android:id="@+id/btnSubscribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tvSAR"
+            android:layout_below="@id/price"
             android:background="@color/red"
             android:text="@string/subscribe"
             android:textColor="@color/white"

@@ -127,7 +127,6 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
         gridLayoutManager=new GridLayoutManager(activity,3);
         progressActivity = findViewById(R.id.account_progressActivity);
         accountListRecyclerview = findViewById(R.id.recyclerview_account_list);
-       // accountListRecyclerview.setAdapter(accountListAdapter);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();

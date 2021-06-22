@@ -541,15 +541,7 @@ public class ServicesMethodsManager {
             } else {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
-        }
-        else if (obj instanceof InsertRecentCouponModel) {
-            InsertRecentCouponModel model = new InsertRecentCouponModel();
-            if (model.toObject(resp.toString())) {
-                mUiCallBack.OnSuccessFromServer(model);
-            } else {
-                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
-            }
-        }else if (obj instanceof InsertRecentCouponModel) {
+        } else if (obj instanceof InsertRecentCouponModel) {
             StatusMainModel model = new StatusMainModel();
             if (model.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(model);
@@ -1169,16 +1161,15 @@ public class ServicesMethodsManager {
 
         postData(context, insertReviewModel, ServerConstants.URL_InsertReview, query, TAG);
     }
+
     public void getMembershipList(Context context, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
         //query = query != null ? query + "&index=" + index : "index=" + index;
         // query = query != null ? query + "&size=" + size : "size=" + size;
         // query = query != null ? query + "&status=" + status : "status=" + status;
-
         getData(context, new MembershipMainModel(), ServerConstants.URL_membership_list, query, TAG);
     }
-
 
 
     public void getRecentCouponList(Context context, ServerResponseInterface mCallInterface, String TAG) {

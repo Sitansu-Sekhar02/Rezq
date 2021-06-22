@@ -74,9 +74,8 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
             @Override
             public void onClick(View v) {
 
-           /*     model.setStoreId(vendor_id);
-                Intent intent = RedeemOfferActivity.newInstance( activity, model,vendorModel);
-                activity.startActivity( intent );*/
+                Intent intent = VendorListDetailsActivity.newInstance( activity, model);
+                activity.startActivity( intent );
             }
         });
     }

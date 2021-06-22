@@ -39,11 +39,11 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center">
                 <RelativeLayout
-                    android:layout_width="102dp"
-                    android:layout_height="102dp">
+                    android:layout_width="96dp"
+                    android:layout_height="96dp">
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/ivProfimeImage"
-                        android:background="@drawable/ic_guest_profile"
+                        android:background="@drawable/ic_baseline_person_24"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
                         android:padding="3dp" />

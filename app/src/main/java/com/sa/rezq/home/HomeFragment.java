@@ -44,6 +44,7 @@ import com.sa.rezq.category.AllCategoryListActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.location_service.LocationMonitoringService;
+import com.sa.rezq.membership.MembershipActivity;
 import com.sa.rezq.membership.UpgradeMembershipActivity;
 import com.sa.rezq.search.SearchActivity;
 import com.sa.rezq.services.ServerResponseInterface;
@@ -201,7 +202,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         upgrade_membership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, UpgradeMembershipActivity.class);
+                Intent intent = new Intent(activity, MembershipActivity.class);
                 activity.startActivity(intent);
 
             }

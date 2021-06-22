@@ -27,19 +27,12 @@ public class MembershipListModel implements Serializable {
         this.membershipModels = membershipModels;
     }
 
+
     public boolean toObject(String jsonObjectString){
         try{
             JSONObject json = new JSONObject(jsonObjectString);
             JSONArray array = json.getJSONArray(RESPONSE);
-            List<MembershipModel> list = new ArrayList<MembershipModel>();
-            for (int i=0;i<array.length();i++){
-                JSONObject jsonObject = array.getJSONObject(i);
-                MembershipModel keyValueModel = new MembershipModel();
-                keyValueModel.toObject(jsonObject.toString());
-                list.add(keyValueModel);
-            }
-            this.membershipModels = list;
-            return true;
+            return this.toObject(array);
         }catch(Exception ex){
             Log.d(TAG, "Json Exception : " + ex);}
         return false;
@@ -50,9 +43,9 @@ public class MembershipListModel implements Serializable {
             List<MembershipModel> list = new ArrayList<MembershipModel>();
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                MembershipModel keyValueModel = new MembershipModel();
-                keyValueModel.toObject(jsonObject.toString());
-                list.add(keyValueModel);
+                MembershipModel model = new MembershipModel();
+                model.toObject(jsonObject.toString());
+                list.add(model);
             }
             this.membershipModels = list;
             return true;

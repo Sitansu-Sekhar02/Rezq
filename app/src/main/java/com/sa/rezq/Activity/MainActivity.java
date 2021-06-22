@@ -64,6 +64,7 @@ import com.sa.rezq.fcm.analytics.AnalyticsReport;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.membership.MembershipActivity;
+import com.sa.rezq.membership.MembershipListActivity;
 import com.sa.rezq.profile.ProfileMainActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
@@ -793,7 +794,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activity.startActivity(intent);
         }
         else if (id == R.id.nav_membership) {
-            Intent intent = new Intent(activity, MembershipActivity.class);
+            Intent intent = new Intent(activity, MembershipListActivity.class);
             activity.startActivity(intent);
         }
         else if (id == R.id.nav_account) {

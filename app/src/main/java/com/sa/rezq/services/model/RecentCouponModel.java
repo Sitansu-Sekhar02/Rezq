@@ -11,21 +11,21 @@ import java.util.List;
 
 public class RecentCouponModel implements Serializable {
 
-    private final String TAG = "AccountModel";
+    private final String TAG = "RecentCouponModel";
 
     private final String
-                    ID                        = "id",
+                    ID                        = "store_id",
                     MEMBERSHIP_ID             ="membership_id",
                     FIRST_NAME                 = "first_name",
                     LAST_NAME                   = "last_name",
-                    VENDOR_NAME               = "vendor_name",
-                    STORE_NAME              =  "store_name",
-                    OFFER_TITLE             = "offer_title",
-                    OFFER_DISCOUNT            = "offer_discount",
-                      CREATED_ON            = "created_on",
-                      LOGO               = "logo",
-
-                    PROFILE_IMAGE                = "profile_image";
+                    VENDOR_NAME                = "vendor_name",
+                    STORE_NAME                 =  "store_name",
+                    AVERAGE_RATING              =  "avg_rating",
+                    OFFER_TITLE               = "offer_title",
+                    OFFER_DISCOUNT             = "offer_discount",
+                    CREATED_ON                = "created_on",
+                    LOGO                       = "logo",
+                    PROFILE_IMAGE             = "profile_image";
 
 
     private String
@@ -36,7 +36,8 @@ public class RecentCouponModel implements Serializable {
             vendor_name       = null,
             store_name       = null,
             logo            = null,
-         offer_title       = null,
+            offer_title       = null,
+            avg_rating       = null,
             offer_discount       = null,
             created_on       = null,
             profile_image       = null;
@@ -87,6 +88,14 @@ public class RecentCouponModel implements Serializable {
 
     public void setVendor_name(String vendor_name) {
         this.vendor_name = vendor_name;
+    }
+
+    public String getAvg_rating() {
+        return avg_rating;
+    }
+
+    public void setAvg_rating(String avg_rating) {
+        this.avg_rating = avg_rating;
     }
 
     public String getStore_name() {
@@ -167,6 +176,7 @@ public class RecentCouponModel implements Serializable {
             if (json.has(STORE_NAME)) store_name = json.getString(STORE_NAME);
             if (json.has(OFFER_DISCOUNT)) offer_discount = json.getString(OFFER_DISCOUNT);
             if (json.has(OFFER_TITLE)) offer_title = json.getString(OFFER_TITLE);
+            if (json.has(AVERAGE_RATING)) avg_rating = json.getString(AVERAGE_RATING);
             if (json.has(CREATED_ON)) created_on = json.getString(CREATED_ON);
 
 
@@ -193,6 +203,7 @@ public class RecentCouponModel implements Serializable {
             jsonMain.put(VENDOR_NAME, vendor_name);
             jsonMain.put(STORE_NAME, store_name);
             jsonMain.put(OFFER_DISCOUNT, offer_discount);
+            jsonMain.put(AVERAGE_RATING, avg_rating);
             jsonMain.put(OFFER_TITLE, offer_title);
             jsonMain.put(CREATED_ON, created_on);
 

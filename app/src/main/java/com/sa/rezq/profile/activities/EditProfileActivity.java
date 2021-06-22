@@ -277,6 +277,8 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
                 if (profileModel == null) {
                     profileModel = new ProfileModel();
                 }
+                profileModel=GlobalFunctions.getProfile(activity);
+
                 profileModel.setFirstName( firstname );
                 profileModel.setLastName( lastname );
                 profileModel.setEmail( email );

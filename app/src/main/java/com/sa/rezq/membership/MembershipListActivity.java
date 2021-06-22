@@ -17,13 +17,16 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
@@ -35,6 +38,8 @@ import com.google.firebase.storage.StorageReference;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.AccountListAdapter;
+import com.sa.rezq.adapter.AllCategoryListAdapter;
+import com.sa.rezq.adapter.MembershipDescriptionListAdapter;
 import com.sa.rezq.adapter.MembershipListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
@@ -63,7 +68,7 @@ import com.vlonjatg.progressactivity.ProgressLinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembershipListActivity extends AppCompatActivity  implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class MembershipListActivity extends AppCompatActivity {
 
     public static final String TAG = "MembershipActivity";
 
@@ -76,7 +81,7 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
     static Activity activity = null;
 
     private EditText public_name_etv, cr_number_etv, vat_number_etv, m_first_name_etv, m_last_name_etv, m_email_etv, shop_url_etv, head_office_address_etv, mobile_number_etv;
-    private TextView continue_tv;
+    private TextView price;
     private ImageView edit_profile_image_iv;
     public View mainView;
     Button btnSubscribe;
@@ -88,8 +93,6 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
     static int titleResourseID;
     static TextView toolbar_title;
     static ImageView toolbar_logo, tool_bar_back_icon;
-    Menu menu;
-    String account = String.valueOf(1);
     SliderLayout mProductSlider;
     PagerIndicator mPagerIndicator;
 
@@ -98,23 +101,20 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
     Window window = null;
-    ImageView vendor_list_image,iv_favourite;
-    TextView tv_vendor_name,tvRating,tv_address,tv_open_map,tv_rating_count;
+
 
     MembershipListAdapter membershipListAdapter;
+    MembershipDescriptionListAdapter descriptionListAdapter;
     List<MembershipModel> membershipModels = new ArrayList<>();
+    LinearLayoutManager linearHorizontalLayoutManager;
     LinearLayoutManager linearLayoutManager;
-    ProgressLinearLayout progressActivity;
-    RecyclerView MembershipListRecyclerview;
-
-    MembershipListModel model;
+    RecyclerView membership_child_list_recyclerview,membership_banner_recyclerview;
 
 
-    String vendor_id = null;
-    TrendingModel trendingModel = null;
+    int review_position = 0;
+    MembershipListModel membershipListModel=null;
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
+    List<String> serviceNameList=new ArrayList<>();
 
 
     @SuppressLint("LongLogTag")
@@ -125,23 +125,20 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
 
         context = this;
         activity = this;
-        window = getWindow();
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
 
+        linearHorizontalLayoutManager = new LinearLayoutManager(activity,linearLayoutManager.HORIZONTAL, false);
         linearLayoutManager = new LinearLayoutManager(activity);
-        progressActivity = findViewById(R.id.details_progressActivity);
-        MembershipListRecyclerview = findViewById(R.id.membership_list_recyclerview);
+
+        membership_child_list_recyclerview = findViewById(R.id.membership_child_list_recyclerview);
+        membership_banner_recyclerview = findViewById(R.id.membership_banner_recyclerview);
 
 
-        mProductSlider = (SliderLayout) view.findViewById(R.id.shop_main_fragment_top_slider);
-        mPagerIndicator = (PagerIndicator) view.findViewById(R.id.shop_main_fragment_top_slider_custom_indicator);
         btnSubscribe = findViewById(R.id.btnSubscribe);
+        price = findViewById(R.id.price);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //toolbar.setPadding(0, GlobalFunctions.getStatusBarHeight(context), 0, 0);
-        //toolbar.setNavigationIcon(R.drawable.ic_back_draw);
-        //toolbar.setContentInsetsAbsolute(0,0);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
         tool_bar_back_icon.setOnClickListener(new View.OnClickListener() {
@@ -152,10 +149,11 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
         });
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
-        loadBanner(context);
+
+        loadListBanner(context);
 
 
-        mainView = MembershipListRecyclerview;
+        mainView = membership_banner_recyclerview;
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -175,7 +173,36 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
 
         setTitle(getString(R.string.upgrade_membership), 0, 0);
 
-        getMembershipList();
+       // getMembershipList();
+
+        SnapHelper snapHelper = new PagerSnapHelper();
+        snapHelper.attachToRecyclerView(membership_banner_recyclerview);
+
+        membership_banner_recyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+
+                review_position = linearHorizontalLayoutManager.findFirstVisibleItemPosition();
+
+                if (membershipListModel.getMembershipModels() != null && membershipListModel.getMembershipModels().get(review_position) != null) {
+                    MembershipModel membershipModel = membershipListModel.getMembershipModels().get(review_position);
+
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            setThisPage(membershipModel);
+                        }
+                    });
+                }
+            }
+        });
+
+        serviceNameList.clear();
+
+        descriptionListAdapter = new MembershipDescriptionListAdapter(activity, serviceNameList);
+        membership_child_list_recyclerview.setLayoutManager(linearLayoutManager);
+        membership_child_list_recyclerview.setAdapter(descriptionListAdapter);
 
 
     }
@@ -188,13 +215,8 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
             public void OnSuccessFromServer(Object arg0) {
                 // globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
-
                 validOutputAfterClick(arg0);
-               /* MembershipMainModel membershipModel = (MembershipMainModel) arg0;
-                if (membershipModel!=null && membershipModel.getMembershipListModel()!=null){
-                    MembershipListModel listModel = membershipModel.getMembershipListModel();
-                    outpotAfterClick(listModel);
-                }*/
+
             }
 
             @Override
@@ -219,115 +241,93 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
             MembershipMainModel membershipMainModel = (MembershipMainModel) arg0;
             MembershipListModel listModel = membershipMainModel.getMembershipListModel();
             if (!membershipMainModel.isStatus()) {
-               // globalFunctions.displayMessaage(activity, mainView, listModel.getMessage());
+                globalFunctions.displayMessaage(activity, mainView, membershipMainModel.getMessage());
 
             } else {
-              //  GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
 
             }
         }
     }
 
-    private void loadBanner(Context context) {
-        //globalFunctions.showProgress(activity, getString(R.string.loading));
-        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.getHomeData(context, new ServerResponseInterface() {
-            @Override
-            public void OnSuccessFromServer(Object arg0) {
-                // globalFunctions.hideProgress();
-                Log.d(TAG, "Response : " + arg0.toString());
-                if (arg0 instanceof MembershipMainModel) {
-                    MembershipMainModel membershipMainModel= (MembershipMainModel) arg0;
-                    //MembershipListModel membershipListModel=membershipMainModel.getMembershipListModel();
-                    setBannerPage(membershipMainModel.getMembershipListModel());
-                }
-            }
-
-            @Override
-            public void OnFailureFromServer(String msg) {
-                //globalFunctions.hideProgress();
-                globalFunctions.displayMessaage(context, mainView, msg);
-
-                Log.d(TAG, "Failure : " + msg);
-            }
-
-            @Override
-            public void OnError(String msg) {
-                // globalFunctions.hideProgress();
-                globalFunctions.displayMessaage(context, mainView, msg);
-                Log.d(TAG, "Error : " + msg);
-            }
-        }, "Menu");
-    }
-
-    private void setBannerPage(final MembershipListModel membershipListModel) {
-        if (membershipListModel != null) {
-
-            if (membershipListModel.getMembershipModels() != null) {
-                MembershipModel section2 = membershipListModel.getMembershipModels();
-                if (section2 != null) setBanners(section2);
-            }
-
-        }
-    }
-
-    private void setBanners(MembershipListModel bannerListModel) {
-        if (bannerListModel != null) {
-            if (model == null) {
-                 BannerTask bannerTask = new BannerTask();
-                bannerTask.execute(bannerListModel);
-            } else if (model.getMembershipModels().size() != bannerListModel.getMembershipModels().size()) {
-                BannerTask bannerTask = new BannerTask();
-                bannerTask.execute(bannerListModel);
-            }
-        }
-    }
-
-
-
-
-
-    private void getMembershipList() {
+    private void loadListBanner(Context context) {
         globalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.getMembershipList(context, new ServerResponseInterface() {
-            @SuppressLint("LongLogTag")
             @Override
             public void OnSuccessFromServer(Object arg0) {
-                globalFunctions.hideProgress();
+                 globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
                 MembershipMainModel membershipMainModel = (MembershipMainModel) arg0;
                 if (membershipMainModel!=null && membershipMainModel.getMembershipListModel()!=null){
-                    MembershipListModel listModel = membershipMainModel.getMembershipListModel();
-                    setThisPage(listModel);
-                }
+                    membershipListModel = membershipMainModel.getMembershipListModel();
+                    setListBanners(membershipListModel);
 
+                    if (membershipListModel.getMembershipModels() != null && membershipListModel.getMembershipModels().get(review_position) != null) {
+                        MembershipModel membershipModel = membershipListModel.getMembershipModels().get(review_position);
+
+                        activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                setThisPage(membershipModel);
+                            }
+                        });
+                    }
+                }
             }
 
-            @SuppressLint("LongLogTag")
             @Override
             public void OnFailureFromServer(String msg) {
                 globalFunctions.hideProgress();
-
                 globalFunctions.displayMessaage(context, mainView, msg);
                 Log.d(TAG, "Failure : " + msg);
             }
 
-            @SuppressLint("LongLogTag")
             @Override
             public void OnError(String msg) {
-                globalFunctions.hideProgress();
+                 globalFunctions.hideProgress();
                 globalFunctions.displayMessaage(context, mainView, msg);
                 Log.d(TAG, "Error : " + msg);
             }
-        }, "list");
+        }, "Banners");
     }
 
-    private void setThisPage(MembershipListModel membershipListModel) {
+
+    private void setThisPage(MembershipModel membershipModel) {
+        if (membershipModel != null) {
+
+                if (globalFunctions.isNotNullValue(membershipModel.getPrice())) {
+                    price.setText(activity.getString(R.string.sar)+membershipModel.getPrice()+" /"+activity.getString(R.string.month));
+
+                }
+
+            if (GlobalFunctions.isNotNullValue(membershipModel.getDescription())) {
+                List<String> serviceNameList = new ArrayList<>();
+                serviceNameList.clear();
+//                service_description_tv.setText(globalFunctions.getHTMLString(membershipModel.getDescription()));
+//                service_description_tv.setText(globalFunctions.html2text(service_description_tv.getText().toString().trim()));
+
+                String[] serviceList = membershipModel.getDescription().split("</div>");
+
+                for (int i = 0; i < serviceList.length; i++) {
+                    String value = serviceList[i];
+                    serviceNameList.add(value);
+                }
+
+                if (serviceNameList.size() > 0) {
+                    descriptionListAdapter.updatePlanList(serviceNameList);
+                }
+
+            }
+
+            review_position = linearHorizontalLayoutManager.findFirstVisibleItemPosition();
+
+        }
+    }
+
+    private void setListBanners(MembershipListModel membershipListModel) {
         if (membershipListModel != null && membershipModels != null) {
             membershipModels.clear();
             membershipModels.addAll(membershipListModel.getMembershipModels());
-            // setStaticAccount();
             if (membershipListAdapter != null) {
                 synchronized (membershipListAdapter) {
                     membershipListAdapter.notifyDataSetChanged();
@@ -335,144 +335,21 @@ public class MembershipListActivity extends AppCompatActivity  implements BaseSl
             }
 
             if (membershipModels.size() > 0) {
-                showContent();
-                initRecyclerView();
+                initBannerRecyclerView();
             }
         }
     }
 
+    private void initBannerRecyclerView() {
 
-
-    private void showContent() {
-        if (progressActivity != null) {
-            progressActivity.showContent();
-        }
-    }
-
-    private void initRecyclerView() {
-        MembershipListRecyclerview.setLayoutManager(linearLayoutManager);
-        MembershipListRecyclerview.setHasFixedSize(true);
         membershipListAdapter = new MembershipListAdapter(activity, membershipModels);
-        MembershipListRecyclerview.setAdapter(membershipListAdapter);
-    }
-
-
-    @Override
-    public void onSliderClick(BaseSliderView slider) {
-        MembershipModel bannerClickedModel = (MembershipModel) slider.getBundle().getSerializable("data");
-        if (bannerClickedModel != null) {
-            if (bannerClickedModel.getId() != null) {
-
-           /*     if(bannerClickedModel.getCount().equalsIgnoreCase("1")){
-                    Intent intent = VendorListDetailsActivity.newInstance( activity, bannerClickedModel );
-                    activity.startActivity( intent );
-                }else {
-                    Intent intent = VendorStoreListActivity.newInstance( activity, bannerClickedModel );
-                    activity.startActivity( intent );
-                }*/
-               /* if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_CATEGORY)) {
-                    Intent intent = VendorStoreListActivity.newInstance(activity, bannerClickedModel.getVendor_id(), null, null);
-                    activity.startActivity(intent);
-                }  else if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_OFFER)) {
-                    Intent intent = ProductListActivity.newInstance(activity, null, null, bannerClickedModel.getId());
-                    activity.startActivity(intent);
-                } else if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_NORMAL)) {
-                    if (bannerClickedModel.getUrl() != null) {
-                        try {
-                            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(bannerClickedModel.getUrl()));
-                            startActivity(browserIntent);
-                        } catch (ActivityNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }*/
-
-            }
-        }
-    }
-
-    @Override
-    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+        membership_banner_recyclerview.setLayoutManager(linearHorizontalLayoutManager);
+        membership_banner_recyclerview.setHasFixedSize(true);
+        membership_banner_recyclerview.setAdapter(membershipListAdapter);
 
     }
 
-    @Override
-    public void onPageSelected(int position) {
 
-    }
-
-    @Override
-    public void onPageScrollStateChanged(int state) {
-
-    }
-    public class BannerTask extends AsyncTask<MembershipListModel, Void, List<String>> {
-
-        @Override
-        protected List<String> doInBackground(MembershipListModel... membershipListModels) {
-            MembershipListModel membershipListModel = membershipListModels[0];
-            if (membershipListModel != null) model = membershipListModel;
-            List<String> bannerStrings = new ArrayList<>();
-            if (model != null) {
-                for (int i = 0; i < model.getMembershipModels().size(); i++) {
-                    String imageModel = model.getMembershipModels().get(i).getImage();
-                    //if url is not empty...add url...else don't add...
-                    if (GlobalFunctions.isNotNullValue(imageModel)) {
-                        bannerStrings.add(imageModel);
-                    }
-                }
-            }
-            if (mProductSlider != null) mProductSlider.removeAllSliders();
-            return bannerStrings;
-        }
-
-        @Override
-        protected void onPostExecute(List<String> bannerStrings) {
-            super.onPostExecute(bannerStrings);
-            setImageOnView(bannerStrings);
-        }
-    }
-
-    public void setImageOnView(List<String> displayImageURL) {
-        if (displayImageURL != null) {
-            if (mProductSlider.getChildCount() <= 1) {
-                Log.d(TAG, "ImageURL List size : " + displayImageURL.size());
-                for (int i = 0; i < displayImageURL.size() && displayImageURL.get(i) != null; i++) {
-                    CustomSliderTextView textSliderView = new CustomSliderTextView(context);
-                    // initialize a SliderLayout
-                    textSliderView
-                            .description(1 + "")
-                            .image(displayImageURL.get(i).toString())
-                            .setScaleType(BaseSliderView.ScaleType.Fit)
-                            .setOnSliderClickListener(this);
-                    //add your extra information
-                    textSliderView.bundle(new Bundle());
-                    textSliderView.getBundle()
-                            .putString("extra", model.getMembershipModels().get(i).getId() + "");
-                    textSliderView.getBundle()
-                            .putSerializable("data", model.getMembershipModels().get(i));
-
-                    mProductSlider.addSlider(textSliderView);
-                    if (displayImageURL.size() > 0) {
-                        mProductSlider.setCurrentPosition(0);
-                    }
-
-                }
-
-                if (displayImageURL.size() > 0) {
-                    mProductSlider.setPresetTransformer(SliderLayout.Transformer.Stack);
-                    mProductSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
-                    if (mPagerIndicator != null) {
-                        mProductSlider.setCustomIndicator(mPagerIndicator);
-                        mProductSlider.setCurrentPosition(0);
-                    }
-                    mProductSlider.setCustomAnimation(new DescriptionAnimation());
-                    mProductSlider.setDuration(SLIDER_LOAD_TIME_IN_MILLI_SEC);
-                    mProductSlider.addOnPageChangeListener(this);
-                    mProductSlider.startAutoCycle();
-                }
-            }
-        }
-    }
 
 
     @Override

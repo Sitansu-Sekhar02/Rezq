@@ -34,6 +34,7 @@ import com.sa.rezq.adapter.OfferListAdapter;
 import com.sa.rezq.adapter.ReviewListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.membership.MembershipActivity;
 import com.sa.rezq.membership.UpgradeMembershipActivity;
 import com.sa.rezq.offers.UpgradeOfferActivity;
 import com.sa.rezq.services.ServerResponseInterface;
@@ -42,6 +43,7 @@ import com.sa.rezq.services.model.BannerModel;
 import com.sa.rezq.services.model.NearbyModel;
 import com.sa.rezq.services.model.OfferListModel;
 import com.sa.rezq.services.model.OfferModel;
+import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.ReviewListModel;
 import com.sa.rezq.services.model.ReviewModel;
 import com.sa.rezq.services.model.StatusMainModel;
@@ -66,6 +68,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             BUNDLE_NEARBY_PLACES = "NearByPlaces",
             BUNDLE_VENDOR_MODEL = "VendorModel",
             BUNDLE_WISHLIST_MODEL = "WishListModel",
+            BUNDLE_RECENT_COUPON = "RecentCopuonList",
             BUNDLE_VENDOR_STORE_LIST_DETAILS = "VendorStoreListDetailsActivity";
 
     View view;
@@ -88,6 +91,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     static ImageView toolbar_logo, tool_bar_back_icon;
     BannerModel bannerModel = null;
     NearbyModel nearbyModel = null;
+    RecentCouponModel recentCouponModel=null;
 
     //int id = 100;
     boolean isWishlisted=false;
@@ -169,6 +173,14 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         Intent intent = new Intent(activity, VendorListDetailsActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_WISHLIST_MODEL, wishModel);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    public static Intent newInstance(Activity activity, RecentCouponModel model) {
+        Intent intent = new Intent(activity, VendorListDetailsActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_RECENT_COUPON, model);
         intent.putExtras(bundle);
         return intent;
     }
@@ -321,6 +333,21 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
 
+        if (getIntent().hasExtra(BUNDLE_RECENT_COUPON)) {
+
+            recentCouponModel = (RecentCouponModel) getIntent().getSerializableExtra(BUNDLE_RECENT_COUPON);
+        } else {
+            recentCouponModel = null;
+        }
+        if (recentCouponModel != null) {
+            if (GlobalFunctions.isNotNullValue(recentCouponModel.getId())) {
+                Log.d(TAG, recentCouponModel.getId());
+                vendor_id = recentCouponModel.getId();
+            }
+        }
+
+
+
         tv_open_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -439,7 +466,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         btn_upgrade_prime_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(VendorListDetailsActivity.this, UpgradeMembershipActivity.class);
+                Intent intent=new Intent(VendorListDetailsActivity.this, MembershipActivity.class);
                 startActivity(intent);
             }
         });

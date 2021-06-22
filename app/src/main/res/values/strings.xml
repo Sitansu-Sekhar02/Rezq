@@ -52,7 +52,7 @@
     <string name="upgrate_to_premium">Upgrade to <br></br>rezq prime</string>
     <string name="unblock_offer">Unlock best offers</string>
     <string name="subscribe">Subscribe</string>
-    <string name="sar">Sar 200/month</string>
+    <string name="sar">Sar </string>
     <string name="create_familacc">Create family account</string>
     <string name="plus_previlegs">Plus privileges</string>
     <string name="nearby_km">Nearby distance 100km</string>
@@ -441,5 +441,6 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="enter_mendatory_field">*Please eneter mendatory fields</string>
     <string name="updating_profile">Updating profile...</string>
+    <string name="month">Month</string>
 
 </resources>

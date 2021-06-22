@@ -25,6 +25,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -46,7 +48,9 @@ import com.sa.rezq.services.model.OfferModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
+import com.sa.rezq.services.model.UpdateLanguageModel;
 import com.sa.rezq.services.model.VendorModel;
+import com.sa.rezq.view.AlertDialog;
 import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -283,15 +287,34 @@ public class RedeemOfferActivity extends AppCompatActivity {
         if (arg0 instanceof StatusMainModel) {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             StatusModel statusModel = statusMainModel.getStatusModel();
-            if (!statusMainModel.isStatusLogin()) {
-                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
 
+            if (statusMainModel.isStatusLogin()) {
+                openSuccessDialog(statusModel.getMessage());
             } else {
-                GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
+                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
 
             }
         }
     }
+
+    private void openSuccessDialog(String message) {
+        final AlertDialog alertDialog = new AlertDialog( activity );
+        alertDialog.setCancelable( false );
+        alertDialog.setIcon( R.drawable.rezq_logo );
+        alertDialog.setTitle( activity.getString( R.string.app_name ) );
+        alertDialog.setMessage( message);
+        alertDialog.setPositiveButton( activity.getString( R.string.ok ), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+
+            }
+        } );
+
+        alertDialog.show();
+
+    }
+
 
     private void openRedeemPopup() {
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
