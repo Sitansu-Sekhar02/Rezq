@@ -10,64 +10,67 @@ import java.io.Serializable;
 public class ProfileModel implements Serializable {
     private final String TAG = "ProfileModel";
     private final String
-            ID = "id",
-            USER_ID="user_id",
-            FIRST_NAME = "first_name",
-            FULL_NAME = "full_name",
-            LAST_NAME = "last_name",
-            TIN_NUMBER = "tin",
-            PAN_NUMBER = "pan",
-            IS_OTP_VERIFIED = "is_otp_verified",
-            EMAIL = "email_id",
-            AGENCY_NAME = "agency_name",
-            PHONE = "mobile_number",
-            ADDRESS = "address",
-            IMAGE = "image",
-            PROFILE_IMAGE = "profile_image",
-            CITY = "city",
-            CITY_ID = "city_id",
-            CITY_NAME = "city_name",
-            ORDER_COUNT = "order_count",
-            CATEGORY = "category",
-            COUNTRY_CODE = "country_code",
-            WALLET="wallet",
-            LOGISTIC_ID="logistic_id",
-            DRIVER_LOGIN_ID="driver_login_id",
-            VEHICLE_NUMBER="vehicle_number",
-            DRIVING_LICENCE="driving_license",
-            NATIONAL_ID="national_id",
-            VEHICLE_DOCUMENT="vehicle_document";
+            ID                  = "id",
+            USER_ID             ="user_id",
+            FIRST_NAME          = "first_name",
+            FULL_NAME           = "full_name",
+            LAST_NAME           = "last_name",
+            TIN_NUMBER           = "tin",
+            PAN_NUMBER           = "pan",
+            IS_OTP_VERIFIED      = "is_otp_verified",
+            EMAIL               = "email_id",
+            AGENCY_NAME         = "agency_name",
+            PHONE               = "mobile_number",
+            ADDRESS             = "address",
+            IMAGE               = "image",
+            PROFILE_IMAGE       = "profile_image",
+            MEMBERSHIP          = "membership",
+            CITY                = "city",
+            CITY_ID             = "city_id",
+            CITY_NAME           = "city_name",
+            ORDER_COUNT         = "order_count",
+            CATEGORY            = "category",
+            COUNTRY_CODE        = "country_code",
+            WALLET              ="wallet",
+            LOGISTIC_ID         ="logistic_id",
+            DRIVER_LOGIN_ID     ="driver_login_id",
+            VEHICLE_NUMBER      ="vehicle_number",
+            DRIVING_LICENCE     ="driving_license",
+            NATIONAL_ID         ="national_id",
+            VEHICLE_DOCUMENT    ="vehicle_document";
 
 
     String
-            id = null,
-             user_id=null,
-            fullname = null,
-            tinNumber = null,
-            orderCount = null,
-            panNumber = null,
-            agencyName = null,
-            firstName = null,
-            lastName = null,
-            email = null,
-            phone = null,
-            image = null,
-            profileImg = null,
-            cityId = null,
-            cityName = null,
-             country_code=null,
-            wallet=null,
-            logistic_id=null,
-            driver_login_id=null,
-            vehicle_number=null,
-            driving_licence=null,
-            national_id=null,
-            vehicle_document=null;
-
+            id                      = null,
+            user_id                 =null,
+            fullname                = null,
+            tinNumber               = null,
+            orderCount              = null,
+            panNumber               = null,
+            agencyName              = null,
+            firstName               = null,
+            lastName                = null,
+            email                   = null,
+            phone                   = null,
+            image                   = null,
+            profileImg              = null,
+           // membership              = null,
+            cityId                  = null,
+            cityName                = null,
+            country_code            =null,
+            wallet                  =null,
+            logistic_id             =null,
+            driver_login_id         =null,
+            vehicle_number          =null,
+            driving_licence         =null,
+            national_id             =null,
+            vehicle_document        =null;
 
 
 
     AddressModel address = new AddressModel();
+
+    ProfileMembershipModel profileMembershipModel = new ProfileMembershipModel();
 
     CityListModel
             cities = null;
@@ -78,6 +81,15 @@ public class ProfileModel implements Serializable {
             profileCategoryListModel = null;
 
     public ProfileModel() {
+    }
+
+
+    public ProfileMembershipModel getProfileMembershipModel() {
+        return profileMembershipModel;
+    }
+
+    public void setProfileMembershipModel(ProfileMembershipModel profileMembershipModel) {
+        this.profileMembershipModel = profileMembershipModel;
     }
 
     public String getId() {
@@ -116,16 +128,16 @@ public class ProfileModel implements Serializable {
         return image;
     }
 
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public String getProfileImg() {
         return profileImg;
     }
 
     public void setProfileImg(String profileImg) {
         this.profileImg = profileImg;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
     }
 
     public String getFullname() {
@@ -288,6 +300,7 @@ public class ProfileModel implements Serializable {
         this.vehicle_document = vehicle_document;
     }
 
+
     public ProfileCategoryListModel getProfileCategoryListModel() {
         return profileCategoryListModel;
     }
@@ -348,6 +361,9 @@ public class ProfileModel implements Serializable {
             if (json.has(PROFILE_IMAGE)) {
                 profileImg = json.getString(PROFILE_IMAGE);
             }
+           /* if (json.has(MEMBERSHIP)) {
+                membership = json.getString(MEMBERSHIP);
+            }*/
             if (json.has(COUNTRY_CODE)) {
                 country_code = json.getString(COUNTRY_CODE);
             }  if (json.has(WALLET)) {
@@ -366,18 +382,18 @@ public class ProfileModel implements Serializable {
                 national_id = json.getString(NATIONAL_ID);
             }
 
-            /*get Address*/
-            if (json.has(ADDRESS)) {
-                AddressModel addressModelTemp = new AddressModel();
+            if (json.has(MEMBERSHIP)) {
+                ProfileMembershipModel membershipModel = new ProfileMembershipModel();
                 JSONObject addressJson = new JSONObject();
-                addressJson = json.getJSONObject(ADDRESS);
+                addressJson = json.getJSONObject(MEMBERSHIP);
                 if (addressJson != null) {
-                    addressModelTemp.toObject(addressJson.toString());
+                    profileMembershipModel.toObject(addressJson.toString());
                 }
-                address = addressModelTemp;
+                profileMembershipModel = membershipModel;
+
             }
 
-            if (json.has(CITY)) {
+           /* if (json.has(CITY)) {
                 CityListModel vehicleListModel = new CityListModel();
                 JSONArray jsonObject1 = new JSONArray();
                 jsonObject1 = json.getJSONArray(CITY);
@@ -397,7 +413,7 @@ public class ProfileModel implements Serializable {
                     this.profileCategoryListModel = null;
                 }
             }
-
+*/
             /*  *//*get Image*//*
             ImageModel imageModelTemp = new ImageModel();
             JSONObject imageJSON = new JSONObject();
@@ -425,16 +441,21 @@ public class ProfileModel implements Serializable {
             jsonMain.put(TIN_NUMBER, tinNumber);
             jsonMain.put(PAN_NUMBER, panNumber);
             jsonMain.put(AGENCY_NAME, agencyName);
-            jsonMain.put(ADDRESS, new JSONObject(this.address.toString()));
             jsonMain.put(EMAIL, email);
             jsonMain.put(PHONE, phone);
             jsonMain.put(CITY_ID, cityId);
             jsonMain.put(CITY_NAME, cityName);
             jsonMain.put(IS_OTP_VERIFIED, isOtp_verified());
-            jsonMain.put(CITY, cities != null ? new JSONArray(this.cities.toString(true)) : new JSONArray());
             jsonMain.put(IMAGE, image);//new JSONObject(image.toString()));
             jsonMain.put(ORDER_COUNT, orderCount);
             jsonMain.put(PROFILE_IMAGE, profileImg);
+           // jsonMain.put(MEMBERSHIP, membership);
+        /*   jsonMain.put(MEMBERSHIP_NAME, membership);
+            jsonMain.put(MEMBERSHIP, membership);
+            jsonMain.put(MEMBERSHIP, membership);
+            jsonMain.put(MEMBERSHIP, membership);*/
+            jsonMain.put(MEMBERSHIP, profileMembershipModel != null ? new JSONObject(this.profileMembershipModel.toString()) : new JSONObject());
+
             jsonMain.put(WALLET, wallet);
             jsonMain.put(COUNTRY_CODE, country_code);
             jsonMain.put(LOGISTIC_ID, logistic_id);
@@ -443,8 +464,6 @@ public class ProfileModel implements Serializable {
             jsonMain.put(VEHICLE_NUMBER, vehicle_number);
             jsonMain.put(VEHICLE_DOCUMENT, vehicle_document);
             jsonMain.put(NATIONAL_ID, national_id);
-
-            jsonMain.put(CATEGORY, profileCategoryListModel != null ? new JSONArray(profileCategoryListModel.toString(true)) : new JSONArray());
             returnString = jsonMain.toString();
         } catch (Exception ex) {
             Log.d(TAG, " To String Exception : " + ex);

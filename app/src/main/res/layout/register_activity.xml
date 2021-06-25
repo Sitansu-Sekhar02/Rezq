@@ -98,7 +98,6 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
                             android:textColorHint="#B5B5B5"
-
                             app:boxBackgroundColor="@null">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -106,7 +105,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/firstname"
-                                android:inputType="text"
+                                android:inputType="textCapSentences"
                                 android:paddingStart="0dp"
                                 android:paddingEnd="0dp"
                                 android:textColor="#171717"
@@ -136,9 +135,9 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:hint="@string/lastname"
+                                android:inputType="textCapSentences"
                                 android:paddingStart="0dp"
                                 android:paddingEnd="0dp"
-                                android:inputType="text"
                                 android:textColor="#171717"
                                 android:textColorHint="@color/black"
                                 android:textSize="14dp" />

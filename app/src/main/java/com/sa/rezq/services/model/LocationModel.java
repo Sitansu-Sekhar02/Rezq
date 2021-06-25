@@ -10,26 +10,23 @@ public class LocationModel implements Serializable {
     private final String TAG = "LocationModel";
 
     private final String
-            ID          = "id",
-            STREET      = "street",
-            ADDRESS     = "address",
-            STATE       = "state",
-            CITY        = "city",
-            COUNTRY     = "country",
-            PRIORITY     = "priority",
-            IS_PREMIUM     = "is_premium",
-            LATITUDE    = "latitude",
-            LONGITUDE   = "longitude";
+            NAME                 = "name",
+            ADDRESS               = "address",
+            IMAGE                 = "image",
+            MEMBERSHIP_ID         = "membership_id",
+            IS_PREMIUM             = "is_premium",
+            PRIORITY               = "priority",
+            LATITUDE              = "latitude",
+            LONGITUDE               = "longitude";
 
     String
-            id          = null,
-            street      = null,
             address     = null,
-            state       = null,
-            city        = null,
-            priority        = null,
-            is_premium        = null,
-            country     = null;
+            priority      = null,
+            is_premium     = null,
+            name           = null,
+            image         = null,
+            membership_id   = null;
+
 
     double
             latitude    = 0.0,
@@ -37,21 +34,6 @@ public class LocationModel implements Serializable {
 
     public LocationModel(){}
 
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getStreet() {
-        return street;
-    }
-
-    public void setStreet(String street) {
-        this.street = street;
-    }
 
     public String getAddress() {
         return address;
@@ -61,28 +43,28 @@ public class LocationModel implements Serializable {
         this.address = address;
     }
 
-    public String getState() {
-        return state;
+    public String getName() {
+        return name;
     }
 
-    public void setState(String state) {
-        this.state = state;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCity() {
-        return city;
+    public String getImage() {
+        return image;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setImage(String image) {
+        this.image = image;
     }
 
-    public String getCountry() {
-        return country;
+    public String getMembership_id() {
+        return membership_id;
     }
 
-    public void setCountry(String country) {
-        this.country = country;
+    public void setMembership_id(String membership_id) {
+        this.membership_id = membership_id;
     }
 
     public double getLatitude() {
@@ -120,10 +102,10 @@ public class LocationModel implements Serializable {
     public boolean toObject(String jsonObject){
         try{
             JSONObject json = new JSONObject(jsonObject);
-            id = json.getString(ID);
-            street = json.getString(STREET);
+            name = json.getString(NAME);
             address = json.getString(ADDRESS);
-            state = json.getString(STATE);
+            image = json.getString(IMAGE);
+            membership_id = json.getString(MEMBERSHIP_ID);
             priority = json.getString(PRIORITY);
             is_premium = json.getString(IS_PREMIUM);
 
@@ -133,8 +115,6 @@ public class LocationModel implements Serializable {
             try{longitude = json.getDouble(LONGITUDE);}
             catch (Exception exx){longitude = 0.0;}
 
-            city = json.getString(CITY);
-            country = json.getString(COUNTRY);
             return true;
         }catch(Exception ex){
             Log.d(TAG, "Json Exception : " + ex);
@@ -147,14 +127,12 @@ public class LocationModel implements Serializable {
         String returnString = null;
         try{
             JSONObject jsonMain = new JSONObject();
-            jsonMain.put(ID, id);
-            jsonMain.put(STREET, street);
+            jsonMain.put(NAME, name);
             jsonMain.put(ADDRESS, address);
-            jsonMain.put(STATE, state);
+            jsonMain.put(IMAGE, image);
+            jsonMain.put(MEMBERSHIP_ID, membership_id);
             jsonMain.put(LATITUDE, latitude);
             jsonMain.put(LONGITUDE, longitude);
-            jsonMain.put(CITY, city);
-            jsonMain.put(COUNTRY, country);
             jsonMain.put(PRIORITY, priority);
             jsonMain.put(IS_PREMIUM, is_premium);
             returnString = jsonMain.toString();

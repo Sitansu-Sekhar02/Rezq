@@ -81,13 +81,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="180dp"
                     android:layout_gravity="center"
-                    android:background="@color/white"
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="visible"
-                    app:tabBackground="@drawable/slider_border">
+                    android:visibility="visible">
 
                     <com.daimajia.slider.library.SliderLayout
                         android:id="@+id/shop_main_fragment_top_slider"
@@ -158,12 +156,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:padding="10dp">
+                    android:padding="5dp">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:layout_marginLeft="12dp"
                         android:text="@string/popular_category"
                         android:textColor="@color/black"
                         android:textSize="16dp"
@@ -197,7 +196,8 @@
                         android:id="@+id/Rvcategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:reverseLayout="false" />
@@ -387,6 +387,7 @@
                         android:layout_weight="1"
                         android:text="@string/trending_now"
                         android:textColor="@color/black"
+                        android:layout_marginLeft="12dp"
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
@@ -402,6 +403,7 @@
                         android:textStyle="bold" />
 
                 </LinearLayout>
+
                 <com.vlonjatg.progressactivity.ProgressLinearLayout
                     android:id="@+id/details_progressActivity_trending"
                     android:layout_width="match_parent"
@@ -417,9 +419,10 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/recycler_trending"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp" />
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp" />
                 </com.vlonjatg.progressactivity.ProgressLinearLayout>
 
                 <RelativeLayout
@@ -441,7 +444,7 @@
                             <ImageView
                                 android:layout_width="158dp"
                                 android:layout_height="170dp"
-                                android:src="@drawable/pexels_paris" />
+                                android:src="@drawable/pexels_paris"/>
 
                             <com.sa.rezq.view.AppTextView
                                 android:layout_width="match_parent"
@@ -582,6 +585,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:text="@string/popular_places"
+                            android:layout_marginLeft="12dp"
                             android:textColor="@color/black"
                             android:textSize="16dp"
                             android:textStyle="bold" />
@@ -602,6 +606,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
+
                         app:emptyTitleTextColor="@color/green_light"
                         app:errorContentTextColor="@color/app_fontColor"
                         app:errorTitleTextColor="@color/app_fontColor"
@@ -613,12 +618,14 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_places_near_you"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="8dp" />
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_height="wrap_content" />
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>
                 </LinearLayout>
 
                 <RelativeLayout
+                    android:id="@+id/rl_prime_upgrade"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:background="@drawable/ic_group_getextra">

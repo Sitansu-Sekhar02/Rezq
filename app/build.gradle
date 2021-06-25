@@ -221,6 +221,9 @@ dependencies {
     //like button
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
+    implementation 'com.github.prabhat1707:EasyWayLocation:2.2'
+
+
 
 
 

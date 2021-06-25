@@ -287,7 +287,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
         if (arg0 instanceof StatusMainModel) {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             StatusModel statusModel = statusMainModel.getStatusModel();
-
             if (statusMainModel.isStatusLogin()) {
                 openSuccessDialog(statusModel.getMessage());
             } else {

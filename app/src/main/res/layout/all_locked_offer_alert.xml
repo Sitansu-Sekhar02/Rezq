@@ -110,6 +110,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/upgrade_prime_rl"
                     android:layout_width="match_parent"
                     android:layout_height="63dp"
                     android:layout_below="@+id/rr"
@@ -117,35 +118,36 @@
                     android:layout_marginTop="20dp"
                     android:background="@color/red"
                     android:gravity="center_vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="163dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:gravity="center"
+                            android:text="@string/prime_members"
+                            android:textColor="@color/white"
+                            android:textSize="14dp" />
 
-                    <com.sa.rezq.view.AppTextView
-                        android:layout_width="163dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
-                        android:gravity="center"
-                        android:text="@string/prime_members"
-                        android:textColor="@color/white"
-                        android:textSize="14dp" />
+                        <com.sa.rezq.view.AppButton
+                            android:id="@+id/btn_upgrade_prime_offer"
+                            android:layout_width="91dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/off_border"
+                            android:gravity="center"
+                            android:text="@string/upgrade"
+                            android:textAllCaps="true"
+                            android:textColor="@color/red"
+                            android:textSize="12dp" />
 
-                    <com.sa.rezq.view.AppButton
-                        android:id="@+id/btn_upgrade_prime_offer"
-                        android:layout_width="91dp"
-                        android:layout_height="26dp"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginRight="40dp"
-                        android:background="@drawable/off_border"
-                        android:gravity="center"
-                        android:text="@string/upgrade"
-                        android:textAllCaps="true"
-                        android:textColor="@color/red"
-                        android:textSize="12dp" />
-
+                    </RelativeLayout>
                 </RelativeLayout>
-
-
             </RelativeLayout>
-
 
         </RelativeLayout>
 

@@ -3,6 +3,7 @@ package com.sa.rezq.membership;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,6 +11,7 @@ import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,11 +28,21 @@ import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.services.ServerResponseInterface;
+import com.sa.rezq.services.ServicesMethodsManager;
+import com.sa.rezq.services.model.HomePageMainModel;
+import com.sa.rezq.services.model.HomePageModel;
+import com.sa.rezq.services.model.MembershipDetailsMainModel;
+import com.sa.rezq.services.model.MembershipDetailsModel;
+import com.sa.rezq.services.model.ProfileModel;
+import com.sa.rezq.services.model.StatusMainModel;
+import com.sa.rezq.services.model.TrendingListModel;
 import com.sa.rezq.services.model.TrendingModel;
+import com.squareup.picasso.Picasso;
 
-public class UpgradeMembershipActivity extends AppCompatActivity {
+public class MembershipDetailsActivity extends AppCompatActivity {
 
-    public static final String TAG = "MembershipActivity";
+    public static final String TAG = "MembershipDetailsActivity";
 
 
     RecyclerView recyclerView;
@@ -39,9 +51,8 @@ public class UpgradeMembershipActivity extends AppCompatActivity {
     Context context = null;
     static Activity activity = null;
 
-    private EditText public_name_etv, cr_number_etv, vat_number_etv, m_first_name_etv, m_last_name_etv, m_email_etv, shop_url_etv, head_office_address_etv, mobile_number_etv;
-    private TextView continue_tv;
-    private ImageView edit_profile_image_iv;
+    private TextView tv_membership_name,tv_validity,tv_valid_from,tv_valid_till;
+    private ImageView iv_membership_image;
     public View mainView;
 
     static Toolbar toolbar;
@@ -58,21 +69,15 @@ public class UpgradeMembershipActivity extends AppCompatActivity {
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
     Window window = null;
-    ImageView vendor_list_image,iv_favourite;
-    TextView tv_vendor_name,tvRating,tv_address,tv_open_map,tv_rating_count;
+    TextView btnUpgrade;
 
-    String vendor_id = null;
-    TrendingModel trendingModel = null;
-
-    FirebaseStorage storage;
-    StorageReference storageReference;
-
+    String membership_id=null;
 
     @SuppressLint("LongLogTag")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.upgrade_membership);
+        setContentView(R.layout.activity_membership_details);
 
         context = this;
         activity = this;
@@ -80,13 +85,15 @@ public class UpgradeMembershipActivity extends AppCompatActivity {
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
-        //linearLayoutManager = new LinearLayoutManager(activity);
-       // progressActivity = findViewById(R.id.details_progressActivity);
-       // swipe_container = findViewById(R.id.swipe_container);
+
+        tv_membership_name = findViewById(R.id.tv_membership_name);
+        tv_validity = findViewById(R.id.tv_validity);
+        tv_valid_from = findViewById(R.id.tv_valid_from);
+        tv_valid_till = findViewById(R.id.tv_valid_till);
+        iv_membership_image = findViewById(R.id.iv_membership_image);
+
+        btnUpgrade = findViewById(R.id.Tv_upgradeTo_Prime);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //toolbar.setPadding(0, GlobalFunctions.getStatusBarHeight(context), 0, 0);
-        //toolbar.setNavigationIcon(R.drawable.ic_back_draw);
-        //toolbar.setContentInsetsAbsolute(0,0);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
         tool_bar_back_icon.setOnClickListener(new View.OnClickListener() {
@@ -105,8 +112,85 @@ public class UpgradeMembershipActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
 
-        setTitle(getString(R.string.upgrade_membership), 0, 0);
+      /*  ProfileModel profileModel = globalFunctions.getProfile( context );
+        if (profileModel != null && context != null) {
+            try {
 
+
+            } catch (Exception exxx) {
+                Log.e( TAG, exxx.getMessage() );
+            }
+
+        } else {
+
+        }
+
+*/
+        setTitle(getString(R.string.my_membership), 0, 0);
+
+        loadMembershipDetails();
+
+
+    }
+
+    private void loadMembershipDetails() {
+        globalFunctions.showProgress(activity, getString(R.string.loading));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.getMembershipDetails(context, new ServerResponseInterface() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+                if (context != null) {
+                    globalFunctions.hideProgress();
+                    Log.d(TAG, "Response: " + arg0.toString());
+                    MembershipDetailsMainModel membershipDetailsMainModel=(MembershipDetailsMainModel) arg0;
+                    MembershipDetailsModel membershipDetailsModel=membershipDetailsMainModel.getMembershipDetailsModel();
+                    setUpThisPage(membershipDetailsModel);
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnFailureFromServer(String msg) {
+                if (context != null) {
+                    globalFunctions.hideProgress();
+                    Log.d(TAG, "Failure : " + msg);
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnError(String msg) {
+                if (context != null) {
+                     globalFunctions.hideProgress();
+                    Log.d(TAG, "Error : " + msg);
+                }
+            }
+        }, " list");
+    }
+
+    private void setUpThisPage(MembershipDetailsModel membershipDetailsModel) {
+        if (membershipDetailsModel != null) {
+
+            if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getMembership_name())) {
+                tv_membership_name.setText(membershipDetailsModel.getMembership_name());
+
+            }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getImage())) {
+                Picasso.with(activity).load(membershipDetailsModel.getImage()).placeholder(R.drawable.rezq_logo).into(iv_membership_image);
+
+            }
+            if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValid_from())) {
+                tv_valid_from.setText(GlobalFunctions.getDateFormat(membershipDetailsModel.getValid_from()));
+
+            }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValid_till())) {
+                tv_valid_till.setText(membershipDetailsModel.getValid_till());
+
+            }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValidity())) {
+                tv_validity.setText(membershipDetailsModel.getValidity()+" "+activity.getString(R.string.days));
+
+            }
+
+        }
 
     }
 

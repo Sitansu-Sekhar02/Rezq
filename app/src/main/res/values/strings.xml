@@ -36,7 +36,7 @@
     <string name="currentlocation">Current Location</string>
     <string name="trending_now">Trending Now</string>
     <string name="popular_places">Popular places near you</string>
-    <string name="get_extra">Become a prime member <br></br> and unlock exciting offers</string>
+    <string name="get_extra">Become a prime member &amp; unlock exciting offers</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="rezq_mem">Rezq plus</string>
@@ -442,5 +442,8 @@
     <string name="enter_mendatory_field">*Please eneter mendatory fields</string>
     <string name="updating_profile">Updating profile...</string>
     <string name="month">Month</string>
+    <string name="days">Days</string>
+    <string name="no_offer_available">NO OFFERS AVAILABLE NOW</string>
+    <string name="no_recent_coupons">"No Recent Coupons Available "</string>
 
 </resources>

@@ -11,6 +11,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -228,7 +229,6 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
 
     public void onBackPressed () {
 
-
        // closeThisActivity();
         super.onBackPressed();
         if (countDownTimer != null) {
@@ -292,8 +292,17 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
         dialog.show();
         final EditText  et_UserfistName = dialog.findViewById(R.id.et_UserfirstName);
         final EditText  et_UserLastName = dialog.findViewById(R.id.et_UserlastName);
+        final ImageView edit_profile_image_iv = dialog.findViewById(R.id.edit_profile_image_iv);
         iv_profile_image = dialog.findViewById(R.id.profile_image);
         final Button  btn_Continue = dialog.findViewById(R.id.btn_Continue);
+
+        edit_profile_image_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCropFuctionalImage();
+
+            }
+        });
 
         btn_Continue.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -319,13 +328,13 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
                         dialog.dismiss();
 
 
-                         insertNewUser(activity, insertAccountModel);
+                        // insertNewUser(activity, insertAccountModel);
 
                             if (profileImageList.size() > 0) {
                                 uploadImage(GlobalVariables.UPLOAD_PROFILE_PHOTO_PATH_CODE);
 
                             } else {
-                               // insertNewUser(activity, insertAccountModel,holder);
+                                insertNewUser(activity, insertAccountModel);
                             }
 
                     }
@@ -379,7 +388,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
 
     private void goToMainActivity() {
         Intent intent = new Intent(activity, MainActivity.class);
-        activity.startActivity(intent);
+        startActivity(intent);
         closeThisActivity();
     }
 

@@ -66,7 +66,7 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
         }
         if (model.getOffer_title() != null) {
             holder.product_applicable.setText((model.getOffer_title()));
-        }   if (model.getLogo() != null) {
+        } if (model.getLogo() != null) {
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
         }
 

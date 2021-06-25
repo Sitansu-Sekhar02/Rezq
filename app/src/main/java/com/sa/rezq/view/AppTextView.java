@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 
-import androidx.appcompat.widget.AppCompatTextView;
-
-public class AppTextView extends AppCompatTextView {
+public class AppTextView extends androidx.appcompat.widget.AppCompatTextView {
     public AppTextView(Context context) {
         super(context);
         init();
@@ -22,8 +20,8 @@ public class AppTextView extends AppCompatTextView {
         init();
     }
     private void init() {
-        Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
+        Typeface otf = Typeface.createFromAsset(getContext().getAssets(),
                 "regular.otf");
-        setTypeface(tf);
+        setTypeface(otf);
     }
 }

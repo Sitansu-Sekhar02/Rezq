@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,8 +45,7 @@ import com.sa.rezq.category.AllCategoryListActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.location_service.LocationMonitoringService;
-import com.sa.rezq.membership.MembershipActivity;
-import com.sa.rezq.membership.UpgradeMembershipActivity;
+import com.sa.rezq.membership.FreeMembershipActivity;
 import com.sa.rezq.search.SearchActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
@@ -55,8 +55,12 @@ import com.sa.rezq.services.model.CategoryListModel;
 import com.sa.rezq.services.model.CategoryModel;
 import com.sa.rezq.services.model.HomePageMainModel;
 import com.sa.rezq.services.model.HomePageModel;
+import com.sa.rezq.services.model.LocationListModel;
+import com.sa.rezq.services.model.LocationModel;
 import com.sa.rezq.services.model.NearbyListModel;
 import com.sa.rezq.services.model.NearbyModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
+import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingListModel;
 import com.sa.rezq.services.model.TrendingModel;
@@ -64,7 +68,7 @@ import com.sa.rezq.services.model.VariantModel;
 import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.sa.rezq.view.CustomSliderTextView;
-import com.sa.rezq.wishlist.WishListActivity;
+import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -130,6 +134,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     PagerIndicator mPagerIndicator;
     TextView create_RFP_now_tv;
     BannerListModel banners;
+    RelativeLayout rl_prime_upgrade;
 
 
     ViewPager mViewPager;
@@ -143,6 +148,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     CardView search_card_view;
 
     SeeAllCategoryModel listModel;
+    LocationModel locationModel;
    // Window window = null;
 
     static Intent locationintent;
@@ -186,6 +192,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         upgrade_membership=view.findViewById(R.id.tv_upgrade_membership);
         cardViewItem=view.findViewById(R.id.cardItem);
         search_card_view=view.findViewById(R.id.search_card_view);
+        rl_prime_upgrade=view.findViewById(R.id.rl_prime_upgrade);
 
         locationintent = new Intent(activity, LocationMonitoringService.class);
 
@@ -199,10 +206,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             }
         });
 
+
         upgrade_membership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(activity, MembershipActivity.class);
+                Intent intent = new Intent(activity, FreeMembershipActivity.class);
                 activity.startActivity(intent);
 
             }
@@ -244,13 +252,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
 
         loadCategory();
-        CategoryRecyclerView.setAdapter(categoryAdapter);
 
         loadNearbyPLaces();
-        nearbyRecyclerView.setAdapter(placesNearyouListAdapter);
 
         TrendingCategory();
-        trending_RecyclerView.setAdapter(trendingListAdapter);
 
         return view;
     }
@@ -274,7 +279,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void OnFailureFromServer(String msg) {
                 if (context != null) {
-                    globalFunctions.hideProgress();
+                   // globalFunctions.hideProgress();
                     Log.d(TAG_trending, "Failure : " + msg);
                 }
             }
@@ -486,6 +491,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 if (arg0 instanceof HomePageMainModel) {
                     HomePageMainModel homePageMainModel= (HomePageMainModel) arg0;
                     setThisPage(homePageMainModel.getHomePageModel());
+
                 }
             }
 
@@ -508,6 +514,18 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     private void setThisPage(final HomePageModel homePageModel) {
         if (homePageModel != null) {
+            if (homePageModel.getProfileMembershipModel()!=null) {
+                ProfileMembershipModel profileMembershipModel = homePageModel.getProfileMembershipModel();
+
+                if (profileMembershipModel!=null){
+                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getIs_premium()) && profileMembershipModel.getIs_premium().equalsIgnoreCase("0")){
+                        rl_prime_upgrade.setVisibility(View.VISIBLE);
+                    }else{
+                        rl_prime_upgrade.setVisibility(View.GONE);
+                    }
+
+                   }
+                }
 
             if (homePageModel.getBannerList() != null) {
                 BannerListModel section2 = homePageModel.getBannerList();

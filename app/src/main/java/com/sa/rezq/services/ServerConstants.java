@@ -33,6 +33,7 @@ public class ServerConstants {
     public static final String URL_check_redeme_code          = SERVER_URL + "check_redeme_code.php";
     public static final String URL_membership_list            = SERVER_URL + "membership_list.php";
     public static final String URL_insert_membership           = SERVER_URL + "insert_membership.php";
+    public static final String URL_Membership_details           = SERVER_URL + "membership_detail.php";
     public static final String URL_insert_User_account         = SERVER_URL + "insert_user_account.php";
     public static final String URL_insert_Recent_Coupon         = SERVER_URL + "insert_recent_viewed.php";
     public static final String URL_insert_Coupon_list         = SERVER_URL + "recent_views.php";

@@ -30,7 +30,7 @@
             android:orientation="horizontal"
             android:padding="16dp">
 
-            <TextView
+            <com.sa.rezq.view.AppTextView
                 android:id="@+id/Tvlang_arabic"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -43,15 +43,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_language"/>
-            <TextView
-                android:id="@+id/Tvlang_english"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#FF3B3B"
                 android:layout_marginLeft="8dp"
-                android:drawablePadding="@dimen/_5sdp"
-                android:textSize="@dimen/_14sdp"
-                android:text="@string/english" />
+                android:orientation="vertical">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/Tvlang_english"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#FF3B3B"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="@string/english" />
+                <View
+                    android:id="@+id/view_english_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/red" />
+
+            </LinearLayout>
+          
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

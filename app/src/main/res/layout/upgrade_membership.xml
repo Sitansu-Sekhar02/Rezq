@@ -66,13 +66,25 @@
                 android:orientation="vertical">
 
                 <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_plan_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/rezq_mem"
                     android:textColor="#171717"
                     android:textSize="24dp" />
 
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_desc_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/rezq_mem"
+                    android:textColor="#171717"
+                    android:textSize="12dp" />
+
                 <LinearLayout
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
@@ -99,22 +111,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true">
-
-        <com.sa.rezq.view.AppTextView
-            android:id="@+id/price"
+        <LinearLayout
+            android:id="@+id/amount"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:gravity="center"
-            android:text="@string/sar"
-            android:textColor="#171717"
-            android:textSize="24dp" />
+            android:layout_height="wrap_content">
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#171717"
+                android:textSize="24dp" />
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_no_ofDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sar"
+                android:textColor="#171717"
+                android:textSize="24dp" />
+        </LinearLayout>
 
         <com.sa.rezq.view.AppButton
             android:id="@+id/btnSubscribe"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/price"
+            android:layout_below="@id/amount"
             android:background="@color/red"
             android:text="@string/subscribe"
             android:textColor="@color/white"

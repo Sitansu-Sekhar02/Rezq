@@ -1,197 +1,219 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:progressActivity="http://schemas.android.com/tools">
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar_offer_detail" />
-    <ScrollView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
+
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="204dp">
 
-            <ImageView
-                android:id="@+id/vendor_list_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/black_trans" />
-            <com.sa.rezq.view.AppTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="10dp"
-                android:layout_above="@+id/tv_vendor_name"
-                android:layout_marginLeft="25dp"
-                android:text=""/>
-            <com.sa.rezq.view.AppTextView
-                android:id="@+id/tv_vendor_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:layout_marginLeft="25dp"
-                android:layout_alignParentBottom="true"
-                android:textSize="16dp"
-                android:layout_marginBottom="15dp"
-                android:text=""/>
-            </RelativeLayout>
+                <ImageView
+                    android:id="@+id/vendor_list_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_160sdp" />
 
-                <RelativeLayout
+                <com.sa.rezq.view.AppTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:orientation="horizontal">
+                    android:layout_above="@+id/tv_vendor_name"
+                    android:layout_marginLeft="25dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="10dp" />
 
-                    <com.sa.rezq.view.AppTextView
-                        android:id="@+id/tvRating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawablePadding="5dp"
-                        android:text=""
-                        android:gravity="center"
-                        android:textColor="@color/yellow"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-                    <com.sa.rezq.view.AppTextView
-                        android:id="@+id/tv_star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:drawableRight="@drawable/ic_path_star"
-                        android:layout_toRightOf="@+id/tvRating"
-                        android:drawablePadding="5dp"
-                        android:gravity="center"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-                    <com.sa.rezq.view.AppTextView
-                        android:id="@+id/tv_count_rating"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/tv_star"
-                        android:text=""
-                        android:layout_marginTop="3dp"
-                        android:textAllCaps="true"
-                        android:gravity="center"
-                        android:textColor="#171717"
-                        android:textSize="12dp" />
-                    <com.sa.rezq.view.AppTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_toRightOf="@+id/tv_count_rating"
-                        android:text="@string/reating"
-                        android:layout_marginTop="3dp"
-                        android:textAllCaps="true"
-                        android:gravity="center"
-                        android:textColor="#171717"
-                        android:textSize="12dp" />
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true">
-                        <ImageView
-                            android:id="@+id/iv_favourite"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:src="@drawable/ic_like"/>
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_vendor_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginBottom="15dp"
+                    android:text=""
+                    android:textColor="#FFFFFF"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
 
-
-                        <com.sa.rezq.view.AppTextView
-                            android:id="@+id/tvFav"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="5dp"
-                            android:text="@string/Favourite"
-                            android:gravity="center_vertical"
-                            android:textAllCaps="true"
-                            android:textColor="#2B2626"
-                            android:textStyle="bold"
-                            android:layout_alignParentRight="true"
-                            android:textSize="12dp" />
-                    </LinearLayout>
-
-                </RelativeLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/grey"
-                android:layout_marginTop="20dp"/>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:text=""
+                    android:textColor="@color/yellow"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tvRating"
+                    android:drawableRight="@drawable/ic_path_star"
+                    android:drawablePadding="5dp"
+                    android:gravity="center"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_count_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toRightOf="@+id/tv_star"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAllCaps="true"
+                    android:textColor="#171717"
+                    android:textSize="12dp" />
+
+                <com.sa.rezq.view.AppTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_toRightOf="@+id/tv_count_rating"
+                    android:gravity="center"
+                    android:text="@string/reating"
+                    android:textAllCaps="true"
+                    android:textColor="#171717"
+                    android:textSize="12dp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true">
+
+                    <ImageView
+                        android:id="@+id/iv_favourite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_like" />
+
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tvFav"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/Favourite"
+                        android:textAllCaps="true"
+                        android:textColor="#2B2626"
+                        android:textSize="12dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:background="@color/grey" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp">
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/TvAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="12dp"
+                    android:text="@string/address"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:textColor="#8D8D8D"
-                    android:text="@string/address"/>
+                    android:textSize="12dp" />
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tv_address"
-                    android:layout_marginTop="5dp"
                     android:layout_width="211dp"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/TvAddress"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="@dimen/_10sdp"
                     android:text=""
                     android:textColor="#171717"
-                    android:textSize="14dp"
-                    android:layout_below="@id/TvAddress"/>
+                    android:textSize="14dp" />
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tv_open_map"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/open_map"
+                    android:layout_alignRight="@+id/tv_address"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="15dp"
+                    android:drawableLeft="@drawable/ic_group_red_map"
+                    android:drawablePadding="5dp"
                     android:gravity="center"
+                    android:text="@string/open_map"
                     android:textAllCaps="true"
                     android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:drawablePadding="5dp"
-                    android:layout_alignRight="@+id/tv_address"
-                    android:drawableLeft="@drawable/ic_group_red_map"
-                    android:layout_marginTop="15dp"
-                    android:layout_alignParentRight="true"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
             </RelativeLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/grey"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/grey" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/offer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textStyle="bold"
                     android:layout_below="@+id/tvAlertMsg"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/offers"
                     android:textColor="#8D8D8D"
-                    android:textSize="12dp" />
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
                 <LinearLayout
-                    android:id="@+id/hotel"
+                    android:id="@+id/hotel_ll"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_below="@+id/offer"
-                    android:orientation="vertical"
+                    android:visibility="gone"
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="10dp"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical">
+
                     <com.vlonjatg.progressactivity.ProgressLinearLayout
                         android:id="@+id/details_progressActivity"
                         android:layout_width="match_parent"
@@ -204,59 +226,78 @@
                         progressActivity:loadingBackgroundColor="@color/transparent"
                         progressActivity:loadingProgressBarColor="@color/green_light">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_locked_offer"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_locked_offer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
 
-                    </androidx.recyclerview.widget.RecyclerView>
+                        </androidx.recyclerview.widget.RecyclerView>
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>
 
                 </LinearLayout>
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/empty_offer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/hotel_ll"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center"
+                    android:text="@string/no_offer_available"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14dp"
+                    android:textStyle="bold"
+                    android:visibility="visible" />
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/Tv_allLockedOffers"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/hotel"
-                    android:layout_marginTop="15dp"
-                    android:textSize="12dp"
+                    android:layout_below="@id/hotel_ll"
+                    android:layout_marginTop="@dimen/_30sdp"
                     android:gravity="center"
+                    android:text="@string/seeall_locked_offer"
                     android:textAllCaps="true"
                     android:textColor="@color/red"
-                    android:textStyle="bold"
-                    android:text="@string/seeall_locked_offer"/>
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/grey"
-                android:layout_marginTop="20dp"/>
+                android:layout_marginTop="20dp"
+                android:background="@color/grey" />
 
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-            <com.sa.rezq.view.AppTextView
-                android:id="@+id/rate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:layout_below="@+id/tvAlertMsg"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
-                android:text="@string/ratings"
-                android:textColor="#8D8D8D"
-                android:textSize="12dp" />
-                <LinearLayout
-                    android:visibility="gone"
-                    android:id="@+id/contentRate"
-                    android:layout_below="@+id/rate"
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/rate"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvAlertMsg"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/ratings"
+                    android:textColor="#8D8D8D"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/contentRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rate"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
-                    android:layout_height="wrap_content">
+                    android:visibility="gone">
+
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/tvratings"
                         android:layout_width="wrap_content"
@@ -264,56 +305,58 @@
                         android:layout_below="@id/rate"
                         android:drawableRight="@drawable/ic_path_star"
                         android:drawablePadding="5dp"
-                        android:text="4.8"
                         android:gravity="center"
+                        android:text="4.8"
                         android:textColor="#FFB400"
                         android:textSize="16dp"
-                        android:textStyle="bold"/>
+                        android:textStyle="bold" />
+
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@+id/tvratings"
+                        android:gravity="center"
                         android:text="@string/reating"
                         android:textAllCaps="true"
-                        android:gravity="center"
-                        android:layout_toRightOf="@+id/tvratings"
                         android:textColor="#171717"
                         android:textSize="12dp" />
                 </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/tvRatings"
-                android:layout_width="match_parent"
-                android:layout_below="@+id/contentRate"
-                android:orientation="vertical"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:layout_height="wrap_content">
-                <com.vlonjatg.progressactivity.ProgressLinearLayout
-                    android:id="@+id/details_progressActivity_reviews"
+                <LinearLayout
+                    android:id="@+id/tvRatings"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:emptyTitleTextColor="@color/green_light"
-                    app:errorContentTextColor="@color/app_fontColor"
-                    app:errorTitleTextColor="@color/app_fontColor"
-                    progressActivity:emptyBackgroundColor="@color/transparent"
-                    progressActivity:errorBackgroundColor="@color/transparent"
-                    progressActivity:loadingBackgroundColor="@color/transparent"
-                    progressActivity:loadingProgressBarColor="@color/green_light">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/contentRate"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/raecyclerview_review_rating"
-                    android:layout_width="match_parent"
-                    android:layout_height="220dp">
+                    <com.vlonjatg.progressactivity.ProgressLinearLayout
+                        android:id="@+id/details_progressActivity_reviews"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:emptyTitleTextColor="@color/green_light"
+                        app:errorContentTextColor="@color/app_fontColor"
+                        app:errorTitleTextColor="@color/app_fontColor"
+                        progressActivity:emptyBackgroundColor="@color/transparent"
+                        progressActivity:errorBackgroundColor="@color/transparent"
+                        progressActivity:loadingBackgroundColor="@color/transparent"
+                        progressActivity:loadingProgressBarColor="@color/green_light">
 
-                </androidx.recyclerview.widget.RecyclerView>
-                </com.vlonjatg.progressactivity.ProgressLinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/raecyclerview_review_rating"
+                            android:layout_width="match_parent"
+                            android:layout_height="220dp">
 
-            </LinearLayout>
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
+
+                </LinearLayout>
             </RelativeLayout>
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>

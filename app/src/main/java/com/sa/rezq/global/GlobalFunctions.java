@@ -57,6 +57,8 @@ import com.sa.rezq.view.AlertDialog;
 import com.sa.rezq.view.ProgressDialog;
 
 
+import org.jsoup.Jsoup;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -1073,6 +1075,10 @@ public class GlobalFunctions {
         } else {
             return Html.fromHtml(unFormatedString);
         }
+    }
+
+    public static String html2text(String html) {
+        return Jsoup.parse(html).text();
     }
 
     public static Map<String, String> getHeader(Context context, String serviceURL){

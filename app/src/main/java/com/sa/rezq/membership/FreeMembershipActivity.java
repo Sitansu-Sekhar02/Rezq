@@ -7,10 +7,8 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -27,17 +25,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sa.rezq.Activity.AppController;
-import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.model.TrendingModel;
-import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class MembershipActivity extends AppCompatActivity {
+public class FreeMembershipActivity extends AppCompatActivity {
 
     public static final String TAG = "MembershipActivity";
 
@@ -120,7 +113,7 @@ public class MembershipActivity extends AppCompatActivity {
         btnUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MembershipActivity.this,UpgradeMembershipActivity.class);
+                Intent intent = new Intent(FreeMembershipActivity.this,UpgradeMembershipListActivity.class);
                 activity.startActivity( intent );
             }
         });

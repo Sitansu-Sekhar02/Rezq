@@ -439,6 +439,7 @@ public class OtpActivity extends AppCompatActivity {
                 globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             }else {
                 GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
+              // GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID, statusModel.get());
                 getProfile();
 //                closeThisActivity();
 //                Intent intent = new Intent(activity, MainActivity.class);

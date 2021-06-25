@@ -35,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mukesh.OtpView;
 import com.sa.rezq.Activity.AppController;
+import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.AllCategoryListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
@@ -389,9 +390,8 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     }
 
     public void onBackPressed () {
-       /* Intent intent = ShowCouponOfferActivity.newInstance( activity, offerModel,storeModel);
-        activity.startActivity( intent );
-*/
+        Intent intent = new Intent(activity, MainActivity.class);
+        startActivity( intent );
         closeThisActivity();
         super.onBackPressed();
 

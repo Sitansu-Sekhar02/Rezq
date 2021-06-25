@@ -23,6 +23,7 @@
             android:layout_marginTop="15dp">
 
             <ImageView
+                android:id="@+id/iv_membership_image"
                 android:layout_width="326dp"
                 android:layout_height="181dp"
                 android:src="@drawable/reqq_plus" />
@@ -39,23 +40,25 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
                     android:orientation="vertical">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/membership"
+                        android:layout_gravity="center"
                         android:textColor="#3B3B3B"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_membership_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -68,18 +71,20 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="80dp"
                     android:orientation="vertical">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/validity"
+                        android:layout_gravity="center"
                         android:textColor="#3B3B3B"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_validity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -94,23 +99,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
+                android:gravity="center"
                 android:orientation="horizontal">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="50dp"
                     android:orientation="vertical">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/valid_from"
+                        android:layout_gravity="center"
                         android:textColor="#3B3B3B"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_valid_from"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -123,18 +130,20 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="100dp"
+                    android:layout_marginLeft="80dp"
                     android:orientation="vertical">
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/valid_to"
+                        android:layout_gravity="center"
                         android:textColor="#3B3B3B"
                         android:textSize="12dp"
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_valid_till"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
@@ -149,7 +158,8 @@
         </LinearLayout>
 
         <com.sa.rezq.view.AppTextView
-            android:id="@+id/TvupgradePrime"
+            android:visibility="gone"
+            android:id="@+id/Tv_upgradeTo_Prime"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/lnrMain"

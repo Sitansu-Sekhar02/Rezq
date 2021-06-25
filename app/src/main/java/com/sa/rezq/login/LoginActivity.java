@@ -33,6 +33,7 @@ import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.LoginModel;
 import com.sa.rezq.services.model.ProfileMainModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.RegisterModel;
 import com.sa.rezq.services.model.StatusMainModel;
@@ -88,7 +89,7 @@ public class LoginActivity  extends AppCompatActivity {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            window.setStatusBarColor(ContextCompat.getColor(this, R.color.app_fontBlackColor));
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.app_background_color));
         }
 
 

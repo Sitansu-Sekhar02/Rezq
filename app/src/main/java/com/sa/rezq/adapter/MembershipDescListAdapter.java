@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,14 +13,12 @@ import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.services.model.MembershipModel;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class MembershipDescriptionListAdapter extends RecyclerView.Adapter<MembershipDescriptionListAdapter.ViewHolder> {
+public class MembershipDescListAdapter extends RecyclerView.Adapter<MembershipDescListAdapter.ViewHolder> {
 
-    public static final String TAG = "MembershipListAdapter";
+    public static final String TAG = "MembershipDescListAdapter";
 
     private final List<String> list;
     private final Activity activity;
@@ -29,7 +26,7 @@ public class MembershipDescriptionListAdapter extends RecyclerView.Adapter<Membe
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
 
-    public MembershipDescriptionListAdapter(Activity activity, List<String> list) {
+    public MembershipDescListAdapter(Activity activity, List<String> list) {
         this.activity = activity;
         this.list = list;
         globalVariables = AppController.getInstance().getGlobalVariables();

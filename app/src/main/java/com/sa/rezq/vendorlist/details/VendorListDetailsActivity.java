@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,17 +28,13 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.like.LikeButton;
-import com.like.OnLikeListener;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.OfferListAdapter;
 import com.sa.rezq.adapter.ReviewListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.membership.MembershipActivity;
-import com.sa.rezq.membership.UpgradeMembershipActivity;
-import com.sa.rezq.offers.UpgradeOfferActivity;
+import com.sa.rezq.membership.FreeMembershipActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.BannerModel;
@@ -58,7 +56,6 @@ import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class VendorListDetailsActivity extends AppCompatActivity {
 
@@ -78,7 +75,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
     ImageView vendor_list_image;
     ImageView iv_favourite;
-    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers;
+    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers,empty_offer;
+    public  static RelativeLayout upgrade_prime_rl;
 
     public View mainView;
 
@@ -92,6 +90,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     BannerModel bannerModel = null;
     NearbyModel nearbyModel = null;
     RecentCouponModel recentCouponModel=null;
+    LinearLayout hotel_ll;
 
     //int id = 100;
     boolean isWishlisted=false;
@@ -204,6 +203,10 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(activity);
         offerprogressActivity = findViewById(R.id.details_progressActivity_reviews);
         AllLockedprogressActivity = findViewById(R.id.locked_progressActivity);
+        empty_offer = findViewById(R.id.empty_offer);
+        hotel_ll = findViewById(R.id.hotel_ll);
+        upgrade_prime_rl = findViewById(R.id.upgrade_prime_rl);
+
 
         reviewLinear = new LinearLayoutManager(activity);
         reviewprogressActivity = findViewById(R.id.details_progressActivity);
@@ -321,17 +324,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
 
-        if (vendorModel != null) {
-
-            if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude())) {
-                Log.d("latitude", vendorModel.getLatitude());
-                latitude = vendorModel.getLatitude();
-            }
-            if (GlobalFunctions.isNotNullValue(vendorModel.getLongitude())) {
-                Log.d("longitude", vendorModel.getLongitude());
-                longitude = vendorModel.getLongitude();
-            }
-        }
 
         if (getIntent().hasExtra(BUNDLE_RECENT_COUPON)) {
 
@@ -347,29 +339,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         }
 
 
-
-        tv_open_map.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (vendorModel!=null){
-                    if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude()) || GlobalFunctions.isNotNullValue( vendorModel.getLongitude())) {
-
-                        try {
-                            String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude ;
-                            Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
-                            intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
-                            startActivity(intent);
-                        }catch (ActivityNotFoundException e){
-                            Uri uri=Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
-                            Intent intent=new Intent(Intent.ACTION_VIEW,uri);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            startActivity(intent);
-
-                        }
-                    }
-                }
-            }
-        });
 
 
 
@@ -463,10 +432,11 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         alertView.setCancelable(true);
         RecyclerView prime_offer = alertView.findViewById(R.id.recyclerview_Rezqplus_offer);
         Button btn_upgrade_prime_offer=alertView.findViewById(R.id.btn_upgrade_prime_offer);
+
         btn_upgrade_prime_offer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(VendorListDetailsActivity.this, MembershipActivity.class);
+                Intent intent=new Intent(VendorListDetailsActivity.this, FreeMembershipActivity.class);
                 startActivity(intent);
             }
         });
@@ -637,8 +607,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             offerListModels.addAll(GlobalFunctions.getOfferList(offerListModel.getOfferModels(), true));
             offerListlocked.addAll(GlobalFunctions.getOfferList(offerListModel.getOfferModels(), false));
 
-            Log.d("offerListModels00","=="+offerListModels);
-            Log.d("offerListlocked00","=="+offerListlocked);
 
             if (offerListAdapter != null) {
                 synchronized (offerListAdapter) {
@@ -649,6 +617,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             if (offerListModels.size() <= 0) {
                 showOfferEmptyPage();
             } else {
+                empty_offer.setVisibility(View.GONE);
+                hotel_ll.setVisibility(View.VISIBLE);
                 showOfferContent();
                 offerRecyclerView();
             }
@@ -657,10 +627,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
     private void showOfferEmptyPage() {
-        if (offerprogressActivity != null) {
-            offerprogressActivity.showEmpty(getResources().getDrawable(R.drawable.rezq_logo), getString(R.string.emptyList),
-                    getString(R.string.not_available));
-        }
+       empty_offer.setVisibility(View.VISIBLE);
+        hotel_ll.setVisibility(View.GONE);
     }
 
     private void offerRecyclerView() {
@@ -747,8 +715,12 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 // Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
             }
-            if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
+            /*if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
                 Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
+
+            }*/
+            if (GlobalFunctions.isNotNullValue(vendorModel.getLogo())) {
+                Picasso.with(context).load(vendorModel.getLogo()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {
@@ -767,6 +739,40 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 tv_rating_count.setText(vendorModel.getRating_count());
 
             }
+            if (vendorModel != null) {
+
+                if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude())) {
+                    latitude = vendorModel.getLatitude();
+                }
+                if (GlobalFunctions.isNotNullValue(vendorModel.getLongitude())) {
+                    longitude = vendorModel.getLongitude();
+                }
+            }
+
+            tv_open_map.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (vendorModel!=null){
+                        if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude()) || GlobalFunctions.isNotNullValue( vendorModel.getLongitude())) {
+
+                            try {
+                                String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude ;
+                                Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
+                                intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+                                startActivity(intent);
+                            }catch (ActivityNotFoundException e){
+                                Uri uri=Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
+                                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+
+                            }
+                        }
+                    }
+                }
+            });
+
+
         }
     }
 

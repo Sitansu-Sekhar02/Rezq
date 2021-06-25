@@ -337,7 +337,6 @@ public final class GPSTracker extends Service implements LocationListener {
                     String country = listAddresses.get(0).getCountryName();
                     String subLocality = listAddresses.get(0).getSubLocality();
 
-                    Log.e("mrakerrrrfdyyyyyyyy", "" + state+country+subLocality);
                 }
             } catch (IOException e) {
                 e.printStackTrace();

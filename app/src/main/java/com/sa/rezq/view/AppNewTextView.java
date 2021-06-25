@@ -23,7 +23,7 @@ public class AppNewTextView extends AppCompatTextView {
     }
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "regular_new.ttf");
+                "regular.otf");
         setTypeface(tf);
     }
 }

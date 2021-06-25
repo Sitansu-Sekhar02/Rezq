@@ -4,11 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -22,53 +20,34 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.PagerSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SnapHelper;
 
-import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 import com.sa.rezq.Activity.AppController;
+import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.AccountListAdapter;
-import com.sa.rezq.adapter.AllCategoryListAdapter;
-import com.sa.rezq.adapter.MembershipDescriptionListAdapter;
+import com.sa.rezq.adapter.MembershipDescListAdapter;
 import com.sa.rezq.adapter.MembershipListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.home.HomeFragment;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
-import com.sa.rezq.services.model.AccountListModel;
-import com.sa.rezq.services.model.AccountMainModel;
-import com.sa.rezq.services.model.AccountModel;
-import com.sa.rezq.services.model.BannerListModel;
-import com.sa.rezq.services.model.BannerModel;
-import com.sa.rezq.services.model.HomePageMainModel;
-import com.sa.rezq.services.model.HomePageModel;
 import com.sa.rezq.services.model.InsertAccountModel;
 import com.sa.rezq.services.model.MembershipListModel;
 import com.sa.rezq.services.model.MembershipMainModel;
 import com.sa.rezq.services.model.MembershipModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
-import com.sa.rezq.services.model.TrendingModel;
-import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
-import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
-import com.sa.rezq.view.CustomSliderTextView;
-import com.vlonjatg.progressactivity.ProgressLinearLayout;
+import com.sa.rezq.view.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MembershipListActivity extends AppCompatActivity {
+public class UpgradeMembershipListActivity extends AppCompatActivity {
 
     public static final String TAG = "MembershipActivity";
 
@@ -81,7 +60,7 @@ public class MembershipListActivity extends AppCompatActivity {
     static Activity activity = null;
 
     private EditText public_name_etv, cr_number_etv, vat_number_etv, m_first_name_etv, m_last_name_etv, m_email_etv, shop_url_etv, head_office_address_etv, mobile_number_etv;
-    private TextView price;
+    private TextView price,tv_desc_type,tv_no_ofDays,tv_plan_title;
     private ImageView edit_profile_image_iv;
     public View mainView;
     Button btnSubscribe;
@@ -104,11 +83,13 @@ public class MembershipListActivity extends AppCompatActivity {
 
 
     MembershipListAdapter membershipListAdapter;
-    MembershipDescriptionListAdapter descriptionListAdapter;
+    MembershipDescListAdapter descriptionListAdapter;
     List<MembershipModel> membershipModels = new ArrayList<>();
     LinearLayoutManager linearHorizontalLayoutManager;
     LinearLayoutManager linearLayoutManager;
     RecyclerView membership_child_list_recyclerview,membership_banner_recyclerview;
+    MembershipModel membershipModel;
+    String membership_id=null;
 
 
     int review_position = 0;
@@ -125,6 +106,8 @@ public class MembershipListActivity extends AppCompatActivity {
 
         context = this;
         activity = this;
+        window = getWindow();
+
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
@@ -135,6 +118,10 @@ public class MembershipListActivity extends AppCompatActivity {
         membership_child_list_recyclerview = findViewById(R.id.membership_child_list_recyclerview);
         membership_banner_recyclerview = findViewById(R.id.membership_banner_recyclerview);
 
+
+        tv_desc_type = findViewById(R.id.tv_desc_type);
+        tv_no_ofDays = findViewById(R.id.tv_no_ofDays);
+        tv_plan_title = findViewById(R.id.tv_plan_title);
 
         btnSubscribe = findViewById(R.id.btnSubscribe);
         price = findViewById(R.id.price);
@@ -163,17 +150,23 @@ public class MembershipListActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
 
-        btnSubscribe.setOnClickListener(new View.OnClickListener() {
+        /*btnSubscribe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                insertMembership();
+                if (membershipModel == null) {
+                    membershipModel = new MembershipModel();
+                }
+                membership_id=membershipModel.getId();
+               // Log.d("Iddd",membership_id=membershipModel.getId());
+
+                membershipModel.setMembership_id(membership_id);
+                insertMembership(membershipModel);
 
             }
-        });
+        });*/
 
         setTitle(getString(R.string.upgrade_membership), 0, 0);
 
-       // getMembershipList();
 
         SnapHelper snapHelper = new PagerSnapHelper();
         snapHelper.attachToRecyclerView(membership_banner_recyclerview);
@@ -200,17 +193,17 @@ public class MembershipListActivity extends AppCompatActivity {
 
         serviceNameList.clear();
 
-        descriptionListAdapter = new MembershipDescriptionListAdapter(activity, serviceNameList);
+        descriptionListAdapter = new MembershipDescListAdapter(activity, serviceNameList);
         membership_child_list_recyclerview.setLayoutManager(linearLayoutManager);
         membership_child_list_recyclerview.setAdapter(descriptionListAdapter);
 
 
     }
 
-    private void insertMembership() {
+    private void insertMembership(MembershipModel membershipModel) {
         //globalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.insertMembership(context, new ServerResponseInterface() {
+        servicesMethodsManager.insertMembership(context,membershipModel, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
                 // globalFunctions.hideProgress();
@@ -237,16 +230,37 @@ public class MembershipListActivity extends AppCompatActivity {
     }
 
     private void validOutputAfterClick(Object arg0) {
-        if (arg0 instanceof MembershipMainModel) {
-            MembershipMainModel membershipMainModel = (MembershipMainModel) arg0;
-            MembershipListModel listModel = membershipMainModel.getMembershipListModel();
-            if (!membershipMainModel.isStatus()) {
-                globalFunctions.displayMessaage(activity, mainView, membershipMainModel.getMessage());
+        if (arg0 instanceof StatusMainModel) {
+            StatusMainModel statusMainModel = (StatusMainModel) arg0;
+            StatusModel statusModel = statusMainModel.getStatusModel();
+            if (statusMainModel.isStatusLogin()) {
+                openSuccessDialog(statusModel.getMessage());
 
             } else {
 
+                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+
             }
         }
+    }
+
+    private void openSuccessDialog(String message) {
+        final AlertDialog alertDialog = new AlertDialog( activity );
+        alertDialog.setCancelable( false );
+        alertDialog.setIcon( R.drawable.rezq_logo );
+        alertDialog.setTitle( activity.getString( R.string.app_name ) );
+        alertDialog.setMessage( message);
+        alertDialog.setPositiveButton( activity.getString( R.string.ok ), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(activity, MainActivity.class);
+                startActivity(intent);
+                alertDialog.dismiss();
+
+            }
+        } );
+
+        alertDialog.show();
     }
 
     private void loadListBanner(Context context) {
@@ -296,30 +310,54 @@ public class MembershipListActivity extends AppCompatActivity {
         if (membershipModel != null) {
 
                 if (globalFunctions.isNotNullValue(membershipModel.getPrice())) {
-                    price.setText(activity.getString(R.string.sar)+membershipModel.getPrice()+" /"+activity.getString(R.string.month));
+                    price.setText(activity.getString(R.string.sar)+" "+membershipModel.getPrice()+" /");
+
+                }
+                if (globalFunctions.isNotNullValue(membershipModel.getNo_of_days())) {
+                    tv_no_ofDays.setText(membershipModel.getNo_of_days()+activity.getString(R.string.days));
+
+                 }
+                if (globalFunctions.isNotNullValue(membershipModel.getName())) {
+                        tv_plan_title.setText(membershipModel.getName());
 
                 }
 
+
+
             if (GlobalFunctions.isNotNullValue(membershipModel.getDescription())) {
-                List<String> serviceNameList = new ArrayList<>();
-                serviceNameList.clear();
-//                service_description_tv.setText(globalFunctions.getHTMLString(membershipModel.getDescription()));
-//                service_description_tv.setText(globalFunctions.html2text(service_description_tv.getText().toString().trim()));
+//                List<String> serviceNameList = new ArrayList<>();
+//                serviceNameList.clear();
+                tv_desc_type.setText(globalFunctions.getHTMLString(membershipModel.getDescription()));
+//                tv_desc_type.setText(globalFunctions.html2text(tv_desc_type.getText().toString().trim()));
 
-                String[] serviceList = membershipModel.getDescription().split("</div>");
+//                String[] serviceList = membershipModel.getDescription().split("</div>");
 
-                for (int i = 0; i < serviceList.length; i++) {
+               /* for (int i = 0; i < serviceList.length; i++) {
                     String value = serviceList[i];
                     serviceNameList.add(value);
                 }
 
                 if (serviceNameList.size() > 0) {
                     descriptionListAdapter.updatePlanList(serviceNameList);
-                }
+                }*/
 
             }
 
             review_position = linearHorizontalLayoutManager.findFirstVisibleItemPosition();
+
+
+            btnSubscribe.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (globalFunctions.isNotNullValue(membershipModel.getId())) {
+                        membership_id=membershipModel.getId();
+
+                    }
+                    membershipModel.setMembership_id(membership_id);
+                    insertMembership(membershipModel);
+
+                }
+            });
 
         }
     }

@@ -23,7 +23,7 @@ public class AppTextView_Title extends AppCompatTextView {
     }
     private void init() {
         Typeface tf = Typeface.createFromAsset(getContext().getAssets(),
-                "bold.ttf");
+                "bold.otf");
         setTypeface(tf);
     }
 }

@@ -20,13 +20,15 @@ public class HomePageModel {
             SECTION2                 = "section2";
 
     BannerListModel
-            bannerList           = null;
+            bannerList            = null;
     NearbyListModel
-            nearbyListModel     =null;
+            nearbyListModel       =null;
     TrendingListModel
             trendingListModel     =null;
-    LocationListModel
-            locationListModel     =null;
+
+    ProfileMembershipModel
+            profileMembershipModel     =new ProfileMembershipModel();
+
 
     CategoryListModel
             categoryList           = null,
@@ -67,12 +69,12 @@ public class HomePageModel {
         this.nearbyListModel = nearbyListModel;
     }
 
-    public LocationListModel getLocationListModel() {
-        return locationListModel;
+    public ProfileMembershipModel getProfileMembershipModel() {
+        return profileMembershipModel;
     }
 
-    public void setLocationListModel(LocationListModel locationListModel) {
-        this.locationListModel = locationListModel;
+    public void setProfileMembershipModel(ProfileMembershipModel profileMembershipModel) {
+        this.profileMembershipModel = profileMembershipModel;
     }
 
     public TrendingListModel getTrendingListModel() {
@@ -142,13 +144,16 @@ public class HomePageModel {
                 listModelLocal.setRESPONSE(NEAR_BY);
                 if(listModelLocal.toObject(array)){this.nearbyListModel = listModelLocal;}
                 else{this.nearbyListModel = null;}
-            }if(json.has(LOCATION)) {
-                JSONArray array = json.getJSONArray(LOCATION);
-                LocationListModel listModelLocal = new LocationListModel();
-                listModelLocal.setRESPONSE(LOCATION);
-                if(listModelLocal.toObject(array)){this.locationListModel = listModelLocal;}
-                else{this.locationListModel = null;}
             }
+
+            if(json.has(LOCATION)){
+                ProfileMembershipModel statusModel = new ProfileMembershipModel();
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1 = json.getJSONObject(LOCATION);
+                if(jsonObject1 != null){statusModel.toObject(jsonObject1.toString());}
+                profileMembershipModel = statusModel;
+            }
+
             if(json.has(SUB_CATEGORY)) {
                 JSONArray array = json.getJSONArray(SUB_CATEGORY);
                 CategoryListModel listModelLocal = new CategoryListModel();
@@ -195,6 +200,9 @@ public class HomePageModel {
             jsonMain.put(BANNERS, bannerList!=null?new JSONArray(bannerList.toString(true)):null);
             jsonMain.put(CATEGORY, categoryList!=null?new JSONArray(categoryList.toString(true)):null);
             jsonMain.put(TRENDING, trendingListModel!=null?new JSONArray(trendingListModel.toString(true)):null);
+            jsonMain.put(LOCATION, profileMembershipModel != null ? new JSONObject(profileMembershipModel.toString()) : new JSONObject());
+            //jsonMain.put(PRICE, priceRangeModel!=null ? new JSONObject(priceRangeModel.toString()) : new JSONObject());
+
             jsonMain.put(SUB_CATEGORY, subCategoryList!=null?new JSONArray(subCategoryList.toString(true)):null);
             jsonMain.put(SECTION1, section1!=null?new JSONArray(section1.toString(true)):null);
             jsonMain.put(SECTION2, section2!=null?new JSONArray(section2.toString(true)):null);
@@ -203,7 +211,8 @@ public class HomePageModel {
             returnString = jsonMain.toString();
         }
         catch (Exception ex){
-            Log.d(TAG," To String Exception : "+ex);}
+            Log.d(TAG," To String Exception : "+ex);
+        }
         return returnString;
     }
 

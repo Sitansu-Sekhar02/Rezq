@@ -6,7 +6,7 @@
     xmlns:progressActivity="http://schemas.android.com/tools">
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar_detail" />
+        layout="@layout/tool_bar_search_detail" />
 
 
         <com.vlonjatg.progressactivity.ProgressLinearLayout

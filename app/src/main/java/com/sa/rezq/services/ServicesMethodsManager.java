@@ -513,13 +513,6 @@ public class ServicesMethodsManager {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
         }else if (obj instanceof InsertAccountModel) {
-            InsertAccountModel model = new InsertAccountModel();
-            if (model.toObject(resp.toString())) {
-                mUiCallBack.OnSuccessFromServer(model);
-            } else {
-                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
-            }
-        }else if (obj instanceof InsertAccountModel) {
             StatusMainModel model = new StatusMainModel();
             if (model.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(model);
@@ -620,18 +613,20 @@ public class ServicesMethodsManager {
             } else {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
-        }
-        else if (obj instanceof MembershipModel) {
-            MembershipMainModel model = new MembershipMainModel();
+        } else if (obj instanceof MembershipModel) {
+            StatusMainModel model = new StatusMainModel();
             if (model.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(model);
             } else {
-                MembershipModel membershipModel = new MembershipModel();
-                if (membershipModel.toObject(resp.toString())) {
-                    mUiCallBack.OnSuccessFromServer(membershipModel);
-                } else {
                     mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
-                }
+            }
+        }
+        else if (obj instanceof MembershipDetailsModel) {
+            MembershipDetailsMainModel model = new MembershipDetailsMainModel();
+            if (model.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(model);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
         }
         else if (obj instanceof RecentCouponMainModel) {
@@ -805,7 +800,15 @@ public class ServicesMethodsManager {
             } else {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
-        }else if (obj instanceof NearbyModel) {
+        }else if (obj instanceof ProfileMembershipModel) {
+            ProfileMembershipModel profileMembershipModel = new ProfileMembershipModel();
+            if (profileMembershipModel.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(profileMembershipModel);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+            }
+        }
+        else if (obj instanceof NearbyModel) {
             NearbyModel nearbyModel = new NearbyModel();
             if (nearbyModel.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(nearbyModel);
@@ -1055,6 +1058,7 @@ public class ServicesMethodsManager {
         String query = null;
        // getData(context, new UtilityMainModel(), ServerConstants.URL_GetMenu, query, TAG);
     }
+
     public void getAccountList(Context context, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
@@ -1148,12 +1152,21 @@ public class ServicesMethodsManager {
 
         postData(context, insertRecentCouponModel, ServerConstants.URL_insert_Recent_Coupon, query, TAG);
     }
-    public void insertMembership(Context context, ServerResponseInterface mCallInterface, String TAG) {
+    public void insertMembership(Context context,MembershipModel membershipModel, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
 
-        postData(context,new MembershipModel() , ServerConstants.URL_insert_membership, query, TAG);
+        postData(context,membershipModel , ServerConstants.URL_insert_membership, query, TAG);
     }
+
+    public void getMembershipDetails(Context context, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String query = null;
+        //query = query != null ? query + "&Account=" + Account : "Account=" + Account;
+
+        getData(context,new MembershipDetailsModel() , ServerConstants.URL_Membership_details, query, TAG);
+    }
+
 
     public void insertReview(Context context,InsertReviewModel insertReviewModel, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);

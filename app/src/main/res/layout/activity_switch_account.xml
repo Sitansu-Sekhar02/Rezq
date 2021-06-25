@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:progressActivity="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:progressActivity="http://schemas.android.com/tools"
     android:gravity="center"
-    android:orientation="vertical">>
+    android:orientation="vertical">
+
     <include
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar_detail" />
-    <ScrollView
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
 
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
                 android:orientation="vertical">
 
@@ -43,9 +44,9 @@
                         android:textSize="24dp" />
 
                     <com.sa.rezq.view.AppTextView
-                        android:layout_marginTop="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:text="@string/select_account" />
 
 
@@ -58,9 +59,9 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginRight="30dp"
-                    android:layout_marginBottom="15dp"
                     android:gravity="center"
                     android:orientation="vertical">
+
                     <com.vlonjatg.progressactivity.ProgressLinearLayout
                         android:id="@+id/account_switch_progressActivity"
                         android:layout_width="match_parent"
@@ -73,22 +74,34 @@
                         progressActivity:loadingBackgroundColor="@color/transparent"
                         progressActivity:loadingProgressBarColor="@color/green_light">
 
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/recyclerview_switch_account_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" >
-                    </androidx.recyclerview.widget.RecyclerView>
-                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_switch_account_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
 
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
 
                 </RelativeLayout>
 
-
-
-
             </LinearLayout>
 
+            <com.sa.rezq.view.AppButton
+                android:id="@+id/btn_add_new_account"
+                android:layout_width="@dimen/_280sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="@string/addnewaccount"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:background="@drawable/button_rezq">
+            </com.sa.rezq.view.AppButton>
 
-        </LinearLayout>
-    </ScrollView>
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

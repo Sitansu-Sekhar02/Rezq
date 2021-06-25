@@ -49,11 +49,10 @@
                         android:scaleType="centerCrop" />
                     <ImageView
                         android:id="@+id/edit_profile_image_iv"
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
                         android:layout_alignParentRight="true"
                         android:layout_alignParentBottom="true"
-                        android:layout_marginBottom="5dp"
                         android:src="@drawable/ic_edit"/>
 
                 </RelativeLayout>
@@ -82,7 +81,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/enter_first_name"
-                        android:inputType="text"
+                        android:inputType="textCapSentences"
                         android:imeOptions="actionNext"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
@@ -114,11 +113,13 @@
                         android:id="@+id/et_UserlastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@null"
                         android:hint="@string/enter_lastname"
-                        android:inputType="text"
                         android:imeOptions="actionDone"
+                        android:inputType="textCapSentences"
                         android:paddingStart="0dp"
                         android:paddingEnd="0dp"
+
                         android:textColor="#171717"
                         android:textColorHint="@color/black"
                         android:textSize="14dp" />

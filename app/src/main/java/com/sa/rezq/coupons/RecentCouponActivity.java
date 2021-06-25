@@ -216,12 +216,26 @@ public class RecentCouponActivity extends AppCompatActivity {
                 }
             }
 
-            if (recentCouponModels.size() > 0) {
+            if (recentCouponModels.size() <= 0) {
+                showEmptyPage();
+            } else {
                 showContent();
                 initRecyclerView();
             }
+            /*if (recentCouponModels.size() > 0) {
+                showContent();
+                initRecyclerView();
+            }*/
         }
     }
+
+    private void showEmptyPage() {
+        if (progressActivity != null) {
+            progressActivity.showEmpty(getResources().getDrawable(R.drawable.rezq_logo), getString(R.string.emptyList),
+                    getString(R.string.no_recent_coupons));
+        }
+    }
+
     private void showContent() {
         if (progressActivity != null) {
             progressActivity.showContent();
