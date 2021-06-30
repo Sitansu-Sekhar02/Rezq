@@ -6,6 +6,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -26,15 +28,18 @@ import com.sa.rezq.services.model.VendorStoreModel;
 import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.viewHolder>{
+public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.viewHolder> implements Filterable {
 
 
     public static final String TAG = "CouponListAdapter";
 
 
     private final List<RecentCouponModel> list;
+    private List<RecentCouponModel> searchList;
+
     private final Activity activity;
     private GlobalVariables globalVariables;
     private GlobalFunctions globalFunctions;
@@ -44,8 +49,10 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
     public CouponListAdapter(Activity activity, List<RecentCouponModel> list) {
         this.activity = activity;
         this.list = list;
+        searchList = new ArrayList<>(list);
 
     }
+
 
     @NonNull
     @Override
@@ -84,6 +91,42 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
     public int getItemCount() {
         return list.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return searchFilter;
+    }
+
+    private Filter searchFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<RecentCouponModel> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(searchList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (RecentCouponModel item : searchList) {
+                    if (item.getVendor_name().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
 
     public class viewHolder extends RecyclerView.ViewHolder {
         ImageView offer_image,first_product_image,second_product_image;

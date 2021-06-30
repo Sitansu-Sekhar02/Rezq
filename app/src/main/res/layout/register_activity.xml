@@ -97,7 +97,6 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="10dp"
-                            android:textColorHint="#B5B5B5"
                             app:boxBackgroundColor="@null">
 
                             <com.google.android.material.textfield.TextInputEditText
@@ -169,8 +168,8 @@
                                 android:focusableInTouchMode="false"
                                 android:paddingStart="0dp"
                                 android:paddingEnd="0dp"
-                                android:textColor="#171717"
-                                android:textColorHint="@color/black"
+                                android:textColor="#B5B5B5"
+                                android:textColorHint="#B5B5B5"
                                 android:textSize="14dp" />
 
                         </com.google.android.material.textfield.TextInputLayout>

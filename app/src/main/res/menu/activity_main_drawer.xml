@@ -2,7 +2,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ite
+
+
+    <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home"
         android:visible="false"

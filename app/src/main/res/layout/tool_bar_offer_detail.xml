@@ -30,10 +30,12 @@
             android:visibility="visible"
             android:gravity="center"
             android:maxLines="1"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title"/>
         <ImageView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"
@@ -43,6 +45,7 @@
             android:id="@+id/iv_grid_menu"
             android:layout_gravity="left"/>
         <ImageView
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="15dp"

@@ -15,7 +15,7 @@ public class WishModel implements Serializable {
             LOGO             = "logo",
             ADDRESS            = "address",
             OFFERS            = "offers",
-            FACILITIES       = "facilities",
+            FACILITIES        = "facilities",
             AVG_RATING        = "avg_rating",
             RATING_COUNT       = "rating_count",
             CREATED_ON            = "created_on";

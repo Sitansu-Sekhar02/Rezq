@@ -26,7 +26,7 @@
                 android:id="@+id/iv_membership_image"
                 android:layout_width="326dp"
                 android:layout_height="181dp"
-                android:src="@drawable/reqq_plus" />
+                android:src="@drawable/rezq_logo" />
         </RelativeLayout>
 
         <LinearLayout
@@ -62,7 +62,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/rezq_mem"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -88,7 +88,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/days_left"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -121,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/date_from"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -147,7 +147,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
-                        android:text="@string/day_to"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="14dp"
                         android:textStyle="bold" />
@@ -158,7 +158,6 @@
         </LinearLayout>
 
         <com.sa.rezq.view.AppTextView
-            android:visibility="gone"
             android:id="@+id/Tv_upgradeTo_Prime"
             android:layout_width="110dp"
             android:layout_height="wrap_content"

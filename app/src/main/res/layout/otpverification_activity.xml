@@ -60,7 +60,7 @@
                 android:lineHeight="0.2dp"
                 android:text=""
                 android:textColor="@color/app_fontBlackColor"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textStyle="bold"
                 android:visibility="visible"
                 app:itemCount="6"
@@ -80,16 +80,33 @@
                 android:text="@string/verify"
                 android:textColor="@color/white"
                 android:textSize="14dp" />
-
-            <com.sa.rezq.view.AppTextView
-                android:id="@+id/resend_code_tv"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="100dp"
-                android:text="@string/resendotp"
-                android:textColor="@color/red"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_marginTop="100dp">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/resend_code_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resendotp"
+                    android:textColor="@color/red"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+                <com.sa.rezq.view.AppTextView_SubTitle
+                    android:id="@+id/otp_timer_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/app_fontColor"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
 

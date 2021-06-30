@@ -45,7 +45,7 @@ import com.sa.rezq.category.AllCategoryListActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.location_service.LocationMonitoringService;
-import com.sa.rezq.membership.FreeMembershipActivity;
+import com.sa.rezq.membership.UpgradeParticularMembershipActivity;
 import com.sa.rezq.search.SearchActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
@@ -55,20 +55,20 @@ import com.sa.rezq.services.model.CategoryListModel;
 import com.sa.rezq.services.model.CategoryModel;
 import com.sa.rezq.services.model.HomePageMainModel;
 import com.sa.rezq.services.model.HomePageModel;
-import com.sa.rezq.services.model.LocationListModel;
 import com.sa.rezq.services.model.LocationModel;
 import com.sa.rezq.services.model.NearbyListModel;
 import com.sa.rezq.services.model.NearbyModel;
 import com.sa.rezq.services.model.ProfileMembershipModel;
-import com.sa.rezq.services.model.ProfileModel;
+import com.sa.rezq.services.model.SearchResponseModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingListModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.sa.rezq.services.model.VariantModel;
+import com.sa.rezq.services.model.VendorModel;
+import com.sa.rezq.services.model.VendorStoreModel;
 import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.sa.rezq.view.CustomSliderTextView;
-import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
@@ -143,7 +143,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     int currentPage = 0;
 
     TextView seeAllPopular_category,tv_all_trending,tv_all_nearby;
-    TextView upgrade_membership;
+    TextView upgrade_membership,tv_gold_membership;
+    String membership_id=null;
     CardView cardViewItem;
     CardView search_card_view;
 
@@ -192,6 +193,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         upgrade_membership=view.findViewById(R.id.tv_upgrade_membership);
         cardViewItem=view.findViewById(R.id.cardItem);
         search_card_view=view.findViewById(R.id.search_card_view);
+        tv_gold_membership=view.findViewById(R.id.tv_gold_membership);
         rl_prime_upgrade=view.findViewById(R.id.rl_prime_upgrade);
 
         locationintent = new Intent(activity, LocationMonitoringService.class);
@@ -202,19 +204,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, SearchActivity.class);
-                activity.startActivity(intent);
+                startActivityForResult(intent,GlobalVariables.REQUEST_CODE_FOR_SEARCH);
             }
         });
 
 
-        upgrade_membership.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(activity, FreeMembershipActivity.class);
-                activity.startActivity(intent);
-
-            }
-        });
 
 
         if (!mAlreadyStartedService) {
@@ -516,14 +510,42 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         if (homePageModel != null) {
             if (homePageModel.getProfileMembershipModel()!=null) {
                 ProfileMembershipModel profileMembershipModel = homePageModel.getProfileMembershipModel();
-
                 if (profileMembershipModel!=null){
-                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getIs_premium()) && profileMembershipModel.getIs_premium().equalsIgnoreCase("0")){
-                        rl_prime_upgrade.setVisibility(View.VISIBLE);
-                    }else{
-                        rl_prime_upgrade.setVisibility(View.GONE);
-                    }
+                    globalFunctions.setProfileMembership(context,profileMembershipModel);
+                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getIs_premium())){
+                            if(profileMembershipModel.getIs_premium()!=null){
+                                rl_prime_upgrade.setVisibility(View.VISIBLE);
+                                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())){
+                                    membership_id=profileMembershipModel.getUpgrade_id();
+                                }
+                                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_title())){
+                                    upgrade_membership.setText(profileMembershipModel.getUpgrade_title());
+                                    upgrade_membership.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
+                                            activity.startActivity( intent);
 
+                                        }
+                                    });
+                                }else if (profileMembershipModel.getUpgrade_title().equalsIgnoreCase("")){
+                                    rl_prime_upgrade.setVisibility(View.GONE);
+
+                                }else{
+
+                                }
+
+                            }else if(profileMembershipModel.getIs_premium().equalsIgnoreCase("1")){
+                                rl_prime_upgrade.setVisibility(View.GONE);
+                                upgrade_membership.setVisibility(View.GONE);
+                            }else{
+
+                            }
+                    }else {
+                        rl_prime_upgrade.setVisibility(View.GONE);
+                        upgrade_membership.setVisibility(View.GONE);
+
+                    }
                    }
                 }
 
@@ -844,6 +866,27 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 Manifest.permission.ACCESS_COARSE_LOCATION);
 
         return permissionState1 == PackageManager.PERMISSION_GRANTED && permissionState2 == PackageManager.PERMISSION_GRANTED;
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult( requestCode, resultCode, data );
+
+        if (resultCode == activity.RESULT_OK) {
+
+            if (requestCode == globalVariables.REQUEST_CODE_FOR_SEARCH) {
+                SearchResponseModel searchResponseModel = (SearchResponseModel) data.getExtras().getSerializable(SearchActivity.BUNDLE_SEARCH_RESPONSE_MODEL);
+                if (searchResponseModel != null) {
+                        if (searchResponseModel.getId() != null) {
+                            VendorStoreModel vendorStoreModel = new VendorStoreModel();
+                             vendorStoreModel.setId(searchResponseModel.getId());
+                                Intent intent = VendorListDetailsActivity.newInstance(activity, vendorStoreModel,new VendorModel());
+                                activity.startActivity(intent);
+                        }
+                }
+            }
+        }
     }
 
 

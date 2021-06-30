@@ -23,8 +23,8 @@ public class VendorModel implements Serializable {
             LONGITUDE            = "longitude",
             IMAGE                = "image",
             OFFER_LIST            = "offer_list",
-            DISTANCE            = "distance",
-            REVIEW_LIST            = "review_list";
+            DISTANCE             = "distance",
+            REVIEW_LIST          = "review_list";
 
 
     String
@@ -32,8 +32,8 @@ public class VendorModel implements Serializable {
             name           = null,
             logo            = null,
             address            = null,
-            avg_rating            = null,
-            rating_count            = null,
+            avg_rating         = null,
+            rating_count        = null,
             wishlist            = null,
             latitude            = null,
             longitude            = null,

@@ -35,12 +35,14 @@ import com.sa.rezq.adapter.ReviewListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.membership.FreeMembershipActivity;
+import com.sa.rezq.membership.UpgradeParticularMembershipActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.BannerModel;
 import com.sa.rezq.services.model.NearbyModel;
 import com.sa.rezq.services.model.OfferListModel;
 import com.sa.rezq.services.model.OfferModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.ReviewListModel;
 import com.sa.rezq.services.model.ReviewModel;
@@ -75,8 +77,10 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
     ImageView vendor_list_image;
     ImageView iv_favourite;
-    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers,empty_offer;
+    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers,empty_offer,tv_empty_locked_offer,tv_upgrade_title;
     public  static RelativeLayout upgrade_prime_rl;
+    public  static RelativeLayout rl_rating;
+
 
     public View mainView;
 
@@ -91,6 +95,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     NearbyModel nearbyModel = null;
     RecentCouponModel recentCouponModel=null;
     LinearLayout hotel_ll;
+
+    String membership_id=null;
 
     //int id = 100;
     boolean isWishlisted=false;
@@ -206,6 +212,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         empty_offer = findViewById(R.id.empty_offer);
         hotel_ll = findViewById(R.id.hotel_ll);
         upgrade_prime_rl = findViewById(R.id.upgrade_prime_rl);
+        rl_rating = findViewById(R.id.rl_rating);
 
 
         reviewLinear = new LinearLayoutManager(activity);
@@ -407,7 +414,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         if (arg0 instanceof StatusMainModel) {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             StatusModel statusModel = statusMainModel.getStatusModel();
-            globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+           // globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             if (statusMainModel.isStatusLogin()) {
                 if (isWishlisted){
                     //not wishlist icon
@@ -431,28 +438,41 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         alertView.setContentView(view);
         alertView.setCancelable(true);
         RecyclerView prime_offer = alertView.findViewById(R.id.recyclerview_Rezqplus_offer);
+        RelativeLayout upgrade_prime_rl=alertView.findViewById(R.id.upgrade_prime_rl);
+        tv_empty_locked_offer=alertView.findViewById(R.id.tv_empty_locked_offer);
+        tv_upgrade_title=alertView.findViewById(R.id.tv_upgrade_title);
         Button btn_upgrade_prime_offer=alertView.findViewById(R.id.btn_upgrade_prime_offer);
-
-        btn_upgrade_prime_offer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(VendorListDetailsActivity.this, FreeMembershipActivity.class);
-                startActivity(intent);
-            }
-        });
-
-
 
         if (offerListlocked.size() <= 0) {
             showEmptyPage();
+            upgrade_prime_rl.setVisibility(View.GONE);
+
+
         } else {
             showContent();
             setStatusRecyclerview(prime_offer);
+            ProfileMembershipModel profileMembershipModel=GlobalFunctions.getProfileMembership(context);
+            if (profileMembershipModel!=null) {
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())) {
+                    membership_id = profileMembershipModel.getUpgrade_id();
+                }
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_title())) {
+                    tv_upgrade_title.setText(profileMembershipModel.getUpgrade_title());
+                }
+            }
+            btn_upgrade_prime_offer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                        Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
+                        startActivity( intent);
+
+
+                }
+            });
         }
-        /*if (offerListlocked.size()>0) {
-            setStatusRecyclerview(prime_offer);
-        }
-*/
+
+
         alertView.show();
     }
 
@@ -463,10 +483,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     }
 
     private void showEmptyPage() {
-        if (AllLockedprogressActivity != null) {
-            AllLockedprogressActivity.showEmpty(getResources().getDrawable(R.drawable.rezq_logo), getString(R.string.emptyList),
-                    getString(R.string.no_offers));
-        }
+        tv_empty_locked_offer.setVisibility(View.VISIBLE);
     }
 
     private void setStatusRecyclerview(RecyclerView prime_offer) {
@@ -528,7 +545,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 }
             }
             if (reviewModels.size() <= 0) {
-                showReviewEmptyPage();
+                //showReviewEmptyPage();
+                rl_rating.setVisibility(View.GONE);
             } else {
                 showReviewContent();
                 reviewRecyclerView();
@@ -613,6 +631,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                     offerListAdapter.notifyDataSetChanged();
                 }
             }
+
 
             if (offerListModels.size() <= 0) {
                 showOfferEmptyPage();
@@ -719,8 +738,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
             }*/
-            if (GlobalFunctions.isNotNullValue(vendorModel.getLogo())) {
-                Picasso.with(context).load(vendorModel.getLogo()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
+            if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
+                Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {

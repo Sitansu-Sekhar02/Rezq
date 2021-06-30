@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -93,7 +94,7 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
         ImageView iv_vendor_logo;
         TextView tv_vendor_name,offer_count,product_discount,product_discount_title,tv_facilities;
         RatingBar store_rating;
-        RelativeLayout vendor_store_list,single_imageview_main_rl,double_imageview_main_rl;
+        LinearLayout vendor_store_list,single_imageview_main_rl,double_imageview_main_rl;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 

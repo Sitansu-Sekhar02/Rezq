@@ -19,8 +19,6 @@ public class WishListMainModel implements Serializable {
             status                    = null,
             message                    = null;
 
-    WishListSubMainModel
-            wishListSubMainModel   = null;
     WishListModel
             wishListModel             = null;
 
@@ -43,13 +41,6 @@ public class WishListMainModel implements Serializable {
         this.message = message;
     }
 
-    public WishListSubMainModel getWishListSubMainModel() {
-        return wishListSubMainModel;
-    }
-
-    public void setWishListSubMainModel(WishListSubMainModel wishListSubMainModel) {
-        this.wishListSubMainModel = wishListSubMainModel;
-    }
 
     public WishListModel getWishListModel() {
         return wishListModel;
@@ -68,16 +59,11 @@ public class WishListMainModel implements Serializable {
 
 
             if(json.has(RESPONSE)){
-                WishListSubMainModel statusModel = new WishListSubMainModel();
-                JSONObject jsonObject1 = new JSONObject();
-                jsonObject1 = json.getJSONObject(RESPONSE);
-                if(jsonObject1 != null){statusModel.toObject(jsonObject1.toString());}
-                wishListSubMainModel = statusModel;
 
-             /*   JSONArray array = json.getJSONArray(RESPONSE);
+                JSONArray array = json.getJSONArray(RESPONSE);
                 WishListModel listModelLocal = new WishListModel();
                 if(listModelLocal.toObject(array)){this.wishListModel = listModelLocal;}
-                else{this.wishListModel = null;}*/
+                else{this.wishListModel = null;}
             }
 
 
@@ -94,9 +80,8 @@ public class WishListMainModel implements Serializable {
             JSONObject jsonMain = new JSONObject();
             jsonMain.put(STATUS, status);
             jsonMain.put(MESSAGE, message);
-           // jsonMain.put(RESPONSE, wishListModel!=null?new JSONArray(wishListModel.toString(true)):null);
+            jsonMain.put(RESPONSE, wishListModel!=null?new JSONArray(wishListModel.toString(true)):null);
 
-            jsonMain.put(RESPONSE, wishListSubMainModel != null ? new JSONObject(this.wishListSubMainModel.toString()) : new JSONObject());
             returnString = jsonMain.toString();
         }
         catch (Exception ex){

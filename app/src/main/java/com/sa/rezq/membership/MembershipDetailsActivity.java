@@ -34,6 +34,7 @@ import com.sa.rezq.services.model.HomePageMainModel;
 import com.sa.rezq.services.model.HomePageModel;
 import com.sa.rezq.services.model.MembershipDetailsMainModel;
 import com.sa.rezq.services.model.MembershipDetailsModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.TrendingListModel;
@@ -69,7 +70,7 @@ public class MembershipDetailsActivity extends AppCompatActivity {
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
     Window window = null;
-    TextView btnUpgrade;
+    TextView tv_upgrade;
 
     String membership_id=null;
 
@@ -92,7 +93,7 @@ public class MembershipDetailsActivity extends AppCompatActivity {
         tv_valid_till = findViewById(R.id.tv_valid_till);
         iv_membership_image = findViewById(R.id.iv_membership_image);
 
-        btnUpgrade = findViewById(R.id.Tv_upgradeTo_Prime);
+        tv_upgrade = findViewById(R.id.Tv_upgradeTo_Prime);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
@@ -112,23 +113,24 @@ public class MembershipDetailsActivity extends AppCompatActivity {
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
 
-      /*  ProfileModel profileModel = globalFunctions.getProfile( context );
-        if (profileModel != null && context != null) {
-            try {
+        loadMembershipDetails();
 
-
-            } catch (Exception exxx) {
-                Log.e( TAG, exxx.getMessage() );
+        ProfileMembershipModel profileMembershipModel=GlobalFunctions.getProfileMembership(context);
+        if (profileMembershipModel!=null){
+            if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())){
+                membership_id=profileMembershipModel.getUpgrade_id();
             }
-
-        } else {
-
+            tv_upgrade.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
+                    startActivity( intent);
+                }
+            });
         }
 
-*/
-        setTitle(getString(R.string.my_membership), 0, 0);
 
-        loadMembershipDetails();
+        setTitle(getString(R.string.my_membership), 0, 0);
 
 
     }
@@ -183,7 +185,7 @@ public class MembershipDetailsActivity extends AppCompatActivity {
                 tv_valid_from.setText(GlobalFunctions.getDateFormat(membershipDetailsModel.getValid_from()));
 
             }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValid_till())) {
-                tv_valid_till.setText(membershipDetailsModel.getValid_till());
+                tv_valid_till.setText(GlobalFunctions.getDateFormatTillDate(membershipDetailsModel.getValid_till()));
 
             }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValidity())) {
                 tv_validity.setText(membershipDetailsModel.getValidity()+" "+activity.getString(R.string.days));

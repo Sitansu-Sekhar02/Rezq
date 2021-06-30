@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -20,6 +21,7 @@ import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyouListAdapter.viewHolder>{
@@ -56,7 +58,8 @@ public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyou
             holder.product_title.setText(model.getName());
         }
         if (model.getDistance() != null) {
-            holder.product_distance.setText((model.getDistance()));
+
+            holder.product_distance.setText(model.getDistance()+" "+activity.getString(R.string.kilometer));
         }  if (model.getIcon() != null) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
         }
@@ -83,7 +86,7 @@ public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyou
         ImageView product_image;
         TextView product_title;
         TextView product_distance;
-        RelativeLayout click_item;
+        LinearLayout click_item;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 

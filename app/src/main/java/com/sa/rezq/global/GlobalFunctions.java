@@ -52,6 +52,7 @@ import com.sa.rezq.services.model.CountryModel;
 import com.sa.rezq.services.model.KeyValueListModel;
 import com.sa.rezq.services.model.NotificationSettingsModel;
 import com.sa.rezq.services.model.OfferModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.view.AlertDialog;
 import com.sa.rezq.view.ProgressDialog;
@@ -124,6 +125,20 @@ public class GlobalFunctions {
         String date = null;
         try {
             SimpleDateFormat spf = new SimpleDateFormat(GlobalVariables.DATE_TIME_SERVER_FORMAT);
+            Date newDate = spf.parse(date1);
+            spf = new SimpleDateFormat("dd MMM yyyy");
+            date = spf.format(newDate);
+            System.out.println(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public static String getDateFormatTillDate(String date1) {
+        String date = null;
+        try {
+            SimpleDateFormat spf = new SimpleDateFormat(GlobalVariables.DATE_FORMAT_MONTH);
             Date newDate = spf.parse(date1);
             spf = new SimpleDateFormat("dd MMM yyyy");
             date = spf.format(newDate);
@@ -1016,6 +1031,20 @@ public class GlobalFunctions {
         String profileString = getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_PROFILE);
         if(profileString!=null){
             ProfileModel model = new ProfileModel();
+            model.toObject(profileString);
+            return model;
+        }
+        return null;
+    }
+
+    public static void setProfileMembership(Context context, ProfileMembershipModel profileModel){
+        setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_PROFILE_MEMBERSHIP, profileModel.toString());
+    }
+
+    public static ProfileMembershipModel getProfileMembership(Context context){
+        String profileString = getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_PROFILE_MEMBERSHIP);
+        if(profileString!=null){
+            ProfileMembershipModel model = new ProfileMembershipModel();
             model.toObject(profileString);
             return model;
         }

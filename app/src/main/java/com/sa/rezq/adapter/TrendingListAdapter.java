@@ -58,10 +58,12 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
     public void onBindViewHolder(@NonNull TrendingListAdapter.viewHolder holder, int position) {
         final TrendingModel model = list.get(position);
 
+
         if (position%2==0){
             holder.single_imageview_main_rl.setVisibility(View.VISIBLE);
             holder.double_imageview_main_rl.setVisibility(View.GONE);
         }else {
+
             holder.single_imageview_main_rl.setVisibility(View.GONE);
             holder.double_imageview_main_rl.setVisibility(View.VISIBLE);
         }
@@ -158,7 +160,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
         TextView product_discount,first_product_discount,second_product_discount;
         TextView product_discount_title,first_product_discount_title,second_product_discount_title;
         RelativeLayout click_item,single_imageview_main_rl,double_imageview_main_rl;
-        CardView first_card_item_click,second_card_item_click;
+        RelativeLayout first_card_item_click,second_card_item_click;
         public viewHolder(@NonNull View itemView) {
             super(itemView);
 

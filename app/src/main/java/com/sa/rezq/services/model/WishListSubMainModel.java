@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.io.Serializable;
 
 public class WishListSubMainModel implements Serializable {
-    private final String TAG = "WalletSubMainModel";
+    private final String TAG = "WishListSubMainModel";
 
     private final String
             AMOUNT                     = "balance",

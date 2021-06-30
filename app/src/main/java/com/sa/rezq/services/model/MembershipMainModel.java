@@ -18,7 +18,6 @@ public class MembershipMainModel implements Serializable {
             membershipListModel      = null;
 
 
-
     String message = null;
     boolean isStatus=false;
 

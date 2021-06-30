@@ -2,6 +2,7 @@ package com.sa.rezq.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,9 +34,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
     private final Activity activity;
     private GlobalVariables globalVariables;
     private GlobalFunctions globalFunctions;
-    String minimumQuantity = "0";
     String vendor_id= null;
-    boolean isProductVertical = false;
     VendorModel vendorModel=null;
 
     public OfferListAdapter(Activity activity, String vendor_id,VendorModel vendorModel,List<OfferModel> list) {
@@ -58,7 +57,6 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
     public void onBindViewHolder(@NonNull OfferListAdapter.viewHolder holder, int position) {
         final OfferModel model = list.get(position);
 
-
             if (model.getTitle() != null) {
                 holder.product_title.setText(model.getTitle());
             }
@@ -72,9 +70,16 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
             @Override
             public void onClick(View v) {
 
-                 model.setStoreId(vendor_id);
-                 Intent intent = RedeemOfferActivity.newInstance( activity, model,vendorModel);
-                 activity.startActivity( intent );
+               // Log.e("vendorModel00","=="+vendorModel);
+                if (model.getAllow().equalsIgnoreCase("1")){
+                    model.setStoreId(vendor_id);
+                    Intent intent = RedeemOfferActivity.newInstance( activity, model,vendorModel);
+                    activity.startActivity( intent );
+                }else{
+
+                }
+
+
             }
         });
 

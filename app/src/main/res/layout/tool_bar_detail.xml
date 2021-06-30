@@ -30,6 +30,8 @@
             android:visibility="visible"
             android:gravity="center"
             android:maxLines="1"
+            android:text=""
+            android:textSize="14dp"
             android:textColor="@color/black"
             android:layout_gravity="center"
             android:id="@+id/toolbar_title"/>

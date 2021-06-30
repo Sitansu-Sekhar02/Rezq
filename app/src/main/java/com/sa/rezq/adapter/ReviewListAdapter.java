@@ -56,37 +56,42 @@ public class ReviewListAdapter extends RecyclerView.Adapter<ReviewListAdapter.vi
     public void onBindViewHolder(@NonNull ReviewListAdapter.viewHolder holder, int position) {
         final ReviewModel model = list.get(position);
 
-        String
-                fullName = model.getFirst_name() + " " + model.getLast_name();
-                holder.user_name.setText( fullName );
-
-        if (model.getRating() != null) {
-            holder.tv_rating.setRating(Float.parseFloat((model.getRating())));
-        }if (GlobalFunctions.isNotNullValue(model.getCreated_on())) {
-            holder.created_on.setText(GlobalFunctions.getDateFormat(model.getCreated_on()));
+        if (GlobalFunctions.isNotNullValue(model.getFirst_name()) && GlobalFunctions.isNotNullValue(model.getLast_name())){
+            String
+                    fullName = model.getFirst_name() + " " + model.getLast_name();
+            holder.user_name.setText( fullName );
         }
 
-       /* if (model.getCreated_on() != null) {
-            holder.created_on.setText((model.getCreated_on()));
-        }*/if (model.getComment() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getRating())) {
+            holder.tv_rating.setRating(Float.parseFloat(model.getRating()));
+        }
+        if (GlobalFunctions.isNotNullValue(model.getCreated_on())) {
+            holder.created_on.setText(GlobalFunctions.getDateFormat(model.getCreated_on()));
+        }
+        if (model.getComment() != null) {
             holder.tv_comment.setText((model.getComment()));
         }
 
+        if (GlobalFunctions.isNotNullValue(model.getFirst_name())){
+            //get first letter of each String item
 
-        //get first letter of each String item
-        String firstLetter= String.valueOf(model.getFirst_name().charAt(0));
+            String firstLetter= String.valueOf(model.getFirst_name().charAt(0));
 
-        //String firstLetter = String.valueOf(personNames.get(position).charAt(0));
+            //String firstLetter = String.valueOf(personNames.get(position).charAt(0));
 
-        ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
-        // generate random color
-        // int color = generator.getColor(personNames.get(position));
-        int color = generator.getRandomColor();
+            ColorGenerator generator = ColorGenerator.MATERIAL; // or use DEFAULT
+            // generate random color
+            // int color = generator.getColor(personNames.get(position));
+            int color = generator.getRandomColor();
 
-        TextDrawable drawable = TextDrawable.builder()
-                .buildRound(firstLetter, color); // radius in px
+            TextDrawable drawable = TextDrawable.builder()
+                    .buildRound(firstLetter, color); // radius in px
 
-        holder.product_image.setImageDrawable(drawable);
+            holder.product_image.setImageDrawable(drawable);
+
+        }
+
+
 
     }
 

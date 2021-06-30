@@ -39,7 +39,7 @@
                     android:gravity="center"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
-                    <androidx.appcompat.widget.AppCompatRatingBar
+                    <RatingBar
                         android:id="@+id/tv_rating"
                         android:layout_marginLeft="15dp"
                         style="@style/Widget.AppCompat.RatingBar.Small"
@@ -48,7 +48,9 @@
                         android:layout_below="@+id/Tvuser_name"
                         android:progressTint="@color/yellow"
                         android:rating="4"
-                        android:stepSize="1" />
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:isIndicator="true" />
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/Tv_date_time"
                         android:layout_marginLeft="15dp"

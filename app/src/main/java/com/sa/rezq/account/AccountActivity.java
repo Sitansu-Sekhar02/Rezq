@@ -344,7 +344,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     }
 
     private void insertNewUser(Activity activity, InsertAccountModel insertAccountModel) {
-        // globalFunctions.showProgress(activity, activity.getString(R.string.loading));
+         globalFunctions.showProgress(activity, activity.getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.insertUser(context, insertAccountModel, new ServerResponseInterface() {
             @Override
@@ -357,14 +357,14 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
 
             @Override
             public void OnFailureFromServer(String msg) {
-                //  globalFunctions.hideProgress();
+                globalFunctions.hideProgress();
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Failure : " + msg);
             }
 
             @Override
             public void OnError(String msg) {
-                // globalFunctions.hideProgress();
+                 globalFunctions.hideProgress();
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Error : " + msg);
             }

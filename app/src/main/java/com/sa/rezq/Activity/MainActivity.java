@@ -49,6 +49,7 @@ import com.example.easywaylocation.EasyWayLocation;
 import com.example.easywaylocation.GetLocationDetail;
 import com.example.easywaylocation.Listener;
 import com.example.easywaylocation.LocationData;
+import com.github.siyamed.shapeimageview.ShapeImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationRequest;
@@ -60,6 +61,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
+import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.account.SwitchAccountActivity;
 import com.sa.rezq.coupons.RecentCouponActivity;
 import com.sa.rezq.home.HomeFragment;
@@ -81,6 +83,7 @@ import com.sa.rezq.services.model.KeyValueModel;
 import com.sa.rezq.services.model.MembershipDetailsModel;
 import com.sa.rezq.services.model.MembershipModel;
 import com.sa.rezq.services.model.NotificationModel;
+import com.sa.rezq.services.model.ProfileMainModel;
 import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.PushNotificationModel;
@@ -176,7 +179,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private List<CountryModel> countryList = new ArrayList();
     private List <String> countryStringList = new ArrayList();
     private String[] countryArr;
-    private Context context;
 
     ProfileMembershipModel profileMembershipModel=null;
 
@@ -287,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // actionBar.setHomeAsUpIndicator( navIconDrawable );
         setOptionsMenuVisiblity( false );
 
-        gravity = globalFunctions.getLanguage( context ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
+        gravity = globalFunctions.getLanguage( mainContext ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
         drawer = ( DrawerLayout ) findViewById( R.id.drawer_layout );
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
@@ -309,7 +311,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         accessPermissions( this );
 
-        gravity = globalFunctions.getLanguage( context ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
+        gravity = globalFunctions.getLanguage( mainContext ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
 
         navigationView.setNavigationItemSelectedListener( this );
         navigationHeaderView = navigationView.getHeaderView( 0 );
@@ -331,12 +333,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } );
 
 
-        // replaceFragmentWithAnimation(new FragmentAllProcess());
         Fragment dashboardFragment=new HomeFragment();
         replaceFragment( dashboardFragment, HomeFragment.TAG, getString( R.string.app_name ), 0, 0 );
 
-        //replace dashboard fragment
-     //   replaceFragmentWithAnimation(new DashboardFragment());
 
         getLocationDetail = new GetLocationDetail(this, this);
         easyWayLocation = new EasyWayLocation(this, false,true,this);
@@ -344,8 +343,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             doLocationWork();
         } else {
             checkLocationPermission();
-            // Permission not granted, ask for it
-            //testLocationRequest.requestPermission(121);
+
         }
 
 //        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -370,10 +368,44 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 //
 //
+        getProfile();
+//        loadMenu(mainContext);
 
-        loadMenu(context);
+
+    }
 
 
+    private void getProfile() {
+        // globalFunctions.showProgress(activity, getString(R.string.loading));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.getProfile(mainContext, new ServerResponseInterface() {
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+                Log.d(TAG, "Response : " + arg0.toString());
+                // globalFunctions.hideProgress();
+                if (arg0 instanceof ProfileMainModel) {
+                    ProfileMainModel profileMainModel=(ProfileMainModel) arg0;
+                    ProfileModel profileModel = profileMainModel.getProfileModel();
+                    globalFunctions.setProfile(mainContext, profileModel);
+                    loadMenu(mainContext);
+//                    setNavigationHeaders();
+                }
+            }
+
+            @Override
+            public void OnFailureFromServer(String msg) {
+                // globalFunctions.hideProgress();
+                globalFunctions.displayMessaage(mainContext, mainView, msg);
+                Log.d(TAG, "Failure : " + msg);
+            }
+
+            @Override
+            public void OnError(String msg) {
+                // globalFunctions.hideProgress();
+                globalFunctions.displayMessaage(mainContext, mainView, msg);
+                Log.d(TAG, "Error : " + msg);
+            }
+        }, "Get Profile");
     }
 
     public boolean permissionIsGranted() {
@@ -424,16 +456,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (homePageModel != null) {
             if (homePageModel.getProfileMembershipModel() != null) {
                 profileMembershipModel = homePageModel.getProfileMembershipModel();
-                /*if (navigationHeaderView != null && mainContext != null) {
+                Log.e("profile",""+homePageModel.getProfileMembershipModel());
+                if (navigationHeaderView != null && mainContext != null) {
 
-                    getMembeshipDetails();
-                }*/
+                    getMembershipDetails(profileMembershipModel);
+                }
 
             }
         }
     }
 
-    private void getMembershipDetails() {
+    private void getMembershipDetails(ProfileMembershipModel profileMembershipModel) {
 
         if (navigationHeaderView != null && mainContext != null) {
             TextView
@@ -444,45 +477,113 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_validity_to = (TextView) navigationHeaderView.findViewById(R.id.tv_validity_to),
                     nav_header = navigationHeaderView.findViewById(R.id.TvseeProfile),
                     nav_tv_upgrade = navigationHeaderView.findViewById(R.id.tv_upgrade),
+                    //nav_ll_validity = navigationHeaderView.findViewById(R.id.ll_validity),
                     header_tv_rezq_plus_member = (TextView) navigationHeaderView.findViewById(R.id.tv_rezq_plus_member);
 
             ImageView
                     header_app_iv = (ImageView) navigationHeaderView.findViewById(R.id.nav_profile_image);
 
+
+            nav_header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+
+                    Intent intent = new Intent( mainContext, ProfileMainActivity.class );
+                    startActivity( intent );
+
+                }
+            });
+            nav_tv_upgrade.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
+
+                    Intent intent = new Intent( mainContext, UpgradeMembershipListActivity.class );
+                    startActivity( intent );
+                }
+            });
+
+            ProfileModel profileModel=globalFunctions.getProfile(activity);
+            if (profileModel!=null) {
+
+                if (GlobalFunctions.isNotNullValue(profileModel.getFirstName())) {
+                    String membership_fullName = profileModel.getFirstName();
+                    if (GlobalFunctions.isNotNullValue(profileModel.getLastName())) {
+                        header_name_tv.setText(membership_fullName + " " + profileModel.getLastName());
+                    } else {
+                        header_name_tv.setText(membership_fullName);
+                    }
+
+                }
+
+
+                if (GlobalFunctions.isNotNullValue(profileModel.getImage())) {
+                    Picasso.with(mainContext).load(profileModel.getImage()).placeholder(R.drawable.ic_guest_profile).into(header_app_iv);
+
+                }
+
+            }
+
+
             if (profileMembershipModel != null) {
-                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_id())) {
+
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_id()) && ! profileMembershipModel.getMembership_id().equalsIgnoreCase("0")) {
                     String membershipName = profileMembershipModel.getMembership_name();
-                    String membership_fullName = profileMembershipModel.getFull_name();
                     String valid_from = profileMembershipModel.getValid_from();
-                    String membership_profileImage = profileMembershipModel.getImage();
                     String valid_to = profileMembershipModel.getValid_till();
 
                     header_tv_free_member.setVisibility(View.GONE);
                     nav_tv_upgrade.setVisibility(View.GONE);
                     header_tv_rezq_plus_member.setVisibility(View.VISIBLE);
-                   // header_name_tv.setText(membership_fullName);
                     header_tv_rezq_plus_member.setText(membershipName);
                     header_tv_validity_from.setText(GlobalFunctions.getDateFormat(valid_from));
-                    header_tv_validity_to.setText(("- " + valid_to));
-                    //header_name_tv.setText(membership_fullName);
+                    header_tv_validity_to.setText("- " + valid_to);
+                    header_tv_rezq_plus_member.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(activity, MembershipDetailsActivity.class);
+                            activity.startActivity(intent);
+                        }
+                    });
+
+                   // ProfileModel profileModel= globalFunctions.getProfile( mainContext );
                     try {
-                        if (profileMembershipModel.getImage() != null || !profileMembershipModel.getImage().equals("null") || !profileMembershipModel.getImage().equalsIgnoreCase("")) {
-                            Picasso.with(mainContext).load(profileMembershipModel.getImage()).placeholder(R.drawable.ic_baseline_person_24).into(header_app_iv);
+                        if (profileMembershipModel.getSubscriber_image() != null || !profileMembershipModel.getSubscriber_image().equals( "null" ) || !profileMembershipModel.getSubscriber_image().equalsIgnoreCase( "" )) {
+                            Picasso.with( mainContext ).load(profileMembershipModel.getSubscriber_image() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
                         }
                     } catch (Exception e) {
+
                     }
+                    crop_profile.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent intent = new Intent( mainContext, ProfileMainActivity.class );
+                            startActivity( intent );
+                        }
+                    });
+
                 } else {
 
                     header_tv_free_member.setVisibility(View.VISIBLE);
                     nav_tv_upgrade.setVisibility(View.VISIBLE);
                 }
-                if (GlobalFunctions.isNotNullValue(String.valueOf(profileMembershipModel.getIs_premium().equalsIgnoreCase("1")))){
-                  // VendorListDetailsActivity.upgrade_prime_rl.setVisibility(View.GONE);
-                }else{
 
-                   // VendorListDetailsActivity.upgrade_prime_rl.setVisibility(View.VISIBLE);
+
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_name())) {
+                    String membership_fullName =profileMembershipModel.getSubscriber_name();
+                    header_name_tv.setText(membership_fullName);
+                }
+
+
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_image())) {
+                    Picasso.with(mainContext).load(profileMembershipModel.getSubscriber_image()).placeholder(R.drawable.ic_guest_profile).into(header_app_iv);
 
                 }
+
 
             } else {
                 //empry wala
@@ -578,13 +679,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = ( NavigationView ) findViewById( R.id.nav_view );
 
-        ProfileModel profileModel= globalFunctions.getProfile( context );;
+       /* ProfileModel profileModel= globalFunctions.getProfile( mainContext );
         try {
             if (profileModel.getProfileImg() != null || !profileModel.getProfileImg().equals( "null" ) || !profileModel.getProfileImg().equalsIgnoreCase( "" )) {
                 Picasso.with( mainContext ).load(profileModel.getProfileImg() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
             }
         } catch (Exception e) {
-        }
+
+        }*/
 
 
     }
@@ -638,7 +740,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void sendPushNotificationID(Context mainContext, PushNotificationModel pushNotificationModel) {
         if (globalFunctions.getSharedPreferenceString( globalVariables.SHARED_PREFERENCE_COOKIE ) != null) {
             ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-            servicesMethodsManager.sendPushNotificationID( context, pushNotificationModel, new ServerResponseInterface() {
+            servicesMethodsManager.sendPushNotificationID( mainContext, pushNotificationModel, new ServerResponseInterface() {
                 @Override
                 public void OnSuccessFromServer(Object arg0) {
                     Log.d( TAG, "Response : " + arg0.toString() );
@@ -677,7 +779,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onResume() {
-        setNavigationHeaders();
+//        setNavigationHeaders();
         super.onResume();
         easyWayLocation.startLocation();
 
@@ -704,7 +806,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_rezq_plus_member= ( TextView ) navigationHeaderView.findViewById( R.id.tv_rezq_plus_member );
 
             ImageView
-                    header_app_iv = ( ImageView ) navigationHeaderView.findViewById( R.id.nav_profile_image );
+                    header_app_iv = ( ImageView ) navigationHeaderView.findViewById( R.id.nav_profile_image);
 
                     nav_header.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -729,7 +831,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     });
 
 
-            ProfileModel profileModel = globalFunctions.getProfile( context );
+            ProfileModel profileModel = globalFunctions.getProfile( mainContext );
             if (profileModel != null && mainContext != null) {
                 try {
                     String
@@ -751,7 +853,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 if (navigationHeaderView != null && mainContext != null) {
-                    getMembershipDetails();
+                   // getMembershipDetails();
 
                 }
 
@@ -894,8 +996,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
         else if (id == R.id.nav_account) {
-            Intent intent = new Intent(activity, SwitchAccountActivity.class);
-            activity.startActivity(intent);
+            /*Intent intent = new Intent(activity, SwitchAccountActivity.class);
+            activity.startActivity(intent);*/
+
+             Intent intent = new Intent(activity, ProfileMainActivity.class);
+             activity.startActivity(intent);
 
         }else if (id == R.id.nav_logout) {
             if (GlobalFunctions.isLoggedIn(activity)) {
@@ -927,8 +1032,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 logoutUser( mainContext ,logoutModel);*/
 
                 UpdateLanguageModel updateLanguageModel = new UpdateLanguageModel();
-                if (GlobalFunctions.isNotNullValue(GlobalFunctions.getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN))) {
-                    updateLanguageModel.setPushToken(GlobalFunctions.getSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN));
+                if (GlobalFunctions.isNotNullValue(GlobalFunctions.getSharedPreferenceString(mainContext, GlobalVariables.SHARED_PREFERENCE_TOKEN))) {
+                    updateLanguageModel.setPushToken(GlobalFunctions.getSharedPreferenceString(mainContext, GlobalVariables.SHARED_PREFERENCE_TOKEN));
                     logoutUser(mainContext, updateLanguageModel);
                 }
             }

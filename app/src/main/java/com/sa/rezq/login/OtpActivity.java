@@ -28,6 +28,7 @@ import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.mukesh.OtpView;
 import com.sa.rezq.Activity.AppController;
@@ -121,7 +122,7 @@ public class OtpActivity extends AppCompatActivity {
        // mobile_number_tv = (OtpView) findViewById(R.id.otp_view);
 
         btn_verify =  findViewById(R.id.btnVerify);
-      //  otp_timer_tv = (TextView) findViewById(R.id.otp_timer_tv);
+        otp_timer_tv = (TextView) findViewById(R.id.otp_timer_tv);
         resend_tv = (TextView) findViewById(R.id.resend_code_tv);
         //mobile_number_tv = (TextView) findViewById(R.id.mobile_number_tv);
         //login_with_password_tv = (TextView) findViewById(R.id.login_with_password_tv);
@@ -153,10 +154,10 @@ public class OtpActivity extends AppCompatActivity {
             }
         }*/
 
-        if (phoneNumber != null) {
+       /* if (phoneNumber != null) {
             //once got client firebase id...add setup firebase and uncomment below 2 lines...
-//            sendVerificationCode(phoneNumber);
-            //startCountDownTimer();
+           sendVerificationCode(phoneNumber);
+           startCountDownTimer();
         }
 
         otpView.addTextChangedListener(new TextWatcher() {
@@ -178,19 +179,19 @@ public class OtpActivity extends AppCompatActivity {
                 }
             }
         });
-
-        resend_tv.setOnClickListener(new View.OnClickListener() {
+*/
+       /* resend_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (phoneNumber != null && OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
                     sendVerificationCode(phoneNumber);
-                    //startCountDownTimer();
+                    startCountDownTimer();
                 } else {
                     openMaxAttemptOtpDialog(context, true);
                 }
             }
         });
-
+*/
         btn_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,7 +205,7 @@ public class OtpActivity extends AppCompatActivity {
                     return;
                 }
 
-                /*if (OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
+              /*  if (OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
                     globalFunctions.showProgress(context, activity.getString(R.string.loading));
                     verifyCode(code);
                 } else {
@@ -240,6 +241,32 @@ public class OtpActivity extends AppCompatActivity {
         });
 
     }
+    private void startCountDownTimer() {
+        countDownTimer = new CountDownTimer(RESEND_OTP_TOTAL_TIME_OUT, RESEND_OTP_TIME_INTERVAL) {
+
+            public void onTick(long millisUntilFinished) {
+                resend_tv.setEnabled(false);
+                resend_tv.setClickable(false);
+                if (getApplicationContext() != null) {
+                    String text = String.format(Locale.getDefault(), "%02d : %02d seconds",
+                            TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) % 60,
+                            TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) % 60);
+                    otp_timer_tv.setText(getString(R.string.in) + " " + text);
+                    // resend_tv.setTextColor(globalFunctions.getColor(R.color.app_fontColor_hint));
+                }
+            }
+
+            @Override
+            public void onFinish() {
+                otp_timer_tv.setText("");
+                resend_tv.setEnabled(true);
+                resend_tv.setClickable(true);
+                // resend_tv.setTextColor(globalFunctions.getColor(R.color.blue));
+            }
+        };
+        countDownTimer.start();
+    }
+
 
     private void openMaxAttemptOtpDialog(Context context, final boolean isMaxAttempt) {
         final AlertDialog alertDialog = new AlertDialog(context);
@@ -266,14 +293,24 @@ public class OtpActivity extends AppCompatActivity {
 
 
     private void sendVerificationCode(String number) {
-        GlobalFunctions.showProgress(activity, context.getString(R.string.sending_otp));
+      /*  GlobalFunctions.showProgress(activity, context.getString(R.string.sending_otp));
         PhoneAuthProvider.getInstance().verifyPhoneNumber(
                 number,
                 60,
                 TimeUnit.SECONDS,
-                (Activity) TaskExecutors.MAIN_THREAD,
+                 TaskExecutors.MAIN_THREAD,
                 mCallBack
-        );
+        );*/
+
+        GlobalFunctions.showProgress(activity, context.getString(R.string.sending_otp));
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mAuth)
+                        .setPhoneNumber(number)       // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
+                        .setActivity(this)                 // Activity (for callback binding)
+                        .setCallbacks(mCallBack)          // OnVerificationStateChangedCallbacks
+                        .build();
+        PhoneAuthProvider.verifyPhoneNumber(options);
 
     }
 
@@ -337,6 +374,7 @@ public class OtpActivity extends AppCompatActivity {
 
                                         Intent intent = RegisterActivity.newInstance(context, registerModel);
                                         startActivity(intent);
+
 
                                     } else if (pageType.equalsIgnoreCase(globalVariables.PAGE_FROM_LOGIN)) {
                                         LoginModel model = new LoginModel();
@@ -440,10 +478,14 @@ public class OtpActivity extends AppCompatActivity {
             }else {
                 GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
               // GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID, statusModel.get());
-                getProfile();
+//                getProfile();
 //                closeThisActivity();
 //                Intent intent = new Intent(activity, MainActivity.class);
 //                startActivity(intent);
+
+                closeThisActivity();
+                Intent intent = new Intent(activity, AccountActivity.class);
+                startActivity(intent);
             }
         }
     }

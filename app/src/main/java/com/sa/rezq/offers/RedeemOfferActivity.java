@@ -19,6 +19,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,13 +58,15 @@ import com.vlonjatg.progressactivity.ProgressLinearLayout;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class RedeemOfferActivity extends AppCompatActivity {
 
     public static final String TAG = "RedeemOfferActivity",
 
             BUNDLE_VENDOR_DETAILS = "VendorDetailsId",
-            BUNDLE_VENDOR_MODEL = "VendorModel",
-            BUNDLE_REDEEM_DETAILS = "RedeemOfferActivity";
+            BUNDLE_VENDOR_MODEL_DETAILS = "VendorModelDetails",
+            BUNDLE_REDEEM_DETAILS = "RedeemOfferDetails";
 
 
     Context context = null;
@@ -73,6 +76,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
     private TextView offer_title,offer_description,restro_title,restro_avg_rating,restro_rating_count,tv_save_in_recent;
     private ImageView offer_image,restro_image;
     private Button btn_redeemOffer;
+    private LinearLayout ll_ratings_count;
     public View mainView;
     public  String code;
    // public   OtpView redeem_insert;
@@ -84,18 +88,9 @@ public class RedeemOfferActivity extends AppCompatActivity {
     static int titleResourseID;
     static TextView toolbar_title;
     static ImageView toolbar_logo, tool_bar_back_icon;
-    Menu menu;
-    String account = String.valueOf(1);
+
     String offer_store_id=null;
     String store_id=null;
-
-
-    AllCategoryListAdapter categoryListAdapter;
-    List<SeeAllCategoryModel> listModelList = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
-    ProgressLinearLayout progressActivity;
-    RecyclerView seeAllCategoryRecyclerview;
-    SwipeRefreshLayout swipe_container;
 
     InsertRecentCouponModel insertRecentCouponModel=null;
 
@@ -107,24 +102,13 @@ public class RedeemOfferActivity extends AppCompatActivity {
     OfferModel offerModel=null;
     VendorModel storeModel=null;
 
-    String imagePath = "";
 
-    FirebaseStorage storage;
-    StorageReference storageReference;
-
-  /*  public static Intent newInstance(Activity activity, OfferModel listModel) {
-        Intent intent = new Intent(activity, RedeemOfferActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable(BUNDLE_REDEEM_DETAILS, listModel);
-        intent.putExtras(bundle);
-        return intent;
-    }*/
 
     public static Intent newInstance(Activity activity, OfferModel model,VendorModel vendorModel ) {
         Intent intent = new Intent(activity, RedeemOfferActivity.class);
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_REDEEM_DETAILS, model);
-        bundle.putSerializable(BUNDLE_VENDOR_MODEL, vendorModel);
+        bundle.putSerializable(BUNDLE_VENDOR_MODEL_DETAILS, vendorModel);
         intent.putExtras(bundle);
         return intent;
     }
@@ -138,6 +122,9 @@ public class RedeemOfferActivity extends AppCompatActivity {
         context = this;
         activity = this;
         window = getWindow();
+       // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+
+
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
@@ -152,18 +139,13 @@ public class RedeemOfferActivity extends AppCompatActivity {
         restro_title=findViewById(R.id.tv_restro_title);
         restro_avg_rating=findViewById(R.id.restro_avg_rating);
         restro_rating_count=findViewById(R.id.restro_rating_count);
+        ll_ratings_count=findViewById(R.id.ll_ratings_count);
 
 
         if (getIntent().hasExtra(BUNDLE_REDEEM_DETAILS)) {
             offerModel = (OfferModel) getIntent().getSerializableExtra(BUNDLE_REDEEM_DETAILS);
         } else {
             offerModel = null;
-        }
-
-        if (getIntent().hasExtra(BUNDLE_VENDOR_MODEL)) {
-            storeModel = (VendorModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_MODEL);
-        } else {
-            storeModel = null;
         }
 
         if (offerModel != null) {
@@ -175,7 +157,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
                 offer_title.setText(offerModel.getTitle());
 
             }
-            if (GlobalFunctions.isNotNullValue(offerModel.getOffer_image())) {
+            if (GlobalFunctions.isNotNullValue(offerModel.getOffer_applicable())) {
                 offer_description.setText(offerModel.getOffer_applicable());
 
             }if (GlobalFunctions.isNotNullValue(offerModel.getId())) {
@@ -189,9 +171,12 @@ public class RedeemOfferActivity extends AppCompatActivity {
                 store_id=offerModel.getStoreId();
             }
 
-
         }
-
+        if (getIntent().hasExtra(BUNDLE_VENDOR_MODEL_DETAILS)) {
+            storeModel = (VendorModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_MODEL_DETAILS);
+        } else {
+            storeModel = null;
+        }
 
         if (storeModel!=null){
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
@@ -204,6 +189,9 @@ public class RedeemOfferActivity extends AppCompatActivity {
 
             if (GlobalFunctions.isNotNullValue(storeModel.getAvg_rating())) {
                 restro_avg_rating.setText(storeModel.getAvg_rating());
+                if (storeModel.getAvg_rating().equalsIgnoreCase("")){
+                    ll_ratings_count.setVisibility(View.GONE);
+                }
             }
 
             if (GlobalFunctions.isNotNullValue(storeModel.getRating_count())) {
@@ -213,7 +201,10 @@ public class RedeemOfferActivity extends AppCompatActivity {
             if (GlobalFunctions.isNotNullValue(storeModel.getId())) {
                 store_id = storeModel.getId();
             }
+
         }
+
+
         btn_redeemOffer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -248,8 +239,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();
 
         setTitle(getString(R.string.offers), 0, 0);
-
-
 
 
     }
@@ -413,7 +402,8 @@ public class RedeemOfferActivity extends AppCompatActivity {
         if (arg0 instanceof StatusMainModel) {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             if (!statusMainModel.isStatusLogin()) {
-                globalFunctions.displayMessaage(activity, mainView, statusMainModel.getMessage());
+                Toasty.error(activity,activity.getString(R.string.wrong_coupon),Toast.LENGTH_SHORT).show();
+               // globalFunctions.displayMessaage(activity, mainView, statusMainModel.getMessage());
 
             } else {
                 Intent intent = ShowCouponOfferActivity.newInstance( activity, offerModel,storeModel);

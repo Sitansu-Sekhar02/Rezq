@@ -37,7 +37,7 @@
                 android:gravity="center"
                 android:layout_marginTop="5dp"
                 android:text="@string/enter_vendorcode"
-                android:textColor="#171717"
+                android:textColor="@color/app_grey_text"
                 android:textSize="12dp" />
 
             <RelativeLayout
@@ -81,6 +81,7 @@
                 android:layout_marginBottom="30dp"
                 android:layout_height="48dp"
                 android:gravity="center"
+                android:textAllCaps="true"
                 android:text="@string/reedm"
                 android:layout_centerInParent="true"
                 android:background="@drawable/button_border"

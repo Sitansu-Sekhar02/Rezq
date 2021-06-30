@@ -11,12 +11,17 @@ public class ProfileMembershipModel implements Serializable {
     private final String
             ID              = "id",
             FULL_NAME       = "full_name",
-            IMAGE           = "image",
-            MEMBERSHIP_NAME = "membership_name",
-            MEMBERSHIP_ID   = "membership_id",
-            VALID_FROM      = "valid_from",
+            IMAGE            = "image",
+            MEMBERSHIP_NAME  = "membership_name",
+            MEMBERSHIP_ID    = "membership_id",
+            VALID_FROM       = "valid_from",
+            PRIORITY          = "priority",
+            UPGRADE_TITLE     = "upgrade_title",
+            UPGRADE_ID        = "upgrade_id",
+            SUBSCRIBER_NAME   = "subscriber_name",
+            SUBSCRIBER_IMAGE   = "subscriber_image",
             IS_PREMIUM        = "is_premium",
-             VALID_TILL      = "valid_till";
+            VALID_TILL      = "valid_till";
 
 
     String
@@ -24,9 +29,14 @@ public class ProfileMembershipModel implements Serializable {
             full_name            = null,
             image                =null,
             membership_name      =null,
-            membership_id       =null,
-            valid_from          =null,
-            is_premium          =null,
+            membership_id        =null,
+            valid_from           =null,
+            is_premium           =null,
+            priority            =null,
+            upgrade_title      =null,
+            subscriber_name      =null,
+            subscriber_image      =null,
+            upgrade_id          =null,
             valid_till          = null;
 
 
@@ -97,6 +107,46 @@ public class ProfileMembershipModel implements Serializable {
         this.valid_till = valid_till;
     }
 
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getUpgrade_title() {
+        return upgrade_title;
+    }
+
+    public void setUpgrade_title(String upgrade_title) {
+        this.upgrade_title = upgrade_title;
+    }
+
+    public String getSubscriber_name() {
+        return subscriber_name;
+    }
+
+    public void setSubscriber_name(String subscriber_name) {
+        this.subscriber_name = subscriber_name;
+    }
+
+    public String getSubscriber_image() {
+        return subscriber_image;
+    }
+
+    public void setSubscriber_image(String subscriber_image) {
+        this.subscriber_image = subscriber_image;
+    }
+
+    public String getUpgrade_id() {
+        return upgrade_id;
+    }
+
+    public void setUpgrade_id(String upgrade_id) {
+        this.upgrade_id = upgrade_id;
+    }
+
     public boolean toObject(String jsonObject){
         try{
             JSONObject json = new JSONObject(jsonObject);
@@ -107,6 +157,11 @@ public class ProfileMembershipModel implements Serializable {
             if(json.has(MEMBERSHIP_ID))membership_id = json.getString(MEMBERSHIP_ID);
             if(json.has(VALID_FROM))valid_from = json.getString(VALID_FROM);
             if(json.has(IS_PREMIUM))is_premium = json.getString(IS_PREMIUM);
+            if(json.has(PRIORITY))priority = json.getString(PRIORITY);
+            if(json.has(UPGRADE_TITLE))upgrade_title = json.getString(UPGRADE_TITLE);
+            if(json.has(SUBSCRIBER_NAME))subscriber_name = json.getString(SUBSCRIBER_NAME);
+            if(json.has(SUBSCRIBER_IMAGE))subscriber_image = json.getString(SUBSCRIBER_IMAGE);
+            if(json.has(UPGRADE_ID))upgrade_id = json.getString(UPGRADE_ID);
             if(json.has(VALID_TILL))valid_till = json.getString(VALID_TILL);
 
             return true;
@@ -128,6 +183,11 @@ public class ProfileMembershipModel implements Serializable {
             jsonMain.put(MEMBERSHIP_ID, membership_id);
             jsonMain.put(VALID_FROM, valid_from);
             jsonMain.put(IS_PREMIUM, is_premium);
+            jsonMain.put(PRIORITY, priority);
+            jsonMain.put(UPGRADE_TITLE, upgrade_title);
+            jsonMain.put(SUBSCRIBER_NAME, subscriber_name);
+            jsonMain.put(SUBSCRIBER_IMAGE, subscriber_image);
+            jsonMain.put(UPGRADE_ID, upgrade_id);
             jsonMain.put(VALID_TILL, valid_till);
             returnString = jsonMain.toString();
         }

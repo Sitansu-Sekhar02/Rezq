@@ -89,6 +89,14 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".profile.activities.EditAccountActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
             android:name=".profile.ProfileMainActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
@@ -124,7 +132,7 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".profile.activities.EditProfileActivity"
+            android:name=".account.EditProfileActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:launchMode="singleTop"
@@ -172,6 +180,13 @@
             android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".membership.UpgradeMembershipListActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:label="@string/app_name"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".membership.UpgradeParticularMembershipActivity"
             android:configChanges="orientation|keyboardHidden"
             android:label="@string/app_name"
             android:launchMode="singleTop"

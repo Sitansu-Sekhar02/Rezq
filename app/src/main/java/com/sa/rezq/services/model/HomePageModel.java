@@ -152,6 +152,7 @@ public class HomePageModel {
                 jsonObject1 = json.getJSONObject(LOCATION);
                 if(jsonObject1 != null){statusModel.toObject(jsonObject1.toString());}
                 profileMembershipModel = statusModel;
+
             }
 
             if(json.has(SUB_CATEGORY)) {

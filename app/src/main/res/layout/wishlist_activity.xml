@@ -8,12 +8,28 @@
         android:id="@+id/tool_bar"
         layout="@layout/tool_bar_search_detail" />
     <RelativeLayout
+        android:id="@+id/rl_fav_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/favourite_list_recyclerview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+    <RelativeLayout
         android:id="@+id/title"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_below="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_marginTop="15dp"
+        android:layout_below="@+id/rl_fav_list"
         android:layout_height="wrap_content">
 
         <com.vlonjatg.progressactivity.ProgressLinearLayout

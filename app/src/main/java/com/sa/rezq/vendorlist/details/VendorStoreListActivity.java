@@ -50,7 +50,7 @@ public class VendorStoreListActivity extends AppCompatActivity {
             BUNDLE_ALL_CATEGORY_LIST = "AllCategoryList",
             BUNDLE_SHOW_TRENDING_LIST = "ShowTrendingList",
             BUNDLE_NEARBY_PLACES = "NearByPlaces",
-          BUNDLE_CATEGORY_LIST = "CategoryList";
+            BUNDLE_CATEGORY_LIST = "CategoryList";
 
     View view;
     TextView AllLockedOffer;

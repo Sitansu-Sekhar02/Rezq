@@ -8,7 +8,7 @@
 
     <include
         android:id="@+id/tool_bar"
-        layout="@layout/tool_bar_detail" />
+        layout="@layout/tool_bar_profile" />
 
     <FrameLayout
         android:id="@+id/profile_main_container"

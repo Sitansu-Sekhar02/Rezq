@@ -613,7 +613,28 @@ public class ServicesMethodsManager {
             } else {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
-        } else if (obj instanceof MembershipModel) {
+        }
+        else if (obj instanceof WishlistCategoryMainModel) {
+            WishlistCategoryMainModel wishlistCategoryMainModel = new WishlistCategoryMainModel();
+            if (wishlistCategoryMainModel.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(wishlistCategoryMainModel);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+            }
+        }
+        else if (obj instanceof WishlistCategoryModel) {
+            WishlistCategoryMainModel model = new WishlistCategoryMainModel();
+            if (model.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(model);
+            } else {
+                WishlistCategoryModel accountModel = new WishlistCategoryModel();
+                if (accountModel.toObject(resp.toString())) {
+                    mUiCallBack.OnSuccessFromServer(accountModel);
+                } else {
+                    mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+                }
+            }
+        }else if (obj instanceof MembershipModel) {
             StatusMainModel model = new StatusMainModel();
             if (model.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(model);
@@ -623,6 +644,23 @@ public class ServicesMethodsManager {
         }
         else if (obj instanceof MembershipDetailsModel) {
             MembershipDetailsMainModel model = new MembershipDetailsMainModel();
+            if (model.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(model);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+            }
+        }
+        else if (obj instanceof UpgradeMembershipModel) {
+            UpgradeMembershipMainModel model = new UpgradeMembershipMainModel();
+            if (model.toObject(resp.toString())) {
+                mUiCallBack.OnSuccessFromServer(model);
+            } else {
+                mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
+            }
+        }
+
+        else if (obj instanceof RatingNFeedbackModel) {
+            StatusMainModel model = new StatusMainModel();
             if (model.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(model);
             } else {
@@ -999,11 +1037,30 @@ public class ServicesMethodsManager {
         String url = ServerConstants.URL_UpdateProfile;
         postData(context, profileModel, url, TAG);
     }
+    public void updateSubscriberInfo(Context context, ProfileModel profileModel, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String url = ServerConstants.URL_UpdateSubscriberProfile;
+        postData(context, profileModel, url, TAG);
+    }
+
+
+    public void giveFeedback(Context context, RatingNFeedbackModel ratingNFeedbackModel, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String url = ServerConstants.URL_Feedback_n_rating;
+        postData(context, ratingNFeedbackModel, url, TAG);
+    }
 
     public void getProfile(Context context, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
         String url = ServerConstants.URL_GetProfile;
+        getData(context, new ProfileMainModel(), url, query, TAG);
+    }
+
+    public void getSubscriberProfile(Context context, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String query = null;
+        String url = ServerConstants.URL_GetAccount;
         getData(context, new ProfileMainModel(), url, query, TAG);
     }
 
@@ -1124,9 +1181,11 @@ public class ServicesMethodsManager {
     }
 
 
-    public void getWishListes(Context context, ServerResponseInterface mCallInterface, String TAG) {
+    public void getWishListes(Context context,String category_id, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
+        query = query != null ? query + "&category_id=" + category_id : "category_id=" + category_id;
+
 
         getData(context, new WishListMainModel(), ServerConstants.URL_Wishlist, query, TAG);
     }
@@ -1159,6 +1218,13 @@ public class ServicesMethodsManager {
         postData(context,membershipModel , ServerConstants.URL_insert_membership, query, TAG);
     }
 
+    public void insertParticularMembership(Context context,UpgradeMembershipModel upgradeMembershipModel, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String query = null;
+
+        postData(context,upgradeMembershipModel , ServerConstants.URL_insert_membership, query, TAG);
+    }
+
     public void getMembershipDetails(Context context, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
         String query = null;
@@ -1182,6 +1248,23 @@ public class ServicesMethodsManager {
         // query = query != null ? query + "&size=" + size : "size=" + size;
         // query = query != null ? query + "&status=" + status : "status=" + status;
         getData(context, new MembershipMainModel(), ServerConstants.URL_membership_list, query, TAG);
+    }
+    public void upgradeParticularMembership(Context context,String membership_id, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String query = null;
+        query = query != null ? query + "&membership_id=" + membership_id : "membership_id=" + membership_id;
+        // query = query != null ? query + "&size=" + size : "size=" + size;
+        // query = query != null ? query + "&status=" + status : "status=" + status;
+        getData(context, new UpgradeMembershipModel(), ServerConstants.URL_upgrade_particular_membership, query, TAG);
+    }
+
+    public void getWishlistCategory(Context context, ServerResponseInterface mCallInterface, String TAG) {
+        setCallbacks(mCallInterface);
+        String query = null;
+        //query = query != null ? query + "&index=" + index : "index=" + index;
+        // query = query != null ? query + "&size=" + size : "size=" + size;
+        // query = query != null ? query + "&status=" + status : "status=" + status;
+        getData(context, new WishlistCategoryMainModel(), ServerConstants.URL_wishList_category, query, TAG);
     }
 
 
@@ -1327,7 +1410,7 @@ public class ServicesMethodsManager {
 
     public void search(Context context, @NonNull SearchModel model, ServerResponseInterface mCallInterface, String TAG) {
         setCallbacks(mCallInterface);
-       // postData(context, model, ServerConstants.URL_Search, null, TAG);
+        postData(context, model, ServerConstants.URL_Search, null, TAG);
     }
 
     public void getWalletHistoryList(Context context, OrderPostModel orderPostModel, ServerResponseInterface mCallInterface, String TAG) {

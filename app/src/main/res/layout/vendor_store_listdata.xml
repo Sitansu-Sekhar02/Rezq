@@ -3,43 +3,38 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/vendor_store_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
-
             <ImageView
                 android:id="@+id/iv_vendor_logo"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:src="@drawable/ic_group_al" />
-        </LinearLayout>
+                android:layout_gravity="center"
+                android:src="@drawable/ic_group_al"
+                android:layout_marginLeft="10dp"/>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_140sdp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/_15sdp"
-            android:layout_toRightOf="@+id/image"
+            android:layout_gravity="top"
             android:orientation="vertical">
 
             <com.sa.rezq.view.AppTextView
                 android:id="@+id/tv_facilities"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/dinner"
                 android:textColor="#848484" />
 
             <com.sa.rezq.view.AppTextView
                 android:id="@+id/tv_vendor_name"
-                android:layout_width="140dp"
+                android:layout_width="match_parent"
                 android:layout_marginTop="4dp"
                 android:layout_height="wrap_content"
                 android:text="@string/pizza_pasta"
@@ -67,13 +62,9 @@
                 android:stepSize="1" />
         </LinearLayout>
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerInParent="true"
-            android:layout_marginRight="15dp"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <com.sa.rezq.view.AppTextView
@@ -82,21 +73,25 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textAllCaps="true"
+                android:layout_toLeftOf="@+id/tv_offer"
                 android:textColor="#8D8D8D"
                 android:textSize="12dp" />
 
             <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_offer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/offers"
                 android:textAllCaps="true"
                 android:layout_marginLeft="4dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp"
                 android:textColor="#8D8D8D"
                 android:textSize="12dp" />
-        </LinearLayout>
+        </RelativeLayout>
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <View
         android:layout_width="match_parent"

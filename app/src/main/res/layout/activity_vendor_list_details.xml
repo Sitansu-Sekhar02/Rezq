@@ -21,6 +21,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
+                android:background="@color/app_fontBlackColor"
                 android:layout_height="204dp">
 
                 <ImageView
@@ -32,21 +33,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_above="@+id/tv_vendor_name"
-                    android:layout_marginLeft="25dp"
-                    android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="10dp" />
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tv_vendor_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginBottom="15dp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:gravity="center"
                     android:text=""
-                    android:textColor="#FFFFFF"
-                    android:textSize="16dp"
+                    android:alpha="0.4"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -102,18 +102,21 @@
                     android:gravity="center"
                     android:text="@string/reating"
                     android:textAllCaps="true"
+                    android:textStyle="bold"
                     android:textColor="#171717"
                     android:textSize="12dp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:layout_alignParentRight="true">
 
                     <ImageView
                         android:id="@+id/iv_favourite"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="@dimen/_18sdp"
+                        android:layout_height="@dimen/_12sdp"
+                        android:layout_gravity="center"
                         android:src="@drawable/ic_like" />
 
 
@@ -123,7 +126,7 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="5dp"
+                        android:layout_marginLeft="3dp"
                         android:text="@string/Favourite"
                         android:textAllCaps="true"
                         android:textColor="#2B2626"
@@ -210,7 +213,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/offer"
                     android:visibility="gone"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
@@ -274,11 +277,12 @@
 
 
             <RelativeLayout
+                android:id="@+id/rl_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.sa.rezq.view.AppTextView
-                    android:id="@+id/rate"
+                    android:id="@+id/rating_txt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tvAlertMsg"
@@ -293,7 +297,7 @@
                     android:id="@+id/contentRate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/rate"
+                    android:layout_below="@+id/rating_txt"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="8dp"
                     android:visibility="gone">
@@ -302,7 +306,6 @@
                         android:id="@+id/tvratings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/rate"
                         android:drawableRight="@drawable/ic_path_star"
                         android:drawablePadding="5dp"
                         android:gravity="center"
@@ -328,7 +331,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/contentRate"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="12dp"
                     android:layout_marginTop="10dp"
                     android:orientation="vertical">
 
@@ -351,6 +354,8 @@
 
                         </androidx.recyclerview.widget.RecyclerView>
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>
+
+
 
                 </LinearLayout>
             </RelativeLayout>

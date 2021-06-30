@@ -591,7 +591,7 @@ public class GlobalVariables {
 
 
     public static String DATE_FORMAT                   ="E, d MMM,yy";
-    public static String DATE_FORMAT_MONTH             ="yyyy-MM-dd";
+    public static String DATE_FORMAT_MONTH             ="dd-mm-yyyy";
     public static String TIME_FORMAT                   ="hh:mm a";
     public static String ENCRYPTION_TIME_FORMAT_UTC    ="yyyyMMddHH";
     public static String DATE_TIME_SERVER_FORMAT       ="yyyy-MM-dd HH:mm:ss";
@@ -619,6 +619,7 @@ public class GlobalVariables {
     public static String SHARED_PREFERENCE_TIME_DIFFERENCE      =  "SharedPreferenceTimeDifference";
     public static String SHARED_PREFERENCE_USERID               =  "SharedPreferenceUserID";
     public static String SHARED_PREFERENCE_PROFILE              =  "SharedPreferenceUserProfile";
+    public static String SHARED_PREFERENCE_PROFILE_MEMBERSHIP    =  "SharedPreferenceUserProfileMembership";
     public static String SHARED_PREFERENCE_USER_TYPE            =  "SharedPreferenceUserType";
     public static String SHARED_BID_CHECKER_TIMESTAMP           =  "SharedPreferenceBidCheckerTimestamp";
     public static String SHARED_PREFERENCE_SELECTED_CITY        =  "SharedPreferenceSelectedCity";
@@ -706,7 +707,8 @@ public class GlobalVariables {
             REQUEST_PREDICTION_CODE         = 224,
             REQUEST_LOCATION_CODE           = 225,
             REQUEST_GPS_ENABLED             = 226,
-            REQUEST_COLOR_CODE              = 227;
+            REQUEST_COLOR_CODE              = 227,
+            REQUEST_CODE_FOR_SEARCH         = 227;
 
     public static final int
                CAR_SERVICE_TYPE_SINGLE_CAR        = 1,

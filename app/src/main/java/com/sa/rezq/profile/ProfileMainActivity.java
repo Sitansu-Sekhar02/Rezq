@@ -27,6 +27,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
+import com.sa.rezq.account.SubscriberProfileFragment;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.model.ProfileModel;
@@ -176,8 +177,12 @@ public class ProfileMainActivity extends AppCompatActivity {
 
 
         Fragment profileFragment = null;
-        profileFragment = ProfileFragment.newInstance();
-        replaceFragment(profileFragment, ProfileFragment.TAG, getString(R.string.my_profile), 0, 0);
+       // profileFragment = ProfileFragment.newInstance();
+       // replaceFragment(profileFragment, ProfileFragment.TAG, getString(R.string.my_profile), 0, 0);
+
+        profileFragment = SubscriberProfileFragment.newInstance();
+        replaceFragment(profileFragment, SubscriberProfileFragment.TAG, getString(R.string.my_profile), 0, 0);
+
     }
 
     @Override

@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,16 +18,15 @@ import androidx.fragment.app.Fragment;
 
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
-import com.sa.rezq.profile.activities.EditProfileActivity;
+import com.sa.rezq.account.EditProfileActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.ProfileMainModel;
+import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.view.AlertDialog;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-import com.theartofdev.edmodo.cropper.CropImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -40,13 +38,14 @@ public class ProfileFragment extends Fragment {
     Activity activity;
     Context context;
     View mainView;
-    TextView tv_userfullName, therapist_tv, update_button, email_ev;
+    TextView tv_userfullName, therapist_tv, update_button, email_ev,tv_membership_title;
     TextView first_name_etv, last_name_etv, mobile_etv, email_etv, password_etv, confirm_password_etv;
     CircleImageView profile_image;
     Button btn_update_profile;
 
     View view;
     ProfileModel detail = null;
+    ProfileMembershipModel profileMembershipModel=null;
 
     public ProfileFragment() {
         setHasOptionsMenu( true );
@@ -83,6 +82,7 @@ public class ProfileFragment extends Fragment {
         email_etv = view.findViewById( R.id.tv_emailId );
         tv_userfullName = view.findViewById( R.id.tv_userfullName );
         btn_update_profile = view.findViewById( R.id.btn_update_profile );
+        tv_membership_title = view.findViewById( R.id.tv_membership_title );
         //email_ev = view.findViewById( R.id.email_ev );
      /*   password_etv = ( EditText ) view.findViewById( R.id.password_etv );
         confirm_password_etv = ( EditText ) view.findViewById( R.id.confirm_password_etv );*/
@@ -147,8 +147,10 @@ public class ProfileFragment extends Fragment {
     private void setDetails(Object arg0) {
         ProfileMainModel profileMainModel = ( ProfileMainModel ) arg0;
         ProfileModel profileModel = profileMainModel.getProfileModel();
+        profileMembershipModel=profileModel.getProfileMembershipModel();
+
         GlobalFunctions.setProfile( context, profileModel );
-        //GlobalFunctions.setProfile( context, profile );
+       // GlobalFunctions.setProfile( context, profileMembershipModel );
         if (context != null && isAdded()) {
             detail = GlobalFunctions.getProfile( context );
             setThisPage();
@@ -165,11 +167,16 @@ public class ProfileFragment extends Fragment {
 
                 String fullName = detail.getFirstName() + " " + detail.getLastName();
                 tv_userfullName.setText( fullName );
-                first_name_etv.setText( detail.getFirstName() );
-                last_name_etv.setText( detail.getLastName() );
-                mobile_etv.setText( detail.getPhone() );
+                first_name_etv.setText( detail.getFirstName());
+                last_name_etv.setText( detail.getLastName());
+                mobile_etv.setText( detail.getPhone());
                 email_etv.setText( detail.getEmail() );
-//                email_ev.setText( detail.getEmail() );
+                //tv_membership_title.setText(detail.);
+                if (profileMembershipModel!=null){
+                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_name())){
+                        tv_membership_title.setText(profileMembershipModel.getMembership_name());
+                    }
+                }
 
                 try {
                     if (detail.getProfileImg() != null || !detail.getProfileImg().equals( "null" ) || !detail.getProfileImg().equalsIgnoreCase( "" )) {
@@ -177,6 +184,7 @@ public class ProfileFragment extends Fragment {
                     }
                 } catch (Exception e) {
                 }
+
             }
         }
     }

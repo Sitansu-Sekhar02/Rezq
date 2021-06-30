@@ -1,18 +1,23 @@
 package com.sa.rezq.login;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +36,7 @@ import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.registration.RegisterActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
+import com.sa.rezq.services.model.InsertAccountModel;
 import com.sa.rezq.services.model.LoginModel;
 import com.sa.rezq.services.model.ProfileMainModel;
 import com.sa.rezq.services.model.ProfileMembershipModel;
@@ -102,31 +108,7 @@ public class LoginActivity  extends AppCompatActivity {
         mainView = phone_number_etv;
 
 
-       /* phone_number_etv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.toString().startsWith("0")) {
-                    s.clear();
-                }
-                String digits = phone_number_etv.getText().toString().trim();
-                if (digits.length() >= 10) {
-                    globalFunctions.closeKeyboard(activity);
-                    showSubmitButton(true);
-                } else {
-                    showSubmitButton(false);
-                }
-            }
-        });*/
         country_code_picker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
             @Override
             public void onCountrySelected() {
@@ -144,6 +126,40 @@ public class LoginActivity  extends AppCompatActivity {
         });
 
         selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
+
+
+         phone_number_etv.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().startsWith("0")) {
+                    s.clear();
+                }
+                String digits = phone_number_etv.getText().toString().trim();
+                if (selected_country_code.equalsIgnoreCase("+91")) {
+                    if (digits.length() >= 10) {
+                        globalFunctions.closeKeyboard(activity);
+                        showSubmitButton(true);
+                    } else {
+                        showSubmitButton(false);
+                    }
+                } else if (digits.length() >= getResources().getInteger(R.integer.mobile_max_length)) {
+                    globalFunctions.closeKeyboard(activity);
+                    showSubmitButton(true);
+                } else {
+                    showSubmitButton(false);
+                }
+            }
+        });
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -326,7 +342,7 @@ public class LoginActivity  extends AppCompatActivity {
 
     private void showAlertMessage(String message, final RegisterModel registerModel1) {
 
-        final AlertDialog alertDialog = new AlertDialog(context);
+      /*  final AlertDialog alertDialog = new AlertDialog(context);
         alertDialog.setCancelable(false);
         alertDialog.setIcon(R.drawable.rezq_logo);
         alertDialog.setTitle(getString(R.string.app_name));
@@ -348,6 +364,42 @@ public class LoginActivity  extends AppCompatActivity {
         });
 
         alertDialog.show();
+
+*/
+
+        final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.registeration_popup);
+        Window window = dialog.getWindow();
+        WindowManager.LayoutParams wlp = window.getAttributes();
+        wlp.gravity = Gravity.CENTER;
+        wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
+        window.setAttributes(wlp);
+        dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.show();
+        dialog.setCancelable(true);
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+        final Button  btn_ok = dialog.findViewById(R.id.btn_ok);
+        final TextView  tv_cancel = dialog.findViewById(R.id.tv_cancel);
+        btn_ok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                pageType=globalVariables.PAGE_FROM_REGISTRATION;
+                sendOtpToMyMobileNumber(registerModel1, pageType);
+            }
+        });
+
+        tv_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+
     }
 
 

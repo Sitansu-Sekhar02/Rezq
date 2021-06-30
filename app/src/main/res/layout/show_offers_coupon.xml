@@ -26,10 +26,10 @@
 
                 <ImageView
                     android:id="@+id/iv_restro_image"
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="10dp"
+                    android:background="@drawable/offer_border"
                     android:src="@drawable/ic_baseline_image_24" />
 
                 <LinearLayout
@@ -54,7 +54,6 @@
 
                         <com.sa.rezq.view.AppTextView
                             android:id="@+id/restro_avg_rating"
-
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawablePadding="5dp"
@@ -63,12 +62,19 @@
                             android:textSize="16dp"
                             android:textStyle="bold" />
                         <com.sa.rezq.view.AppTextView
-                            android:id="@+id/restro_rating_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:drawableRight="@drawable/ic_baseline_star_rate_24"
                             android:drawablePadding="5dp"
                             android:textColor="#FFB400"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <com.sa.rezq.view.AppTextView
+                            android:id="@+id/restro_rating_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFB400"
+                            android:layout_marginLeft="@dimen/_8sdp"
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
@@ -78,7 +84,8 @@
                             android:layout_marginLeft="5dp"
                             android:text="@string/reating"
                             android:textColor="#171717"
-                            android:textSize="12dp" />
+                            android:textSize="12dp"
+                            android:textStyle="bold"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -102,6 +109,7 @@
                         android:layout_width="52dp"
                         android:layout_height="52dp"
                         android:layout_marginTop="20dp"
+                        android:background="@drawable/offer_border"
                         android:id="@+id/image_offer"
                         android:gravity="center" />
 

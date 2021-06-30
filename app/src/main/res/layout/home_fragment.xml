@@ -636,7 +636,18 @@
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:text="@string/get_extra"
+                        android:text=""
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+                    <com.sa.rezq.view.AppTextView
+                        android:visibility="gone"
+                        android:id="@+id/tv_gold_membership"
+                        android:layout_width="211dp"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="@string/get_gold_membership"
                         android:textColor="@color/white"
                         android:textSize="18dp"
                         android:textStyle="bold" />

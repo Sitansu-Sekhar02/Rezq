@@ -2,26 +2,24 @@ package com.sa.rezq.wishlist;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.EditText;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,31 +27,25 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
-import com.sa.rezq.adapter.AccountListAdapter;
 import com.sa.rezq.adapter.WishListAdapter;
-import com.sa.rezq.adapter.interfaces.OpenInsertAccountInvoke;
+import com.sa.rezq.adapter.WishListCategoryAdapter;
+import com.sa.rezq.adapter.interfaces.ClickListener;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
-import com.sa.rezq.services.model.AccountListModel;
-import com.sa.rezq.services.model.AccountMainModel;
-import com.sa.rezq.services.model.AccountModel;
-import com.sa.rezq.services.model.InsertAccountModel;
-import com.sa.rezq.services.model.StatusMainModel;
-import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.services.model.WishListMainModel;
 import com.sa.rezq.services.model.WishListModel;
-import com.sa.rezq.services.model.WishListSubMainModel;
 import com.sa.rezq.services.model.WishModel;
+import com.sa.rezq.services.model.WishlistCategoryListModel;
+import com.sa.rezq.services.model.WishlistCategoryMainModel;
+import com.sa.rezq.services.model.WishlistCategoryModel;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
-public class WishListActivity extends AppCompatActivity {
+public class WishListActivity extends AppCompatActivity implements ClickListener {
     public static final String TAG = "WishListActivity";
 
 
@@ -75,11 +67,19 @@ public class WishListActivity extends AppCompatActivity {
 
     WishListAdapter wishListAdapter;
     List<WishModel> wishModels = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
-    GridLayoutManager gridLayoutManager;
+    LinearLayoutManager gridLayoutManager;
     ProgressLinearLayout progressActivity;
     RecyclerView wishListRecyclerview;
     SwipeRefreshLayout swipe_container;
+
+    String category_id=null;
+
+
+    WishListCategoryAdapter wishListCategoryAdapter;
+    List<WishlistCategoryModel> wishlistCategoryModels = new ArrayList<>();
+    LinearLayoutManager horizontalLinear;
+    RecyclerView wishlist_category_recyclerview;
+
 
 
     @Override
@@ -93,12 +93,14 @@ public class WishListActivity extends AppCompatActivity {
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
 
-        linearLayoutManager = new LinearLayoutManager(activity);
         gridLayoutManager=new GridLayoutManager(activity,2);
         progressActivity = findViewById(R.id.favourite_progressActivity);
         wishListRecyclerview = findViewById(R.id.wishlist_recyclerview);
         swipe_container = findViewById(R.id.swipe_container);
 
+
+        horizontalLinear = new LinearLayoutManager(activity,LinearLayoutManager.HORIZONTAL, false);
+        wishlist_category_recyclerview = findViewById(R.id.favourite_list_recyclerview);
 
         mainView = wishListRecyclerview;
 
@@ -115,39 +117,39 @@ public class WishListActivity extends AppCompatActivity {
             }
         });
 
-        swipe_container.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getWishList();
-            }
-        });
+
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
         setTitle(getString(R.string.favourites), 0, 0);
 
-        getWishList();
+        getWishlistCategoryList();
 
+        initRecyclerView();
 
+    /*    swipe_container.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getWishList(category_id);
+            }
+        });
+*/
     }
 
-    private void getWishList() {
-        globalFunctions.showProgress(activity, getString(R.string.loading));
+    private void getWishlistCategoryList() {
+        //globalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.getWishListes(context, new ServerResponseInterface() {
+        servicesMethodsManager.getWishlistCategory(context, new ServerResponseInterface() {
             @SuppressLint("LongLogTag")
             @Override
             public void OnSuccessFromServer(Object arg0) {
-                globalFunctions.hideProgress();
-                if (swipe_container.isRefreshing()) {
-                    swipe_container.setRefreshing( false );
-                }
+               // globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
-                WishListMainModel wishListMainModel = (WishListMainModel) arg0;
-                if (wishListMainModel!=null && wishListMainModel.getWishListSubMainModel()!=null){
-                    WishListSubMainModel listModel = wishListMainModel.getWishListSubMainModel();
-                    WishListModel wishListModel=listModel.getWishListModel();
-                    setThisPage(wishListModel);
+                WishlistCategoryMainModel wishlistCategoryMainModel = (WishlistCategoryMainModel) arg0;
+                if (wishlistCategoryMainModel!=null && wishlistCategoryMainModel.getWishlistCategoryListModel()!=null){
+                    WishlistCategoryListModel listModel = wishlistCategoryMainModel.getWishlistCategoryListModel();
+                 //   WishlistCategoryModel wishListModel=listModel.getWishlistCategoryModels();
+                    setWishListPage(listModel);
                 }
 
             }
@@ -156,10 +158,8 @@ public class WishListActivity extends AppCompatActivity {
             @Override
             public void OnFailureFromServer(String msg) {
 
-                globalFunctions.hideProgress();
-                if (swipe_container.isRefreshing()) {
-                    swipe_container.setRefreshing( false );
-                }
+                //globalFunctions.hideProgress();
+
                 globalFunctions.displayMessaage(context, mainView, msg);
                 Log.d(TAG, "Failure : " + msg);
             }
@@ -167,10 +167,76 @@ public class WishListActivity extends AppCompatActivity {
             @SuppressLint("LongLogTag")
             @Override
             public void OnError(String msg) {
-                globalFunctions.hideProgress();
+               // globalFunctions.hideProgress();
+                globalFunctions.displayMessaage(context, mainView, msg);
+                Log.d(TAG, "Error : " + msg);
+            }
+        }, "list");
+    }
+
+    private void setWishListPage(WishlistCategoryListModel listModel) {
+        if (listModel != null && wishlistCategoryModels != null) {
+            wishlistCategoryModels.clear();
+            wishlistCategoryModels.addAll(listModel.getWishlistCategoryModels());
+            if (wishListCategoryAdapter != null) {
+                synchronized (wishListCategoryAdapter) {
+                    wishListCategoryAdapter.notifyDataSetChanged();
+                }
+            }
+
+            if (wishlistCategoryModels.size() > 0) {
+                initCategoryRecyclerView();
+            }
+        }
+    }
+
+    private void initCategoryRecyclerView() {
+        wishlist_category_recyclerview.setLayoutManager(horizontalLinear);
+        wishlist_category_recyclerview.setHasFixedSize(true);
+        wishListCategoryAdapter = new WishListCategoryAdapter(activity, wishlistCategoryModels,this::OnItemClickListener);
+        wishlist_category_recyclerview.setAdapter(wishListCategoryAdapter);
+    }
+
+    private void getWishList(String category_id) {
+       // globalFunctions.showProgress(activity, getString(R.string.loading));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.getWishListes(context,category_id, new ServerResponseInterface() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+               // globalFunctions.hideProgress();
+               /* if (swipe_container.isRefreshing()) {
+                    swipe_container.setRefreshing( false );
+                }*/
+                Log.d(TAG, "Response : " + arg0.toString());
+                WishListMainModel wishListMainModel = (WishListMainModel) arg0;
+                if (wishListMainModel!=null && wishListMainModel.getWishListModel()!=null){
+                    WishListModel listModel = wishListMainModel.getWishListModel();
+                    //WishListModel wishListModel=listModel.getWishList();
+                    setThisPage(listModel);
+                }
+
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnFailureFromServer(String msg) {
+
+              /*  globalFunctions.hideProgress();
                 if (swipe_container.isRefreshing()) {
                     swipe_container.setRefreshing( false );
-                }
+                }*/
+                globalFunctions.displayMessaage(context, mainView, msg);
+                Log.d(TAG, "Failure : " + msg);
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnError(String msg) {
+               /* globalFunctions.hideProgress();
+                if (swipe_container.isRefreshing()) {
+                    swipe_container.setRefreshing( false );
+                }*/
                 globalFunctions.displayMessaage(context, mainView, msg);
                 Log.d(TAG, "Error : " + msg);
             }
@@ -203,7 +269,7 @@ public class WishListActivity extends AppCompatActivity {
     private void showEmptyPage() {
         if (progressActivity != null) {
             progressActivity.showEmpty(getResources().getDrawable(R.drawable.rezq_logo), getString(R.string.emptyList),
-                    getString(R.string.no_data_show));
+                    getString(R.string.no_favourite_item));
         }
     }
 
@@ -216,9 +282,55 @@ public class WishListActivity extends AppCompatActivity {
 
     private void initRecyclerView() {
         wishListRecyclerview.setLayoutManager(gridLayoutManager);
-        wishListRecyclerview.setHasFixedSize(true);
         wishListAdapter = new WishListAdapter(activity, wishModels);
         wishListRecyclerview.setAdapter(wishListAdapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu_item, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                wishListAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                // Set styles for expanded state here
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.LTGRAY));
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Set styles for collapsed state here
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                }
+                return true;
+            }
+        });
+
+
+        return true;
     }
 
     public static void setTitle (String title,int titleImageID, int backgroundResourceID){
@@ -286,4 +398,9 @@ public class WishListActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
+    @Override
+    public void OnItemClickListener( WishlistCategoryModel model) {
+        getWishList(model.getId());
+
+    }
 }

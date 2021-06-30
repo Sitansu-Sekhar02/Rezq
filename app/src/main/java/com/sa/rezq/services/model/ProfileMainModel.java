@@ -10,8 +10,8 @@ public class ProfileMainModel implements Serializable {
     private final String TAG = "ProfileMainModel";
     private final String
             RESPONSE            = "response",
-            STATUS              = "status_bool",
-            MESSAGE             = "status";
+            STATUS              = "status",
+            MESSAGE             = "message";
 
     ProfileModel
             profileModel      = null;

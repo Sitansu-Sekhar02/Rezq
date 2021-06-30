@@ -31,6 +31,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,22 +43,28 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.sa.rezq.Activity.AppController;
+import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.AccountListAdapter;
 import com.sa.rezq.adapter.interfaces.OpenInsertAccountInvoke;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.image_picker.ImagePickerActivity;
+import com.sa.rezq.membership.UpgradeMembershipListActivity;
+import com.sa.rezq.profile.ProfileMainActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.AccountListModel;
 import com.sa.rezq.services.model.AccountMainModel;
 import com.sa.rezq.services.model.AccountModel;
 import com.sa.rezq.services.model.InsertAccountModel;
+import com.sa.rezq.services.model.ProfileMainModel;
+import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.upload.UploadImage;
 import com.sa.rezq.upload.UploadListener;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -515,6 +523,56 @@ public class SwitchAccountActivity extends AppCompatActivity implements OpenInse
         accountListRecyclerview.setAdapter(accountListAdapter);
     }
 
+
+    private void insertNewUser(Activity activity, InsertAccountModel insertAccountModel) {
+        // globalFunctions.showProgress(activity, activity.getString(R.string.loading));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.insertUser(context, insertAccountModel, new ServerResponseInterface() {
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+                // globalFunctions.hideProgress();
+                Log.d(TAG, "Response : " + arg0.toString());
+                //StatusModel model = (StatusModel) arg0;
+                validateOutputAfterInsertUser(arg0);
+            }
+
+            @Override
+            public void OnFailureFromServer(String msg) {
+                //  globalFunctions.hideProgress();
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Failure : " + msg);
+            }
+
+            @Override
+            public void OnError(String msg) {
+                // globalFunctions.hideProgress();
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Error : " + msg);
+            }
+        }, "Register_User");
+    }
+
+    private void validateOutputAfterInsertUser(Object arg0) {
+        if (arg0 instanceof StatusMainModel) {
+            StatusMainModel statusMainModel = (StatusMainModel) arg0;
+            StatusModel statusModel = statusMainModel.getStatusModel();
+            if (!statusMainModel.isStatusLogin()) {
+                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+
+            } else {
+                GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID, statusModel.getExtra());
+                goToMainActivity();
+
+            }
+        }
+    }
+
+    private void goToMainActivity() {
+        Intent intent = new Intent(activity, MainActivity.class);
+        startActivity(intent);
+        closeThisActivity();
+    }
+
     public static void setTitle (String title,int titleImageID, int backgroundResourceID){
         mTitle = title;
         if (backgroundResourceID != 0) {
@@ -586,45 +644,5 @@ public class SwitchAccountActivity extends AppCompatActivity implements OpenInse
       // openAccountPopup(position);
     }
 
-    private void insertNewUser(Activity activity, InsertAccountModel insertAccountModel) {
-        // globalFunctions.showProgress(activity, activity.getString(R.string.loading));
-        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.insertUser(context, insertAccountModel, new ServerResponseInterface() {
-            @Override
-            public void OnSuccessFromServer(Object arg0) {
-               // globalFunctions.hideProgress();
-                Log.d(TAG, "Response : " + arg0.toString());
-                //StatusModel model = (StatusModel) arg0;
-                validateOutputAfterInsertUser(arg0);
-            }
 
-            @Override
-            public void OnFailureFromServer(String msg) {
-                //  globalFunctions.hideProgress();
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Failure : " + msg);
-            }
-
-            @Override
-            public void OnError(String msg) {
-                // globalFunctions.hideProgress();
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-                Log.d(TAG, "Error : " + msg);
-            }
-        }, "Register_User");
-    }
-
-    private void validateOutputAfterInsertUser(Object arg0) {
-        if (arg0 instanceof StatusMainModel) {
-            StatusMainModel statusMainModel = (StatusMainModel) arg0;
-            StatusModel statusModel = statusMainModel.getStatusModel();
-            if (!statusMainModel.isStatusLogin()) {
-                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
-            } else {
-                GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
-               // getProfile();
-
-            }
-        }
-    }
 }

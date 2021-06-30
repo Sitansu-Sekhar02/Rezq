@@ -23,7 +23,7 @@ public class AppButton extends AppCompatButton {
     }
 
     private void applyCustomFont(Context context) {
-        Typeface customFont = FontCache.get("medium.otf", context);
+        Typeface customFont = FontCache.get("bold.otf", context);
         setTypeface(customFont);
     }
 

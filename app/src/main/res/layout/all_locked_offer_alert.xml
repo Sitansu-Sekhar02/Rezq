@@ -74,11 +74,26 @@
 
                     </androidx.recyclerview.widget.RecyclerView>
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_empty_locked_offer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/hotel_ll"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="@string/no_offer_available"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
 
                 </LinearLayout>
 
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/rr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -122,10 +137,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
                         <com.sa.rezq.view.AppTextView
+                            android:id="@+id/tv_upgrade_title"
                             android:layout_width="163dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
-                            android:gravity="center"
                             android:text="@string/prime_members"
                             android:textColor="@color/white"
                             android:textSize="14dp" />

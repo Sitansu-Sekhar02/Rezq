@@ -10,8 +10,8 @@ public class SearchMainModel {
 
     private final String
             RESPONSE            = "response",
-            STATUS              = "status_bool",
-            MESSAGE             = "status";
+            STATUS              = "status",
+            MESSAGE             = "message";
 
     SearchResponseListModel
             searchResponseListModel      = null;

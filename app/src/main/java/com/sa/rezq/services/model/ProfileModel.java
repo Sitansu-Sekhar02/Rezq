@@ -382,15 +382,12 @@ public class ProfileModel implements Serializable {
                 national_id = json.getString(NATIONAL_ID);
             }
 
-            if (json.has(MEMBERSHIP)) {
+            if(json.has(MEMBERSHIP)){
                 ProfileMembershipModel membershipModel = new ProfileMembershipModel();
-                JSONObject addressJson = new JSONObject();
-                addressJson = json.getJSONObject(MEMBERSHIP);
-                if (addressJson != null) {
-                    profileMembershipModel.toObject(addressJson.toString());
-                }
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1 = json.getJSONObject(MEMBERSHIP);
+                if(jsonObject1 != null){membershipModel.toObject(jsonObject1.toString());}
                 profileMembershipModel = membershipModel;
-
             }
 
            /* if (json.has(CITY)) {
@@ -449,7 +446,8 @@ public class ProfileModel implements Serializable {
             jsonMain.put(IMAGE, image);//new JSONObject(image.toString()));
             jsonMain.put(ORDER_COUNT, orderCount);
             jsonMain.put(PROFILE_IMAGE, profileImg);
-           // jsonMain.put(MEMBERSHIP, membership);
+            jsonMain.put(COUNTRY_CODE, country_code);
+            // jsonMain.put(MEMBERSHIP, membership);
         /*   jsonMain.put(MEMBERSHIP_NAME, membership);
             jsonMain.put(MEMBERSHIP, membership);
             jsonMain.put(MEMBERSHIP, membership);
@@ -457,7 +455,6 @@ public class ProfileModel implements Serializable {
             jsonMain.put(MEMBERSHIP, profileMembershipModel != null ? new JSONObject(this.profileMembershipModel.toString()) : new JSONObject());
 
             jsonMain.put(WALLET, wallet);
-            jsonMain.put(COUNTRY_CODE, country_code);
             jsonMain.put(LOGISTIC_ID, logistic_id);
             jsonMain.put(DRIVER_LOGIN_ID, driver_login_id);
             jsonMain.put(DRIVING_LICENCE, driving_licence);

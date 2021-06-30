@@ -10,10 +10,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.Window;
@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.mukesh.OtpView;
@@ -40,11 +42,18 @@ import com.sa.rezq.R;
 import com.sa.rezq.adapter.AllCategoryListAdapter;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.membership.FreeMembershipActivity;
+import com.sa.rezq.services.ServerResponseInterface;
+import com.sa.rezq.services.ServicesMethodsManager;
+import com.sa.rezq.services.model.FeedbackNRatingMainModel;
+import com.sa.rezq.services.model.InsertAccountModel;
 import com.sa.rezq.services.model.OfferModel;
+import com.sa.rezq.services.model.RatingNFeedbackModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.services.model.VendorModel;
+import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -67,7 +76,12 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     private EditText public_name_etv, cr_number_etv, vat_number_etv, m_first_name_etv, m_last_name_etv, m_email_etv, shop_url_etv, head_office_address_etv, mobile_number_etv;
     private TextView offer_title,offer_description,restro_title,restro_avg_rating,restro_rating_count,tv_show_coupon,tv_copy_code;
     private ImageView offer_image,restro_image;
+    private ImageView iv_feedback_image;
+    private RatingBar rt_rating;
+    private TextView tv_feedback_title;
+    private  EditText et_feedback_comment;
     private Button btn_redeemOffer;
+    private Button btn_submit;
     public View mainView;
     public   OtpView redeem_insert;
 
@@ -82,6 +96,10 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     String account = String.valueOf(1);
     String offer_store_id=null;
     String store_id=null;
+
+    LayoutInflater layoutInflater;
+    RatingNFeedbackModel ratingNFeedbackModel;
+
 
 
     AllCategoryListAdapter categoryListAdapter;
@@ -133,6 +151,9 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         context = this;
         activity = this;
         window = getWindow();
+
+        layoutInflater = activity.getLayoutInflater();
+
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
@@ -236,7 +257,10 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         tool_bar_back_icon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+               // onBackPressed();
+                Intent intent = new Intent(activity, MainActivity.class);
+                startActivity(intent);
+                closeThisActivity();
             }
         });
         mainView = seeAllCategoryRecyclerview;
@@ -247,14 +271,22 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         setTitle(getString(R.string.offers), 0, 0);
 
 
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // TODO Auto-generated method stub
+                // Show your dialog here
+                openFeedbackPopup();
 
+            }
+        }, 1500);
 
     }
 
-    private void openRedeemPopup() {
+    private void openFeedbackPopup() {
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.reedem_offer_alert);
+        dialog.setContentView(R.layout.feed_back_n_rating_allert);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.CENTER;
@@ -266,97 +298,108 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-        redeem_insert = dialog.findViewById(R.id.redeem_offer_insert);
-        final Button  btn_Continue = dialog.findViewById(R.id.btn_continue_redeem);
 
-        redeem_insert.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        iv_feedback_image=dialog.findViewById(R.id.iv_product_image);
+        tv_feedback_title=dialog.findViewById(R.id.tv_product_title);
+        rt_rating=dialog.findViewById(R.id.rt_rating);
+        et_feedback_comment=dialog.findViewById(R.id.et_Comment);
+        btn_submit=dialog.findViewById(R.id.btn_submit);
+        et_feedback_comment.clearFocus();
+
+
+        if (storeModel != null) {
+            if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
+                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.rezq_logo).into(iv_feedback_image);
 
             }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
+            if (GlobalFunctions.isNotNullValue(storeModel.getName())) {
+                tv_feedback_title.setText(storeModel.getName());
             }
+        }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-                String digits = redeem_insert.getText().toString().trim();
-                if (digits.length() >= 6) {
-                    globalFunctions.closeKeyboard(activity);
-                }
-            }
-        });
 
-        btn_Continue.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+             btn_submit.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (rt_rating != null && et_feedback_comment != null) {
+                        String
+                                rating = String.valueOf(rt_rating.getRating()),
+                                comment = et_feedback_comment.getText().toString().trim();
+                       /* if (rating.isEmpty()) {
+                            rt_rating.setError(getString(R.string.pleaseFillMandatoryDetails));
+                            rt_rating.setFocusableInTouchMode(true);
+                            rt_rating.requestFocus();
+                        }*/ if (comment.isEmpty()) {
+                            et_feedback_comment.setError(getString(R.string.please_give_a_comment));
+                            et_feedback_comment.setFocusableInTouchMode(true);
+                            et_feedback_comment.requestFocus();
+                        } else {
+                            if (ratingNFeedbackModel == null) {
+                                ratingNFeedbackModel = new RatingNFeedbackModel();
+                            }
+                            ratingNFeedbackModel.setStore_id(store_id);
+                            ratingNFeedbackModel.setRating(rating);
+                            ratingNFeedbackModel.setComment(comment);
+                            dialog.dismiss();
 
-                String code = redeem_insert.getText().toString().trim();
+                             insertFeedback(activity, ratingNFeedbackModel);
 
-                if (code.isEmpty() || code.length() < 6) {
-
-                    redeem_insert.setError(getString(R.string.please_enter_valid_code));
-                    redeem_insert.requestFocus();
-                    return;
-                }
-                else {
-
-                      verifyCode();
-
+                        }
                     }
+                }
 
-            }
-        });
+
+            });
+
     }
 
-    private void verifyCode() {
-       /* globalFunctions.showProgress(activity, getString(R.string.loading));
+    private void insertFeedback(Activity activity, RatingNFeedbackModel ratingNFeedbackModel) {
+        globalFunctions.showProgress(activity, activity.getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.checkRedeemCode(context,id,redeem_insert,offer_store_id, new ServerResponseInterface() {
-            @SuppressLint("LongLogTag")
+        servicesMethodsManager.giveFeedback(context, ratingNFeedbackModel, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
                 globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
-                validateOutputAfterInsertCoupon(arg0);
-
+                //StatusModel model = (StatusModel) arg0;
+                validateOutputAfterFeedback(arg0);
             }
 
-            @SuppressLint("LongLogTag")
             @Override
             public void OnFailureFromServer(String msg) {
-                globalFunctions.hideProgress();
-
-                globalFunctions.displayMessaage(context, mainView, msg);
+                  globalFunctions.hideProgress();
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Failure : " + msg);
             }
 
-            @SuppressLint("LongLogTag")
             @Override
             public void OnError(String msg) {
                 globalFunctions.hideProgress();
-
-                globalFunctions.displayMessaage(context, mainView, msg);
+                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Error : " + msg);
             }
-        }, "Redeem Code");*/
-
+        }, "feedback");
     }
-
-    private void validateOutputAfterInsertCoupon(Object arg0) {
+    private void validateOutputAfterFeedback(Object arg0) {
         if (arg0 instanceof StatusMainModel) {
-            StatusMainModel statusMainModel = (StatusMainModel) arg0;
-            StatusModel statusModel = statusMainModel.getStatusModel();
-            if (!statusModel.isStatus()) {
+            StatusMainModel feedbackNRatingMainModel = (StatusMainModel) arg0;
+            StatusModel statusModel = feedbackNRatingMainModel.getStatusModel();
+            if (!feedbackNRatingMainModel.isStatusLogin()) {
                 globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
 
             } else {
+                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+                //goToMainActivity();
 
             }
         }
     }
+    private void goToMainActivity() {
+        Intent intent = new Intent(activity, MainActivity.class);
+        startActivity(intent);
+        closeThisActivity();
+    }
+
 
 
     public static void setTitle (String title,int titleImageID, int backgroundResourceID){
@@ -396,7 +439,6 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         super.onBackPressed();
 
     }
-
     public static void closeThisActivity () {
         if (activity != null) {
             activity.finish();

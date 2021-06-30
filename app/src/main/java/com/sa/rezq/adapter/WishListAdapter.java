@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.WishListModel;
 import com.sa.rezq.services.model.WishModel;
@@ -22,13 +25,15 @@ import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHolder> {
+public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHolder> implements Filterable {
 
     public static final String TAG = "WishListAdapter";
 
     private final List<WishModel> list;
+    private List<WishModel> searchList;
     private final Activity activity;
     private GlobalVariables globalVariables;
     private GlobalFunctions globalFunctions;
@@ -37,6 +42,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     public WishListAdapter(Activity activity, List<WishModel> list) {
         this.activity = activity;
         this.list = list;
+        searchList = new ArrayList<>(list);
 
     }
 
@@ -77,6 +83,42 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     public int getItemCount() {
         return list.size();
     }
+
+    @Override
+    public Filter getFilter() {
+        return searchFilter;
+    }
+    private Filter searchFilter = new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<WishModel> filteredList = new ArrayList<>();
+
+            if (constraint == null || constraint.length() == 0) {
+                filteredList.addAll(searchList);
+            } else {
+                String filterPattern = constraint.toString().toLowerCase().trim();
+
+                for (WishModel item : searchList) {
+                    if (item.getName().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(item);
+                    }
+                }
+            }
+
+            FilterResults results = new FilterResults();
+            results.values = filteredList;
+
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            list.clear();
+            list.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
          ImageView item_image, item_viv;

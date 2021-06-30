@@ -10,19 +10,19 @@ public class SearchResponseModel implements Serializable{
     private final String TAG = "SearchResponseModel";
     private final String
             ID                    = "id",
-            TITLE                 = "title",
+            NAME                  = "name",
             VARIATION             = "id_variation",
             EXTRA                 = "type",
-            CATEGORY_TITLE        = "category_title",
-            CATEGORY_ID           = "category_id";
+            LATITUDE              = "latitude",
+            LONGITUDE             = "longitude";
 
     String
             id                 = null,
-            title              = null,
+            name               = null,
             variation          = null,
             extra              = null,
-            categoryTitle      = null,
-            categoryId         = null;
+            latitude           = null,
+            longitude         = null;
 
     public SearchResponseModel(){}
 
@@ -34,14 +34,6 @@ public class SearchResponseModel implements Serializable{
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getExtra() {
         return extra;
     }
@@ -50,20 +42,28 @@ public class SearchResponseModel implements Serializable{
         this.extra = extra;
     }
 
-    public String getCategoryTitle() {
-        return categoryTitle;
+    public String getName() {
+        return name;
     }
 
-    public void setCategoryTitle(String categoryTitle) {
-        this.categoryTitle = categoryTitle;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getCategoryId() {
-        return categoryId;
+    public String getLatitude() {
+        return latitude;
     }
 
-    public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
     }
 
     public String getVariation() {
@@ -78,11 +78,11 @@ public class SearchResponseModel implements Serializable{
         try{
             JSONObject json = new JSONObject(jsonObject);
             if(json.has(ID))id = json.getString(ID);
-            if(json.has(TITLE))title = json.getString(TITLE);
+            if(json.has(NAME))name = json.getString(NAME);
             if(json.has(EXTRA))extra = json.getString(EXTRA);
             if(json.has(VARIATION))variation = json.getString(VARIATION);
-            if(json.has(CATEGORY_TITLE))categoryTitle = json.getString(CATEGORY_TITLE);
-            if(json.has(CATEGORY_ID))categoryId = json.getString(CATEGORY_ID);
+            if(json.has(LONGITUDE))longitude = json.getString(LONGITUDE);
+            if(json.has(LATITUDE))latitude = json.getString(LATITUDE);
 
             return true;
         }catch(Exception ex){
@@ -96,11 +96,11 @@ public class SearchResponseModel implements Serializable{
         try{
             JSONObject jsonMain = new JSONObject();
             jsonMain.put(ID, this.getId());
-            jsonMain.put(TITLE, this.getTitle());
+            jsonMain.put(NAME, this.getName());
             jsonMain.put(EXTRA, this.getExtra());
             jsonMain.put(VARIATION, this.getVariation());
-            jsonMain.put(CATEGORY_TITLE, this.getCategoryTitle());
-            jsonMain.put(CATEGORY_ID, this.getCategoryId());
+            jsonMain.put(LONGITUDE, this.getLongitude());
+            jsonMain.put(LATITUDE, this.getLatitude());
 
             returnString = jsonMain.toString();
         }

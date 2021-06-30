@@ -39,6 +39,20 @@
 
             </androidx.cardview.widget.CardView>
 
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/iv_next"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/card_banner_list"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:text="@string/scroll_right_toseeMore"
+                android:drawablePadding="@dimen/_5sdp"
+                android:drawableRight="@drawable/ic_baseline_arrow_forward_ios_24">
+
+            </com.sa.rezq.view.AppTextView>
+
 
 
             <RelativeLayout
@@ -59,9 +73,9 @@
                 android:id="@+id/lnrDesc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/card_banner_list"
+                android:layout_below="@id/iv_next"
                 android:layout_marginLeft="25dp"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="25dp"
                 android:orientation="vertical">
 

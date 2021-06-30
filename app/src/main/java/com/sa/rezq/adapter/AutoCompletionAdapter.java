@@ -41,11 +41,11 @@ public class AutoCompletionAdapter extends RecyclerView.Adapter<AutoCompletionAd
         SearchResponseModel keyValue = items.get(position);
         if (keyValue != null) {
             TextView customerNameLabel = (TextView) v.findViewById(R.id.autoCompleteLabel);
-            TextView customerNameLabelSubtitle = (TextView) v.findViewById(R.id.autoCompleteLabel_subtitle);
+           // TextView customerNameLabelSubtitle = (TextView) v.findViewById(R.id.autoCompleteLabel_subtitle);
             if (customerNameLabel != null) {
 
-                if (keyValue.getTitle() != null) {
-                    customerNameLabel.setText(keyValue.getTitle());
+                if (keyValue.getName() != null) {
+                    customerNameLabel.setText(keyValue.getName());
                 }
             }
         }
@@ -58,7 +58,7 @@ public class AutoCompletionAdapter extends RecyclerView.Adapter<AutoCompletionAd
         public ViewHolder(View view) {
             super(view);
             customerNameLabel = (TextView) view.findViewById(R.id.autoCompleteLabel);
-            customerNameLabelSubtitle = (TextView) view.findViewById(R.id.autoCompleteLabel_subtitle);
+            //customerNameLabelSubtitle = (TextView) view.findViewById(R.id.autoCompleteLabel_subtitle);
         }
     }
 
@@ -75,8 +75,8 @@ public class AutoCompletionAdapter extends RecyclerView.Adapter<AutoCompletionAd
         final SearchResponseModel item = items.get(position);
         if (item != null) {
 
-            if (item.getTitle() != null) {
-                holder.customerNameLabel.setText(item.getTitle());
+            if (item.getName() != null) {
+                holder.customerNameLabel.setText(item.getName());
             }
 
             holder.itemView.setOnClickListener(new View.OnClickListener() {

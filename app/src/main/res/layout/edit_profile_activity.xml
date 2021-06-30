@@ -138,6 +138,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
             <RelativeLayout
+                android:visibility="gone"
                 android:id="@+id/mobile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,6 +165,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </RelativeLayout>
             <LinearLayout
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
@@ -178,6 +180,9 @@
                     android:layout_marginTop="@dimen/_2sdp"
                     app:ccp_autoDetectCountry="true"
                     android:layout_gravity="center"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
                     app:ccp_autoDetectLanguage="true"
                     app:ccp_contentColor="@color/login_text"
                     app:ccp_textSize="@dimen/_12sdp" />
@@ -190,10 +195,34 @@
                 android:layout_marginBottom="15dp">
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_mobile_no"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/contact"
+                        android:inputType="number"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="#B5B5B5"
+                        android:textColorHint="#B5B5B5"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+               <!-- <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColorHint="#B5B5B5"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintRight_toRightOf="parent">
 
@@ -202,10 +231,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/mobile_no"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/app_grey_text"
                         android:imeOptions="actionDone"
                         android:inputType="number" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>-->
             </RelativeLayout>
 
             </LinearLayout>

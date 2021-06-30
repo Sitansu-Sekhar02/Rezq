@@ -2,16 +2,22 @@ package com.sa.rezq.coupons;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,7 +27,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -83,31 +91,16 @@ public class RecentCouponActivity extends AppCompatActivity {
     static int titleResourseID;
     static TextView toolbar_title;
     static ImageView toolbar_logo, tool_bar_back_icon;
-    Menu menu;
-    String account = String.valueOf(1);
 
     ProgressLinearLayout progressActivity;
     GlobalFunctions globalFunctions;
     GlobalVariables globalVariables;
-    SwipeRefreshLayout swipe_container;
     List <RecentCouponModel> recentCouponModels = new ArrayList <>();
     LinearLayoutManager linearLayoutManager;
-
     CouponListAdapter listAdapter;
 
 
-    private boolean shouldRefreshOnResume = false;
-
-
     Window window = null;
-    ImageView vendor_list_image,iv_favourite;
-    TextView tv_vendor_name,tvRating,tv_address,tv_open_map,tv_rating_count;
-
-    String vendor_id = null;
-    TrendingModel trendingModel = null;
-
-    FirebaseStorage storage;
-    StorageReference storageReference;
 
 
     @SuppressLint("LongLogTag")
@@ -122,14 +115,8 @@ public class RecentCouponActivity extends AppCompatActivity {
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
-        //linearLayoutManager = new LinearLayoutManager(activity);
-       // progressActivity = findViewById(R.id.details_progressActivity);
-       // swipe_container = findViewById(R.id.swipe_container);
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
-        //toolbar.setPadding(0, GlobalFunctions.getStatusBarHeight(context), 0, 0);
-        //toolbar.setNavigationIcon(R.drawable.ic_back_draw);
-        //toolbar.setContentInsetsAbsolute(0,0);
         toolbar_title = (TextView) toolbar.findViewById(R.id.toolbar_title);
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
         tool_bar_back_icon.setOnClickListener(new View.OnClickListener() {
@@ -144,17 +131,10 @@ public class RecentCouponActivity extends AppCompatActivity {
 
         linearLayoutManager = new LinearLayoutManager( activity );
         progressActivity = findViewById( R.id.recent_progressActivity );
-        swipe_container =findViewById( R.id.swipe_container );
 
         mainView = recyclerView;
         loadRecentList();
 
-        swipe_container.setOnRefreshListener( new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                loadRecentList();
-            }
-        } );
 
 
 
@@ -166,15 +146,13 @@ public class RecentCouponActivity extends AppCompatActivity {
     }
 
     private void loadRecentList() {
-        GlobalFunctions.showProgress( context, getString( R.string.loading ));
+       // GlobalFunctions.showProgress( context, getString( R.string.loading ));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.getRecentCouponList( context, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
-                GlobalFunctions.hideProgress();
-                if (swipe_container.isRefreshing()) {
-                    swipe_container.setRefreshing( false );
-                }
+              //  GlobalFunctions.hideProgress();
+
                 Log.d( TAG, "Response : " + arg0.toString() );
                 RecentCouponMainModel recentCouponMainModel = (RecentCouponMainModel) arg0;
                 if (recentCouponMainModel!=null && recentCouponMainModel.getRecentCouponListModel()!=null){
@@ -185,20 +163,16 @@ public class RecentCouponActivity extends AppCompatActivity {
 
             @Override
             public void OnFailureFromServer(String msg) {
-                GlobalFunctions.hideProgress();
-                if (swipe_container.isRefreshing()) {
-                    swipe_container.setRefreshing( false );
-                }
+               // GlobalFunctions.hideProgress();
+
                 Log.d( TAG, "Failure : " + msg );
                 GlobalFunctions.displayMessaage( context, mainView, msg );
             }
 
             @Override
             public void OnError(String msg) {
-                GlobalFunctions.hideProgress();
-                if (swipe_container.isRefreshing()) {
-                    swipe_container.setRefreshing( false );
-                }
+                //GlobalFunctions.hideProgress();
+
                 Log.d( TAG, "Error : " + msg );
                 GlobalFunctions.displayMessaage( context, mainView, msg );
             }
@@ -222,10 +196,7 @@ public class RecentCouponActivity extends AppCompatActivity {
                 showContent();
                 initRecyclerView();
             }
-            /*if (recentCouponModels.size() > 0) {
-                showContent();
-                initRecyclerView();
-            }*/
+
         }
     }
 
@@ -249,12 +220,56 @@ public class RecentCouponActivity extends AppCompatActivity {
         recyclerView.setAdapter(listAdapter);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_menu_item, menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                listAdapter.getFilter().filter(newText);
+                return false;
+            }
+        });
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                // Set styles for expanded state here
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.LTGRAY));
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Set styles for collapsed state here
+                if (getSupportActionBar() != null) {
+                    getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+                }
+                return true;
+            }
+        });
+        return true;
+    }
+
 
 
     @Override
     public void onStop () {
         super.onStop();
-        shouldRefreshOnResume = true;
     }
 
     public static void setTitle (String title,int titleImageID, int backgroundResourceID){

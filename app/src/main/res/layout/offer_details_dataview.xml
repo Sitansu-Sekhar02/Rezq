@@ -13,6 +13,7 @@
             android:id="@+id/iv_offer_image"
             android:layout_width="52dp"
             android:layout_height="52dp"
+            android:background="@drawable/offer_border"
             android:gravity="center" />
 
         <com.sa.rezq.view.AppTextView
