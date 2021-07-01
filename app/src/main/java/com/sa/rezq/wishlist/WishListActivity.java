@@ -27,6 +27,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.R;
+import com.sa.rezq.adapter.AllCategoryListAdapter;
 import com.sa.rezq.adapter.WishListAdapter;
 import com.sa.rezq.adapter.WishListCategoryAdapter;
 import com.sa.rezq.adapter.interfaces.ClickListener;
@@ -34,11 +35,12 @@ import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
+import com.sa.rezq.services.model.SeeAllCategoryListMainModel;
+import com.sa.rezq.services.model.SeeAllCategoryListModel;
+import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.WishListMainModel;
 import com.sa.rezq.services.model.WishListModel;
 import com.sa.rezq.services.model.WishModel;
-import com.sa.rezq.services.model.WishlistCategoryListModel;
-import com.sa.rezq.services.model.WishlistCategoryMainModel;
 import com.sa.rezq.services.model.WishlistCategoryModel;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
@@ -53,8 +55,7 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
     private static Activity activity;
     View mainView;
 
-
-
+    
     static Toolbar toolbar;
     static ActionBar actionBar;
     static String mTitle;
@@ -79,6 +80,10 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
     List<WishlistCategoryModel> wishlistCategoryModels = new ArrayList<>();
     LinearLayoutManager horizontalLinear;
     RecyclerView wishlist_category_recyclerview;
+
+    AllCategoryListAdapter categoryListAdapter;
+    List<SeeAllCategoryModel> listModelList = new ArrayList<>();
+
 
 
 
@@ -139,16 +144,21 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
     private void getWishlistCategoryList() {
         //globalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.getWishlistCategory(context, new ServerResponseInterface() {
+        servicesMethodsManager.getSeeAllCategoryList(context, new ServerResponseInterface() {
             @SuppressLint("LongLogTag")
             @Override
             public void OnSuccessFromServer(Object arg0) {
                // globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
-                WishlistCategoryMainModel wishlistCategoryMainModel = (WishlistCategoryMainModel) arg0;
+               /* WishlistCategoryMainModel wishlistCategoryMainModel = (WishlistCategoryMainModel) arg0;
                 if (wishlistCategoryMainModel!=null && wishlistCategoryMainModel.getWishlistCategoryListModel()!=null){
                     WishlistCategoryListModel listModel = wishlistCategoryMainModel.getWishlistCategoryListModel();
                  //   WishlistCategoryModel wishListModel=listModel.getWishlistCategoryModels();
+                    setWishListPage(listModel);
+                }*/
+                SeeAllCategoryListMainModel seeAllCategoryListMainModel = (SeeAllCategoryListMainModel) arg0;
+                if (seeAllCategoryListMainModel!=null && seeAllCategoryListMainModel.getSeeAllCategoryListModel()!=null){
+                    SeeAllCategoryListModel listModel = seeAllCategoryListMainModel.getSeeAllCategoryListModel();
                     setWishListPage(listModel);
                 }
 
@@ -174,17 +184,22 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
         }, "list");
     }
 
-    private void setWishListPage(WishlistCategoryListModel listModel) {
-        if (listModel != null && wishlistCategoryModels != null) {
-            wishlistCategoryModels.clear();
-            wishlistCategoryModels.addAll(listModel.getWishlistCategoryModels());
-            if (wishListCategoryAdapter != null) {
-                synchronized (wishListCategoryAdapter) {
-                    wishListCategoryAdapter.notifyDataSetChanged();
+    private void setWishListPage(SeeAllCategoryListModel listModel) {
+        if (listModel != null && listModelList != null) {
+            listModelList.clear();
+            //static for all category
+            SeeAllCategoryModel wishlistCategoryModel=new SeeAllCategoryModel();
+            wishlistCategoryModel.setCategori_id("0");
+            wishlistCategoryModel.setName("All");
+            listModelList.add(wishlistCategoryModel);
+            listModelList.addAll(listModel.getAllCategoryList());
+            if (categoryListAdapter != null) {
+                synchronized (categoryListAdapter) {
+                    categoryListAdapter.notifyDataSetChanged();
                 }
             }
 
-            if (wishlistCategoryModels.size() > 0) {
+            if (listModelList.size() > 0) {
                 initCategoryRecyclerView();
             }
         }
@@ -193,7 +208,7 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
     private void initCategoryRecyclerView() {
         wishlist_category_recyclerview.setLayoutManager(horizontalLinear);
         wishlist_category_recyclerview.setHasFixedSize(true);
-        wishListCategoryAdapter = new WishListCategoryAdapter(activity, wishlistCategoryModels,this::OnItemClickListener);
+        wishListCategoryAdapter = new WishListCategoryAdapter(activity, listModelList, model -> OnItemClickListener(model));
         wishlist_category_recyclerview.setAdapter(wishListCategoryAdapter);
     }
 
@@ -399,8 +414,8 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
     }
 
     @Override
-    public void OnItemClickListener( WishlistCategoryModel model) {
-        getWishList(model.getId());
+    public void OnItemClickListener(SeeAllCategoryModel model) {
+        getWishList(model.getCategori_id());
 
     }
 }

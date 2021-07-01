@@ -27,6 +27,7 @@
                 <ImageView
                     android:id="@+id/vendor_list_image"
                     android:layout_width="match_parent"
+                    android:scaleType="centerCrop"
                     android:layout_height="@dimen/_160sdp" />
 
                 <com.sa.rezq.view.AppTextView
@@ -45,7 +46,6 @@
                     android:gravity="center"
                     android:text=""
                     android:alpha="0.4"
-                    android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
             </RelativeLayout>

@@ -2,6 +2,7 @@ package com.sa.rezq.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,7 +49,6 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-
         return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vendor_store_listdata, parent, false));
 
     }
@@ -57,17 +57,17 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
     public void onBindViewHolder(@NonNull VendorListAdapter.viewHolder holder, int position) {
         final VendorStoreModel model = list.get(position);
 
-        if (model.getName() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getName())) {
             holder.tv_vendor_name.setText(model.getName());
         }
-        if (model.getRating_count() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getRating_count())) {
             holder.store_rating.setRating(Float.parseFloat((model.getRating_count())));
         }
-        if (model.getOffers() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getOffers())) {
             holder.offer_count.setText((model.getOffers()));
-        }  if (model.getFacilities() != null) {
+        }  if (GlobalFunctions.isNotNullValue(model.getFacilities() )) {
             holder.tv_facilities.setText((model.getFacilities()));
-        }   if (model.getLogo() != null) {
+        }   if (GlobalFunctions.isNotNullValue(model.getLogo())) {
 
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.iv_vendor_logo);
 
@@ -76,6 +76,29 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
         holder.vendor_store_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if (vendorModel==null){vendorModel=new VendorModel();}
+
+                if (GlobalFunctions.isNotNullValue(model.getId())) {
+                    vendorModel.setId(model.getId());
+                }
+
+                if (GlobalFunctions.isNotNullValue(model.getName())) {
+                    vendorModel.setName(model.getName());
+                }
+                if (GlobalFunctions.isNotNullValue(model.getRating_count())) {
+                    vendorModel.setRating_count(model.getRating_count());
+                }
+
+                if (GlobalFunctions.isNotNullValue(model.getAvg_rating())) {
+                    vendorModel.setAvg_rating(model.getAvg_rating());
+                }
+
+                if (GlobalFunctions.isNotNullValue(model.getLogo())) {
+                    vendorModel.setImage(model.getLogo());
+                }
+
+                Log.d("vendorModel00","=="+vendorModel);
 
                 Intent intent = VendorListDetailsActivity.newInstance( activity, model ,vendorModel);
                 activity.startActivity( intent );

@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +20,6 @@ import androidx.fragment.app.Fragment;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.profile.ProfileMainActivity;
-import com.sa.rezq.profile.activities.EditAccountActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.ProfileMainModel;
@@ -41,7 +41,7 @@ public class SubscriberProfileFragment extends Fragment {
     View mainView;
     TextView tv_userfullName, therapist_tv, update_button, email_ev,tv_membership_title;
     TextView first_name_etv, last_name_etv, mobile_etv, email_etv, password_etv, confirm_password_etv;
-    CircleImageView profile_image;
+    ImageView profile_image;
     Button btn_update_profile;
 
     View view;
@@ -99,7 +99,7 @@ public class SubscriberProfileFragment extends Fragment {
         });
 
 
-        getAccountProfile();
+        //getAccountProfile();
         mainView=first_name_etv;
 
 
@@ -175,11 +175,19 @@ public class SubscriberProfileFragment extends Fragment {
                // mobile_etv.setText( detail.getPhone());
                 //email_etv.setText( detail.getEmail() );
                 //tv_membership_title.setText(detail.);
-                if (profileMembershipModel!=null){
+                ProfileMembershipModel profileMembershipModel=GlobalFunctions.getProfileMembership(context);
+                if (profileMembershipModel!=null) {
+                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_name())) {
+                        //   membership_id=profileMembershipModel.getUpgrade_id();
+                        tv_membership_title.setText(profileMembershipModel.getMembership_name());
+
+                    }
+                }
+               /* if (profileMembershipModel!=null){
                     if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_name())){
                         tv_membership_title.setText(profileMembershipModel.getMembership_name());
                     }
-                }
+                }*/
 
                 try {
                     if (detail.getProfileImg() != null || !detail.getProfileImg().equals( "null" ) || !detail.getProfileImg().equalsIgnoreCase( "" )) {
@@ -194,7 +202,7 @@ public class SubscriberProfileFragment extends Fragment {
 
     @Override
     public void onResume() {
-        /* getProfile();*/
+         getAccountProfile();
         // MainActivity.setTitleResourseID(0);
         ((ProfileMainActivity) activity).setTitle( getString( R.string.my_profile ), R.drawable.rezq_logo, 0 );
         super.onResume();

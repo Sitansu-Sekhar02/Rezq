@@ -345,6 +345,40 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
 
+        if (vendorModel==null){
+            vendorModel=new VendorModel();
+            if (nearbyModel != null) {
+                if (GlobalFunctions.isNotNullValue(nearbyModel.getName())) {
+                    vendorModel.setName(nearbyModel.getName());
+                }
+                if (GlobalFunctions.isNotNullValue(nearbyModel.getId())) {
+                    vendorModel.setId(nearbyModel.getId());
+                }
+
+                if (GlobalFunctions.isNotNullValue(nearbyModel.getIcon())) {
+                    vendorModel.setImage(nearbyModel.getIcon());
+                }
+
+            }
+        }
+
+        if (vendorModel==null){
+            vendorModel=new VendorModel();
+            if (trendingModel != null) {
+                if (GlobalFunctions.isNotNullValue(trendingModel.getName())) {
+                    vendorModel.setName(trendingModel.getName());
+                }
+                if (GlobalFunctions.isNotNullValue(trendingModel.getId())) {
+                    vendorModel.setId(trendingModel.getId());
+                }
+
+                if (GlobalFunctions.isNotNullValue(trendingModel.getIcon())) {
+                    vendorModel.setImage(trendingModel.getIcon());
+                }
+
+            }
+        }
+
 
 
 
@@ -358,7 +392,10 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         });
 
 
-        setTitle(getString(R.string.offers), 0, 0);
+
+
+
+       // setTitle(getString(R.string.offers), 0, 0);
 
         loadVendorlistDetails();
 
@@ -731,13 +768,13 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                     isWishlisted=true;
                 }
 
-                // Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
-
             }
-            /*if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
-                Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
-            }*/
+            if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {
+                    toolbar_title.setText(vendorModel.getName());
+            }
+
+
             if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
                 Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
 
@@ -824,7 +861,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         if (actionBar != null) {
             Log.d(TAG, "Restore Action Bar not Null");
             Log.d(TAG, "Title : " + mTitle);
-            toolbar_title.setText(mTitle);
+
+            //toolbar_title.setText(mTitle);
             if (mResourceID != 0) toolbar.setBackgroundResource(mResourceID);
             //actionBar.setTitle("");
             // actionBar.setDisplayHomeAsUpEnabled(true);

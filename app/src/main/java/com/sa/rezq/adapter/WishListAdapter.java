@@ -58,11 +58,11 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final WishModel model = list.get(position);
 
-        if (model.getName() != null) {
+        /*if (GlobalFunctions.isNotNullValue(model.getName() )) {
             holder.product_title_tv.setText(model.getName());
-        } if (model.getFacilities() != null) {
+        } if (GlobalFunctions.isNotNullValue(model.getFacilities())) {
             holder.product_sub_title.setText(model.getFacilities());
-        }if (model.getLogo() != null) {
+        }*/if (GlobalFunctions.isNotNullValue(model.getLogo() )) {
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.item_image);
         }
 

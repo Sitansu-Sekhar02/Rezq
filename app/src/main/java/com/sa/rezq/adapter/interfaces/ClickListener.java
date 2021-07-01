@@ -1,8 +1,8 @@
 package com.sa.rezq.adapter.interfaces;
 
 
-import com.sa.rezq.services.model.WishlistCategoryModel;
+import com.sa.rezq.services.model.SeeAllCategoryModel;
 
 public interface ClickListener {
-    void OnItemClickListener( WishlistCategoryModel model);
+    void OnItemClickListener(SeeAllCategoryModel model);
 }

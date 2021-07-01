@@ -57,12 +57,12 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
     public void onBindViewHolder(@NonNull OfferListAdapter.viewHolder holder, int position) {
         final OfferModel model = list.get(position);
 
-            if (model.getTitle() != null) {
+            if (GlobalFunctions.isNotNullValue(model.getTitle())) {
                 holder.product_title.setText(model.getTitle());
             }
-            if (model.getOffer_applicable() != null) {
+            if (GlobalFunctions.isNotNullValue(model.getOffer_applicable() )) {
                 holder.product_applicable.setText((model.getOffer_applicable()));
-            }   if (model.getOffer_image() != null) {
+            }   if (GlobalFunctions.isNotNullValue(model.getOffer_image() )) {
                  Picasso.with(activity).load(model.getOffer_image()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
             }
 
@@ -70,7 +70,7 @@ public class OfferListAdapter extends RecyclerView.Adapter<OfferListAdapter.view
             @Override
             public void onClick(View v) {
 
-               // Log.e("vendorModel00","=="+vendorModel);
+
                 if (model.getAllow().equalsIgnoreCase("1")){
                     model.setStoreId(vendor_id);
                     Intent intent = RedeemOfferActivity.newInstance( activity, model,vendorModel);

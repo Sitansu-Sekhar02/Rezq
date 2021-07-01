@@ -136,7 +136,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
     //Langauge Textview
-    TextView tvArabic,tvEnglish;
+    static  TextView arabic_language_tv, english_language_tv;
+
+    static View arabic_language_iv, english_language_iv;
+
 
 
     public static final String BUNDLE_DEEPLINK_URL = "BundleDeepLinkURL";
@@ -368,7 +371,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //        }
 //
 //
-        getProfile();
+        //getProfile();
 //        loadMenu(mainContext);
 
 
@@ -505,6 +508,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity( intent );
                 }
             });
+/*
+            if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
+                english_language_iv.setVisibility(View.VISIBLE);
+                arabic_language_iv.setVisibility(View.GONE);
+            } else {
+                english_language_iv.setVisibility(View.GONE);
+                arabic_language_iv.setVisibility(View.VISIBLE);
+            }*/
+
+          /*  arabic_language_tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
+                        LanguageChange(mainContext);
+//                    RestartEntireApp(mainContext, true);
+                    } else {
+                        ///nothing...
+                    }
+                    drawer.closeDrawer(gravity);
+                }
+            });
+
+            english_language_tv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
+                        //nothing
+                    } else {
+                        LanguageChange(mainContext);
+//                    RestartEntireApp(mainContext, true);
+                    }
+                    drawer.closeDrawer(gravity);
+                }
+            });*/
 
             ProfileModel profileModel=globalFunctions.getProfile(activity);
             if (profileModel!=null) {
@@ -580,7 +618,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
 
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_image())) {
-                    Picasso.with(mainContext).load(profileMembershipModel.getSubscriber_image()).placeholder(R.drawable.ic_guest_profile).into(header_app_iv);
+                    Picasso.with(mainContext).load(profileMembershipModel.getSubscriber_image()).placeholder(R.drawable.ic_baseline_person_24).into(header_app_iv);
 
                 }
 
@@ -592,6 +630,62 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             }
         }
+    }
+
+    public void LanguageChange(Context context) {
+        ShowPopUpLanguage(context);
+    }
+
+    public void ShowPopUpLanguage(final Context context) {
+        final AlertDialog alertDialog = new AlertDialog(activity);
+        alertDialog.setCancelable(false);
+        alertDialog.setIcon(R.drawable.rezq_logo);
+        alertDialog.setTitle(activity.getString(R.string.app_name));
+        alertDialog.setMessage(activity.getString(R.string.lang_change));
+        alertDialog.setPositiveButton(activity.getString(R.string.ok), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+                RestartEntireAppForChange(context, true);
+            }
+        });
+
+        alertDialog.setNegativeButton(activity.getString(R.string.cancel), new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.dismiss();
+            }
+        });
+
+        alertDialog.show();
+    }
+
+    public void RestartEntireAppForChange(Context context, boolean isLanguageChange) {
+        if (isLanguageChange) {
+            SharedPreferences shared_preference = PreferenceManager.getDefaultSharedPreferences(this
+                    .getApplicationContext());
+
+            String mCustomerLanguage = shared_preference.getString(
+                    globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, "null");
+            String mCurrentlanguage;
+            if ((mCustomerLanguage.equalsIgnoreCase("en"))) {
+                globalFunctions.setLanguage(context, GlobalVariables.LANGUAGE.ARABIC);
+
+                mCurrentlanguage = "ar";
+            } else {
+                mCurrentlanguage = "en";
+                globalFunctions.setLanguage(context, GlobalVariables.LANGUAGE.ENGLISH);
+
+            }
+            SharedPreferences.Editor editor = shared_preference.edit();
+            editor.putString(globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, mCurrentlanguage);
+            editor.commit();
+        }
+        globalFunctions.closeAllActivities();
+        Intent i = new Intent(this, SplashActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        System.exit(0);
     }
 
     private boolean checkLocationPermission() {
@@ -667,8 +761,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvHeaderText = findViewById(R.id.tvHeaderText);
         tvLocation = findViewById(R.id.tvlocation);
         crop_profile = findViewById(R.id.iv_userProfile);
-        tvArabic=findViewById(R.id.Tvlang_arabic);
-        tvEnglish=findViewById(R.id.Tvlang_english);
+        arabic_language_tv=findViewById(R.id.Tvlang_arabic);
+        english_language_tv=findViewById(R.id.Tvlang_english);
         ivHome=findViewById(R.id.ivHomeText);
 
 
@@ -679,14 +773,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = ( NavigationView ) findViewById( R.id.nav_view );
 
-       /* ProfileModel profileModel= globalFunctions.getProfile( mainContext );
-        try {
-            if (profileModel.getProfileImg() != null || !profileModel.getProfileImg().equals( "null" ) || !profileModel.getProfileImg().equalsIgnoreCase( "" )) {
-                Picasso.with( mainContext ).load(profileModel.getProfileImg() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
-            }
-        } catch (Exception e) {
-
-        }*/
 
 
     }
@@ -779,7 +865,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onResume() {
-//        setNavigationHeaders();
+        getProfile();
         super.onResume();
         easyWayLocation.startLocation();
 

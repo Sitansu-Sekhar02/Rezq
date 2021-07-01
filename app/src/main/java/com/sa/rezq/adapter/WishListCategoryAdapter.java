@@ -13,6 +13,7 @@ import com.sa.rezq.R;
 import com.sa.rezq.adapter.interfaces.ClickListener;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.WishlistCategoryModel;
 
 import java.util.List;
@@ -21,7 +22,7 @@ public class WishListCategoryAdapter extends RecyclerView.Adapter<WishListCatego
 
     public static final String TAG = "WishListAdapter";
 
-    private final List<WishlistCategoryModel> list;
+    private final List<SeeAllCategoryModel> list;
     private final Activity activity;
     private GlobalVariables globalVariables;
     private GlobalFunctions globalFunctions;
@@ -30,7 +31,7 @@ public class WishListCategoryAdapter extends RecyclerView.Adapter<WishListCatego
 
 
 
-    public WishListCategoryAdapter(Activity activity, List<WishlistCategoryModel> list, ClickListener clicklistener) {
+    public WishListCategoryAdapter(Activity activity, List<SeeAllCategoryModel> list, ClickListener clicklistener) {
         this.activity = activity;
         this.list = list;
         this.clicklistener = clicklistener;
@@ -46,9 +47,9 @@ public class WishListCategoryAdapter extends RecyclerView.Adapter<WishListCatego
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final WishlistCategoryModel model = list.get(position);
+        final SeeAllCategoryModel model = list.get(position);
 
-        if (model.getName() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getName())) {
             holder.tv_fav_title.setText(model.getName());
         }
 
@@ -64,7 +65,7 @@ public class WishListCategoryAdapter extends RecyclerView.Adapter<WishListCatego
             selectedPosition=0;
             holder.line_view.setVisibility(View.VISIBLE);
             holder.tv_fav_title.setTextColor(activity.getResources().getColor(R.color.black));
-            WishlistCategoryModel tmpModel = list.get(selectedPosition);
+            SeeAllCategoryModel tmpModel = list.get(selectedPosition);
             clicklistener.OnItemClickListener(tmpModel);
 
         }

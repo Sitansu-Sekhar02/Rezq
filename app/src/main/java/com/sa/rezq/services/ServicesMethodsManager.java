@@ -419,7 +419,7 @@ public class ServicesMethodsManager {
                 mUiCallBack.OnError(context.getString(R.string.ErrorResponseData));
             }
         } else if (obj instanceof ProfileModel) {
-            StatusResponseModel profileModel = new StatusResponseModel();
+            ProfileMainModel profileModel = new ProfileMainModel();
             if (profileModel.toObject(resp.toString())) {
                 mUiCallBack.OnSuccessFromServer(profileModel);
             } else {

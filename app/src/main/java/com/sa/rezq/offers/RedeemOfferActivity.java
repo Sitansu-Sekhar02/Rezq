@@ -103,7 +103,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
     VendorModel storeModel=null;
 
 
-
     public static Intent newInstance(Activity activity, OfferModel model,VendorModel vendorModel ) {
         Intent intent = new Intent(activity, RedeemOfferActivity.class);
         Bundle bundle = new Bundle();
@@ -148,6 +147,14 @@ public class RedeemOfferActivity extends AppCompatActivity {
             offerModel = null;
         }
 
+        if (getIntent().hasExtra(BUNDLE_VENDOR_MODEL_DETAILS)) {
+            storeModel = (VendorModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_MODEL_DETAILS);
+        } else {
+            storeModel = null;
+        }
+
+         Log.d("storeModel000","=="+storeModel);
+
         if (offerModel != null) {
             if (GlobalFunctions.isNotNullValue(offerModel.getOffer_image())) {
                 Picasso.with(context).load(offerModel.getOffer_image()).placeholder(R.drawable.rezq_logo).into(offer_image);
@@ -172,11 +179,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
             }
 
         }
-        if (getIntent().hasExtra(BUNDLE_VENDOR_MODEL_DETAILS)) {
-            storeModel = (VendorModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_MODEL_DETAILS);
-        } else {
-            storeModel = null;
-        }
+
 
         if (storeModel!=null){
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {

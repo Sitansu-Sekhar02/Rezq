@@ -50,11 +50,11 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final SeeAllCategoryModel model = list.get(position);
 
-        if (model.getName() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getName())) {
             holder.title_tv.setText(model.getName());
-        } if (model.getVendor_count() != null) {
+        } if(GlobalFunctions.isNotNullValue (model.getVendor_count())) {
             holder.vendor_count.setText(model.getVendor_count());
-        }if (model.getIcon() != null) {
+        }if (GlobalFunctions.isNotNullValue(model.getIcon() )) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.item_image);
         }
 

@@ -68,12 +68,12 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
         final RecentCouponModel model = list.get(position);
 
 
-        if (model.getVendor_name() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getVendor_name() )) {
             holder.product_title.setText(model.getVendor_name());
         }
-        if (model.getOffer_title() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getOffer_title() )) {
             holder.product_applicable.setText((model.getOffer_title()));
-        } if (model.getLogo() != null) {
+        } if (GlobalFunctions.isNotNullValue(model.getLogo() )) {
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
         }
 

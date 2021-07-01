@@ -49,7 +49,7 @@
     <string name="valid_to">Valid till</string>
     <string name="date_from">12 Aug 2021</string>
     <string name="day_to">24 Aug 2022</string>
-    <string name="upgrate_to_premium">Upgrade to <br></br>rezq prime</string>
+    <string name="upgrate_to_premium">Upgrade Membership</string>
     <string name="unblock_offer">Unlock best offers</string>
     <string name="subscribe">Subscribe</string>
     <string name="sar">Sar </string>
@@ -432,7 +432,7 @@
     <string name="lbl_choose_from_gallery">Choose from gallery</string>
     <string name="toast_image_intent_null"></string>
     <string name="select_image">Select Image</string>
-    <string name="please_enter_valid_code">Please enter a valid code</string>
+    <string name="please_enter_valid_code">Please enter a valid Redeem Code</string>
     <string name="switch_account">Switch Accounts</string>
     <string name="copy_coupon_code">"Coupon copied "</string>
     <string name="no_search_found">No result found for</string>
@@ -460,5 +460,6 @@
     <string name="wrong_coupon">Please enter a valid Coupon</string>
     <string name="scroll_right_toseeMore">Scroll right to see more</string>
     <string name="kilometer">Km</string>
+    <string name="lang_change">Application will be restarted to apply changes</string>
 
 </resources>

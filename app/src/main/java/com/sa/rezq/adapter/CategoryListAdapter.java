@@ -55,12 +55,12 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final CategoryModel model = list.get(position);
 
-        if (model.getName() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getName() )) {
             holder.title_tv.setText(model.getName());
         }
-        if (model.getCount() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getCount())) {
             holder.product_count.setText((model.getCount()));
-        }  if (model.getIcon() != null) {
+        }  if (GlobalFunctions.isNotNullValue(model.getIcon() )) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.item_iv);
         }
 

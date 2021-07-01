@@ -54,13 +54,13 @@ public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyou
     public void onBindViewHolder(@NonNull PlacesNearyouListAdapter.viewHolder holder, int position) {
         final NearbyModel model = list.get(position);
 
-        if (model.getName() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getName())) {
             holder.product_title.setText(model.getName());
         }
-        if (model.getDistance() != null) {
+        if (GlobalFunctions.isNotNullValue(model.getDistance() )) {
 
             holder.product_distance.setText(model.getDistance()+" "+activity.getString(R.string.kilometer));
-        }  if (model.getIcon() != null) {
+        }  if (GlobalFunctions.isNotNullValue(model.getIcon())) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
         }
 

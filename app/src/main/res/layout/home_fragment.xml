@@ -196,7 +196,7 @@
                         android:id="@+id/Rvcategory"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp"
                         android:orientation="horizontal"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -421,7 +421,7 @@
                         android:id="@+id/recycler_trending"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_marginRight="10dp" />
                 </com.vlonjatg.progressactivity.ProgressLinearLayout>
 
@@ -618,7 +618,7 @@
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recycler_places_near_you"
                             android:layout_width="match_parent"
-                            android:layout_marginLeft="10dp"
+                            android:layout_marginLeft="5dp"
                             android:layout_marginRight="10dp"
                             android:layout_height="wrap_content" />
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>

@@ -2,26 +2,32 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp">
 
     <RelativeLayout
         android:id="@+id/relative_unlocked_offer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_item"
+            android:layout_height="56dp"
+            app:cardCornerRadius="5dp"
+            android:layout_width="56dp">
+            <ImageView
+                android:id="@+id/iv_offer_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop" />
+        </androidx.cardview.widget.CardView>
 
-        <ImageView
-            android:id="@+id/iv_offer_image"
-            android:layout_width="52dp"
-            android:layout_height="52dp"
-            android:background="@drawable/offer_border"
-            android:gravity="center" />
 
         <com.sa.rezq.view.AppTextView
             android:id="@+id/tv_first_offer_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/iv_offer_image"
+            android:layout_toRightOf="@id/card_item"
             android:text="@string/buy_two_get_one"
             android:textColor="#171717"
             android:textSize="16dp" />
@@ -32,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/tv_first_offer_title"
             android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@id/iv_offer_image"
+            android:layout_toRightOf="@id/card_item"
             android:text="@string/applicable_onselectitem"
             android:textColor="#898989"
             android:textSize="12dp" />
@@ -40,6 +46,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
+        android:layout_marginTop="@dimen/_5sdp"
         android:background="@color/grey_light"
         android:layout_below="@+id/relative_unlocked_offer"/>
 

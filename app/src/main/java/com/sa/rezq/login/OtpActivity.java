@@ -153,12 +153,14 @@ public class OtpActivity extends AppCompatActivity {
                 mobile_number_tv.setText(activity.getString(R.string.verification_code_sent_text) + " " + registerModel.getCountryCode() + registerModel.getMobileNumber());
             }
         }*/
+/*
 
-       /* if (phoneNumber != null) {
+        if (phoneNumber != null) {
             //once got client firebase id...add setup firebase and uncomment below 2 lines...
            sendVerificationCode(phoneNumber);
            startCountDownTimer();
         }
+*/
 
         otpView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -179,8 +181,8 @@ public class OtpActivity extends AppCompatActivity {
                 }
             }
         });
-*/
-       /* resend_tv.setOnClickListener(new View.OnClickListener() {
+
+      /*  resend_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (phoneNumber != null && OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {

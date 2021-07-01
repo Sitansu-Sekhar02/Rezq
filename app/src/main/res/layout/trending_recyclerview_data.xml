@@ -7,19 +7,23 @@
     <RelativeLayout
         android:id="@+id/single_imageview_main_rl"
         android:layout_width="170dp"
-        android:layout_height="170dp"
+        android:layout_height="160dp"
         android:visibility="gone"
-        android:background="@drawable/slider_border"
-        android:layout_margin="6dp">
-
+        android:layout_margin="8dp">
+        <androidx.cardview.widget.CardView
+            android:layout_height="match_parent"
+            android:id="@+id/cardItem"
+            app:cardCornerRadius="8dp"
+            android:layout_width="match_parent">
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/product_image"
-                    android:layout_width="170dp"
-                    android:layout_height="170dp" />
+                    <ImageView
+                        android:id="@+id/product_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop" />
 
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/product_title"
@@ -63,6 +67,7 @@
 
             </RelativeLayout>
 
+        </androidx.cardview.widget.CardView>
 
 
     </RelativeLayout>
@@ -70,25 +75,29 @@
     <RelativeLayout
         android:id="@+id/double_imageview_main_rl"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
         android:layout_toRightOf="@+id/single_imageview_main_rl"
-        android:layout_margin="6dp">
+        android:layout_margin="8dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
+        <androidx.cardview.widget.CardView
+            android:layout_height="70dp"
+            app:cardCornerRadius="5dp"
+            android:layout_width="170dp">
                 <RelativeLayout
                     android:id="@+id/first_card_item"
-                    android:layout_width="170dp"
-                    android:layout_height="80dp"
-                    android:background="@drawable/slider_border">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <ImageView
                         android:id="@+id/first_product_image"
-                        android:layout_width="170dp"
-                        android:layout_height="80dp" />
+                        android:layout_width="match_parent"
+                        android:scaleType="centerCrop"
+                        android:layout_height="match_parent" />
 
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/first_product_title"
@@ -128,20 +137,28 @@
                     </LinearLayout>
 
                 </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
-                <RelativeLayout
+
+        <androidx.cardview.widget.CardView
+            android:layout_height="match_parent"
+            app:cardCornerRadius="8dp"
+            android:layout_width="170dp"
+            android:layout_marginTop="10dp">
+
+            <RelativeLayout
                     android:id="@+id/second_card_item"
-                    android:layout_width="170dp"
-                    android:layout_height="80dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/slider_border">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/second_product_image"
-                        android:layout_width="170dp"
-                        android:layout_height="80dp" />
 
-                    <com.sa.rezq.view.AppTextView
+                <ImageView
+                    android:id="@+id/second_product_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop" />
+
+                <com.sa.rezq.view.AppTextView
                         android:id="@+id/second_product_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -179,6 +196,7 @@
                     </LinearLayout>
 
                 </RelativeLayout>
+        </androidx.cardview.widget.CardView>
 
 
 

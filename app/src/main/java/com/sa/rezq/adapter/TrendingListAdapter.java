@@ -76,7 +76,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.product_discount.setText((model.getOffer_discount()));
         }  if (model.getOffer_title() != null) {
             holder.product_discount_title.setText((model.getOffer_title()));
-        }*/ if (model.getIcon() != null) {
+        }*/ if (GlobalFunctions.isNotNullValue(model.getIcon())) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
 
         }
@@ -89,7 +89,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
         }
         if (model.getOffer_discount() != null) {
             holder.first_product_discount.setText((model.getOffer_discount()));
-        }*/  if (model.getIcon() != null) {
+        }*/  if (GlobalFunctions.isNotNullValue(model.getIcon() )) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.first_product_image);
         }
 
@@ -102,7 +102,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
             holder.second_product_discount.setText((model.getOffer_discount()));
         }  if (model.getOffer_title() != null) {
             holder.second_product_discount_title.setText((model.getOffer_title()));
-        }*/if (model.getIcon() != null) {
+        }*/if (GlobalFunctions.isNotNullValue(model.getIcon())) {
             Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.second_product_image);
 
         }

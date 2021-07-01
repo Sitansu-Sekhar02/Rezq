@@ -23,9 +23,9 @@ public class VendorStoreModel implements Serializable {
             RATING_COUNT         = "rating_count",
             FACILITIES         = "facilities",
             VENDOR_NAME         = "vendor_name",
-            STORE_NAME         = "store_name",
+            STORE_NAME          = "store_name",
             OFFER_TITLE         = "offer_title",
-            OFFER_DISCOUNT         = "offer_discount",
+            OFFER_DISCOUNT      = "offer_discount",
             CREATED_ON         = "created_on",
             DISTANCE            = "distance";
 

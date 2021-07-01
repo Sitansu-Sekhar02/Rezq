@@ -18,7 +18,7 @@ public class WishModel implements Serializable {
             FACILITIES        = "facilities",
             AVG_RATING        = "avg_rating",
             RATING_COUNT       = "rating_count",
-            CREATED_ON            = "created_on";
+            CREATED_ON          = "created_on";
 
 
     String

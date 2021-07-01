@@ -100,6 +100,8 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     LayoutInflater layoutInflater;
     RatingNFeedbackModel ratingNFeedbackModel;
 
+    String rating = "1";
+
 
 
     AllCategoryListAdapter categoryListAdapter;
@@ -263,7 +265,7 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
                 closeThisActivity();
             }
         });
-        mainView = seeAllCategoryRecyclerview;
+        mainView = toolbar;
 
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
@@ -306,6 +308,58 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         btn_submit=dialog.findViewById(R.id.btn_submit);
         et_feedback_comment.clearFocus();
 
+        final ImageView rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5;
+
+        rating_iv1 = dialog.findViewById(R.id.rating_iv1);
+        rating_iv2 = dialog.findViewById(R.id.rating_iv2);
+        rating_iv3 = dialog.findViewById(R.id.rating_iv3);
+        rating_iv4 = dialog.findViewById(R.id.rating_iv4);
+        rating_iv5 = dialog.findViewById(R.id.rating_iv5);
+
+        setImageView(5, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+
+
+        rating_iv1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageView(1, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+            }
+
+        });
+
+        rating_iv2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageView(2, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+            }
+
+        });
+
+        rating_iv3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageView(3, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+            }
+
+        });
+
+        rating_iv4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageView(4, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+            }
+
+        });
+
+        rating_iv5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setImageView(5, rating_iv1, rating_iv2, rating_iv3, rating_iv4, rating_iv5);
+            }
+
+        });
+
+
 
         if (storeModel != null) {
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
@@ -318,22 +372,24 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
         }
 
 
+
+
              btn_submit.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (rt_rating != null && et_feedback_comment != null) {
+                    if (et_feedback_comment != null) {
                         String
-                                rating = String.valueOf(rt_rating.getRating()),
+                                //rating = String.valueOf(rt_rating.getRating()),
                                 comment = et_feedback_comment.getText().toString().trim();
                        /* if (rating.isEmpty()) {
                             rt_rating.setError(getString(R.string.pleaseFillMandatoryDetails));
                             rt_rating.setFocusableInTouchMode(true);
                             rt_rating.requestFocus();
-                        }*/ if (comment.isEmpty()) {
+                        }*//* if (comment.isEmpty()) {
                             et_feedback_comment.setError(getString(R.string.please_give_a_comment));
                             et_feedback_comment.setFocusableInTouchMode(true);
                             et_feedback_comment.requestFocus();
-                        } else {
+                        } else {*/
                             if (ratingNFeedbackModel == null) {
                                 ratingNFeedbackModel = new RatingNFeedbackModel();
                             }
@@ -345,12 +401,67 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
                              insertFeedback(activity, ratingNFeedbackModel);
 
                         }
-                    }
                 }
-
 
             });
 
+    }
+
+    private void setImageView(int position, ImageView rating_iv1, ImageView rating_iv2, ImageView rating_iv3, ImageView rating_iv4, ImageView rating_iv5) {
+        switch (position) {
+            case 1:
+                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating = position + "";
+                break;
+
+            case 2:
+                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating = position + "";
+                break;
+
+            case 3:
+                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating = position + "";
+                break;
+
+            case 4:
+                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating = position + "";
+                break;
+
+            case 5:
+                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_selected_large);
+                rating = position + "";
+                break;
+
+            default:
+                rating_iv1.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv2.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating = "1";
+        }
     }
 
     private void insertFeedback(Activity activity, RatingNFeedbackModel ratingNFeedbackModel) {

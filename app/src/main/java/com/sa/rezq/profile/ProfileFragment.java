@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,7 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
-import com.sa.rezq.account.EditProfileActivity;
+import com.sa.rezq.profile.activities.EditProfileActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.ProfileMainModel;
@@ -40,7 +41,7 @@ public class ProfileFragment extends Fragment {
     View mainView;
     TextView tv_userfullName, therapist_tv, update_button, email_ev,tv_membership_title;
     TextView first_name_etv, last_name_etv, mobile_etv, email_etv, password_etv, confirm_password_etv;
-    CircleImageView profile_image;
+    ImageView profile_image;
     Button btn_update_profile;
 
     View view;

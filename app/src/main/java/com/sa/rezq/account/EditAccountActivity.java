@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,7 +35,6 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
-
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
@@ -59,8 +59,8 @@ import java.util.List;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class EditProfileActivity extends AppCompatActivity implements UploadListener {
-    public static final String TAG ="EditProfileActivity" ;
+public class EditAccountActivity extends AppCompatActivity implements UploadListener {
+    public static final String TAG ="EditAccountActivity" ;
     public static final String BUNDLE_EDIT_MODEL= "BundleEditProfile";
 
 
@@ -76,7 +76,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
     View mainView;
     TextView name_tv, therapist_tv,tv_edit;
     EditText first_name_etv, last_name_etv, mobile_etv, email_etv, confirm_password_etv;
-    CircleImageView profile_image;
+    ImageView profile_image;
     Button update_profile;
     private CountryCodePicker country_code_picker;
 
@@ -116,15 +116,15 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
         globalVariables = AppController.getInstance().getGlobalVariables();
 
         // name_tv = ( TextView ) view.findViewById( R.id.name_tv );
-        country_code_picker = (CountryCodePicker) findViewById(R.id.country_code_picker);
+       // country_code_picker = (CountryCodePicker) findViewById(R.id.country_code_picker);
 
         first_name_etv = findViewById( R.id.et_firstname );
         last_name_etv =  findViewById( R.id.et_lastname );
-        mobile_etv =  findViewById( R.id.et_mobile_no );
-        email_etv = findViewById( R.id.et_email_id );
+      //  mobile_etv =  findViewById( R.id.et_mobile_no );
+      //  email_etv = findViewById( R.id.et_email_id );
         tv_edit = findViewById( R.id.tv_edit );
         update_profile =findViewById( R.id.continue_btn );
-        profile_image = ( CircleImageView ) findViewById( R.id.ivProfimeImage );
+        profile_image = ( ImageView ) findViewById( R.id.ivProfimeImage );
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
@@ -133,16 +133,16 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
             window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
         }
 
-        country_code_picker.setCountryForPhoneCode(+91);
+       /* country_code_picker.setCountryForPhoneCode(+91);
         country_code_picker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
             @Override
             public void onCountrySelected() {
                 selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
                 mobile_etv.setText("");
             }
-        });
+        });*/
 
-        country_code_picker.registerCarrierNumberEditText(mobile_etv);
+        /*country_code_picker.registerCarrierNumberEditText(mobile_etv);
 
         country_code_picker.setPhoneNumberValidityChangeListener(new CountryCodePicker.PhoneNumberValidityChangeListener() {
             @Override
@@ -150,7 +150,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
             }
         });
 
-        selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
+        selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();*/
 
         if (getIntent().hasExtra(BUNDLE_EDIT_MODEL)) {
             profileModel = (ProfileModel) getIntent().getSerializableExtra(BUNDLE_EDIT_MODEL);
@@ -228,22 +228,22 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
             if (GlobalFunctions.isNotNullValue(profileModel.getLastName())) {
                 last_name_etv.setText(profileModel.getLastName());
             }
-            if (GlobalFunctions.isNotNullValue(profileModel.getEmail())) {
+           /* if (GlobalFunctions.isNotNullValue(profileModel.getEmail())) {
                 email_etv.setText(profileModel.getEmail());
             }
             if (GlobalFunctions.isNotNullValue(profileModel.getPhone())) {
                 mobile_etv.setText(profileModel.getPhone());
-            }
+            }*/
         }
     }
 
     private void validateProfile() {
-        if (first_name_etv != null || last_name_etv != null || mobile_etv != null ||email_etv != null ) {
+        if (first_name_etv != null || last_name_etv != null ) {
             String
                     firstname = first_name_etv.getText().toString().trim(),
-                    lastname = last_name_etv.getText().toString().trim(),
-                    mobileNo = mobile_etv.getText().toString().trim(),
-                    email = email_etv.getText().toString().trim();
+                    lastname = last_name_etv.getText().toString().trim();
+                  //  mobileNo = mobile_etv.getText().toString().trim(),
+                 //   email = email_etv.getText().toString().trim();
 
             if (firstname.isEmpty()) {
                 first_name_etv.setError( getString( R.string.enter_mendatory_field) );
@@ -253,7 +253,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
                 last_name_etv.setError( getString( R.string.enter_mendatory_field ) );
                 last_name_etv.setFocusableInTouchMode( true );
                 last_name_etv.requestFocus();
-            } else if (email.isEmpty()) {
+            } /*else if (email.isEmpty()) {
                 email_etv.setError(getString(R.string.pleaseFillMandatoryDetails));
                 email_etv.setFocusableInTouchMode(true);
                 email_etv.requestFocus();
@@ -273,7 +273,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
                 mobile_etv.setSelection(mobile_etv.getText().length());
                 mobile_etv.setFocusableInTouchMode(true);
                 mobile_etv.requestFocus();
-            } else {
+            }*/ else {
 
                 if (profileModel == null) {
                     profileModel = new ProfileModel();
@@ -282,9 +282,9 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
 
                 profileModel.setFirstName( firstname );
                 profileModel.setLastName( lastname );
-                profileModel.setEmail( email );
-                profileModel.setPhone( mobileNo );
-                profileModel.setCountry_code( selected_country_code );
+               // profileModel.setEmail( email );
+              //  profileModel.setPhone( mobileNo );
+              //  profileModel.setCountry_code( selected_country_code );
                 if (profileImageList.size()>0){
                     uploadImage(GlobalVariables.UPLOAD_PROFILE_PHOTO_PATH_CODE);
 
@@ -300,7 +300,7 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
 
         GlobalFunctions.showProgress(context, getString( R.string.updating_profile ) );
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.updateUser(context,profileModel, new ServerResponseInterface() {
+        servicesMethodsManager.updateSubscriberInfo(context,profileModel, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
                 GlobalFunctions.hideProgress();
@@ -311,14 +311,14 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
             @Override
             public void OnFailureFromServer(String msg) {
                 GlobalFunctions.hideProgress();
-                GlobalFunctions.displayMessaage(EditProfileActivity.this.context, mainView, msg );
+                GlobalFunctions.displayMessaage(EditAccountActivity.this.context, mainView, msg );
                 Log.d( TAG, "Failure : " + msg );
             }
 
             @Override
             public void OnError(String msg) {
                 GlobalFunctions.hideProgress();
-                GlobalFunctions.displayMessaage(EditProfileActivity.this.context, mainView, msg );
+                GlobalFunctions.displayMessaage(EditAccountActivity.this.context, mainView, msg );
                 Log.d( TAG, "Error : " + msg );
             }
         }, "Get Profile" );
@@ -349,14 +349,14 @@ public class EditProfileActivity extends AppCompatActivity implements UploadList
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
-                if (profileMainModel.isStatus()){
+                closeThisActivity();
+               /* if (profileMainModel.isStatus()){
                     setThisPage(profileMainModel.getProfileModel());
-                }
+                }*/
             }
         });
 
         alertDialog.show();
-
 
     }
 
