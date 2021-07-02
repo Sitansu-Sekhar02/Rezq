@@ -190,7 +190,7 @@ public class WishListActivity extends AppCompatActivity implements ClickListener
             //static for all category
             SeeAllCategoryModel wishlistCategoryModel=new SeeAllCategoryModel();
             wishlistCategoryModel.setCategori_id("0");
-            wishlistCategoryModel.setName("All");
+            wishlistCategoryModel.setName(activity.getString(R.string.all));
             listModelList.add(wishlistCategoryModel);
             listModelList.addAll(listModel.getAllCategoryList());
             if (categoryListAdapter != null) {

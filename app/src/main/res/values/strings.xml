@@ -5,7 +5,7 @@
     <string name="seeall">SEE ALL</string>
     <string name="food">Food</string>
     <string name="bar">BAR</string>
-    <string name="travel">TRAVEL</string>
+    <string name="travel">  </string>
     <string name="cinema">CINEMA</string>
     <string name="welcome">WELCOME</string>
     <string name="enter_mobileno">Enter mobile number</string>
@@ -86,7 +86,7 @@
     <string name="submit">submit</string>
     <string name="all_locked_offer">All locked Offers</string>
     <string name="rezq_plus_offer">Rezq Plus offers</string>
-    <string name="prime_members">Become a prime member<br></br>To unlock offers</string>
+    <string name="prime_members">Become a prime member &amp; To unlock offers</string>
     <string name="prime_offer">Rezq prime offers</string>
     <string name="dinner">Dinner | Takeaway | Bar</string>
     <string name="dubai_marina">Carlucciaos- Dubai Marina mall</string>
