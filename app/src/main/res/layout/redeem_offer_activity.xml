@@ -40,7 +40,7 @@
                         android:layout_width="match_parent"
                         android:scaleType="centerCrop"
                         android:layout_height="match_parent"
-                        android:src="@drawable/ic_baseline_image_24"/>
+                        android:src="@drawable/ic_lazy_load"/>
                 </androidx.cardview.widget.CardView>
 
 
@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:layout_gravity="center_vertical"
                     android:orientation="horizontal">
 
                     <com.sa.rezq.view.AppTextView
@@ -91,17 +92,19 @@
                         android:id="@+id/restro_rating_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#FFB400"
+                        android:textColor="@color/black"
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:layout_marginLeft="8dp"
-                        android:textSize="16dp"
+                        android:textSize="14dp"
+                        android:text=""
                         android:textStyle="bold" />
 
                     <com.sa.rezq.view.AppTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
+                        android:gravity="center"
                         android:layout_marginLeft="5dp"
                         android:text="@string/reating"
                         android:textAllCaps="true"

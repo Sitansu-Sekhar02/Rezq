@@ -61,7 +61,7 @@ public class PlacesNearyouListAdapter extends RecyclerView.Adapter<PlacesNearyou
 
             holder.product_distance.setText(model.getDistance()+" "+activity.getString(R.string.kilometer));
         }  if (GlobalFunctions.isNotNullValue(model.getIcon())) {
-            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.product_image);
+            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.ic_lazy_load).into(holder.product_image);
         }
 
 

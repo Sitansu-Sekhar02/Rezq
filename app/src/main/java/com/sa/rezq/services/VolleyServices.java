@@ -175,14 +175,16 @@ public class VolleyServices implements Response.Listener<JSONObject>,
         if(networkResponse!=null){
             if(networkResponse.statusCode == GlobalVariables.RESPONSE_HTTP_METHOD_FORBIDDEN){
                 mCallBack.OnFailure(R.string.AuthFailedError);
-            }else  if(networkResponse.statusCode == GlobalVariables.RESPONSE_HTTP_METHOD_SESSION_EXPIRED){
+            }else if(networkResponse.statusCode == GlobalVariables.RESPONSE_HTTP_METHOD_SESSION_EXPIRED){
+                GlobalFunctions.logoutApplication(context,true);
+            }else  if(networkResponse.statusCode == GlobalVariables.RESPONSE_HTTP_METHOD_ERROR){
                 if(networkResponse.data!=null){
                     String msg = new String(networkResponse.data);
                     Log.d(TAG, "Error Status : "+msg);
                     StatusModel statusModel = new StatusModel();
                     if(statusModel.toObject(msg)){
                         if(!statusModel.isStatus()){
-                            GlobalFunctions.logoutApplication(context);
+                            GlobalFunctions.logoutApplication(context,true);
                         }
                         mCallBack.OnFailure(statusModel.getMessage());
                     }else{

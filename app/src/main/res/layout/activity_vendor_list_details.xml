@@ -55,8 +55,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="20dp"
                 android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true">
+
 
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tvRating"
@@ -69,42 +75,41 @@
                     android:textSize="16dp"
                     android:textStyle="bold" />
 
-                <com.sa.rezq.view.AppTextView
+                <ImageView
                     android:id="@+id/tv_star"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tvRating"
-                    android:drawableRight="@drawable/ic_path_star"
-                    android:drawablePadding="5dp"
-                    android:gravity="center"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_baseline_star_rate_24" />
 
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tv_count_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="3dp"
                     android:layout_toRightOf="@+id/tv_star"
                     android:gravity="center"
                     android:text=""
                     android:textAllCaps="true"
                     android:textColor="#171717"
-                    android:textSize="12dp" />
+                    android:textSize="14dp" />
 
                 <com.sa.rezq.view.AppTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="6dp"
                     android:layout_toRightOf="@+id/tv_count_rating"
+                    android:layout_centerInParent="true"
                     android:gravity="center"
                     android:text="@string/reating"
                     android:textAllCaps="true"
                     android:textStyle="bold"
                     android:textColor="#171717"
                     android:textSize="12dp" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"

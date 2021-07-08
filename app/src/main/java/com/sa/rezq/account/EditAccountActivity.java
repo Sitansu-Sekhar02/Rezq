@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Build;
@@ -29,6 +30,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.hbb20.CountryCodePicker;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -125,6 +127,12 @@ public class EditAccountActivity extends AppCompatActivity implements UploadList
         tv_edit = findViewById( R.id.tv_edit );
         update_profile =findViewById( R.id.continue_btn );
         profile_image = ( ImageView ) findViewById( R.id.ivProfimeImage );
+
+        TextInputLayout user_firstname_TextObj = (TextInputLayout)    findViewById(R.id.ti_first_name);
+        TextInputLayout user_last_TextObj = (TextInputLayout)    findViewById(R.id.ti_last_name);
+        Typeface font_yekan  = Typeface.createFromAsset(getAssets(), "regular.otf");
+        user_firstname_TextObj .setTypeface(font_yekan);
+        user_last_TextObj .setTypeface(font_yekan);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();

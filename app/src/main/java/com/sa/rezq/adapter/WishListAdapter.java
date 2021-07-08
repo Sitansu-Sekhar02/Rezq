@@ -63,7 +63,7 @@ public class WishListAdapter extends RecyclerView.Adapter<WishListAdapter.ViewHo
         } if (GlobalFunctions.isNotNullValue(model.getFacilities())) {
             holder.product_sub_title.setText(model.getFacilities());
         }*/if (GlobalFunctions.isNotNullValue(model.getLogo() )) {
-            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.item_image);
+            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.ic_lazy_load).into(holder.item_image);
         }
 
 

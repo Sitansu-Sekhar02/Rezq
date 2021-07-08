@@ -153,12 +153,14 @@ public class OtpActivity extends AppCompatActivity {
                 mobile_number_tv.setText(activity.getString(R.string.verification_code_sent_text) + " " + registerModel.getCountryCode() + registerModel.getMobileNumber());
             }
         }*/
+/*
 
         if (phoneNumber != null) {
             //once got client firebase id...add setup firebase and uncomment below 2 lines...
            sendVerificationCode(phoneNumber);
            startCountDownTimer();
         }
+*/
 
         otpView.addTextChangedListener(new TextWatcher() {
             @Override
@@ -180,7 +182,7 @@ public class OtpActivity extends AppCompatActivity {
             }
         });
 
-        resend_tv.setOnClickListener(new View.OnClickListener() {
+      /*  resend_tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (phoneNumber != null && OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
@@ -191,6 +193,7 @@ public class OtpActivity extends AppCompatActivity {
                 }
             }
         });
+*/
         btn_verify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -204,16 +207,16 @@ public class OtpActivity extends AppCompatActivity {
                     return;
                 }
 
-                if (OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
+              /*  if (OTP_ATTEMPT_COUNT < OTP_MAX_ATTEMPT_COUNT) {
                     globalFunctions.showProgress(context, activity.getString(R.string.loading));
                     verifyCode(code);
                 } else {
                     openMaxAttemptOtpDialog(context, true);
-                }
+                }*/
 
                 //once got client firebase id...add setup firebase and comment below lines...
                 //below lines for static otp...any otp it will take...
-              /*  if (pageType != null) {
+                if (pageType != null) {
                     if (pageType.equalsIgnoreCase(globalVariables.PAGE_FROM_REGISTRATION)) {
 //
                         Intent intent = RegisterActivity.newInstance(context, registerModel);
@@ -235,7 +238,7 @@ public class OtpActivity extends AppCompatActivity {
 //                            startActivity(intent);
                         }
                     }
-                }*/
+                }
             }
         });
 

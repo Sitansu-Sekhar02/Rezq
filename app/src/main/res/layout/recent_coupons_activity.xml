@@ -107,7 +107,7 @@
                     android:id="@+id/ImgRestro2"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/ic_lazy_load"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -219,7 +219,7 @@
                     android:id="@+id/ImgRestro3"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/ic_lazy_load"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -178,11 +178,11 @@ public class MembershipDetailsActivity extends AppCompatActivity {
                 tv_membership_name.setText(membershipDetailsModel.getMembership_name());
 
             }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getImage())) {
-                Picasso.with(activity).load(membershipDetailsModel.getImage()).placeholder(R.drawable.rezq_logo).into(iv_membership_image);
+                Picasso.with(activity).load(membershipDetailsModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(iv_membership_image);
 
             }
             if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValid_from())) {
-                tv_valid_from.setText(GlobalFunctions.getDateFormat(membershipDetailsModel.getValid_from()));
+                tv_valid_from.setText(GlobalFunctions.getDateFormatTillDate(membershipDetailsModel.getValid_from()));
 
             }if (GlobalFunctions.isNotNullValue(membershipDetailsModel.getValid_till())) {
                 tv_valid_till.setText(GlobalFunctions.getDateFormatTillDate(membershipDetailsModel.getValid_till()));

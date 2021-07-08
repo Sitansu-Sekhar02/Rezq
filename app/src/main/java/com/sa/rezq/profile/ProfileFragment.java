@@ -264,7 +264,7 @@ public class ProfileFragment extends Fragment {
                 /*Logout success, Clear all cache and reload the home page*/
 
             }
-            GlobalFunctions.logoutApplication( context );
+//            GlobalFunctions.logoutApplication( context );
             // MainActivity.RestartEntireApp(context);
         }
     }

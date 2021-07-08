@@ -41,7 +41,6 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
-import com.sa.rezq.Models.CategoryModelClass;
 import com.sa.rezq.R;
 import com.sa.rezq.adapter.AccountListAdapter;
 import com.sa.rezq.adapter.AllCategoryListAdapter;
@@ -69,8 +68,6 @@ public class RecentCouponActivity extends AppCompatActivity {
     public static final String TAG = "RecentCouponActivity";
 
 
-    ArrayList<String> categoryList;
-    private List<CategoryModelClass> movieList = new ArrayList<>();
    // private RecentCouponAdapter mAdapter;
     //CategoryAdapter adapter;
     RecyclerView recyclerView;

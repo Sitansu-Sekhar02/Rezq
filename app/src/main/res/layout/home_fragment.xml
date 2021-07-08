@@ -13,16 +13,7 @@
         android:layout_height="match_parent"
         android:background="#F5F5F5"
         android:orientation="vertical">
-        <SearchView
-            android:visibility="gone"
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@color/white"
-            android:iconifiedByDefault="false"
-            app:queryBackground="@android:color/transparent"
-            android:queryHint="@string/search" />
+
 
         <androidx.cardview.widget.CardView
             android:id="@+id/search_card_view"
@@ -43,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@color/transparent"
-                android:drawableLeft="@drawable/ic_search"
+                android:drawableLeft="@drawable/quantum_ic_search_grey600_24"
                 android:drawablePadding="@dimen/_8sdp"
                 android:gravity="left|center"
                 android:padding="@dimen/_8sdp"
@@ -444,7 +435,7 @@
                             <ImageView
                                 android:layout_width="158dp"
                                 android:layout_height="170dp"
-                                android:src="@drawable/pexels_paris"/>
+                                android:src="@drawable/ic_lazy_load"/>
 
                             <com.sa.rezq.view.AppTextView
                                 android:layout_width="match_parent"
@@ -495,7 +486,7 @@
                                 <ImageView
                                     android:layout_width="158dp"
                                     android:layout_height="80dp"
-                                    android:src="@drawable/quark_studio" />
+                                    android:src="@drawable/ic_lazy_load" />
 
                                 <com.sa.rezq.view.AppTextView
                                     android:layout_width="match_parent"
@@ -538,7 +529,7 @@
                                 <ImageView
                                     android:layout_width="158dp"
                                     android:layout_height="80dp"
-                                    android:src="@drawable/quark_studio" />
+                                    android:src="@drawable/ic_lazy_load" />
 
                                 <com.sa.rezq.view.AppTextView
                                     android:layout_width="match_parent"

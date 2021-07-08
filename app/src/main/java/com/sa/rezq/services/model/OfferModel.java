@@ -16,9 +16,8 @@ public class OfferModel implements Serializable {
             MEMBERSHIP_TITLE          = "membership_title",
             OFFER_APPLICABLE          = "offer_applicable",
             OFFER_DISCOUNT           = "offer_discount",
-
-            COUPON_CODE             = "coupon_code",
-
+            RECENTLY_VISITED          = "recently_visited",
+            COUPON_CODE               = "coupon_code",
             OFFER_IMAGE              = "offer_image";
 
     private String
@@ -28,6 +27,7 @@ public class OfferModel implements Serializable {
             membership_title       = null,
             offer_applicable      = null,
             offer_image            = null,
+            recently_visited        = null,
             coupon_code             = null,
             storeId                = null,
             offer_discount        = null;
@@ -98,6 +98,14 @@ public class OfferModel implements Serializable {
         this.coupon_code = coupon_code;
     }
 
+    public String getRecently_visited() {
+        return recently_visited;
+    }
+
+    public void setRecently_visited(String recently_visited) {
+        this.recently_visited = recently_visited;
+    }
+
     public String getStoreId() {
         return storeId;
     }
@@ -117,6 +125,7 @@ public class OfferModel implements Serializable {
             if (json.has(OFFER_APPLICABLE)) offer_applicable = json.getString(OFFER_APPLICABLE);
             if (json.has(OFFER_DISCOUNT)) offer_discount = json.getString(OFFER_DISCOUNT);
             if (json.has(COUPON_CODE)) coupon_code = json.getString(COUPON_CODE);
+            if (json.has(RECENTLY_VISITED)) recently_visited = json.getString(RECENTLY_VISITED);
             if (json.has(OFFER_IMAGE)) offer_image = json.getString(OFFER_IMAGE);
             if (json.has(STORE_ID)) storeId = json.getString(STORE_ID);
 
@@ -139,6 +148,7 @@ public class OfferModel implements Serializable {
             jsonMain.put(OFFER_APPLICABLE, offer_applicable);
             jsonMain.put(OFFER_DISCOUNT, offer_discount);
             jsonMain.put(COUPON_CODE, coupon_code);
+            jsonMain.put(RECENTLY_VISITED, recently_visited);
             jsonMain.put(OFFER_IMAGE, offer_image);
             jsonMain.put(STORE_ID, storeId);
 

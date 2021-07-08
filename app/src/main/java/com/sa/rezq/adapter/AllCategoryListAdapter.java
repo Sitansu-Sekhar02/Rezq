@@ -55,7 +55,7 @@ public class AllCategoryListAdapter extends RecyclerView.Adapter<AllCategoryList
         } if(GlobalFunctions.isNotNullValue (model.getVendor_count())) {
             holder.vendor_count.setText(model.getVendor_count());
         }if (GlobalFunctions.isNotNullValue(model.getIcon() )) {
-            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.item_image);
+            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.ic_lazy_load).into(holder.item_image);
         }
 
 

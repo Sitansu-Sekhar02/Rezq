@@ -74,7 +74,7 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
         if (GlobalFunctions.isNotNullValue(model.getOffer_title() )) {
             holder.product_applicable.setText((model.getOffer_title()));
         } if (GlobalFunctions.isNotNullValue(model.getLogo() )) {
-            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.offer_image);
+            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.ic_lazy_load).into(holder.offer_image);
         }
 
         holder.relative_unlocked_offer.setOnClickListener(new View.OnClickListener() {

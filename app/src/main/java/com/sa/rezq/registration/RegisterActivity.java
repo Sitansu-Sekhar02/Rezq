@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -32,6 +33,7 @@ import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.ContextCompat;
 
 import com.facebook.FacebookSdk;
+import com.google.android.material.textfield.TextInputLayout;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -157,6 +159,17 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
         phone_number_etv = (EditText) findViewById(R.id.etContact);
         edit_profile_image_iv = (ImageView) findViewById(R.id.edit_profile_image_iv);
         profile_iamge = (CircleImageView) findViewById(R.id.ivProfimeImage);
+
+
+        TextInputLayout user_firstname_TextObj = (TextInputLayout)    findViewById(R.id.outlined_text_input_layout);
+        TextInputLayout user_lastnameTextObj = (TextInputLayout)    findViewById(R.id.ti_last_name_input);
+        TextInputLayout user_contactTextObj = (TextInputLayout)    findViewById(R.id.ti_contact_input);
+        TextInputLayout user_emailTextObj = (TextInputLayout)    findViewById(R.id.ti_email_input);
+        Typeface font_yekan  = Typeface.createFromAsset(getAssets(), "regular.otf");
+        user_firstname_TextObj .setTypeface(font_yekan);
+        user_lastnameTextObj .setTypeface(font_yekan);
+        user_contactTextObj .setTypeface(font_yekan);
+        user_emailTextObj .setTypeface(font_yekan);
 
 
         mainView = first_name_etv;

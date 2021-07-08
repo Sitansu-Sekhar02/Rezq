@@ -61,7 +61,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
         if (GlobalFunctions.isNotNullValue(model.getCount())) {
             holder.product_count.setText((model.getCount()));
         }  if (GlobalFunctions.isNotNullValue(model.getIcon() )) {
-            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.rezq_logo).into(holder.item_iv);
+            Picasso.with(activity).load(model.getIcon()).placeholder(R.drawable.ic_lazy_load).into(holder.item_iv);
         }
 
 

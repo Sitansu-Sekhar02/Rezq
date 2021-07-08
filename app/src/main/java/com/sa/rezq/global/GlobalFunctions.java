@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.text.Html;
 import android.text.Spanned;
@@ -39,6 +40,7 @@ import androidx.annotation.Nullable;
 import com.google.android.material.snackbar.Snackbar;
 import com.sa.rezq.Activity.AppController;
 import com.sa.rezq.Activity.MainActivity;
+import com.sa.rezq.Activity.SplashActivity;
 import com.sa.rezq.R;
 import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.addon.PasswordValidator;
@@ -138,7 +140,7 @@ public class GlobalFunctions {
     public static String getDateFormatTillDate(String date1) {
         String date = null;
         try {
-            SimpleDateFormat spf = new SimpleDateFormat(GlobalVariables.DATE_FORMAT_MONTH);
+            SimpleDateFormat spf = new SimpleDateFormat(GlobalVariables.DATE_MONTH_SERVER_FORMAT);
             Date newDate = spf.parse(date1);
             spf = new SimpleDateFormat("dd MMM yyyy");
             date = spf.format(newDate);
@@ -1198,14 +1200,46 @@ public class GlobalFunctions {
         }
     }
 
-    public static void logoutApplication(Context context){
+    public static void logoutApplication(Context context, boolean isSessionExpired) {
         //remove saved details.
         GlobalVariables.LANGUAGE lang = getLanguage(context);
         removeSharedPreferenceKey(context, GlobalVariables.SHARED_PREFERENCE_PROFILE);
         removeSharedPreferenceAll(context);
         setLanguage(context, lang);
-        /*refreshAfterLogout(context);
-        MainActivity.RestartEntireApp(context);*/
+
+        if (isSessionExpired) {
+//            closeAllActivities();
+            restartEntireApp(context, false);
+        }
+    }
+
+    public static void restartEntireApp(Context mainContext, boolean isLanguageChange) {
+        if (isLanguageChange) {
+            SharedPreferences shared_preference = PreferenceManager.getDefaultSharedPreferences(mainContext
+                    .getApplicationContext());
+
+            String mCustomerLanguage = shared_preference.getString(
+                    GlobalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, "null");
+            String mCurrentlanguage;
+            if ((mCustomerLanguage.equalsIgnoreCase("en"))) {
+                setLanguage(mainContext, GlobalVariables.LANGUAGE.ARABIC);
+
+                mCurrentlanguage = "ar";
+            } else {
+                mCurrentlanguage = "en";
+                setLanguage(mainContext, GlobalVariables.LANGUAGE.ENGLISH);
+
+            }
+            SharedPreferences.Editor editor = shared_preference.edit();
+            editor.putString(GlobalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, mCurrentlanguage);
+            editor.commit();
+        }
+        closeAllActivities();
+
+        Intent i = new Intent(mainContext, SplashActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainContext.startActivity(i);
+        System.exit(0);
     }
 
     public static void playStoreAction(Context mContext){

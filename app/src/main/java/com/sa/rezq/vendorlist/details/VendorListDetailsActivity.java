@@ -381,20 +381,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
 
-
-
-        Tv_allLockedOffers.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openOrderStatusDialog();
-
-            }
-        });
-
-
-
-
-
        // setTitle(getString(R.string.offers), 0, 0);
 
         loadVendorlistDetails();
@@ -413,6 +399,15 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         getOfferList();
 
         getReviews();
+
+        Tv_allLockedOffers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openOrderStatusDialog();
+
+            }
+        });
+
 
     }
 
@@ -503,7 +498,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
                         Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
                         startActivity( intent);
-
 
                 }
             });
@@ -669,6 +663,12 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 }
             }
 
+            if (offerListlocked.size()<=0){
+                Tv_allLockedOffers.setVisibility(View.GONE);
+            }else{
+
+            }
+
 
             if (offerListModels.size() <= 0) {
                 showOfferEmptyPage();
@@ -680,7 +680,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
     }
-
 
     private void showOfferEmptyPage() {
        empty_offer.setVisibility(View.VISIBLE);
@@ -776,7 +775,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
             if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
-                Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.rezq_logo).into(vendor_list_image);
+                Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(vendor_list_image);
 
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {

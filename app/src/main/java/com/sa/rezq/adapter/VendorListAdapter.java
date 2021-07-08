@@ -69,7 +69,7 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
             holder.tv_facilities.setText((model.getFacilities()));
         }   if (GlobalFunctions.isNotNullValue(model.getLogo())) {
 
-            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.rezq_logo).into(holder.iv_vendor_logo);
+            Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.ic_lazy_load).into(holder.iv_vendor_logo);
 
         }
 

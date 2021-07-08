@@ -68,7 +68,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
             BUNDLE_VENDOR_MODEL_DETAILS = "VendorModelDetails",
             BUNDLE_REDEEM_DETAILS = "RedeemOfferDetails";
 
-
     Context context = null;
     static Activity activity = null;
 
@@ -153,7 +152,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
             storeModel = null;
         }
 
-         Log.d("storeModel000","=="+storeModel);
+        Log.d("storeModel000","=="+storeModel);
 
         if (offerModel != null) {
             if (GlobalFunctions.isNotNullValue(offerModel.getOffer_image())) {
@@ -171,7 +170,27 @@ public class RedeemOfferActivity extends AppCompatActivity {
                 offer_store_id = offerModel.getId();
             }
             if (GlobalFunctions.isNotNullValue(offerModel.getCoupon_code())) {
-               // code = offerModel.getCoupon_code();
+                // code = offerModel.getCoupon_code();
+
+            }
+
+            if (GlobalFunctions.isNotNullValue(offerModel.getRecently_visited())) {
+                 Log.d("tv_save_in_recent","=="+offerModel.getRecently_visited());
+
+                if (offerModel.getRecently_visited().equalsIgnoreCase("1")){
+                    tv_save_in_recent.setVisibility(View.GONE);
+                }else{
+                    tv_save_in_recent.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (insertRecentCouponModel == null) { insertRecentCouponModel = new InsertRecentCouponModel();}
+                            insertRecentCouponModel.setOffers_id(offer_store_id);
+                            insertRecentCouponModel.setStore_id(store_id);
+                            saveInRecentCoupon(insertRecentCouponModel);
+
+                        }
+                    });
+                }
             }
 
             if (GlobalFunctions.isNotNullValue(offerModel.getStoreId())) {
@@ -215,16 +234,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
             }
         });
 
-        tv_save_in_recent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (insertRecentCouponModel == null) { insertRecentCouponModel = new InsertRecentCouponModel();}
-                    insertRecentCouponModel.setOffers_id(offer_store_id);
-                    insertRecentCouponModel.setStore_id(store_id);
-                    saveInRecentCoupon(insertRecentCouponModel);
-
-            }
-        });
 
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar);

@@ -58,7 +58,7 @@
                 <com.hbb20.CountryCodePicker
                     android:id="@+id/country_code_picker"
                     android:layout_width="wrap_content"
-                    android:layout_height="48dp"
+                    android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:gravity="center"
                     app:ccp_autoDetectCountry="true"

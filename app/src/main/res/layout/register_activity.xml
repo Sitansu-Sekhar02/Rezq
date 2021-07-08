@@ -23,7 +23,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
@@ -33,7 +33,7 @@
                         android:src="@drawable/logo_ac" />
 
                     <com.sa.rezq.view.AppTextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="148dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="20dp"
@@ -43,7 +43,6 @@
                         android:textStyle="bold" />
                 </LinearLayout>
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/llmain"
@@ -123,6 +122,7 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_last_name_input"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
@@ -151,6 +151,7 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_contact_input"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"
@@ -182,6 +183,7 @@
                         android:orientation="vertical">
 
                         <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_email_input"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"

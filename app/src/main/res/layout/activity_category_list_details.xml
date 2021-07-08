@@ -27,8 +27,7 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:src="@drawable/background_offer">
+                    android:layout_height="184dp">
 
                 </ImageView>
 

@@ -68,7 +68,7 @@ public class MembershipListAdapter extends RecyclerView.Adapter<MembershipListAd
 
             }*/
             if (GlobalFunctions.isNotNullValue(model.getImage())) {
-                Picasso.with(activity).load(model.getImage()).placeholder(R.drawable.rezq_logo).into(holder.iv_banner_image);
+                Picasso.with(activity).load(model.getImage()).placeholder(R.drawable.ic_lazy_load).into(holder.iv_banner_image);
 
             }
 

@@ -11,7 +11,7 @@
         android:layout_gravity="bottom"
         android:layout_marginTop="15dp"
         android:layout_alignParentBottom="true"
-        android:layout_height="3dp"/>
+        android:layout_height="4dp"/>
 
 
     <LinearLayout
@@ -24,9 +24,9 @@
         android:layout_marginTop="40dp">
         <androidx.cardview.widget.CardView
             android:id="@+id/card_item"
-            android:layout_height="@dimen/_70sdp"
+            android:layout_height="@dimen/_55sdp"
             app:cardCornerRadius="8dp"
-            android:layout_width="@dimen/_70sdp">
+            android:layout_width="@dimen/_55sdp">
             <ImageView
                 android:id="@+id/nav_profile_image"
                 android:layout_width="match_parent"
@@ -38,7 +38,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginLeft="20dp">
+                android:layout_marginLeft="15dp">
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tv_nav_fullname"
                     android:layout_width="match_parent"
@@ -78,7 +78,6 @@
                         android:id="@+id/TvseeProfile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="8dp"
                         android:background="@drawable/ic_baseline_arrow_forward_ios_24"
                         android:layout_alignParentRight="true"/>
                 </RelativeLayout>
@@ -95,6 +94,7 @@
                         android:textSize="12dp"
                         android:textColor="#171717"
                         android:layout_height="wrap_content"
+                        android:textStyle="bold"
                         android:text=""/>
                     <com.sa.rezq.view.AppTextView
                         android:id="@+id/tv_validity_to"
@@ -102,6 +102,7 @@
                         android:textSize="12dp"
                         android:layout_marginLeft="4dp"
                         android:textColor="#171717"
+                        android:textStyle="bold"
                         android:layout_height="wrap_content"
                         android:text=""/>
                 </LinearLayout>

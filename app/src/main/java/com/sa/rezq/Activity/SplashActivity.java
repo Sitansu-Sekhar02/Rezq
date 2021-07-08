@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.gms.analytics.Tracker;
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
@@ -34,6 +35,9 @@ public class SplashActivity  extends AppCompatActivity {
 
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
+
+    private Tracker tracker;
+
 
     private NotificationModel notificationModel = null;
 
@@ -67,6 +71,8 @@ public class SplashActivity  extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
         }
+
+
 
         shared_preference = PreferenceManager.getDefaultSharedPreferences(this
                 .getApplicationContext());

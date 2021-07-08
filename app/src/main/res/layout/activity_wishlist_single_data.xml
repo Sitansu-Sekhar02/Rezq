@@ -22,7 +22,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/pexels_paris" />
+                    android:src="@drawable/ic_lazy_load" />
 
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/product_title"

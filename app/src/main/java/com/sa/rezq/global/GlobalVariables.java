@@ -525,7 +525,8 @@ public class GlobalVariables {
     public static String RESPONSE_HTTP_SESSION_EXPIRED     = "401";
     public static String RESPONSE_HTTP_METHOD_NOT_ALLOWED  = "405";
     public static int  RESPONSE_HTTP_METHOD_FORBIDDEN       = 403;
-    public static int  RESPONSE_HTTP_METHOD_SESSION_EXPIRED = 504;
+    public static int  RESPONSE_HTTP_METHOD_SESSION_EXPIRED = 503;
+    public static int  RESPONSE_HTTP_METHOD_ERROR           = 504;
     public static String RESPONSE_HTTP_RECORD_EXIST        = "409";
     public static String RESPONSE_HTTP_BAD_REQUEST_5       = "5";
 
@@ -595,6 +596,7 @@ public class GlobalVariables {
     public static String TIME_FORMAT                   ="hh:mm a";
     public static String ENCRYPTION_TIME_FORMAT_UTC    ="yyyyMMddHH";
     public static String DATE_TIME_SERVER_FORMAT       ="yyyy-MM-dd HH:mm:ss";
+    public static String DATE_MONTH_SERVER_FORMAT       ="yyyy-MM-dd";
 
     public static String AUTHENTICATION_DATE_FORMAT    ="yyyyMMdd";
     public static String AUTHENTICATION_TIME_FORMAT    ="HHmm";

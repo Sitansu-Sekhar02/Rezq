@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.location.Address;
 import android.location.Criteria;
 import android.location.Geocoder;
@@ -31,11 +34,14 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
@@ -276,12 +282,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainContext = this;
         mainWindow = getWindow();
 
+
+
         mainActivityFM = getSupportFragmentManager();
         layoutInflater = activity.getLayoutInflater();
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
         analyticsReport = new AnalyticsReport();
         //initialize findviewbyid
+
+        arabic_language_tv=findViewById(R.id.arabic_language_tv);
+        english_language_tv=findViewById(R.id.english_language_tv);
+        arabic_language_iv=findViewById(R.id.arabic_language_iv);
+        english_language_iv=findViewById(R.id.english_language_iv);
         Intialize();
 
         toolbar = ( Toolbar ) findViewById( R.id.tool_bar ); // Attaching the layout to the toolbar object
@@ -292,12 +305,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // actionBar.setHomeAsUpIndicator( navIconDrawable );
         setOptionsMenuVisiblity( false );
 
+        Drawable navIconDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_menu, getTheme());
         gravity = globalFunctions.getLanguage( mainContext ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
         drawer = ( DrawerLayout ) findViewById( R.id.drawer_layout );
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
         toggle.setDrawerIndicatorEnabled( false );
-        drawer.addDrawerListener( toggle );
+        toggle.setHomeAsUpIndicator(navIconDrawable);
+        toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (drawer.isDrawerVisible(gravity)) {
+                    drawer.closeDrawer(gravity);
+                } else {
+                    drawer.openDrawer(gravity);
+                }
+            }
+        });
+        drawer.addDrawerListener(toggle);
         toggle.syncState();
 
 
@@ -318,8 +343,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         navigationView.setNavigationItemSelectedListener( this );
         navigationHeaderView = navigationView.getHeaderView( 0 );
-        searchView .clearFocus();
-        searchView.setFocusable(false);
 
 
         mainActivityFM.addOnBackStackChangedListener( new FragmentManager.OnBackStackChangedListener() {
@@ -409,6 +432,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d(TAG, "Error : " + msg);
             }
         }, "Get Profile");
+    }
+
+    private void applyFontToMenuItem(MenuItem mi) {
+        Typeface font = Typeface.createFromAsset(getAssets(), "regular.otf");
+        SpannableString mNewTitle = new SpannableString(mi.getTitle());
+        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mi.setTitle(mNewTitle);
     }
 
     public boolean permissionIsGranted() {
@@ -508,16 +538,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     startActivity( intent );
                 }
             });
-/*
             if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
                 english_language_iv.setVisibility(View.VISIBLE);
                 arabic_language_iv.setVisibility(View.GONE);
             } else {
                 english_language_iv.setVisibility(View.GONE);
                 arabic_language_iv.setVisibility(View.VISIBLE);
-            }*/
+            }
 
-          /*  arabic_language_tv.setOnClickListener(new View.OnClickListener() {
+            arabic_language_tv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
@@ -542,7 +571,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     }
                     drawer.closeDrawer(gravity);
                 }
-            });*/
+            });
 
             ProfileModel profileModel=globalFunctions.getProfile(activity);
             if (profileModel!=null) {
@@ -578,29 +607,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_rezq_plus_member.setVisibility(View.VISIBLE);
                     header_tv_rezq_plus_member.setText(membershipName);
                     header_tv_validity_from.setText(GlobalFunctions.getDateFormat(valid_from));
-                    header_tv_validity_to.setText("- " + valid_to);
+                    header_tv_validity_to.setText("- " + GlobalFunctions.getDateFormatTillDate(valid_to));
                     header_tv_rezq_plus_member.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             Intent intent = new Intent(activity, MembershipDetailsActivity.class);
                             activity.startActivity(intent);
-                        }
-                    });
-
-                   // ProfileModel profileModel= globalFunctions.getProfile( mainContext );
-                    try {
-                        if (profileMembershipModel.getSubscriber_image() != null || !profileMembershipModel.getSubscriber_image().equals( "null" ) || !profileMembershipModel.getSubscriber_image().equalsIgnoreCase( "" )) {
-                            Picasso.with( mainContext ).load(profileMembershipModel.getSubscriber_image() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
-                        }
-                    } catch (Exception e) {
-
-                    }
-                    crop_profile.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent intent = new Intent( mainContext, ProfileMainActivity.class );
-                            startActivity( intent );
                         }
                     });
 
@@ -610,11 +622,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     nav_tv_upgrade.setVisibility(View.VISIBLE);
                 }
 
-
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_name())) {
                     String membership_fullName =profileMembershipModel.getSubscriber_name();
                     header_name_tv.setText(membership_fullName);
                 }
+
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_image())) {
+                    Picasso.with( mainContext ).load(profileMembershipModel.getSubscriber_image() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
+                }
+
+                crop_profile.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        Intent intent = new Intent( mainContext, ProfileMainActivity.class );
+                        startActivity( intent );
+                    }
+                });
 
 
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_image())) {
@@ -761,8 +785,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         tvHeaderText = findViewById(R.id.tvHeaderText);
         tvLocation = findViewById(R.id.tvlocation);
         crop_profile = findViewById(R.id.iv_userProfile);
-        arabic_language_tv=findViewById(R.id.Tvlang_arabic);
-        english_language_tv=findViewById(R.id.Tvlang_english);
+
         ivHome=findViewById(R.id.ivHomeText);
 
 
@@ -773,7 +796,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = ( NavigationView ) findViewById( R.id.nav_view );
 
+        Menu m = navigationView.getMenu();
+        for (int i=0;i<m.size();i++) {
+            MenuItem mi = m.getItem(i);
 
+            //for aapplying a font to subMenu ...
+            SubMenu subMenu = mi.getSubMenu();
+            if (subMenu!=null && subMenu.size() >0 ) {
+                for (int j=0; j <subMenu.size();j++) {
+                    MenuItem subMenuItem = subMenu.getItem(j);
+                    applyFontToMenuItem(subMenuItem);
+                }
+            }
+
+            //the method we have create in activity
+            applyFontToMenuItem(mi);
+        }
 
     }
 
@@ -1037,7 +1075,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             if (statusModel.isStatus()) {
                 /*Logout success, Clear all cache and reload the home page*/
 
-                globalFunctions.logoutApplication( mainContext );
+                globalFunctions.logoutApplication( mainContext ,false);
                 GlobalFunctions.closeAllActivities();
                 RestartEntireApp( mainContext, false );
 
@@ -1049,10 +1087,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_menu:
+           /* case R.id.iv_menu:
                 drawer.openDrawer(Gravity.LEFT);
                 break;
-
+*/
         }
     }
 

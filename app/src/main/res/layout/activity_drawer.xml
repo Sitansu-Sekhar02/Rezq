@@ -16,7 +16,12 @@
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:scrollbars="none"
         android:layout_gravity="start"
+        app:itemIconSize="@dimen/_14sdp"
+        app:itemTextAppearance="@style/NavDrawerTextStyle"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main1"
         app:menu="@menu/activity_main_drawer" >
@@ -27,16 +32,50 @@
             android:gravity="center"
             android:orientation="horizontal"
             android:padding="16dp">
-
-            <com.sa.rezq.view.AppTextView
-                android:id="@+id/Tvlang_arabic"
+           <!-- <LinearLayout
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/Tvlang_arabic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="@string/arabic" />
+                <View
+                    android:id="@+id/view_arabic_language"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/red" />
+            </LinearLayout>-->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#000000"
-                android:drawablePadding="@dimen/_5sdp"
-                android:textSize="@dimen/_14sdp"
-                android:text="@string/arabic" />
+                android:layout_marginLeft="8dp"
+                android:orientation="vertical">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/arabic_language_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:paddingBottom="@dimen/_3sdp"
+                    android:textSize="@dimen/_14sdp"
+                    android:text="@string/arabic" />
+                <View
+                    android:id="@+id/arabic_language_iv"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_2sdp"
+                    android:background="@color/red"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+
             <ImageView
+                android:id="@+id/iv_lang"
                 android:layout_marginLeft="8dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +86,7 @@
                 android:layout_marginLeft="8dp"
                 android:orientation="vertical">
                 <com.sa.rezq.view.AppTextView
-                    android:id="@+id/Tvlang_english"
+                    android:id="@+id/english_language_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#FF3B3B"
@@ -56,7 +95,7 @@
                     android:textSize="@dimen/_14sdp"
                     android:text="@string/english" />
                 <View
-                    android:id="@+id/view_english_language"
+                    android:id="@+id/english_language_iv"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_2sdp"
                     android:background="@color/red" />
