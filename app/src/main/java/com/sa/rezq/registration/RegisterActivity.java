@@ -553,8 +553,6 @@ public class RegisterActivity extends AppCompatActivity implements UploadListene
         }
     }
 
-
-
     private void goToMainActivity() {
         Intent intent = new Intent(activity, AccountActivity.class);
         activity.startActivity(intent);

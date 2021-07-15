@@ -1576,4 +1576,21 @@ public class GlobalFunctions {
 
         return updatedList;
     }
+
+    public static OfferModel getSelectedModelFromList(List<OfferModel> list,String selectedOfferList) {
+        OfferModel resultvariantModel = null;
+
+        if (list.size() > 0) {
+            for (int i = 0; i < list.size(); i++) {
+                OfferModel variantModel = list.get(i);
+                if (variantModel.getId().equalsIgnoreCase(selectedOfferList)) {
+                    return variantModel;
+                }
+            }
+        } else {
+            return resultvariantModel;
+        }
+
+        return resultvariantModel;
+    }
 }

@@ -30,7 +30,7 @@
                 android:layout_marginLeft="@dimen/_15sdp"
                 android:layout_marginRight="@dimen/_15sdp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/rezq_logo"/>
+                android:src="@drawable/ic_lazy_load"/>
 
             <LinearLayout
                 android:id="@+id/lnrDesc"
@@ -58,7 +58,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/rezq_mem"
                     android:textColor="#171717"
-                    android:textSize="12dp" />
+                    android:textSize="16dp" />
 
                 <LinearLayout
                     android:visibility="gone"

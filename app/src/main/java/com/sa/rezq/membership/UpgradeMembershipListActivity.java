@@ -253,7 +253,7 @@ public class UpgradeMembershipListActivity extends AppCompatActivity {
         alertDialog.setPositiveButton( activity.getString( R.string.ok ), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(activity, MainActivity.class);
+                Intent intent=new Intent(activity, MembershipDetailsActivity.class);
                 startActivity(intent);
                 alertDialog.dismiss();
 

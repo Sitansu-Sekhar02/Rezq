@@ -29,6 +29,7 @@
                 android:layout_margin="@dimen/_8sdp"
                 android:background="@drawable/slider_border"
                 app:cardCornerRadius="15dp">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/membership_banner_recyclerview"
                     android:layout_width="match_parent"
@@ -95,7 +96,7 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:text="@string/rezq_mem"
                     android:textColor="#171717"
-                    android:textSize="12dp" />
+                    android:textSize="16dp" />
 
                 <LinearLayout
                     android:visibility="gone"

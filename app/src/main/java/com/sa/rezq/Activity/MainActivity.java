@@ -607,7 +607,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_rezq_plus_member.setVisibility(View.VISIBLE);
                     header_tv_rezq_plus_member.setText(membershipName);
                     header_tv_validity_from.setText(GlobalFunctions.getDateFormat(valid_from));
-                    header_tv_validity_to.setText("- " + GlobalFunctions.getDateFormatTillDate(valid_to));
+                    header_tv_validity_to.setText(" - "+GlobalFunctions.getDateFormatTillDate(valid_to));
                     header_tv_rezq_plus_member.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {

@@ -46,11 +46,13 @@ import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.InsertAccountModel;
 import com.sa.rezq.services.model.InsertRecentCouponModel;
 import com.sa.rezq.services.model.OfferModel;
+import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.services.model.UpdateLanguageModel;
 import com.sa.rezq.services.model.VendorModel;
+import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.view.AlertDialog;
 import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
@@ -66,7 +68,8 @@ public class RedeemOfferActivity extends AppCompatActivity {
 
             BUNDLE_VENDOR_DETAILS = "VendorDetailsId",
             BUNDLE_VENDOR_MODEL_DETAILS = "VendorModelDetails",
-            BUNDLE_REDEEM_DETAILS = "RedeemOfferDetails";
+                    BUNDLE_RECENT_COUPON = "RecentCopuonList",
+             BUNDLE_REDEEM_DETAILS = "RedeemOfferDetails";
 
     Context context = null;
     static Activity activity = null;
@@ -100,6 +103,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
     Window window = null;
     OfferModel offerModel=null;
     VendorModel storeModel=null;
+    RecentCouponModel recentCouponModel=null;
 
 
     public static Intent newInstance(Activity activity, OfferModel model,VendorModel vendorModel ) {
@@ -107,6 +111,14 @@ public class RedeemOfferActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putSerializable(BUNDLE_REDEEM_DETAILS, model);
         bundle.putSerializable(BUNDLE_VENDOR_MODEL_DETAILS, vendorModel);
+        intent.putExtras(bundle);
+        return intent;
+    }
+
+    public static Intent newInstance(Activity activity, RecentCouponModel model) {
+        Intent intent = new Intent(activity, RedeemOfferActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable(BUNDLE_RECENT_COUPON, model);
         intent.putExtras(bundle);
         return intent;
     }
@@ -139,6 +151,20 @@ public class RedeemOfferActivity extends AppCompatActivity {
         restro_rating_count=findViewById(R.id.restro_rating_count);
         ll_ratings_count=findViewById(R.id.ll_ratings_count);
 
+
+        if (getIntent().hasExtra(BUNDLE_RECENT_COUPON)) {
+
+            recentCouponModel = (RecentCouponModel) getIntent().getSerializableExtra(BUNDLE_RECENT_COUPON);
+        } else {
+            recentCouponModel = null;
+        }
+        if (recentCouponModel != null) {
+            if (GlobalFunctions.isNotNullValue(recentCouponModel.getId()) && GlobalFunctions.isNotNullValue(recentCouponModel.getOffer_id())) {
+                store_id = recentCouponModel.getId();
+                offer_store_id=recentCouponModel.getOffer_id();
+
+            }
+        }
 
         if (getIntent().hasExtra(BUNDLE_REDEEM_DETAILS)) {
             offerModel = (OfferModel) getIntent().getSerializableExtra(BUNDLE_REDEEM_DETAILS);
@@ -175,7 +201,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
             }
 
             if (GlobalFunctions.isNotNullValue(offerModel.getRecently_visited())) {
-                 Log.d("tv_save_in_recent","=="+offerModel.getRecently_visited());
 
                 if (offerModel.getRecently_visited().equalsIgnoreCase("1")){
                     tv_save_in_recent.setVisibility(View.GONE);
@@ -196,9 +221,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
             if (GlobalFunctions.isNotNullValue(offerModel.getStoreId())) {
                 store_id=offerModel.getStoreId();
             }
-
         }
-
 
         if (storeModel!=null){
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
@@ -211,7 +234,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
 
             if (GlobalFunctions.isNotNullValue(storeModel.getAvg_rating())) {
                 restro_avg_rating.setText(storeModel.getAvg_rating());
-                if (storeModel.getAvg_rating().equalsIgnoreCase("")){
+                if (storeModel.getAvg_rating().equalsIgnoreCase("0")){
                     ll_ratings_count.setVisibility(View.GONE);
                 }
             }
@@ -289,7 +312,8 @@ public class RedeemOfferActivity extends AppCompatActivity {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             StatusModel statusModel = statusMainModel.getStatusModel();
             if (statusMainModel.isStatusLogin()) {
-                openSuccessDialog(statusModel.getMessage());
+                globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+                //openSuccessDialog(statusModel.getMessage());
             } else {
                 globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
 

@@ -21,6 +21,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -41,7 +42,7 @@ import com.sa.rezq.services.model.SearchResponseModel;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends Activity {
+public class SearchActivity extends AppCompatActivity {
     public static final String TAG = "SearchActivity";
     public static final String BUNDLE_SEARCH_RESPONSE_MODEL = "Bundle_Search_Response_Model";
 

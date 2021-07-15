@@ -11,6 +11,7 @@
     <color name="grey_light">#F5F5F5</color>
     <color name="red">#FF3B3B</color>
     <color name="holo_green">#009393</color>
+    <color name="holo_green_light">#78D3CA</color>
     <color name="colorPrimary">#FF018786</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#03DAC5</color>

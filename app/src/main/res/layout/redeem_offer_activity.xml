@@ -143,7 +143,7 @@
                         android:layout_width="match_parent"
                         android:gravity="center"
                         android:scaleType="centerCrop"
-                        android:background="@drawable/rezq_logo"
+                        android:background="@drawable/ic_lazy_load"
                         android:layout_height="match_parent" />
                 </androidx.cardview.widget.CardView>
 
@@ -155,7 +155,7 @@
                     android:textColor="#171717"
                     android:gravity="center"
                     android:textSize="16dp"
-                    android:text="@string/buy_two_get_one"
+                    android:text=""
                     android:layout_height="wrap_content" />
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/offer_description"
@@ -163,7 +163,7 @@
                     android:layout_marginTop="5dp"
                     android:textColor="#898989"
                     android:gravity="center"
-                    android:text="@string/applicable_onselectitem"
+                    android:text=""
                     android:layout_height="wrap_content" />
                 <com.sa.rezq.view.AppButton
                     android:id="@+id/btn_RedeemOffer"

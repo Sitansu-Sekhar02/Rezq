@@ -209,7 +209,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     private void setStaticAccount() {
         if (accountModels==null){accountModels=new ArrayList<>();}
         AccountModel accountModel=new AccountModel();
-        accountModel.setFirst_name("Add");
+        accountModel.setFirst_name(activity.getString(R.string.add));
         accountModel.setId("0");
         accountModels.add(accountModel);
     }

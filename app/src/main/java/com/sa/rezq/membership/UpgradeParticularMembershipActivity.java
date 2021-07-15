@@ -69,11 +69,8 @@ public class UpgradeParticularMembershipActivity extends AppCompatActivity {
     static int titleResourseID;
     static TextView toolbar_title;
     static ImageView toolbar_logo, tool_bar_back_icon;
-    SliderLayout mProductSlider;
-    PagerIndicator mPagerIndicator;
 
     private boolean shouldRefreshOnResume = false;
-
     GlobalVariables globalVariables;
     GlobalFunctions globalFunctions;
     Window window = null;

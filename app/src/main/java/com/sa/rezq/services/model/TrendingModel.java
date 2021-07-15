@@ -17,6 +17,7 @@ public class TrendingModel implements Serializable {
             OFFER_TITLE = "offer_title",
             OFFER_APPLICABLE = "offer_applicable",
             ICON = "image",
+            EXTRA = "extra",
             VENDOR_NAME = "vendor_name",
             OFFER_DISCOUNT = "offer_discount",
             COUNT = "count",
@@ -34,6 +35,8 @@ public class TrendingModel implements Serializable {
 
     ServicesListModel
             servicesListModel = null;
+
+    TrendingModel traTrendingModel=null;
 
 
     public TrendingModel() {
@@ -135,6 +138,14 @@ public class TrendingModel implements Serializable {
         return 0;
     }
 
+    public TrendingModel getTraTrendingModel() {
+        return traTrendingModel;
+    }
+
+    public void setTraTrendingModel(TrendingModel traTrendingModel) {
+        this.traTrendingModel = traTrendingModel;
+    }
+
     public boolean toObject(String jsonObject) {
         try {
             JSONObject json = new JSONObject(jsonObject);
@@ -146,6 +157,14 @@ public class TrendingModel implements Serializable {
             if (json.has(OFFER_DISCOUNT)) offer_discount = json.getString(OFFER_DISCOUNT);
             if (json.has(VENDOR_NAME)) vendor_name = json.getString(VENDOR_NAME);
             if (json.has(COUNT)) count = json.getString(COUNT);
+
+            if(json.has(EXTRA)){
+                TrendingModel tmpstatusModel = new TrendingModel();
+                JSONObject jsonObject1 = new JSONObject();
+                jsonObject1 = json.getJSONObject(EXTRA);
+                if(jsonObject1 != null){tmpstatusModel.toObject(jsonObject1.toString());}
+                traTrendingModel = tmpstatusModel;
+            }
 
 
             if (json.has(SERVICES)) {
@@ -179,7 +198,7 @@ public class TrendingModel implements Serializable {
             jsonMain.put(OFFER_DISCOUNT, offer_discount);
             jsonMain.put(VENDOR_NAME, vendor_name);
             jsonMain.put(COUNT, count);
-
+            jsonMain.put(EXTRA, traTrendingModel != null ? new JSONObject(this.traTrendingModel.toString()) : new JSONObject());
             jsonMain.put(SERVICES, servicesListModel != null ? new JSONArray(servicesListModel.toString(true)) : new JSONArray());
             returnString = jsonMain.toString();
             returnString = jsonMain.toString();

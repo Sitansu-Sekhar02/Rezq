@@ -43,6 +43,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:gravity="left"
+            android:background="@null"
             android:hint="@string/start_typing"
             android:imeOptions="actionSearch"
             android:paddingLeft="@dimen/_5sdp"

@@ -52,7 +52,7 @@
                     android:id="@+id/tv_membership_title"
                     android:visibility="visible"
                     android:layout_width="76dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_18sdp"
                     android:text="@string/free"
                     android:gravity="center"
                     android:layout_centerInParent="true"

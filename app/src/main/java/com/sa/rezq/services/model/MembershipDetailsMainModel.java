@@ -82,8 +82,6 @@ public class MembershipDetailsMainModel implements Serializable {
             jsonMain.put(MESSAGE, message);
             jsonMain.put(RESPONSE, membershipDetailsModel != null ? new JSONObject(this.membershipDetailsModel.toString()) : new JSONObject());
 
-           // jsonMain.put(RESPONSE, this.membershipDetailsModel != null? new JSONArray(this.membershipDetailsModel.toString(true)) : new JSONArray());
-
             returnString = jsonMain.toString();
         }
         catch (Exception ex){

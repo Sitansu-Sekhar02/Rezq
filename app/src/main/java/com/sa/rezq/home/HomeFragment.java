@@ -292,7 +292,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void setUpTrendingPage(TrendingListModel trendingListModel) {
         if (trendingListModel != null && trendingModelList != null) {
             trendingModelList.clear();
-            trendingModelList.addAll( trendingListModel.getTrendingModels() );
+//            trendingModelList.addAll( trendingListModel.getTrendingModels() );
+
+            setUpdatedList(trendingListModel.getTrendingModels() );
+
             if (trendingListAdapter != null) {
                 synchronized (trendingListAdapter) {
                     trendingListAdapter.notifyDataSetChanged();
@@ -304,6 +307,21 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 showTrendingContent();
                 trendingRecyclerView();
             }
+        }
+    }
+
+    private void setUpdatedList(List<TrendingModel> trendingListModel) {
+        for (int i=0;i<trendingListModel.size();i++){
+            TrendingModel trendingModel=trendingListModel.get(i);
+
+            if (i==1 || i%3==1){
+                trendingModelList.add(trendingModel);
+            }else if (i==2 || i%3==2){
+                trendingModelList.get(i-1).setTraTrendingModel(trendingModel);
+            }else {
+                trendingModelList.add(trendingModel);
+            }
+
         }
     }
 

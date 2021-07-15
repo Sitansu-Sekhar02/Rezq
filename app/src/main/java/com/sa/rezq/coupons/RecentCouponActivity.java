@@ -45,25 +45,31 @@ import com.sa.rezq.R;
 import com.sa.rezq.adapter.AccountListAdapter;
 import com.sa.rezq.adapter.AllCategoryListAdapter;
 import com.sa.rezq.adapter.CouponListAdapter;
+import com.sa.rezq.adapter.interfaces.OnOfferClickInvoke;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.offers.RedeemOfferActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
 import com.sa.rezq.services.model.AccountListModel;
 import com.sa.rezq.services.model.AccountMainModel;
 import com.sa.rezq.services.model.AccountModel;
 import com.sa.rezq.services.model.InsertAccountModel;
+import com.sa.rezq.services.model.OfferModel;
 import com.sa.rezq.services.model.RecentCouponListModel;
 import com.sa.rezq.services.model.RecentCouponMainModel;
 import com.sa.rezq.services.model.RecentCouponModel;
 import com.sa.rezq.services.model.SeeAllCategoryModel;
 import com.sa.rezq.services.model.TrendingModel;
+import com.sa.rezq.services.model.VendorDetailsMainModel;
+import com.sa.rezq.services.model.VendorModel;
+import com.squareup.picasso.Picasso;
 import com.vlonjatg.progressactivity.ProgressLinearLayout;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecentCouponActivity extends AppCompatActivity {
+public class RecentCouponActivity extends AppCompatActivity implements OnOfferClickInvoke {
 
     public static final String TAG = "RecentCouponActivity";
 
@@ -150,7 +156,7 @@ public class RecentCouponActivity extends AppCompatActivity {
             public void OnSuccessFromServer(Object arg0) {
               //  GlobalFunctions.hideProgress();
 
-                Log.d( TAG, "Response : " + arg0.toString() );
+                Log.d( TAG, "Response : " + arg0.toString());
                 RecentCouponMainModel recentCouponMainModel = (RecentCouponMainModel) arg0;
                 if (recentCouponMainModel!=null && recentCouponMainModel.getRecentCouponListModel()!=null){
                     RecentCouponListModel listModel = recentCouponMainModel.getRecentCouponListModel();
@@ -213,7 +219,7 @@ public class RecentCouponActivity extends AppCompatActivity {
     private void initRecyclerView() {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setHasFixedSize(true);
-        listAdapter = new CouponListAdapter(activity, recentCouponModels);
+        listAdapter = new CouponListAdapter(activity, recentCouponModels,this);
         recyclerView.setAdapter(listAdapter);
     }
 
@@ -331,6 +337,58 @@ public class RecentCouponActivity extends AppCompatActivity {
     @Override
     public void onDestroy () {
         super.onDestroy();
+    }
+
+
+    @Override
+    public void OnClickInvoke(RecentCouponModel recentCouponModel) {
+        loadVendorlistDetails(recentCouponModel.getId(),recentCouponModel.getOffer_id());
+    }
+
+
+    private void loadVendorlistDetails(String vendor_id, String offer_id) {
+        GlobalFunctions.showProgress(context, getString(R.string.loading));
+        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
+        servicesMethodsManager.getVendorDetails(context, vendor_id, new ServerResponseInterface() {
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnSuccessFromServer(Object arg0) {
+                GlobalFunctions.hideProgress();
+                Log.d(TAG, "Response : " + arg0.toString());
+                VendorDetailsMainModel vendorMainModel = (VendorDetailsMainModel) arg0;
+                VendorModel vendorModel = vendorMainModel.getVendorModel();
+
+                if (vendorModel != null) {
+                    setVendorDetails(vendorModel,offer_id);
+                }
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnFailureFromServer(String msg) {
+                GlobalFunctions.hideProgress();
+                Log.d(TAG, "Failure : " + msg);
+                GlobalFunctions.displayMessaage(context, mainView, msg);
+            }
+
+            @SuppressLint("LongLogTag")
+            @Override
+            public void OnError(String msg) {
+                GlobalFunctions.hideProgress();
+                Log.d(TAG, "Error : " + msg);
+                GlobalFunctions.displayMessaage(context, mainView, msg);
+            }
+        }, "Order List");
+    }
+
+    private void setVendorDetails(VendorModel vendorModel,String offer_id ) {
+
+        if (vendorModel != null && context != null) {
+            OfferModel offerModel=GlobalFunctions.getSelectedModelFromList(vendorModel.getOfferListModel().getOfferModels(),offer_id);
+            Intent intent = RedeemOfferActivity.newInstance( activity, offerModel,vendorModel);
+            activity.startActivity( intent );
+
+        }
     }
 
 }

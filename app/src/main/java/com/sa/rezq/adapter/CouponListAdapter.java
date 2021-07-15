@@ -17,6 +17,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sa.rezq.R;
+import com.sa.rezq.adapter.interfaces.OnOfferClickInvoke;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
 import com.sa.rezq.offers.RedeemOfferActivity;
@@ -45,10 +46,11 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
     private GlobalFunctions globalFunctions;
     String minimumQuantity = "0";
     boolean isProductVertical = false;
-
-    public CouponListAdapter(Activity activity, List<RecentCouponModel> list) {
+    OnOfferClickInvoke listener;
+    public CouponListAdapter(Activity activity, List<RecentCouponModel> list,OnOfferClickInvoke listener) {
         this.activity = activity;
         this.list = list;
+        this.listener = listener;
         searchList = new ArrayList<>(list);
 
     }
@@ -77,12 +79,12 @@ public class CouponListAdapter extends RecyclerView.Adapter<CouponListAdapter.vi
             Picasso.with(activity).load(model.getLogo()).placeholder(R.drawable.ic_lazy_load).into(holder.offer_image);
         }
 
-        holder.relative_unlocked_offer.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent intent = VendorListDetailsActivity.newInstance( activity, model);
-                activity.startActivity( intent );
+                listener.OnClickInvoke(model);
+
             }
         });
     }

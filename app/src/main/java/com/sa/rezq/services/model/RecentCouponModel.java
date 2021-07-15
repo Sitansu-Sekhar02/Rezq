@@ -25,6 +25,7 @@ public class RecentCouponModel implements Serializable {
                     OFFER_DISCOUNT             = "offer_discount",
                     CREATED_ON                = "created_on",
                     LOGO                       = "logo",
+                    OFFER_ID                    = "offer_id",
                     PROFILE_IMAGE             = "profile_image";
 
 
@@ -40,6 +41,7 @@ public class RecentCouponModel implements Serializable {
             avg_rating       = null,
             offer_discount       = null,
             created_on       = null,
+            offer_id         = null,
             profile_image       = null;
 
 
@@ -137,6 +139,14 @@ public class RecentCouponModel implements Serializable {
         this.created_on = created_on;
     }
 
+    public String getOffer_id() {
+        return offer_id;
+    }
+
+    public void setOffer_id(String offer_id) {
+        this.offer_id = offer_id;
+    }
+
     public String getProfile_image() {
         return profile_image;
     }
@@ -178,6 +188,7 @@ public class RecentCouponModel implements Serializable {
             if (json.has(OFFER_TITLE)) offer_title = json.getString(OFFER_TITLE);
             if (json.has(AVERAGE_RATING)) avg_rating = json.getString(AVERAGE_RATING);
             if (json.has(CREATED_ON)) created_on = json.getString(CREATED_ON);
+            if (json.has(OFFER_ID)) offer_id = json.getString(OFFER_ID);
 
 
             return true;
@@ -206,6 +217,7 @@ public class RecentCouponModel implements Serializable {
             jsonMain.put(AVERAGE_RATING, avg_rating);
             jsonMain.put(OFFER_TITLE, offer_title);
             jsonMain.put(CREATED_ON, created_on);
+            jsonMain.put(OFFER_ID, offer_id);
 
             returnString = jsonMain.toString();
         }

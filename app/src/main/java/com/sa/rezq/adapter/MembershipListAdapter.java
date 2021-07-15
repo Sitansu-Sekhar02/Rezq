@@ -48,14 +48,11 @@ public class MembershipListAdapter extends RecyclerView.Adapter<MembershipListAd
 
     }
 
-
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.membership_banner_dataview, parent, false));
-
 
     }
 
