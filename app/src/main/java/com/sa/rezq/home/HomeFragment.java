@@ -382,6 +382,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                     placesNearyouListAdapter.notifyDataSetChanged();
                 }
             }
+
             if (nearbyModelList.size() <= 0) {
                 showNearbyEmptyPage();
             } else {

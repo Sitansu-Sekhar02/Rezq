@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/marker_view_incl"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/app_color_background"
+    tools:context=".map.SearchPlaceOnMapActivity">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_detail" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/googleplacesearch_cv"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tool_bar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_8sdp"
+        android:elevation="0dp"
+        android:gravity="center"
+        android:visibility="visible"
+        app:cardCornerRadius="@dimen/_4sdp"
+        app:cardElevation="3dp"
+        app:cardPreventCornerOverlap="false">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tool_bar"
+            android:layout_gravity="center"
+            android:background="@color/grey_light"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:visibility="visible"
+                app:endIconMode="clear_text"
+                app:hintEnabled="false">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:drawableLeft="@drawable/ic_search"
+                    android:drawablePadding="@dimen/_8sdp"
+                    android:hint="@string/search_hint"
+                    android:inputType="textMultiLine"
+                    android:maxLines="5"
+                    android:padding="@dimen/_8sdp"
+                    android:text=""
+                    android:textColor="@color/app_fontBlackColor"
+                    android:textColorHint="@color/grey" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <AutoCompleteTextView
+                android:id="@+id/googleplacesearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.5"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/ic_search"
+                android:drawablePadding="@dimen/_8sdp"
+                android:hint="@string/search_hint"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
+                android:padding="@dimen/_8sdp"
+                android:textColor="@color/app_fontBlackColor"
+                android:textColorHint="@color/grey"
+                android:visibility="gone" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <FrameLayout
+        android:id="@+id/map_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_250sdp"
+        android:layout_below="@+id/toolbar"
+        android:visibility="visible">
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.sa.rezq.map.CustomMapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/marker_icon_view"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:padding="@dimen/_4sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_location_on"
+            android:tint="@color/red" />
+    </FrameLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_address_tv"
+        android:layout_below="@+id/map_fragment"
+        android:background="@color/white"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+    </androidx.core.widget.NestedScrollView>
+
+
+    <com.sa.rezq.view.AppTextView_SubTitle
+        android:id="@+id/add_address_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/_8sdp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/button_rezq"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:maxLines="2"
+        android:minLines="1"
+        android:padding="@dimen/_10sdp"
+        android:text="@string/add_address"
+        android:textAllCaps="true"
+        android:textColor="@color/app_fontBlackColor"
+        android:textStyle="bold" />
+
+</RelativeLayout>

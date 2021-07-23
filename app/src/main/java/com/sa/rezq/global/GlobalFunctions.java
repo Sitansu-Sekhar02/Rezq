@@ -46,6 +46,7 @@ import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.addon.PasswordValidator;
 import com.sa.rezq.login.LoginActivity;
 import com.sa.rezq.login.OtpActivity;
+import com.sa.rezq.map.MapActivity;
 import com.sa.rezq.navigation.NavigationDrawerFragment;
 import com.sa.rezq.profile.ProfileMainActivity;
 import com.sa.rezq.registration.RegisterActivity;
@@ -1179,6 +1180,7 @@ public class GlobalFunctions {
         MainActivity.closeThisActivity();
         OtpActivity.closeThisActivity();
        AccountActivity.closeThisActivity();
+       MapActivity.closeThisActivity();
 
         RegisterActivity.closeThisActivity();
        // LoginActivity.closeThisActivity();

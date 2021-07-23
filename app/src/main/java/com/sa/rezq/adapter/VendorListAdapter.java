@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -49,7 +48,7 @@ public class VendorListAdapter extends RecyclerView.Adapter<VendorListAdapter.vi
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vendor_store_listdata, parent, false));
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vendor_store_list_adapter, parent, false));
 
     }
 

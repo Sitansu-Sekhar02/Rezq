@@ -58,11 +58,17 @@ import com.example.easywaylocation.LocationData;
 import com.github.siyamed.shapeimageview.ShapeImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
@@ -75,6 +81,7 @@ import com.sa.rezq.R;
 import com.sa.rezq.fcm.analytics.AnalyticsReport;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
+import com.sa.rezq.map.MapActivity;
 import com.sa.rezq.membership.FreeMembershipActivity;
 import com.sa.rezq.membership.MembershipDetailsActivity;
 import com.sa.rezq.membership.UpgradeMembershipListActivity;
@@ -102,6 +109,7 @@ import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
@@ -127,9 +135,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Location mLastLocation;
     Marker mCurrLocationMarker;
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+
     Double latitute, longitute;
 
     public static TextView tvHeaderText;
+    public static LinearLayout ln_location;
 
     public  static SearchView searchView;
     public  static TextView tvLocation,ivHome;
@@ -295,6 +306,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         english_language_tv=findViewById(R.id.english_language_tv);
         arabic_language_iv=findViewById(R.id.arabic_language_iv);
         english_language_iv=findViewById(R.id.english_language_iv);
+        ln_location=findViewById(R.id.ln_location);
         Intialize();
 
         toolbar = ( Toolbar ) findViewById( R.id.tool_bar ); // Attaching the layout to the toolbar object
@@ -397,6 +409,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //getProfile();
 //        loadMenu(mainContext);
 
+        Places.initialize(AppController.getInstance().getApplicationContext(), activity.getString(R.string.GoogleAPIKey));
+
+
+        ln_location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Intent intent=new Intent(MainActivity.this, MapActivity.class);
+               // startActivity(intent);
+                List<Place.Field> placefield = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME);
+                Intent i = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, placefield).build(MainActivity.this);
+                startActivityForResult(i, AUTOCOMPLETE_REQUEST_CODE);
+            }
+        });
 
     }
 
@@ -788,11 +813,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         ivHome=findViewById(R.id.ivHomeText);
 
-
         iv_menu = findViewById(R.id.iv_menu);
 
 
-        iv_menu.setOnClickListener(this);
+        //iv_menu.setOnClickListener(this);
         //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         navigationView = ( NavigationView ) findViewById( R.id.nav_view );
 
@@ -837,6 +861,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == LOCATION_SETTING_REQUEST_CODE) {
             easyWayLocation.onActivityResult(resultCode);
         }
+
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                tvHeaderText.setText(place.getAddress());
+                Log.e("TAG", "Place: " + place.getName() + ", " + place.getId());
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(TAG, status.getStatusMessage());
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     private void accessPermissions(MainActivity mainActivity) {
@@ -981,18 +1021,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 }
 
-
             } else {
                 if (mainContext != null) {
                     try {
                         //header_email_tv.setVisibility( View.GONE );
                         header_name_tv.setText( mainContext.getString( R.string.guest ) );
                     } catch (Exception exxx) {
-                        Log.e( TAG, exxx.getMessage() );
+                        Log.e( TAG, exxx.getMessage());
                     }
                 }
             }
-
 
         }
     }
@@ -1074,7 +1112,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             if (statusModel.isStatus()) {
                 /*Logout success, Clear all cache and reload the home page*/
-
                 globalFunctions.logoutApplication( mainContext ,false);
                 GlobalFunctions.closeAllActivities();
                 RestartEntireApp( mainContext, false );

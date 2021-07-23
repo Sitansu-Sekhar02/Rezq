@@ -17,7 +17,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,23 +27,18 @@ import androidx.core.content.ContextCompat;
 
 import com.hbb20.CountryCodePicker;
 import com.sa.rezq.Activity.AppController;
-import com.sa.rezq.Activity.MainActivity;
 import com.sa.rezq.R;
 import com.sa.rezq.account.AccountActivity;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.registration.RegisterActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
-import com.sa.rezq.services.model.InsertAccountModel;
 import com.sa.rezq.services.model.LoginModel;
 import com.sa.rezq.services.model.ProfileMainModel;
-import com.sa.rezq.services.model.ProfileMembershipModel;
 import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.RegisterModel;
 import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
-import com.sa.rezq.services.model.SubProfileModel;
 import com.sa.rezq.view.AlertDialog;
 
 public class LoginActivity  extends AppCompatActivity {
@@ -369,7 +363,7 @@ public class LoginActivity  extends AppCompatActivity {
 
         final Dialog dialog = new Dialog(activity, android.R.style.Theme_Translucent_NoTitleBar);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.registeration_popup);
+        dialog.setContentView(R.layout.registration_popup);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams wlp = window.getAttributes();
         wlp.gravity = Gravity.CENTER;

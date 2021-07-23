@@ -585,6 +585,11 @@ public class GlobalVariables {
     public static String DEVICE_TYPE = "1";
     public static final int REQUEST_MAIN_PICK_UP_LOCATION_CODE     = 231;
 
+    public static final String  ADDRESS_TYPE_HOME        = "Home";
+    public static final String  ADDRESS_TYPE_WORK        = "Office";
+    public static final String  ADDRESS_TYPE_OTHERS      = "Other";
+
+
     public static final String
             AUTHORIZATION   = "Authentication",
             CONTENT_TYPE    = "Content-Type",

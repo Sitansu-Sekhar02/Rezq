@@ -103,6 +103,7 @@ public class FreeMembershipActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
 
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -119,7 +120,6 @@ public class FreeMembershipActivity extends AppCompatActivity {
         });
 
         setTitle(getString(R.string.my_membership), 0, 0);
-
 
     }
 
@@ -156,7 +156,6 @@ public class FreeMembershipActivity extends AppCompatActivity {
             //actionBar.setTitle("");
             // actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     public void onBackPressed () {
@@ -177,6 +176,7 @@ public class FreeMembershipActivity extends AppCompatActivity {
         if (getFragmentManager().findFragmentByTag(TAG) != null)
             getFragmentManager().findFragmentByTag(TAG).setRetainInstance(true);
     }
+
 
     @Override
     public void onStart () {

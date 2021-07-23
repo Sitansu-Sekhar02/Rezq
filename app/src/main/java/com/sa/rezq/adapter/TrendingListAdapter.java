@@ -2,7 +2,6 @@ package com.sa.rezq.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.sa.rezq.R;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.services.model.NearbyModel;
 import com.sa.rezq.services.model.TrendingModel;
 import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.vendorlist.details.VendorStoreListActivity;
@@ -50,7 +47,7 @@ public class TrendingListAdapter extends RecyclerView.Adapter<TrendingListAdapte
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
 
-        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_recyclerview_data, parent, false));
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_list_adapter, parent, false));
 
     }
 

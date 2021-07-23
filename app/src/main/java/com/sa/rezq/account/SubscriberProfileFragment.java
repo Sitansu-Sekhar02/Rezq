@@ -235,49 +235,6 @@ public class SubscriberProfileFragment extends Fragment {
         alertDialog.show();
     }
 
-/*
-    private void logoutUser(Context context) {
-        GlobalFunctions.showProgress( context, getString( R.string.logingout ) );
-        ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.logout( context, new ServerResponseInterface() {
-            @Override
-            public void OnSuccessFromServer(Object arg0) {
-                GlobalFunctions.hideProgress();
-                Log.d( TAG, "Response : " + arg0.toString() );
-                validateOutput( arg0 );
-            }
-
-            @Override
-            public void OnFailureFromServer(String msg) {
-                GlobalFunctions.hideProgress();
-                Toast.makeText( context, msg, Toast.LENGTH_SHORT ).show();
-                //GlobalFunctions.displayMessaage(context, mainView, msg);
-                Log.d( TAG, "Failure : " + msg );
-            }
-
-            @Override
-            public void OnError(String msg) {
-                GlobalFunctions.hideProgress();
-                Toast.makeText( context, msg, Toast.LENGTH_SHORT ).show();
-                //GlobalFunctions.displayMessaage(context, mainView, msg);
-                Log.d( TAG, "Error : " + msg );
-            }
-        }, "Logout_User" );
-    }
-*/
-
-    private void validateOutput(Object arg0) {
-        if (arg0 instanceof StatusModel) {
-            StatusModel statusModel = ( StatusModel ) arg0;
-            GlobalFunctions.displayMessaage( context, mainView, statusModel.getMessage() );
-            if (statusModel.isStatus()) {
-                /*Logout success, Clear all cache and reload the home page*/
-
-            }
-//            GlobalFunctions.logoutApplication( context );
-            // MainActivity.RestartEntireApp(context);
-        }
-    }
 
 
 }

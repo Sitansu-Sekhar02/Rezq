@@ -135,7 +135,6 @@ public class RedeemOfferActivity extends AppCompatActivity {
        // getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
 
 
-
         globalFunctions = AppController.getInstance().getGlobalFunctions();
         globalVariables = AppController.getInstance().getGlobalVariables();
 
@@ -182,7 +181,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
 
         if (offerModel != null) {
             if (GlobalFunctions.isNotNullValue(offerModel.getOffer_image())) {
-                Picasso.with(context).load(offerModel.getOffer_image()).placeholder(R.drawable.rezq_logo).into(offer_image);
+                Picasso.with(context).load(offerModel.getOffer_image()).placeholder(R.drawable.ic_lazy_load).into(offer_image);
 
             }
             if (GlobalFunctions.isNotNullValue(offerModel.getTitle())) {
@@ -225,7 +224,7 @@ public class RedeemOfferActivity extends AppCompatActivity {
 
         if (storeModel!=null){
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
-                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.rezq_logo).into(restro_image);
+                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(restro_image);
             }
 
             if (GlobalFunctions.isNotNullValue(storeModel.getName())) {

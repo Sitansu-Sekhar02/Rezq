@@ -89,11 +89,14 @@
                         <com.sa.rezq.view.AppTextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
                             android:layout_marginLeft="5dp"
                             android:text="@string/reating"
+                            android:textAllCaps="true"
                             android:textColor="#171717"
-                            android:textSize="12dp"
-                            android:textStyle="bold"/>
+                            android:textStyle="bold"
+                            android:textSize="12dp" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -135,7 +138,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
                         android:gravity="center"
-                        android:text="@string/buy_two_get_one"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="16dp" />
 
@@ -145,7 +148,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:gravity="center"
-                        android:text="@string/applicable_onselectitem"
+                        android:text=""
                         android:textColor="#898989" />
 
                     <com.sa.rezq.view.AppTextView
@@ -155,7 +158,7 @@
                         android:layout_marginTop="20dp"
                         android:background="@drawable/ic_rectangle_grey_border"
                         android:gravity="center"
-                        android:text="@string/code_coupon"
+                        android:text=""
                         android:textColor="#171717"
                         android:textSize="24dp"
                         android:textStyle="bold" />

@@ -65,7 +65,6 @@ import es.dmoral.toasty.Toasty;
 public class ShowCouponOfferActivity extends AppCompatActivity {
 
     public static final String TAG = "ShowCouponOfferActivity",
-
             BUNDLE_VENDOR_DETAILS = "VendorDetailsId",
             BUNDLE_REDEEM_DETAILS = "RedeemOfferActivity";
 
@@ -103,15 +102,6 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     String rating = "1";
 
 
-
-    AllCategoryListAdapter categoryListAdapter;
-    List<SeeAllCategoryModel> listModelList = new ArrayList<>();
-    LinearLayoutManager linearLayoutManager;
-    ProgressLinearLayout progressActivity;
-    RecyclerView seeAllCategoryRecyclerview;
-    SwipeRefreshLayout swipe_container;
-
-    private boolean shouldRefreshOnResume = false;
 
     private ClipboardManager myClipboard;
     private ClipData myClip;
@@ -187,7 +177,7 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
 
         if (offerModel != null) {
             if (GlobalFunctions.isNotNullValue(offerModel.getOffer_image())) {
-                Picasso.with(context).load(offerModel.getOffer_image()).placeholder(R.drawable.rezq_logo).into(offer_image);
+                Picasso.with(context).load(offerModel.getOffer_image()).placeholder(R.drawable.ic_lazy_load).into(offer_image);
 
             }
             if (GlobalFunctions.isNotNullValue(offerModel.getTitle())) {
@@ -214,7 +204,7 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
 
         if (storeModel!=null){
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
-                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.rezq_logo).into(restro_image);
+                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(restro_image);
             }
 
             if (GlobalFunctions.isNotNullValue(storeModel.getName())) {
@@ -363,7 +353,7 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
 
         if (storeModel != null) {
             if (GlobalFunctions.isNotNullValue(storeModel.getImage())) {
-                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.rezq_logo).into(iv_feedback_image);
+                Picasso.with(context).load(storeModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(iv_feedback_image);
 
             }
             if (GlobalFunctions.isNotNullValue(storeModel.getName())) {
@@ -410,56 +400,56 @@ public class ShowCouponOfferActivity extends AppCompatActivity {
     private void setImageView(int position, ImageView rating_iv1, ImageView rating_iv2, ImageView rating_iv3, ImageView rating_iv4, ImageView rating_iv5) {
         switch (position) {
             case 1:
-                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv1.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv2.setImageResource(R.drawable.ic_grey_star);
+                rating_iv3.setImageResource(R.drawable.ic_grey_star);
+                rating_iv4.setImageResource(R.drawable.ic_grey_star);
+                rating_iv5.setImageResource(R.drawable.ic_grey_star);
                 rating = position + "";
                 break;
 
             case 2:
-                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv1.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv2.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv3.setImageResource(R.drawable.ic_grey_star);
+                rating_iv4.setImageResource(R.drawable.ic_grey_star);
+                rating_iv5.setImageResource(R.drawable.ic_grey_star);
                 rating = position + "";
                 break;
 
             case 3:
-                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv1.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv2.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv3.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv4.setImageResource(R.drawable.ic_grey_star);
+                rating_iv5.setImageResource(R.drawable.ic_grey_star);
                 rating = position + "";
                 break;
 
             case 4:
-                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv1.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv2.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv3.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv4.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv5.setImageResource(R.drawable.ic_grey_star);
                 rating = position + "";
                 break;
 
             case 5:
-                rating_iv1.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_selected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_selected_large);
+                rating_iv1.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv2.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv3.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv4.setImageResource(R.drawable.ic_yellow_star);
+                rating_iv5.setImageResource(R.drawable.ic_yellow_star);
                 rating = position + "";
                 break;
 
             default:
-                rating_iv1.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv2.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv3.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv4.setImageResource(R.drawable.ic_star_unselected_large);
-                rating_iv5.setImageResource(R.drawable.ic_star_unselected_large);
+                rating_iv1.setImageResource(R.drawable.ic_grey_star);
+                rating_iv2.setImageResource(R.drawable.ic_grey_star);
+                rating_iv3.setImageResource(R.drawable.ic_grey_star);
+                rating_iv4.setImageResource(R.drawable.ic_grey_star);
+                rating_iv5.setImageResource(R.drawable.ic_grey_star);
                 rating = "1";
         }
     }

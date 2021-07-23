@@ -1,69 +1,53 @@
 {
   "project_info": {
-    "project_number": "412387003336",
-    "firebase_url": "https://image-dental-244312.firebaseio.com",
-    "project_id": "image-dental-244312",
-    "storage_bucket": "image-dental-244312.appspot.com"
+    "project_number": "425691223771",
+    "project_id": "imcrinox-test-projects",
+    "storage_bucket": "imcrinox-test-projects.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:412387003336:android:c8726eed5f5ca648",
+        "mobilesdk_app_id": "1:425691223771:android:e0c4cb51a43bc1eb741efe",
         "android_client_info": {
-          "package_name": "com.imagedent.app.dental"
+          "package_name": "com.sa.laboga"
         }
       },
       "oauth_client": [
         {
-          "client_id": "412387003336-1e8j4pmu2i40ehvsdj1t4v37ph9kghmc.apps.googleusercontent.com",
+          "client_id": "425691223771-2ipcucvvir86dveq58ldu6dkgkkfcc8j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.imagedent.app.dental",
-            "certificate_hash": "1b9eed9a3d610e76371a214316668301445f56e7"
+            "package_name": "com.sa.laboga",
+            "certificate_hash": "849b38d5246f516a75bef560b5b5d38f12e179c4"
           }
         },
         {
-          "client_id": "412387003336-6i30eb0qvotpojedjlgcpn5s05ofc3uc.apps.googleusercontent.com",
+          "client_id": "425691223771-kpnlo770h1pdbgjjadin2rhsrtg6c6v8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.imagedent.app.dental",
-            "certificate_hash": "5f1c1bdfa066c632730fda57864927988224f095"
+            "package_name": "com.sa.laboga",
+            "certificate_hash": "b9a29fbf2aa0c066a1fac2cac6fee880eccf2d30"
           }
         },
         {
-          "client_id": "412387003336-spgr1pqadn2ftp14hd93qnhml8sve64n.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.imagedent.app.dental",
-            "certificate_hash": "d2e06089b82c2353b23e9e6d2c0e2cbe91e98e0a"
-          }
-        },
-        {
-          "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+          "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAI23bT6rrH0Kres7e0xdJmj4dtEaMR7lo"
+          "current_key": "AIzaSyAoZxkqzaoC2ZiyK1K7GypTMYO41M_svWk"
         },
         {
-          "current_key": "AIzaSyCB4c9eAGX94wOoPF0D2Sq8asYZWHXqyDo"
+          "current_key": "AIzaSyAXz0AYT02k3Xawn0iqcJiZTHKW-Py_M18"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+              "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "412387003336-juofl4gvlusg3gjb2sutf7tfjertl7lb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.3leenaapp"
-              }
             }
           ]
         }
@@ -71,46 +55,31 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:412387003336:android:6b81adc7b655f32ed4cefd",
+        "mobilesdk_app_id": "1:425691223771:android:38be06a5b458c7d1741efe",
         "android_client_info": {
           "package_name": "com.sa.rezq"
         }
       },
       "oauth_client": [
         {
-          "client_id": "412387003336-ka7dhfm34gboltvm9bl2lh9e8nvuscj2.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.sa.rezq",
-            "certificate_hash": "c29c00e158be166dff1170d33db9f6de74a0adfa"
-          }
-        },
-        {
-          "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+          "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAI23bT6rrH0Kres7e0xdJmj4dtEaMR7lo"
+          "current_key": "AIzaSyAoZxkqzaoC2ZiyK1K7GypTMYO41M_svWk"
         },
         {
-          "current_key": "AIzaSyCB4c9eAGX94wOoPF0D2Sq8asYZWHXqyDo"
+          "current_key": "AIzaSyAXz0AYT02k3Xawn0iqcJiZTHKW-Py_M18"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+              "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "412387003336-juofl4gvlusg3gjb2sutf7tfjertl7lb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.3leenaapp"
-              }
             }
           ]
         }
@@ -118,132 +87,39 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:412387003336:android:bd7e8a06e59b3161d4cefd",
+        "mobilesdk_app_id": "1:425691223771:android:71da5acff3da1105741efe",
         "android_client_info": {
-          "package_name": "org.mesibo.messenger"
+          "package_name": "com.saudi.user.laboga"
         }
       },
       "oauth_client": [
         {
-          "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAI23bT6rrH0Kres7e0xdJmj4dtEaMR7lo"
-        },
-        {
-          "current_key": "AIzaSyCB4c9eAGX94wOoPF0D2Sq8asYZWHXqyDo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "412387003336-juofl4gvlusg3gjb2sutf7tfjertl7lb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.3leenaapp"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:412387003336:android:ab484073779eb4a7d4cefd",
-        "android_client_info": {
-          "package_name": "tc.sa.user"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "412387003336-rvdj2cluutv5qt3aqn71oao556331chp.apps.googleusercontent.com",
+          "client_id": "425691223771-nnm4il49tv45shks6o2i6afmnnn2uj76.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "tc.sa.user",
-            "certificate_hash": "cf06d32dbac3855db10c0dbc02bd071af915c879"
+            "package_name": "com.saudi.user.laboga",
+            "certificate_hash": "b9a29fbf2aa0c066a1fac2cac6fee880eccf2d30"
           }
         },
         {
-          "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+          "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAI23bT6rrH0Kres7e0xdJmj4dtEaMR7lo"
+          "current_key": "AIzaSyAoZxkqzaoC2ZiyK1K7GypTMYO41M_svWk"
         },
         {
-          "current_key": "AIzaSyCB4c9eAGX94wOoPF0D2Sq8asYZWHXqyDo"
+          "current_key": "AIzaSyAXz0AYT02k3Xawn0iqcJiZTHKW-Py_M18"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
+              "client_id": "425691223771-rv8u3n3e6k5ug18otqdk5vul80arrpru.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "412387003336-juofl4gvlusg3gjb2sutf7tfjertl7lb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.3leenaapp"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:412387003336:android:9dbca3ba3f55be75d4cefd",
-        "android_client_info": {
-          "package_name": "tc.sa.vendor"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "412387003336-abb2bn2vp1n4gkg2384rh41kmc59fbbd.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "tc.sa.vendor",
-            "certificate_hash": "cf06d32dbac3855db10c0dbc02bd071af915c879"
-          }
-        },
-        {
-          "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAI23bT6rrH0Kres7e0xdJmj4dtEaMR7lo"
-        },
-        {
-          "current_key": "AIzaSyCB4c9eAGX94wOoPF0D2Sq8asYZWHXqyDo"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "412387003336-6t0949u687a87vrqq5o39kqu6a6lhjhr.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "412387003336-juofl4gvlusg3gjb2sutf7tfjertl7lb.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.app.3leenaapp"
-              }
             }
           ]
         }

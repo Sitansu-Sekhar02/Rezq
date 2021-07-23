@@ -66,48 +66,48 @@
 
             <LinearLayout
                 android:id="@+id/rr"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_25sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_below="@+id/hotel">
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:src="@drawable/ic_star_selected_large"
+                    android:src="@drawable/ic_yellow_star"
                     android:id="@+id/rating_iv1"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_selected_large"
+                    android:src="@drawable/ic_yellow_star"
                     android:id="@+id/rating_iv2"/>
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:src="@drawable/ic_star_selected_large"
+                    android:src="@drawable/ic_yellow_star"
                     android:id="@+id/rating_iv3"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:src="@drawable/ic_star_selected_large"
+                    android:src="@drawable/ic_yellow_star"
                     android:id="@+id/rating_iv4"/>
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     android:layout_marginRight="@dimen/_4sdp"
-                    android:src="@drawable/ic_star_unselected_large"
+                    android:src="@drawable/ic_grey_star"
                     android:id="@+id/rating_iv5"/>
 
                 <RatingBar

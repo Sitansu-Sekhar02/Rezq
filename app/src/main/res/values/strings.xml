@@ -271,10 +271,7 @@
     <string name="tryAgain">Try Again</string>
     <string name="emptyList">Empty List</string>
     <string name="emptyListMessage">No records to display.</string>
-    <string name="no_completed_order">No Completed orders.</string>
 
-    <string name="customer">Customer</string>
-    <string name="theripast">Therapist</string>
     <string name="location">Location</string>
     <!--
         <string name="pickup">Pickup</string>
@@ -391,7 +388,12 @@
     -->
     <string name="please_enter_valid_otp">Please Enter Valid OTP</string>
     <string name="sorry_u_have_not_register_with_us">Sorry,You Have Not Registered With Us</string>
-    <string name="GoogleAPIKey">AIzaSyB9wXo_mbTsC2XTeJcIMVPwzuLQPxFQ8S0</string>
+
+    <!--Google API Keys-->
+
+    <string name="GoogleAPIKey">AIzaSyB32cztSOS5gJtnyCxYnN9TOI89q5ANnnU</string>
+
+
     <string name="loading_profile">Loading Profile</string>
     <string name="loggin">Logging...</string>
     <string name="no_product">No product found</string>
@@ -461,5 +463,7 @@
     <string name="scroll_right_toseeMore">Scroll right to see more</string>
     <string name="kilometer">Km</string>
     <string name="lang_change">Application will be restarted to apply changes</string>
+    <string name="add_address">Add Address</string>
+    <string name="add_location">Add Location</string>
 
 </resources>
