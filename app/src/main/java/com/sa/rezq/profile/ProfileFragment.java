@@ -77,8 +77,8 @@ public class ProfileFragment extends Fragment {
 
        // name_tv = ( TextView ) view.findViewById( R.id.name_tv );
 
-        first_name_etv = view.findViewById( R.id.tv_firstname );
-        last_name_etv =  view.findViewById( R.id.tv_lastName );
+        first_name_etv = view.findViewById( R.id.tv_firstname);
+        last_name_etv =  view.findViewById( R.id.tv_lastName);
         mobile_etv =  view.findViewById( R.id.tv_mobileNumber );
         email_etv = view.findViewById( R.id.tv_emailId );
         tv_userfullName = view.findViewById( R.id.tv_userfullName );

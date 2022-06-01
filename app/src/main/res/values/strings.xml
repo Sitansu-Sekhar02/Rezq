@@ -436,7 +436,7 @@
     <string name="select_image">Select Image</string>
     <string name="please_enter_valid_code">Please enter a valid Redeem Code</string>
     <string name="switch_account">Switch Accounts</string>
-    <string name="copy_coupon_code">"Coupon copied "</string>
+    <string name="copy_coupon_code">Coupon copied </string>
     <string name="no_search_found">No result found for</string>
     <string name="search_phrase_missing">Type something to search</string>
     <string name="save_and_update"><![CDATA[Save & Update]]></string>

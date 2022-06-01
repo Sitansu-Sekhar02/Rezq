@@ -4,57 +4,58 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black_trans"
+    android:elevation="4dp"
+    android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:contentInsetStart="0dp"
     app:contentInsetStartWithNavigation="0dp"
-    android:background="@color/black_trans"
-    android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:elevation="4dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="@dimen/_40sdp">
+
         <ImageView
+            android:id="@+id/tool_bar_back_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:src="@drawable/ic_back_white"
-            android:id="@+id/tool_bar_back_icon"
-            android:layout_gravity="left"/>
+            android:layout_gravity="left"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_back_white" />
 
         <com.sa.rezq.view.AppTextView_Title
+            android:id="@+id/toolbar_title"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:textAppearance="@style/MediumText"
+            android:layout_gravity="center"
             android:layout_toRightOf="@+id/tool_bar_back_icon"
-            android:textStyle="bold"
-            android:visibility="visible"
             android:gravity="center"
             android:maxLines="1"
-            android:textSize="14dp"
+            android:textAppearance="@style/SmallMediumText"
             android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:id="@+id/toolbar_title"/>
+            android:textStyle="bold"
+            android:visibility="visible" />
+
         <ImageView
-            android:visibility="gone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="8dp"
-            android:src="@drawable/ic_repeat_menu_dot"
             android:id="@+id/iv_grid_menu"
-            android:layout_gravity="left"/>
-        <ImageView
-            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:layout_toLeftOf="@+id/iv_grid_menu"
-            android:src="@drawable/ic_group_location_white"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="left"
+            android:layout_marginRight="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_repeat_menu_dot"
+            android:visibility="gone" />
+
+        <ImageView
             android:id="@+id/iv_location"
-            android:layout_gravity="left"/>
-
-
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_toLeftOf="@+id/iv_grid_menu"
+            android:padding="@dimen/_10sdp"
+            android:src="@drawable/ic_group_location_white"
+            android:visibility="gone" />
 
     </RelativeLayout>
 

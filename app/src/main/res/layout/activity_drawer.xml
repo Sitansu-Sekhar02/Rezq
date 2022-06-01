@@ -98,6 +98,7 @@
                     android:id="@+id/english_language_iv"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_2sdp"
+                    android:layout_marginTop="-4dp"
                     android:background="@color/red" />
 
             </LinearLayout>

@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:progressActivity="http://schemas.android.com/tools">
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_search_detail" />
+
+
+        <com.vlonjatg.progressactivity.ProgressLinearLayout
+            android:layout_below="@+id/tool_bar"
+            android:id="@+id/recent_progressActivity"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:emptyTitleTextColor="@color/green_light"
+            app:errorContentTextColor="@color/app_fontColor"
+            app:errorTitleTextColor="@color/app_fontColor"
+            progressActivity:emptyBackgroundColor="@color/transparent"
+            progressActivity:errorBackgroundColor="@color/transparent"
+            progressActivity:loadingBackgroundColor="@color/transparent"
+            progressActivity:loadingProgressBarColor="@color/green_light">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recent_list_recyclerview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                </androidx.recyclerview.widget.RecyclerView>
+        </com.vlonjatg.progressactivity.ProgressLinearLayout>
+        <RelativeLayout
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+
+                android:id="@+id/tvToday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/today"
+                    android:textSize="12dp"
+                    android:textColor="#8D8D8D"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/RlRestro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:layout_below="@id/tvToday"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/ImRestro"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_group_al"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ImRestro"
+                    android:textSize="12dp"
+                    android:textColor="#171717"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/dubai_marina"/>
+                <TextView
+                    android:id="@+id/tvRatingStar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_path_star"
+                    android:drawablePadding="5dp"
+                    android:text="4.8"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#FFB400"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerToday"
+                android:layout_below="@+id/RlRestro"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/restro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:layout_below="@id/RecyclerToday"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/ImgRestro2"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lazy_load"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="#171717"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/ImgRestro2"
+                    android:text="@string/broklin"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_path_star"
+                    android:drawablePadding="5dp"
+                    android:text="4.2"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#FFB400"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recyclerview"
+                android:layout_below="@+id/restro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/grey"
+                android:layout_below="@id/Recyclerview"
+                android:layout_marginTop="15dp"/>
+
+            <LinearLayout
+                android:id="@+id/tvYesterday"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_below="@+id/view"
+                android:layout_marginTop="15dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/yesterday"
+                    android:textSize="12dp"
+                    android:textColor="#8D8D8D"/>
+            </LinearLayout>
+            <RelativeLayout
+                android:id="@+id/RlRestro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:layout_below="@id/tvYesterday"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/ImRestro3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_group_al"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/ImRestro3"
+                    android:textSize="12dp"
+                    android:textColor="#171717"
+                    android:layout_marginLeft="10dp"
+                    android:text="@string/dubai_marina"/>
+                <TextView
+                    android:id="@+id/tvRatingStar2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_path_star"
+                    android:drawablePadding="5dp"
+                    android:text="4.8"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#FFB400"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerYesterday"
+                android:layout_below="@+id/RlRestro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+            <RelativeLayout
+                android:id="@+id/restro3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="center"
+                android:layout_below="@id/RecyclerYesterday"
+                android:layout_marginTop="20dp">
+                <ImageView
+                    android:id="@+id/ImgRestro3"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_lazy_load"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12dp"
+                    android:textColor="#171717"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/ImgRestro3"
+                    android:text="@string/broklin"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawableRight="@drawable/ic_path_star"
+                    android:drawablePadding="5dp"
+                    android:text="4.2"
+                    android:gravity="center"
+                    android:layout_marginRight="20dp"
+                    android:layout_alignParentRight="true"
+                    android:textColor="#FFB400"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </RelativeLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/Recyclerview2"
+                android:layout_below="@+id/restro3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+
+        </RelativeLayout>
+
+
+
+</RelativeLayout>

@@ -6,28 +6,26 @@
     <RelativeLayout
         android:id="@+id/category_click_item"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="@dimen/_70sdp"
         android:orientation="horizontal">
-
-
 
         <LinearLayout
             android:id="@+id/food"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="20dp">
+            android:layout_marginLeft="@dimen/_15sdp">
 
             <ImageView
                 android:id="@+id/category_image"
-                android:layout_width="50dp"
-                android:layout_gravity="center"
-                android:layout_height="60dp" />
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="25dp"
+            android:layout_marginLeft="@dimen/_20sdp"
             android:layout_toRightOf="@+id/food"
             android:gravity="center"
             android:orientation="vertical">
@@ -36,30 +34,32 @@
                 android:id="@+id/tv_category_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:layout_gravity="left"
+                android:text=""
                 android:textAllCaps="true"
-                android:textColor="#171717" />
+                android:textColor="@color/app_text_color" />
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="left"
                 android:layout_gravity="left"
+                android:gravity="left"
                 android:orientation="horizontal">
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/vendor_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="#898989" />
+                    android:textColor="@color/app_grey_text" />
+
                 <com.sa.rezq.view.AppTextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="4dp"
+                    android:layout_marginLeft="@dimen/_4sdp"
                     android:text="@string/places"
-                    android:textColor="#898989" />
+                    android:textColor="@color/app_grey_text" />
             </LinearLayout>
-
 
         </LinearLayout>
 
@@ -67,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:gravity="center">
 
             <com.sa.rezq.view.AppTextView
@@ -83,9 +83,8 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/_1sdp"
         android:layout_below="@+id/category_click_item"
         android:background="@color/grey" />
-
 
 </RelativeLayout>

@@ -92,10 +92,7 @@
         <item name="android:textColor">@color/hint_color</item>
         <item name="android:textSize">@dimen/_14sdp</item>
     </style>
-    <style name="MediumSizeText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">14dp</item>
-        <item name="android:typeface">normal</item>
-    </style>
+
     <style name="MediumText" parent="MediumSizeText">
         <item name="android:textColor">@color/app_fontColor</item>
     </style>
@@ -117,13 +114,63 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">5dp</item>
     </style>
-    <style name="SmallSizeText" parent="@android:style/TextAppearance.Medium">
-        <item name="android:textSize">@dimen/font_size_small</item>
-        <item name="android:typeface">normal</item>
+
+
+    <style name="ActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">0dip</item>
+        <item name="android:paddingRight">0dip</item>
+    </style>
+
+    <style name="LargeText" parent="LargeSizeText">
+        <item name="android:textColor">@color/app_fontColor</item>
+    </style>
+
+    <style name="SmallerText" parent="SmallerSizeText">
+        <item name="android:textColor">@color/app_fontColor</item>
+    </style>
+
+    <style name="SmallestText" parent="SmallestSizeText">
+        <item name="android:textColor">@color/app_fontColor</item>
     </style>
 
     <style name="SmallText" parent="SmallSizeText">
         <item name="android:textColor">@color/app_fontColor</item>
+    </style>
+
+    <style name="SmallMediumSizeText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">@dimen/font_size_smallMedium</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="SmallMediumText" parent="SmallMediumSizeText"></style>
+
+    <style name="MediumSizeText" parent="@android:style/TextAppearance.Medium">
+        <item name="android:textSize">@dimen/font_size_medium</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="LargeSizeText" parent="@android:style/TextAppearance.Large">
+        <item name="android:textSize">@dimen/font_size_large</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="SmallSizeText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="SmallerSizeText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">@dimen/font_size_smaller</item>
+        <item name="android:typeface">normal</item>
+    </style>
+
+    <style name="SmallestSizeText" parent="@android:style/TextAppearance.Small">
+        <item name="android:textSize">@dimen/font_size_smallest</item>
+    </style>
+
+    <style name="TwoWayView">
+        <item name="android:orientation">horizontal</item>
     </style>
     <style name="myTextInputLabel" parent="TextAppearance.AppCompat">
         <!-- Customize your theme here. -->

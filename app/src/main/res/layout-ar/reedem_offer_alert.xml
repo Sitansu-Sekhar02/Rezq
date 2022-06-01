@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_trans">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <RelativeLayout
+            android:background="@drawable/dialog_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tvAlertMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:text="@string/reedemoffer"
+                android:textColor="#171717"
+                android:textSize="16dp" />
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/Tvvendor"
+                android:layout_below="@+id/tvAlertMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:text="@string/enter_vendorcode"
+                android:textColor="@color/app_grey_text"
+                android:textSize="12dp" />
+
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/Tvvendor">
+
+                <com.mukesh.OtpView
+                    android:id="@+id/redeem_offer_insert"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:focusedByDefault="false"
+                    android:gravity="center"
+                    android:inputType="text"
+                    android:itemBackground="@color/transparent"
+                    android:lineHeight="0.2dp"
+                    android:text=""
+                    android:textColor="@color/app_fontBlackColor"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:itemCount="6"
+                    app:itemSpacing="@dimen/_8sdp"
+                    app:itemWidth="@dimen/_35sdp"
+                    app:lineColor="@color/holo_green"
+                    app:viewType="line" />
+
+            </RelativeLayout>
+
+
+
+            <com.sa.rezq.view.AppButton
+                android:layout_marginTop="40dp"
+                android:id="@+id/btn_continue_redeem"
+                android:layout_width="220dp"
+                android:layout_marginBottom="30dp"
+                android:layout_height="48dp"
+                android:gravity="center"
+                android:textAllCaps="true"
+                android:text="@string/reedm"
+                android:layout_centerInParent="true"
+                android:background="@drawable/button_border"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_below="@+id/rr" />
+
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/wecome"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_lock" />
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/textwel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/wecome"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="15dp"
+                android:text="@string/otpverify"
+                android:textColor="#171717"
+                android:textSize="24dp"
+                android:textStyle="bold" />
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/txtmobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textwel"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="100dp"
+                android:layout_marginLeft="25dp"
+                android:gravity="right"
+                android:text="@string/enter_otp"
+                android:textColor="#758591"
+                android:textSize="14dp" />
+
+
+            <com.mukesh.OtpView
+                android:id="@+id/otp_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:focusedByDefault="false"
+                android:gravity="center"
+                android:inputType="numberPassword"
+                android:itemBackground="@color/transparent"
+                android:lineHeight="0.2dp"
+                android:text=""
+                android:textColor="@color/app_fontBlackColor"
+                android:textSize="12dp"
+                android:textStyle="bold"
+                android:visibility="visible"
+                app:itemCount="6"
+                app:itemSpacing="@dimen/_10sdp"
+                app:itemWidth="@dimen/_35sdp"
+                app:lineColor="@color/holo_green"
+                app:viewType="line" />
+            <com.sa.rezq.view.AppButton
+                android:id="@+id/btnVerify"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@id/etNumber"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/button_rezq"
+                android:text="@string/verify"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="100dp">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/resend_code_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/resendotp"
+                    android:textColor="@color/red"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+                <com.sa.rezq.view.AppTextView_SubTitle
+                    android:id="@+id/otp_timer_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:text=""
+                    android:textAllCaps="false"
+                    android:textColor="@color/app_fontColor"
+                    android:textStyle="normal"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="visible" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

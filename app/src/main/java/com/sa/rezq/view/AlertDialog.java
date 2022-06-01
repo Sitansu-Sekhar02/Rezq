@@ -64,13 +64,13 @@ public class AlertDialog extends Dialog {
         else{description.setVisibility(View.VISIBLE);description.setText(message);}
 
         okButton.setText(okButtonString);
-        //okButton.setTextColor(getContext().getResources().getColor(R.color.ColorPrimary));
+        okButton.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
         okButton.setOnClickListener(okButtonListener);
 
         if(cancelButtonString!=null && cancelButtonListener!=null){
             cancelButton.setVisibility(View.VISIBLE);
             cancelButton.setText(cancelButtonString);
-          //  cancelButton.setTextColor(getContext().getResources().getColor(R.color.ColorPrimary));
+            cancelButton.setTextColor(getContext().getResources().getColor(R.color.app_fontColorBright));
             cancelButton.setOnClickListener(cancelButtonListener);
         }else{
             cancelButton.setVisibility(View.INVISIBLE);
@@ -79,7 +79,7 @@ public class AlertDialog extends Dialog {
         if(neutralButtonString!=null && neutralButtonListener!=null){
             neutralButton.setVisibility(View.VISIBLE);
             neutralButton.setText(neutralButtonString);
-         //   neutralButton.setTextColor(getContext().getResources().getColor(R.color.ColorPrimary));
+            neutralButton.setTextColor(getContext().getResources().getColor(R.color.colorPrimary));
             neutralButton.setOnClickListener(neutralButtonListener);
         }else{
             neutralButton.setVisibility(View.INVISIBLE);

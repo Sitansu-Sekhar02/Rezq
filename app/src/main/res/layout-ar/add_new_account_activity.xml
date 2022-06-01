@@ -1,0 +1,158 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_trans">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_margin="@dimen/_20sdp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <RelativeLayout
+            android:background="@drawable/dialog_bg"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:id="@+id/newAccount"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content">
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tvAlertMsg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:textStyle="bold"
+                    android:text="@string/addnewaccount"
+                    android:textColor="#171717"
+                    android:textSize="18dp" />
+                <RelativeLayout
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="25dp"
+                    android:layout_below="@+id/tvAlertMsg"
+                    android:background="@drawable/layout_add_account_bg">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/profile_image"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:scaleType="centerCrop" />
+                    <ImageView
+                        android:id="@+id/edit_profile_image_iv"
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:src="@drawable/ic_edit"/>
+
+                </RelativeLayout>
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rr"
+                android:layout_marginTop="30dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/newAccount">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlined_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:textColorHint="#B5B5B5"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_UserfirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/enter_first_name"
+                        android:gravity="end"
+                        android:inputType="textCapSentences"
+                        android:imeOptions="actionNext"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+                        android:textColor="#171717"
+                        android:textColorHint="@color/black"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rllastname"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rr">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/outlined_lastname_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:textColorHint="#B5B5B5"
+                    app:boxBackgroundColor="@null">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_UserlastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@null"
+                        android:hint="@string/enter_lastname"
+                        android:gravity="end"
+                        android:imeOptions="actionDone"
+                        android:inputType="textCapSentences"
+                        android:paddingStart="0dp"
+                        android:paddingEnd="0dp"
+
+                        android:textColor="#171717"
+                        android:textColorHint="@color/black"
+                        android:textSize="14dp" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </RelativeLayout>
+
+
+            <com.sa.rezq.view.AppButton
+                android:id="@+id/btn_Continue"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_below="@+id/rllastname"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:textAllCaps="true"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/button_rezq"
+                android:gravity="center"
+                android:text="@string/coninue"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     public static final String BUNDLE_SEARCH_RESPONSE_MODEL = "Bundle_Search_Response_Model";
 
-    public static final int SLIDER_LOAD_TIME_IN_MILLI_SEC=2000;
+    public static final int SLIDER_LOAD_TIME_IN_MILLI_SEC = 2000;
 
     Activity activity;
     Context context;
@@ -93,8 +93,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     View mainView;
 
 
-
-    CategoryModel categoryModel=null;
+    CategoryModel categoryModel = null;
     CategoryListAdapter categoryAdapter;
     List<CategoryModel> categoryList = new ArrayList<>();
     LinearLayoutManager reviewLayoutManager;
@@ -104,7 +103,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
     private static final int REQUEST_PERMISSIONS_REQUEST_CODE = 34;
 
-    NearbyModel nearbyModel=null;
+    NearbyModel nearbyModel = null;
     PlacesNearyouListAdapter placesNearyouListAdapter;
     List<NearbyModel> nearbyModelList = new ArrayList<>();
     LinearLayoutManager nearbyplaces;
@@ -112,8 +111,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     RecyclerView nearbyRecyclerView;
 
 
-
-    TrendingModel trendingModel=null;
+    TrendingModel trendingModel = null;
     TrendingListAdapter trendingListAdapter;
     List<TrendingModel> trendingModelList = new ArrayList<>();
     LinearLayoutManager trendinLinearLayout;
@@ -142,15 +140,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     TabLayout tabLayout;
     int currentPage = 0;
 
-    TextView seeAllPopular_category,tv_all_trending,tv_all_nearby;
-    TextView upgrade_membership,tv_gold_membership;
-    String membership_id=null;
+    TextView seeAllPopular_category, tv_all_trending, tv_all_nearby;
+    TextView upgrade_membership, tv_gold_membership;
+    String membership_id = null;
     CardView cardViewItem;
     CardView search_card_view;
 
     SeeAllCategoryModel listModel;
     LocationModel locationModel;
-   // Window window = null;
+    // Window window = null;
 
     static Intent locationintent;
     private boolean mAlreadyStartedService = false;
@@ -164,7 +162,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         activity = getActivity();
         context = getActivity();
-       // window =getActivity().getWindow();
+        // window =getActivity().getWindow();
 
 
         globalFunctions = AppController.getInstance().getGlobalFunctions();
@@ -175,10 +173,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         reviewLayoutManager = new LinearLayoutManager(activity);
 
 
-
-        progressActivity = view.findViewById( R.id.details_progressActivity );
-        nearbyprogressLinearLayout = view.findViewById( R.id.details_progressActivity_nearyou );
-        trendinProgress = view.findViewById( R.id.details_progressActivity_trending );
+        progressActivity = view.findViewById(R.id.details_progressActivity);
+        nearbyprogressLinearLayout = view.findViewById(R.id.details_progressActivity_nearyou);
+        trendinProgress = view.findViewById(R.id.details_progressActivity_trending);
 
 
         mainView = mProductSlider;
@@ -186,15 +183,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         CategoryRecyclerView = view.findViewById(R.id.Rvcategory);
         trending_RecyclerView = view.findViewById(R.id.recycler_trending);
-        nearbyRecyclerView =view.findViewById(R.id.recycler_places_near_you);
-        seeAllPopular_category=view.findViewById(R.id.TvseeAllCategory);
-        tv_all_trending=view.findViewById(R.id.tv_all_trending);
-        tv_all_nearby=view.findViewById(R.id.tv_all_nearby);
-        upgrade_membership=view.findViewById(R.id.tv_upgrade_membership);
-        cardViewItem=view.findViewById(R.id.cardItem);
-        search_card_view=view.findViewById(R.id.search_card_view);
-        tv_gold_membership=view.findViewById(R.id.tv_gold_membership);
-        rl_prime_upgrade=view.findViewById(R.id.rl_prime_upgrade);
+        nearbyRecyclerView = view.findViewById(R.id.recycler_places_near_you);
+        seeAllPopular_category = view.findViewById(R.id.TvseeAllCategory);
+        tv_all_trending = view.findViewById(R.id.tv_all_trending);
+        tv_all_nearby = view.findViewById(R.id.tv_all_nearby);
+        upgrade_membership = view.findViewById(R.id.tv_upgrade_membership);
+        cardViewItem = view.findViewById(R.id.cardItem);
+        search_card_view = view.findViewById(R.id.search_card_view);
+        tv_gold_membership = view.findViewById(R.id.tv_gold_membership);
+        rl_prime_upgrade = view.findViewById(R.id.rl_prime_upgrade);
 
         locationintent = new Intent(activity, LocationMonitoringService.class);
 
@@ -204,11 +201,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(activity, SearchActivity.class);
-                startActivityForResult(intent,GlobalVariables.REQUEST_CODE_FOR_SEARCH);
+                startActivityForResult(intent, GlobalVariables.REQUEST_CODE_FOR_SEARCH);
             }
         });
-
-
 
 
         if (!mAlreadyStartedService) {
@@ -223,8 +218,8 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         seeAllPopular_category.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = AllCategoryListActivity.newInstance( activity, listModel );
-                activity.startActivity( intent );
+                Intent intent = AllCategoryListActivity.newInstance(activity, listModel);
+                activity.startActivity(intent);
             }
         });
 
@@ -232,15 +227,15 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void onClick(View v) {
 
-                Intent intent = VendorStoreListActivity.newInstance( activity, "1" );
-                activity.startActivity( intent );
+                Intent intent = VendorStoreListActivity.newInstance(activity, "1");
+                activity.startActivity(intent);
             }
         });
         tv_all_nearby.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               Intent intent = VendorStoreListActivity.newInstance( activity, "2" );
-               activity.startActivity( intent );
+                Intent intent = VendorStoreListActivity.newInstance(activity, "2");
+                activity.startActivity(intent);
             }
         });
 
@@ -263,9 +258,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 if (context != null) {
                     //globalFunctions.hideProgress();
                     Log.d(TAG_trending, "Response: " + arg0.toString());
-                    HomePageMainModel homePageMainModel=(HomePageMainModel) arg0;
+                    HomePageMainModel homePageMainModel = (HomePageMainModel) arg0;
                     HomePageModel homePageModel = homePageMainModel.getHomePageModel();
-                    TrendingListModel trendingListModel=homePageModel.getTrendingListModel();
+                    TrendingListModel trendingListModel = homePageModel.getTrendingListModel();
                     setUpTrendingPage(trendingListModel);
                 }
             }
@@ -273,7 +268,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void OnFailureFromServer(String msg) {
                 if (context != null) {
-                   // globalFunctions.hideProgress();
+                    // globalFunctions.hideProgress();
                     Log.d(TAG_trending, "Failure : " + msg);
                 }
             }
@@ -294,7 +289,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             trendingModelList.clear();
 //            trendingModelList.addAll( trendingListModel.getTrendingModels() );
 
-            setUpdatedList(trendingListModel.getTrendingModels() );
+            setUpdatedList(trendingListModel.getTrendingModels());
 
             if (trendingListAdapter != null) {
                 synchronized (trendingListAdapter) {
@@ -311,14 +306,14 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     }
 
     private void setUpdatedList(List<TrendingModel> trendingListModel) {
-        for (int i=0;i<trendingListModel.size();i++){
-            TrendingModel trendingModel=trendingListModel.get(i);
+        for (int i = 0; i < trendingListModel.size(); i++) {
+            TrendingModel trendingModel = trendingListModel.get(i);
 
-            if (i==1 || i%3==1){
+            if (i == 1 || i % 3 == 1) {
                 trendingModelList.add(trendingModel);
-            }else if (i==2 || i%3==2){
-                trendingModelList.get(i-1).setTraTrendingModel(trendingModel);
-            }else {
+            } else if (i == 2 || i % 3 == 2) {
+                trendingModelList.get(i - 1).setTraTrendingModel(trendingModel);
+            } else {
                 trendingModelList.add(trendingModel);
             }
 
@@ -348,9 +343,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 if (context != null) {
                     //globalFunctions.hideProgress();
                     Log.d(TAG_nearby, "Response: " + arg0.toString());
-                    HomePageMainModel homePageMainModel=(HomePageMainModel) arg0;
+                    HomePageMainModel homePageMainModel = (HomePageMainModel) arg0;
                     HomePageModel homePageModel = homePageMainModel.getHomePageModel();
-                    NearbyListModel nearbyListModel=homePageModel.getNearbyListModel();
+                    NearbyListModel nearbyListModel = homePageModel.getNearbyListModel();
                     setUpNearbyPage(nearbyListModel);
                 }
             }
@@ -366,7 +361,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
             @Override
             public void OnError(String msg) {
                 if (context != null) {
-                   // globalFunctions.hideProgress();
+                    // globalFunctions.hideProgress();
                     Log.d(TAG_nearby, "Error : " + msg);
                 }
             }
@@ -376,9 +371,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     private void setUpNearbyPage(NearbyListModel nearbyListModel) {
         if (nearbyListModel != null && nearbyModelList != null) {
             nearbyModelList.clear();
-            nearbyModelList.addAll( nearbyListModel.getNearbyModels() );
+            nearbyModelList.addAll(nearbyListModel.getNearbyModels());
             if (placesNearyouListAdapter != null) {
-                synchronized (categoryAdapter) {
+                synchronized (placesNearyouListAdapter) {
                     placesNearyouListAdapter.notifyDataSetChanged();
                 }
             }
@@ -387,7 +382,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 showNearbyEmptyPage();
             } else {
                 showNearbyContent();
-               nearbyRecyclerView();
+                nearbyRecyclerView();
             }
         }
     }
@@ -423,9 +418,9 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
                 if (context != null) {
                     globalFunctions.hideProgress();
                     Log.d(TAG_Category, "Response: " + arg0.toString());
-                    HomePageMainModel homePageMainModel=(HomePageMainModel) arg0;
+                    HomePageMainModel homePageMainModel = (HomePageMainModel) arg0;
                     HomePageModel homePageModel = homePageMainModel.getHomePageModel();
-                    CategoryListModel categoryModel=homePageModel.getCategoryList();
+                    CategoryListModel categoryModel = homePageModel.getCategoryList();
                     setUpPageCategoryplace(categoryModel);
                 }
             }
@@ -454,7 +449,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
         if (categoryListModel != null && categoryList != null) {
             categoryList.clear();
-            categoryList.addAll( categoryListModel.getCategoryList() );
+            categoryList.addAll(categoryListModel.getCategoryList());
             if (categoryAdapter != null) {
                 synchronized (categoryAdapter) {
                     categoryAdapter.notifyDataSetChanged();
@@ -483,14 +478,11 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     }
 
     private void initRecyclerView() {
-       // CategoryRecyclerView.setLayoutManager(reviewLayoutManager);
+        // CategoryRecyclerView.setLayoutManager(reviewLayoutManager);
         CategoryRecyclerView.setHasFixedSize(true);
         categoryAdapter = new CategoryListAdapter(activity, categoryList);
         CategoryRecyclerView.setAdapter(categoryAdapter);
     }
-
-
-
 
 
     private void loadMenu(final Context context) {
@@ -499,10 +491,10 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         servicesMethodsManager.getHomeData(context, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
-               // globalFunctions.hideProgress();
+                // globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
                 if (arg0 instanceof HomePageMainModel) {
-                    HomePageMainModel homePageMainModel= (HomePageMainModel) arg0;
+                    HomePageMainModel homePageMainModel = (HomePageMainModel) arg0;
                     setThisPage(homePageMainModel.getHomePageModel());
 
                 }
@@ -518,7 +510,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
             @Override
             public void OnError(String msg) {
-               // globalFunctions.hideProgress();
+                // globalFunctions.hideProgress();
                 globalFunctions.displayMessaage(context, mainView, msg);
                 Log.d(TAG, "Error : " + msg);
             }
@@ -527,46 +519,46 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     private void setThisPage(final HomePageModel homePageModel) {
         if (homePageModel != null) {
-            if (homePageModel.getProfileMembershipModel()!=null) {
+            if (homePageModel.getProfileMembershipModel() != null) {
                 ProfileMembershipModel profileMembershipModel = homePageModel.getProfileMembershipModel();
-                if (profileMembershipModel!=null){
-                    globalFunctions.setProfileMembership(context,profileMembershipModel);
-                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getIs_premium())){
-                            if(profileMembershipModel.getIs_premium()!=null){
-                                rl_prime_upgrade.setVisibility(View.VISIBLE);
-                                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())){
-                                    membership_id=profileMembershipModel.getUpgrade_id();
-                                }
-                                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_title())){
-                                    upgrade_membership.setText(profileMembershipModel.getUpgrade_title());
-                                    upgrade_membership.setOnClickListener(new View.OnClickListener() {
-                                        @Override
-                                        public void onClick(View v) {
-                                            Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
-                                            activity.startActivity( intent);
+                if (profileMembershipModel != null) {
+                    globalFunctions.setProfileMembership(context, profileMembershipModel);
+                    if (GlobalFunctions.isNotNullValue(profileMembershipModel.getIs_premium())) {
+                        if (profileMembershipModel.getIs_premium() != null) {
+                            rl_prime_upgrade.setVisibility(View.VISIBLE);
+                            if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())) {
+                                membership_id = profileMembershipModel.getUpgrade_id();
+                            }
+                            if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_title())) {
+                                upgrade_membership.setText(profileMembershipModel.getUpgrade_title());
+                                upgrade_membership.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View v) {
+                                        Intent intent = UpgradeParticularMembershipActivity.newInstance(activity, membership_id);
+                                        activity.startActivity(intent);
 
-                                        }
-                                    });
-                                }else if (profileMembershipModel.getUpgrade_title().equalsIgnoreCase("")){
-                                    rl_prime_upgrade.setVisibility(View.GONE);
-
-                                }else{
-
-                                }
-
-                            }else if(profileMembershipModel.getIs_premium().equalsIgnoreCase("1")){
+                                    }
+                                });
+                            } else if (profileMembershipModel.getUpgrade_title().equalsIgnoreCase("")) {
                                 rl_prime_upgrade.setVisibility(View.GONE);
-                                upgrade_membership.setVisibility(View.GONE);
-                            }else{
+
+                            } else {
 
                             }
-                    }else {
+
+                        } else if (profileMembershipModel.getIs_premium().equalsIgnoreCase("1")) {
+                            rl_prime_upgrade.setVisibility(View.GONE);
+                            upgrade_membership.setVisibility(View.GONE);
+                        } else {
+
+                        }
+                    } else {
                         rl_prime_upgrade.setVisibility(View.GONE);
                         upgrade_membership.setVisibility(View.GONE);
 
                     }
-                   }
                 }
+            }
 
             if (homePageModel.getBannerList() != null) {
                 BannerListModel section2 = homePageModel.getBannerList();
@@ -623,12 +615,12 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         if (bannerClickedModel != null) {
             if (bannerClickedModel.getVendor_id() != null) {
 
-                if(bannerClickedModel.getCount().equalsIgnoreCase("1")){
-                    Intent intent = VendorListDetailsActivity.newInstance( activity, bannerClickedModel );
-                    activity.startActivity( intent );
-                }else {
-                    Intent intent = VendorStoreListActivity.newInstance( activity, bannerClickedModel );
-                    activity.startActivity( intent );
+                if (bannerClickedModel.getCount().equalsIgnoreCase("1")) {
+                    Intent intent = VendorListDetailsActivity.newInstance(activity, bannerClickedModel);
+                    activity.startActivity(intent);
+                } else {
+                    Intent intent = VendorStoreListActivity.newInstance(activity, bannerClickedModel);
+                    activity.startActivity(intent);
                 }
                /* if (bannerClickedModel.getType().equalsIgnoreCase(globalVariables.TYPE_CATEGORY)) {
                     Intent intent = VendorStoreListActivity.newInstance(activity, bannerClickedModel.getVendor_id(), null, null);
@@ -665,6 +657,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
     public void onPageScrollStateChanged(int state) {
 
     }
+
     public class BannerTask extends AsyncTask<BannerListModel, Void, List<String>> {
 
         @Override
@@ -833,7 +826,7 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
         if (!mAlreadyStartedService) {
             //Start location sharing service to app server.........
             // Intent intent = new Intent(activity, LocationMonitoringService.class);
-           // GlobalFunctions.setSharedPreferenceString(context, "extra_order_Id", order_vendor_product_id);
+            // GlobalFunctions.setSharedPreferenceString(context, "extra_order_Id", order_vendor_product_id);
             activity.startService(locationintent);
 
             mAlreadyStartedService = true;
@@ -890,19 +883,19 @@ public class HomeFragment extends Fragment implements BaseSliderView.OnSliderCli
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult( requestCode, resultCode, data );
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == activity.RESULT_OK) {
 
             if (requestCode == globalVariables.REQUEST_CODE_FOR_SEARCH) {
                 SearchResponseModel searchResponseModel = (SearchResponseModel) data.getExtras().getSerializable(SearchActivity.BUNDLE_SEARCH_RESPONSE_MODEL);
                 if (searchResponseModel != null) {
-                        if (searchResponseModel.getId() != null) {
-                            VendorStoreModel vendorStoreModel = new VendorStoreModel();
-                             vendorStoreModel.setId(searchResponseModel.getId());
-                                Intent intent = VendorListDetailsActivity.newInstance(activity, vendorStoreModel,new VendorModel());
-                                activity.startActivity(intent);
-                        }
+                    if (searchResponseModel.getId() != null) {
+                        VendorStoreModel vendorStoreModel = new VendorStoreModel();
+                        vendorStoreModel.setId(searchResponseModel.getId());
+                        Intent intent = VendorListDetailsActivity.newInstance(activity, vendorStoreModel, new VendorModel());
+                        activity.startActivity(intent);
+                    }
                 }
             }
         }

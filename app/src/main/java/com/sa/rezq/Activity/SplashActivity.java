@@ -25,7 +25,7 @@ import com.sa.rezq.services.model.NotificationModel;
 
 import java.util.Locale;
 
-public class SplashActivity  extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity {
     public static String TAG = "SplashScreen";
     public static final String BUNDLE_MAIN_NOTIFICATION_MODEL = "BundleMainModelNotificationModel";
     Context context;
@@ -52,7 +52,7 @@ public class SplashActivity  extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash_screen);
 
         context = this;
@@ -71,7 +71,6 @@ public class SplashActivity  extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Window window = this.getWindow();
         }
-
 
 
         shared_preference = PreferenceManager.getDefaultSharedPreferences(this
@@ -118,8 +117,9 @@ public class SplashActivity  extends AppCompatActivity {
                 overridePendingTransition(R.anim.slide_left, R.anim.slide_right);
                 finish();*/
             }
-        }, 6000);
+        }, 2000);
     }
+
     private void goToMainActivity() {
         Intent intent = null;
         if (globalFunctions.isLoggedIn(context)) {
@@ -142,6 +142,7 @@ public class SplashActivity  extends AppCompatActivity {
             activity.finish();
         }
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();

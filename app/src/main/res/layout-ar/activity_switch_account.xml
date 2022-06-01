@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_detail" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/choseAccount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/switch_account"
+                        android:textColor="#171717"
+                        android:textSize="24dp" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:text="@string/select_account" />
+
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/recycler_viewItem"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginRight="30dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <com.vlonjatg.progressactivity.ProgressLinearLayout
+                        android:id="@+id/account_switch_progressActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:emptyTitleTextColor="@color/green_light"
+                        app:errorContentTextColor="@color/app_fontColor"
+                        app:errorTitleTextColor="@color/app_fontColor"
+                        progressActivity:emptyBackgroundColor="@color/transparent"
+                        progressActivity:errorBackgroundColor="@color/transparent"
+                        progressActivity:loadingBackgroundColor="@color/transparent"
+                        progressActivity:loadingProgressBarColor="@color/green_light">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recyclerview_switch_account_list"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        </androidx.recyclerview.widget.RecyclerView>
+                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <com.sa.rezq.view.AppButton
+                android:id="@+id/btn_add_new_account"
+                android:layout_width="@dimen/_280sdp"
+                android:layout_height="@dimen/_48sdp"
+                android:layout_marginBottom="@dimen/_15sdp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:text="@string/addnewaccount"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14sdp"
+                android:background="@drawable/button_rezq">
+            </com.sa.rezq.view.AppButton>
+
+
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/Linear_UserView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/layout_bg">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/profile_image"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_guest_profile" />
+            </RelativeLayout>
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_profile_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="@string/abdul"
+                android:textAppearance="@style/SmallMediumText"
+                android:textColor="@color/app_text_color_common" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/Linear_AddView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_20sdp"
+            android:layout_toRightOf="@+id/Linear_UserView"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:background="@drawable/layout_bg">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/add_profile_image"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_baseline_add_24" />
+            </RelativeLayout>
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_add_profilename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:gravity="center"
+                android:text="@string/add"
+                android:textAppearance="@style/SmallMediumText"
+                android:textColor="@color/app_text_color" />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -91,7 +91,7 @@ public class ProductDetailsActivity extends AppCompatActivity implements BaseSli
 
     TextView subCat_tv, category_tv, reviews_count_tv, variant_tv, price_tv, discount_tv, offer_tv, per_day_tv,
             per_week_tv, per_month_tv, seller_tv, seller_price_tv, view_details_tv, min_qty_tv, qty_tv, shipping_charges_tv, book_now_tv, add_to_cart_tv,
-            sold_by_tv, review_view_more, product_details_tv, review_tv, terms_conditions_tv, variant_main_tv,variant_sub_tv,variant_subChild_tv,
+            sold_by_tv, review_view_more, product_details_tv, review_tv, terms_conditions_tv, variant_main_tv, variant_sub_tv, variant_subChild_tv,
             certification_tv, brand_name_tv, type_tv, weight_tv, dimension_tv, availability_tv, place_of_origin_tv, colour_tv, shipping_type_tv, product_description_tv;
     SliderLayout mProductSlider;
     PagerIndicator mPagerIndicator;

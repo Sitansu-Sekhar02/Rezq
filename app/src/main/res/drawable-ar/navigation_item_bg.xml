@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape
+            android:padding="@dimen/activity_gutter_margin_double"
+            android:shape="rectangle">
+            <solid android:color="@color/ColorPrimaryDark" />
+            <corners android:radius="0dp" />
+        </shape>
+
+    </item>
+    <item
+        android:bottom="@dimen/activity_gutter_margin_half_increased"
+        android:drawable="@drawable/ic_nav_right_arow"
+        android:gravity="left"
+        android:left="@dimen/activity_gutter_margin_half_increased"
+        android:top="@dimen/activity_gutter_margin_half_increased"/>
+    <item
+        android:height="0dp"
+        android:bottom="0dp"
+        android:gravity="bottom"
+        android:left="@dimen/activity_gutter_margin_half"
+        android:right="@dimen/activity_gutter_margin_half">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/ColorPrimaryDark" />
+            <corners android:radius="0dp" />
+
+        </shape>
+
+    </item>
+
+</layer-list>

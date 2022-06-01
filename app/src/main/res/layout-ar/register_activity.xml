@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="120dp"
+                        android:src="@drawable/logo_ac" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="148dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="20dp"
+                        android:text="@string/createnewaccount"
+                        android:textColor="#171717"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/llmain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/_8sdp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfimeImage"
+                        android:layout_width="136dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_group" />
+
+                    <ImageView
+                        android:id="@+id/edit_profile_image_iv"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginTop="100dp"
+                        android:layout_marginRight="@dimen/_5sdp"
+                        android:src="@drawable/ic_edit"/>
+
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_15sdp"
+                    android:orientation="vertical">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/outlined_text_input_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:boxBackgroundColor="@null">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etFirstName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="right"
+                                android:hint="@string/firstname"
+                                android:inputType="textCapSentences"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="0dp"
+                                android:textColor="#171717"
+                                android:textColorHint="@color/black"
+                                android:textSize="14dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_last_name_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:boxBackgroundColor="@null">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etLastName"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/lastname"
+                                android:inputType="textCapSentences"
+                                android:paddingStart="0dp"
+                                android:gravity="right"
+                                android:paddingEnd="0dp"
+                                android:textColor="#171717"
+                                android:textColorHint="@color/black"
+                                android:textSize="14dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_contact_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:boxBackgroundColor="@null">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etContact"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/contact"
+                                android:inputType="number"
+                                android:clickable="false"
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:paddingStart="0dp"
+                                android:gravity="right"
+                                android:paddingEnd="0dp"
+                                android:textColor="#B5B5B5"
+                                android:textColorHint="#B5B5B5"
+                                android:textSize="14dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/ti_email_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            app:boxBackgroundColor="@null">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etEmail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/email"
+                                android:inputType="textEmailAddress"
+                                android:imeOptions="actionDone"
+                                android:textColor="#171717"
+                                android:paddingStart="0dp"
+                                android:paddingEnd="0dp"
+                                android:gravity="right"
+                                android:textColorHint="@color/black"
+                                android:textSize="14dp" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+                    </LinearLayout>
+
+
+                    <com.sa.rezq.view.AppButton
+                        android:id="@+id/tvRegisterButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_below="@+id/tvForgotPassword"
+                        android:layout_marginLeft="25dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="25dp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        android:background="@drawable/button_rezq"
+                        android:gravity="center"
+                        android:text="@string/signup"
+                        android:textColor="@color/white"
+                        android:textSize="14dp" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

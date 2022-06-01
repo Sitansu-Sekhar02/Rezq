@@ -81,13 +81,12 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.sa.rezq.profile.ProfileMainActivity.context;
 
-public class AccountActivity  extends AppCompatActivity implements OpenInsertAccountInvoke, UploadListener {
+public class AccountActivity extends AppCompatActivity implements OpenInsertAccountInvoke, UploadListener {
     public static final String TAG = "AccountActivity";
 
 
     private static final int PERMISSION_REQUEST_CODE = 200;
     public static final int REQUEST_IMAGE = 100;
-
 
     Context context;
     private static Activity activity;
@@ -110,8 +109,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     ProgressLinearLayout progressActivity;
     RecyclerView accountListRecyclerview;
     InsertAccountModel insertAccountModel;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -125,7 +123,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
         globalVariables = AppController.getInstance().getGlobalVariables();
 
         linearLayoutManager = new LinearLayoutManager(activity);
-        gridLayoutManager=new GridLayoutManager(activity,3);
+        gridLayoutManager = new GridLayoutManager(activity, 3);
         progressActivity = findViewById(R.id.account_progressActivity);
         accountListRecyclerview = findViewById(R.id.recyclerview_account_list);
 
@@ -162,11 +160,10 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
                 globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
                 AccountMainModel accountMainModel = (AccountMainModel) arg0;
-                if (accountMainModel!=null && accountMainModel.getAccountListModel()!=null){
+                if (accountMainModel != null && accountMainModel.getAccountListModel() != null) {
                     AccountListModel listModel = accountMainModel.getAccountListModel();
                     setThisPage(listModel);
                 }
-
             }
 
             @SuppressLint("LongLogTag")
@@ -207,8 +204,10 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     }
 
     private void setStaticAccount() {
-        if (accountModels==null){accountModels=new ArrayList<>();}
-        AccountModel accountModel=new AccountModel();
+        if (accountModels == null) {
+            accountModels = new ArrayList<>();
+        }
+        AccountModel accountModel = new AccountModel();
         accountModel.setFirst_name(activity.getString(R.string.add));
         accountModel.setId("0");
         accountModels.add(accountModel);
@@ -223,13 +222,13 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     private void initRecyclerView() {
         accountListRecyclerview.setLayoutManager(gridLayoutManager);
         accountListRecyclerview.setHasFixedSize(true);
-        accountListAdapter = new AccountListAdapter(activity, accountModels,this::OnItemClickListener);
+        accountListAdapter = new AccountListAdapter(activity, accountModels, this::OnItemClickListener);
         accountListRecyclerview.setAdapter(accountListAdapter);
     }
 
-    public void onBackPressed () {
+    public void onBackPressed() {
 
-       // closeThisActivity();
+        // closeThisActivity();
         super.onBackPressed();
         if (countDownTimer != null) {
             countDownTimer.cancel();
@@ -237,21 +236,22 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
         closeThisActivity();
     }
 
-    public static void closeThisActivity () {
+    public static void closeThisActivity() {
         if (activity != null) {
             activity.finish();
             //activity.overridePendingTransition(R.anim.zoom_in,R.anim.zoom_out);
         }
     }
+
     @Override
-    public void onPause () {
+    public void onPause() {
         super.onPause();
         if (getFragmentManager().findFragmentByTag(TAG) != null)
             getFragmentManager().findFragmentByTag(TAG).setRetainInstance(true);
     }
 
     @Override
-    public void onStart () {
+    public void onStart() {
 
        /* if(hint != null) {
             hint.launchAutomaticHintForCall(activity.findViewById(R.id.action_call));
@@ -261,7 +261,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     }
 
     @Override
-    public void onDestroy () {
+    public void onDestroy() {
         if (countDownTimer != null) {
             countDownTimer.cancel();
         }
@@ -290,11 +290,11 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-        final EditText  et_UserfistName = dialog.findViewById(R.id.et_UserfirstName);
-        final EditText  et_UserLastName = dialog.findViewById(R.id.et_UserlastName);
+        final EditText et_UserfistName = dialog.findViewById(R.id.et_UserfirstName);
+        final EditText et_UserLastName = dialog.findViewById(R.id.et_UserlastName);
         final ImageView edit_profile_image_iv = dialog.findViewById(R.id.edit_profile_image_iv);
         iv_profile_image = dialog.findViewById(R.id.profile_image);
-        final Button  btn_Continue = dialog.findViewById(R.id.btn_Continue);
+        final Button btn_Continue = dialog.findViewById(R.id.btn_Continue);
 
         edit_profile_image_iv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -330,12 +330,12 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
 
                         // insertNewUser(activity, insertAccountModel);
 
-                            if (profileImageList.size() > 0) {
-                                uploadImage(GlobalVariables.UPLOAD_PROFILE_PHOTO_PATH_CODE);
+                        if (profileImageList.size() > 0) {
+                            uploadImage(GlobalVariables.UPLOAD_PROFILE_PHOTO_PATH_CODE);
 
-                            } else {
-                                insertNewUser(activity, insertAccountModel);
-                            }
+                        } else {
+                            insertNewUser(activity, insertAccountModel);
+                        }
 
                     }
                 }
@@ -344,7 +344,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
     }
 
     private void insertNewUser(Activity activity, InsertAccountModel insertAccountModel) {
-         globalFunctions.showProgress(activity, activity.getString(R.string.loading));
+        globalFunctions.showProgress(activity, activity.getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.insertUser(context, insertAccountModel, new ServerResponseInterface() {
             @Override
@@ -364,7 +364,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
 
             @Override
             public void OnError(String msg) {
-                 globalFunctions.hideProgress();
+                globalFunctions.hideProgress();
                 Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
                 Log.d(TAG, "Error : " + msg);
             }
@@ -404,14 +404,15 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
                     }
                 } else {
                     GlobalFunctions.hideProgress();
-                    insertNewUser(activity,insertAccountModel);
+                    insertNewUser(activity, insertAccountModel);
                 }
             } else {
                 GlobalFunctions.hideProgress();
-                insertNewUser(activity,insertAccountModel);
+                insertNewUser(activity, insertAccountModel);
             }
         }
     }
+
     private boolean checkPermission() {
         if (ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA)
                 != PackageManager.PERMISSION_GRANTED || ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -550,13 +551,13 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
             } catch (Exception exccc) {
                 globalFunctions.displayMessaage(context, mainView, getString(R.string.something_went_wrong_message));
             }
-        }else if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE) {
+        } else if (resultCode == RESULT_OK && requestCode == REQUEST_IMAGE) {
             Uri uri = data.getParcelableExtra("path");
             try {
                 // You can update this bitmap to your server
                 bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), uri);
                 selectUri = uri;
-                setProfileImageToModel(bitmap,selectUri);
+                setProfileImageToModel(bitmap, selectUri);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -584,6 +585,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
             }
         });
     }
+
     private void setUploadedImageToModel(String type, String imagePath) {
         if (type != null) {
             if (type.equalsIgnoreCase(GlobalVariables.UPLOAD_PROFILE_PHOTO_PATH_CODE)) {
@@ -592,7 +594,7 @@ public class AccountActivity  extends AppCompatActivity implements OpenInsertAcc
                 }
                 insertAccountModel.setProfile_image(imagePath);
                 GlobalFunctions.hideProgress();
-                insertNewUser(activity,insertAccountModel);
+                insertNewUser(activity, insertAccountModel);
             }
         }
     }

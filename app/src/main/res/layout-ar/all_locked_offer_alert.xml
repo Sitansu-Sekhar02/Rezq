@@ -1,0 +1,173 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:progressActivity="http://schemas.android.com/tools"
+    android:background="@color/black_trans"
+    android:id="@+id/bottom_sheet"
+    app:behavior_hideable="true"
+    app:behavior_peekHeight="0dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/dialog_ratings">
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tvAlertMsg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/all_locked_offer"
+                    android:gravity="end"
+                    android:textColor="#171717"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/rezqplus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvAlertMsg"
+                    android:layout_marginRight="10dp"
+                    android:gravity="end"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/rezq_plus_offer"
+                    android:textAllCaps="true"
+                    android:textColor="@color/holo_green"
+                    android:textSize="14dp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/hotel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rezqplus"
+                    android:layout_marginTop="10dp"
+                    android:orientation="vertical">
+                    <com.vlonjatg.progressactivity.ProgressLinearLayout
+                        android:id="@+id/locked_progressActivity"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:emptyTitleTextColor="@color/green_light"
+                        app:errorContentTextColor="@color/app_fontColor"
+                        app:errorTitleTextColor="@color/app_fontColor"
+                        progressActivity:emptyBackgroundColor="@color/transparent"
+                        progressActivity:errorBackgroundColor="@color/transparent"
+                        progressActivity:loadingBackgroundColor="@color/transparent"
+                        progressActivity:loadingProgressBarColor="@color/green_light">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_Rezqplus_offer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                    </com.vlonjatg.progressactivity.ProgressLinearLayout>
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_empty_locked_offer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/hotel_ll"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center"
+                        android:text="@string/no_offer_available"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14dp"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+
+                </LinearLayout>
+
+
+                <RelativeLayout
+                    android:visibility="gone"
+                    android:id="@+id/rr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/hotel"
+                    android:layout_marginTop="39dp"
+                    android:gravity="center">
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/primeOffer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="10dp"
+                        android:text="@string/prime_offer"
+                        android:textAllCaps="true"
+                        android:textColor="@color/red"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recyclerview_rezq_PrimeOffer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/primeOffer"
+                        android:layout_marginTop="5dp">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/upgrade_prime_rl"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
+                    android:layout_below="@+id/rr"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="20dp"
+                    android:background="@color/red"
+                    android:gravity="center_vertical">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <com.sa.rezq.view.AppTextView
+                            android:id="@+id/tv_upgrade_title"
+                            android:layout_width="163dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="15dp"
+                            android:text="@string/prime_members"
+                            android:textColor="@color/white"
+                            android:textSize="14dp" />
+
+                        <com.sa.rezq.view.AppButton
+                            android:id="@+id/btn_upgrade_prime_offer"
+                            android:layout_width="91dp"
+                            android:layout_height="26dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_marginLeft="40dp"
+                            android:layout_marginRight="40dp"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/off_border"
+                            android:gravity="center"
+                            android:text="@string/upgrade"
+                            android:textAllCaps="true"
+                            android:textColor="@color/red"
+                            android:textSize="12dp" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</LinearLayout>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_detail" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tool_bar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_item"
+                    android:layout_height="@dimen/_65sdp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_width="@dimen/_65sdp">
+                    <ImageView
+                        android:id="@+id/iv_restro_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_baseline_image_24" />
+
+                </androidx.cardview.widget.CardView>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="20dp"
+                    android:orientation="vertical">
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_restro_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:orientation="horizontal">
+
+                        <com.sa.rezq.view.AppTextView
+                            android:id="@+id/restro_avg_rating"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawablePadding="5dp"
+                            android:text=""
+                            android:textColor="#FFB400"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_baseline_star_rate_24"
+                            android:drawablePadding="5dp"
+                            android:textColor="#FFB400"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+                        <com.sa.rezq.view.AppTextView
+                            android:id="@+id/restro_rating_count"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#FFB400"
+                            android:layout_marginRight="@dimen/_8sdp"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <com.sa.rezq.view.AppTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:layout_marginLeft="5dp"
+                            android:text="@string/reating"
+                            android:textAllCaps="true"
+                            android:textColor="#171717"
+                            android:textStyle="bold"
+                            android:textSize="12dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="25dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/Linearupgrade"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_height="@dimen/_52sdp"
+                        app:cardCornerRadius="5dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_width="@dimen/_52sdp"
+                        android:gravity="center">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/image_offer"
+                            android:scaleType="centerCrop" />
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/offer_title"
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/offer_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#898989" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_show_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/ic_rectangle_grey_border"
+                        android:gravity="center"
+                        android:text=""
+                        android:textColor="#171717"
+                        android:textSize="24dp"
+                        android:textStyle="bold" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="15dp"
+                        android:gravity="center"
+                        android:text="@string/show_reception"
+                        android:textColor="#898989" />
+
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_copy_couponcode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginBottom="50dp"
+                        android:text="@string/copy_coupon"
+                        android:textColor="#FF3B3B"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/LinearCopycopon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/unlock_raza"
+                        android:textColor="#898989" />
+
+                    <TextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/off_border"
+                        android:drawableStart="@drawable/ic_group_lock"
+                        android:gravity="center"
+                        android:text="@string/off"
+                        android:textColor="#747474" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/upto_50_off"
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/applicable_onselectitem"
+                        android:textColor="#898989" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="@drawable/ic_rectangle_green"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/premium_members_only"
+                            android:textColor="@color/white"
+                            android:textSize="14dp" />
+
+                        <Button
+                            android:layout_width="100dp"
+                            android:layout_height="26dp"
+                            android:layout_marginTop="15dp"
+                            android:background="@drawable/off_border"
+                            android:text="@string/upgrade"
+                            android:textColor="#FF5C5C"
+                            android:textSize="14dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="52dp"
+                        android:layout_height="52dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/hours_border"
+                        android:gravity="center"
+                        android:text="@string/happy_hourse"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center"
+                        android:text="@string/buy_two_get_one"
+                        android:textColor="#171717"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:text="@string/applicable_onselectitem"
+                        android:textColor="#898989" />
+
+                    <TextView
+                        android:layout_width="220dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="25dp"
+                        android:background="@drawable/button_border"
+                        android:gravity="center"
+                        android:text="@string/reedemoffer2"
+                        android:textColor="@color/white"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:layout_marginBottom="50dp"
+                        android:text="@string/save_in_recent"
+                        android:textAllCaps="true"
+                        android:textColor="#FF3B3B"
+                        android:textSize="14dp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+</RelativeLayout>

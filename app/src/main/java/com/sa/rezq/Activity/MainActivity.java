@@ -14,7 +14,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.viewpager.widget.ViewPager;
 
 import android.Manifest;
 import android.animation.ValueAnimator;
@@ -31,13 +30,11 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -55,7 +52,6 @@ import com.example.easywaylocation.EasyWayLocation;
 import com.example.easywaylocation.GetLocationDetail;
 import com.example.easywaylocation.Listener;
 import com.example.easywaylocation.LocationData;
-import com.github.siyamed.shapeimageview.ShapeImageView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Status;
@@ -71,30 +67,22 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.iid.FirebaseInstanceId;
-import com.ogaclejapan.smarttablayout.SmartTabLayout;
-import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItem;
-import com.sa.rezq.account.AccountActivity;
-import com.sa.rezq.account.SwitchAccountActivity;
 import com.sa.rezq.coupons.RecentCouponActivity;
 import com.sa.rezq.home.HomeFragment;
 import com.sa.rezq.R;
 import com.sa.rezq.fcm.analytics.AnalyticsReport;
 import com.sa.rezq.global.GlobalFunctions;
 import com.sa.rezq.global.GlobalVariables;
-import com.sa.rezq.map.MapActivity;
 import com.sa.rezq.membership.FreeMembershipActivity;
 import com.sa.rezq.membership.MembershipDetailsActivity;
 import com.sa.rezq.membership.UpgradeMembershipListActivity;
 import com.sa.rezq.profile.ProfileMainActivity;
 import com.sa.rezq.services.ServerResponseInterface;
 import com.sa.rezq.services.ServicesMethodsManager;
-import com.sa.rezq.services.model.BannerListModel;
 import com.sa.rezq.services.model.CountryModel;
 import com.sa.rezq.services.model.HomePageMainModel;
 import com.sa.rezq.services.model.HomePageModel;
 import com.sa.rezq.services.model.KeyValueModel;
-import com.sa.rezq.services.model.MembershipDetailsModel;
-import com.sa.rezq.services.model.MembershipModel;
 import com.sa.rezq.services.model.NotificationModel;
 import com.sa.rezq.services.model.ProfileMainModel;
 import com.sa.rezq.services.model.ProfileMembershipModel;
@@ -102,7 +90,6 @@ import com.sa.rezq.services.model.ProfileModel;
 import com.sa.rezq.services.model.PushNotificationModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.services.model.UpdateLanguageModel;
-import com.sa.rezq.vendorlist.details.VendorListDetailsActivity;
 import com.sa.rezq.view.AlertDialog;
 import com.sa.rezq.wishlist.WishListActivity;
 import com.squareup.picasso.Picasso;
@@ -117,8 +104,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 import static com.example.easywaylocation.EasyWayLocation.LOCATION_SETTING_REQUEST_CODE;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, LocationListener,GoogleApiClient.ConnectionCallbacks,
-        GoogleApiClient.OnConnectionFailedListener , Listener, LocationData.AddressCallBack {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener, LocationListener, GoogleApiClient.ConnectionCallbacks,
+        GoogleApiClient.OnConnectionFailedListener, Listener, LocationData.AddressCallBack {
 
 
     EasyWayLocation easyWayLocation;
@@ -142,21 +129,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static TextView tvHeaderText;
     public static LinearLayout ln_location;
 
-    public  static SearchView searchView;
-    public  static TextView tvLocation,ivHome;
-    public  static CircleImageView crop_profile;
-    public  static SearchView EtsearchRecent;
-
+    public static SearchView searchView;
+    public static TextView tvLocation, ivHome;
+    public static CircleImageView crop_profile;
+    public static SearchView EtsearchRecent;
 
 
     public static NavigationView navigationView;
 
 
     //Langauge Textview
-    static  TextView arabic_language_tv, english_language_tv;
+    static TextView arabic_language_tv, english_language_tv;
 
     static View arabic_language_iv, english_language_iv;
-
 
 
     public static final String BUNDLE_DEEPLINK_URL = "BundleDeepLinkURL";
@@ -197,20 +182,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     CountryModel countryModel;
     private List<CountryModel> countryList = new ArrayList();
-    private List <String> countryStringList = new ArrayList();
+    private List<String> countryStringList = new ArrayList();
     private String[] countryArr;
 
-    ProfileMembershipModel profileMembershipModel=null;
+    ProfileMembershipModel profileMembershipModel = null;
 
     public static Intent newInstance(Context context, String url) {
-        Intent intent = new Intent( context, MainActivity.class );
-        intent.putExtra( BUNDLE_DEEPLINK_URL, url );
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(BUNDLE_DEEPLINK_URL, url);
         return intent;
     }
 
     public static Intent newInstance(Context context, NotificationModel notificationModel) {
-        Intent intent = new Intent( context, MainActivity.class );
-        intent.putExtra( BUNDLE_MAIN_NOTIFICATION_MODEL, notificationModel );
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.putExtra(BUNDLE_MAIN_NOTIFICATION_MODEL, notificationModel);
         return intent;
     }
 
@@ -251,13 +236,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             activity.finish();
         }
     }
+
     public static void startLocationService() {
-        activity.startService( locationintent );
+        activity.startService(locationintent);
     }
 
     public static void stopLocationService() {
 
-        activity.stopService( locationintent );
+        activity.stopService(locationintent);
     }
 
 
@@ -294,7 +280,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mainWindow = getWindow();
 
 
-
         mainActivityFM = getSupportFragmentManager();
         layoutInflater = activity.getLayoutInflater();
         globalFunctions = AppController.getInstance().getGlobalFunctions();
@@ -302,27 +287,27 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         analyticsReport = new AnalyticsReport();
         //initialize findviewbyid
 
-        arabic_language_tv=findViewById(R.id.arabic_language_tv);
-        english_language_tv=findViewById(R.id.english_language_tv);
-        arabic_language_iv=findViewById(R.id.arabic_language_iv);
-        english_language_iv=findViewById(R.id.english_language_iv);
-        ln_location=findViewById(R.id.ln_location);
+        arabic_language_tv = findViewById(R.id.arabic_language_tv);
+        english_language_tv = findViewById(R.id.english_language_tv);
+        arabic_language_iv = findViewById(R.id.arabic_language_iv);
+        english_language_iv = findViewById(R.id.english_language_iv);
+        ln_location = findViewById(R.id.ln_location);
         Intialize();
 
-        toolbar = ( Toolbar ) findViewById( R.id.tool_bar ); // Attaching the layout to the toolbar object
+        toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
 
-        mainView=toolbar;
-        setSupportActionBar( toolbar );
+        mainView = toolbar;
+        setSupportActionBar(toolbar);
         actionBar = getSupportActionBar();
         // actionBar.setHomeAsUpIndicator( navIconDrawable );
-        setOptionsMenuVisiblity( false );
+        setOptionsMenuVisiblity(false);
 
         Drawable navIconDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_group_menu, getTheme());
-        gravity = globalFunctions.getLanguage( mainContext ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
-        drawer = ( DrawerLayout ) findViewById( R.id.drawer_layout );
+        gravity = globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close );
-        toggle.setDrawerIndicatorEnabled( false );
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        toggle.setDrawerIndicatorEnabled(false);
         toggle.setHomeAsUpIndicator(navIconDrawable);
         toggle.setToolbarNavigationClickListener(new View.OnClickListener() {
             @Override
@@ -341,42 +326,42 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         String token = FirebaseInstanceId.getInstance().getToken();
         if (token != null) {
             PushNotificationModel pushNotificationModel = new PushNotificationModel();
-            pushNotificationModel.setRegistration_id( token );
-            sendPushNotificationID( mainContext, pushNotificationModel );
+            pushNotificationModel.setRegistration_id(token);
+            sendPushNotificationID(mainContext, pushNotificationModel);
         }
-        if (getIntent().hasExtra( BUNDLE_MAIN_NOTIFICATION_MODEL )) {
-            notificationModel = ( NotificationModel ) getIntent().getSerializableExtra( BUNDLE_MAIN_NOTIFICATION_MODEL );
+        if (getIntent().hasExtra(BUNDLE_MAIN_NOTIFICATION_MODEL)) {
+            notificationModel = (NotificationModel) getIntent().getSerializableExtra(BUNDLE_MAIN_NOTIFICATION_MODEL);
         } else {
             notificationModel = null;
         }
-        accessPermissions( this );
+        accessPermissions(this);
 
-        gravity = globalFunctions.getLanguage( mainContext ) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
+        gravity = globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ARABIC ? GravityCompat.START : GravityCompat.START;
 
-        navigationView.setNavigationItemSelectedListener( this );
-        navigationHeaderView = navigationView.getHeaderView( 0 );
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationHeaderView = navigationView.getHeaderView(0);
 
 
-        mainActivityFM.addOnBackStackChangedListener( new FragmentManager.OnBackStackChangedListener() {
+        mainActivityFM.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
 
             @Override
             public void onBackStackChanged() {
                 if (mainActivityFM != null) {
-                    Fragment currentFragment = mainActivityFM.findFragmentById( R.id.container );
+                    Fragment currentFragment = mainActivityFM.findFragmentById(R.id.container);
                     if (currentFragment != null) {
                         currentFragment.onResume();
                     }
                 }
             }
-        } );
+        });
 
 
-        Fragment dashboardFragment=new HomeFragment();
-        replaceFragment( dashboardFragment, HomeFragment.TAG, getString( R.string.app_name ), 0, 0 );
+        Fragment dashboardFragment = new HomeFragment();
+        replaceFragment(dashboardFragment, HomeFragment.TAG, getString(R.string.app_name), 0, 0);
 
 
         getLocationDetail = new GetLocationDetail(this, this);
-        easyWayLocation = new EasyWayLocation(this, false,true,this);
+        easyWayLocation = new EasyWayLocation(this, false, true, this);
         if (permissionIsGranted()) {
             doLocationWork();
         } else {
@@ -388,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //            checkLocationPermission();
 //        }else {
 
-            //for current location
+        //for current location
             /*GPSTracker mGPS = new GPSTracker(this);
             if (mGPS.canGetLocation()) {
                 mGPS.getLocation();
@@ -416,7 +401,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onClick(View v) {
                 //Intent intent=new Intent(MainActivity.this, MapActivity.class);
-               // startActivity(intent);
+                // startActivity(intent);
                 List<Place.Field> placefield = Arrays.asList(Place.Field.ADDRESS, Place.Field.LAT_LNG, Place.Field.NAME);
                 Intent i = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, placefield).build(MainActivity.this);
                 startActivityForResult(i, AUTOCOMPLETE_REQUEST_CODE);
@@ -435,7 +420,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.d(TAG, "Response : " + arg0.toString());
                 // globalFunctions.hideProgress();
                 if (arg0 instanceof ProfileMainModel) {
-                    ProfileMainModel profileMainModel=(ProfileMainModel) arg0;
+                    ProfileMainModel profileMainModel = (ProfileMainModel) arg0;
                     ProfileModel profileModel = profileMainModel.getProfileModel();
                     globalFunctions.setProfile(mainContext, profileModel);
                     loadMenu(mainContext);
@@ -462,7 +447,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void applyFontToMenuItem(MenuItem mi) {
         Typeface font = Typeface.createFromAsset(getAssets(), "regular.otf");
         SpannableString mNewTitle = new SpannableString(mi.getTitle());
-        mNewTitle.setSpan(new CustomTypefaceSpan("" , font), 0 , mNewTitle.length(),  Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+        mNewTitle.setSpan(new CustomTypefaceSpan("", font), 0, mNewTitle.length(), Spannable.SPAN_INCLUSIVE_INCLUSIVE);
         mi.setTitle(mNewTitle);
     }
 
@@ -487,7 +472,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 // globalFunctions.hideProgress();
                 Log.d(TAG, "Response : " + arg0.toString());
                 if (arg0 instanceof HomePageMainModel) {
-                    HomePageMainModel homePageMainModel= (HomePageMainModel) arg0;
+                    HomePageMainModel homePageMainModel = (HomePageMainModel) arg0;
                     setThisPage(homePageMainModel.getHomePageModel());
 
                 }
@@ -514,7 +499,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (homePageModel != null) {
             if (homePageModel.getProfileMembershipModel() != null) {
                 profileMembershipModel = homePageModel.getProfileMembershipModel();
-                Log.e("profile",""+homePageModel.getProfileMembershipModel());
+                Log.e("profile", "" + homePageModel.getProfileMembershipModel());
                 if (navigationHeaderView != null && mainContext != null) {
 
                     getMembershipDetails(profileMembershipModel);
@@ -533,13 +518,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_free_member = (TextView) navigationHeaderView.findViewById(R.id.tv_free_membership),
                     header_tv_validity_from = (TextView) navigationHeaderView.findViewById(R.id.tv_validity_from),
                     header_tv_validity_to = (TextView) navigationHeaderView.findViewById(R.id.tv_validity_to),
-                    nav_header = navigationHeaderView.findViewById(R.id.TvseeProfile),
                     nav_tv_upgrade = navigationHeaderView.findViewById(R.id.tv_upgrade),
                     //nav_ll_validity = navigationHeaderView.findViewById(R.id.ll_validity),
                     header_tv_rezq_plus_member = (TextView) navigationHeaderView.findViewById(R.id.tv_rezq_plus_member);
 
-            ImageView
-                    header_app_iv = (ImageView) navigationHeaderView.findViewById(R.id.nav_profile_image);
+            ImageView header_app_iv = (ImageView) navigationHeaderView.findViewById(R.id.nav_profile_image);
+            ImageView nav_header = navigationHeaderView.findViewById(R.id.iv_view_profile);
 
 
             nav_header.setOnClickListener(new View.OnClickListener() {
@@ -548,8 +532,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                     drawer.closeDrawer(GravityCompat.START);
 
-                    Intent intent = new Intent( mainContext, ProfileMainActivity.class );
-                    startActivity( intent );
+                    Intent intent = new Intent(mainContext, ProfileMainActivity.class);
+                    startActivity(intent);
 
                 }
             });
@@ -559,8 +543,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
                     drawer.closeDrawer(GravityCompat.START);
 
-                    Intent intent = new Intent( mainContext, UpgradeMembershipListActivity.class );
-                    startActivity( intent );
+                    Intent intent = new Intent(mainContext, UpgradeMembershipListActivity.class);
+                    startActivity(intent);
                 }
             });
             if (globalFunctions.getLanguage(mainContext) == GlobalVariables.LANGUAGE.ENGLISH) {
@@ -598,8 +582,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
 
-            ProfileModel profileModel=globalFunctions.getProfile(activity);
-            if (profileModel!=null) {
+            ProfileModel profileModel = globalFunctions.getProfile(activity);
+            if (profileModel != null) {
 
                 if (GlobalFunctions.isNotNullValue(profileModel.getFirstName())) {
                     String membership_fullName = profileModel.getFirstName();
@@ -622,7 +606,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             if (profileMembershipModel != null) {
 
-                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_id()) && ! profileMembershipModel.getMembership_id().equalsIgnoreCase("0")) {
+                if (GlobalFunctions.isNotNullValue(profileMembershipModel.getMembership_id()) && !profileMembershipModel.getMembership_id().equalsIgnoreCase("0")) {
                     String membershipName = profileMembershipModel.getMembership_name();
                     String valid_from = profileMembershipModel.getValid_from();
                     String valid_to = profileMembershipModel.getValid_till();
@@ -632,7 +616,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     header_tv_rezq_plus_member.setVisibility(View.VISIBLE);
                     header_tv_rezq_plus_member.setText(membershipName);
                     header_tv_validity_from.setText(GlobalFunctions.getDateFormat(valid_from));
-                    header_tv_validity_to.setText(" - "+GlobalFunctions.getDateFormatTillDate(valid_to));
+                    header_tv_validity_to.setText(" - " + GlobalFunctions.getDateFormatTillDate(valid_to));
                     header_tv_rezq_plus_member.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -648,20 +632,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_name())) {
-                    String membership_fullName =profileMembershipModel.getSubscriber_name();
+                    String membership_fullName = profileMembershipModel.getSubscriber_name();
                     header_name_tv.setText(membership_fullName);
                 }
 
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getSubscriber_image())) {
-                    Picasso.with( mainContext ).load(profileMembershipModel.getSubscriber_image() ).placeholder( R.drawable.ic_baseline_person_24 ).into(crop_profile);
+                    Picasso.with(mainContext).load(profileMembershipModel.getSubscriber_image()).placeholder(R.drawable.ic_baseline_person_24).into(crop_profile);
                 }
 
                 crop_profile.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        Intent intent = new Intent( mainContext, ProfileMainActivity.class );
-                        startActivity( intent );
+                        Intent intent = new Intent(mainContext, ProfileMainActivity.class);
+                        startActivity(intent);
                     }
                 });
 
@@ -757,6 +741,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         }
     }
+
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -793,9 +778,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 String state = listAddresses.get(0).getAdminArea();
                 String country = listAddresses.get(0).getCountryName();
                 String subLocality = listAddresses.get(0).getSubLocality();
-                strAdd = subLocality+","+state+","+country;
+                strAdd = subLocality + "," + state + "," + country;
 
-               // Log.e("rrrrr", "" + subLocality+","+state+","+country);
+                // Log.e("rrrrr", "" + subLocality+","+state+","+country);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -805,29 +790,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void Intialize() {
         llmain = findViewById(R.id.llmain);
-        searchView=findViewById(R.id.searchView);
         //textview
         tvHeaderText = findViewById(R.id.tvHeaderText);
         tvLocation = findViewById(R.id.tvlocation);
         crop_profile = findViewById(R.id.iv_userProfile);
 
-        ivHome=findViewById(R.id.ivHomeText);
-
-        iv_menu = findViewById(R.id.iv_menu);
-
 
         //iv_menu.setOnClickListener(this);
         //drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = ( NavigationView ) findViewById( R.id.nav_view );
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
 
         Menu m = navigationView.getMenu();
-        for (int i=0;i<m.size();i++) {
+        for (int i = 0; i < m.size(); i++) {
             MenuItem mi = m.getItem(i);
 
             //for aapplying a font to subMenu ...
             SubMenu subMenu = mi.getSubMenu();
-            if (subMenu!=null && subMenu.size() >0 ) {
-                for (int j=0; j <subMenu.size();j++) {
+            if (subMenu != null && subMenu.size() > 0) {
+                for (int j = 0; j < subMenu.size(); j++) {
                     MenuItem subMenuItem = subMenu.getItem(j);
                     applyFontToMenuItem(subMenuItem);
                 }
@@ -839,24 +819,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
 
-    private void replaceFragment(@Nullable Fragment allFragment,@Nullable String tag,@Nullable String title, int titleImageID,@Nullable int bgResID) {
+    private void replaceFragment(@Nullable Fragment allFragment, @Nullable String tag, @Nullable String title, int titleImageID, @Nullable int bgResID) {
         if (allFragment != null && mainActivityFM != null) {
-            Fragment tempFrag = mainActivityFM.findFragmentByTag( tag );
+            Fragment tempFrag = mainActivityFM.findFragmentByTag(tag);
             if (tempFrag != null) {
 //                mainActivityFM.beginTransaction().remove(tempFrag).commitAllowingStateLoss();
-                mainActivityFM.beginTransaction().remove( tempFrag ).commit();
+                mainActivityFM.beginTransaction().remove(tempFrag).commit();
             }
-            setTitle( title, titleImageID, bgResID );
+            setTitle(title, titleImageID, bgResID);
             FragmentTransaction ft = mainActivityFM.beginTransaction();
             ft.setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right, R.anim.enter_from_right, R.anim.exit_to_left);
             //ft.setCustomAnimations(R.anim.slide_out_left, R.anim.slide_out_right);
-            ft.add( R.id.container, allFragment, tag ).addToBackStack( tag ).commitAllowingStateLoss();
+            ft.add(R.id.container, allFragment, tag).addToBackStack(tag).commitAllowingStateLoss();
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult( requestCode, resultCode, data );
+        super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == LOCATION_SETTING_REQUEST_CODE) {
             easyWayLocation.onActivityResult(resultCode);
@@ -865,8 +845,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
                 Place place = Autocomplete.getPlaceFromIntent(data);
-                tvHeaderText.setText(place.getAddress());
-                Log.e("TAG", "Place: " + place.getName() + ", " + place.getId());
+                // tvHeaderText.setText(place.getAddress());
+                Log.d("id1111", "" + place.getName());
+                Log.d("place111", "" + place.getName() + ", " + place.getId());
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 // TODO: Handle the error.
                 Status status = Autocomplete.getStatusFromIntent(data);
@@ -880,46 +861,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void accessPermissions(MainActivity mainActivity) {
-        int permissionCheck_getAccounts = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.GET_ACCOUNTS );
-        int permissionCheck_callPhone = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.CALL_PHONE );
-        int permissionCheck_lockwake = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.WAKE_LOCK );
-        int permissionCheck_internet = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.INTERNET );
-        int permissionCheck_Access_internet = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.ACCESS_NETWORK_STATE );
-        int permissionCheck_Access_wifi = ContextCompat.checkSelfPermission( activity, android.Manifest.permission.ACCESS_WIFI_STATE );
+        int permissionCheck_getAccounts = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.GET_ACCOUNTS);
+        int permissionCheck_callPhone = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.CALL_PHONE);
+        int permissionCheck_lockwake = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.WAKE_LOCK);
+        int permissionCheck_internet = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.INTERNET);
+        int permissionCheck_Access_internet = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_NETWORK_STATE);
+        int permissionCheck_Access_wifi = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.ACCESS_WIFI_STATE);
         // int permissionCheck_External_storage = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE);
         // int permissionCheck_cam = ContextCompat.checkSelfPermission(activity, android.Manifest.permission.CAMERA);
 
         if (permissionCheck_internet != PackageManager.PERMISSION_GRANTED || permissionCheck_Access_internet != PackageManager.PERMISSION_GRANTED || permissionCheck_callPhone != PackageManager.PERMISSION_GRANTED) {
             // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale( activity, android.Manifest.permission.INTERNET ) && ActivityCompat.shouldShowRequestPermissionRationale( activity, android.Manifest.permission.ACCESS_NETWORK_STATE ) && ActivityCompat.shouldShowRequestPermissionRationale( activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE ) && ActivityCompat.shouldShowRequestPermissionRationale( activity, android.Manifest.permission.CAMERA ) || ActivityCompat.shouldShowRequestPermissionRationale( activity, android.Manifest.permission.CALL_PHONE )) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.INTERNET) && ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.ACCESS_NETWORK_STATE) && ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.WRITE_EXTERNAL_STORAGE) && ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.CAMERA) || ActivityCompat.shouldShowRequestPermissionRationale(activity, android.Manifest.permission.CALL_PHONE)) {
                 Fragment homeFragment = null;
                 homeFragment = new HomeFragment();
-                mainActivityFM.beginTransaction().replace( R.id.container, homeFragment, "" ).commitAllowingStateLoss();
+                mainActivityFM.beginTransaction().replace(R.id.container, homeFragment, "").commitAllowingStateLoss();
             } else {
-                ActivityCompat.requestPermissions( activity, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_NETWORK_STATE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CALL_PHONE}, globalVariables.PERMISSIONS_REQUEST_PRIMARY );
+                ActivityCompat.requestPermissions(activity, new String[]{android.Manifest.permission.CAMERA, android.Manifest.permission.INTERNET, android.Manifest.permission.ACCESS_NETWORK_STATE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE, android.Manifest.permission.CALL_PHONE}, globalVariables.PERMISSIONS_REQUEST_PRIMARY);
             }
         }
     }
 
     private void sendPushNotificationID(Context mainContext, PushNotificationModel pushNotificationModel) {
-        if (globalFunctions.getSharedPreferenceString( globalVariables.SHARED_PREFERENCE_COOKIE ) != null) {
+        if (globalFunctions.getSharedPreferenceString(globalVariables.SHARED_PREFERENCE_COOKIE) != null) {
             ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-            servicesMethodsManager.sendPushNotificationID( mainContext, pushNotificationModel, new ServerResponseInterface() {
+            servicesMethodsManager.sendPushNotificationID(mainContext, pushNotificationModel, new ServerResponseInterface() {
                 @Override
                 public void OnSuccessFromServer(Object arg0) {
-                    Log.d( TAG, "Response : " + arg0.toString() );
+                    Log.d(TAG, "Response : " + arg0.toString());
                 }
 
                 @Override
                 public void OnFailureFromServer(String msg) {
-                    Log.d( TAG, "Failure : " + msg );
+                    Log.d(TAG, "Failure : " + msg);
                 }
 
                 @Override
                 public void OnError(String msg) {
-                    Log.d( TAG, "Error : " + msg );
+                    Log.d(TAG, "Error : " + msg);
                 }
-            }, "Send_Push_Notification_ID" );
+            }, "Send_Push_Notification_ID");
         }
     }
 
@@ -928,6 +909,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onPause();
         easyWayLocation.endUpdates();
     }
+
     @Override
     protected void onStart() {
       /*  if (upComingFragment != null) {
@@ -950,7 +932,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     public void setOptionsMenuVisiblity(boolean showMenu) {
         if (menu == null)
             return;
@@ -960,64 +941,64 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void setNavigationHeaders() {
         if (navigationHeaderView != null && mainContext != null) {
             TextView
-                    header_name_tv = ( TextView ) navigationHeaderView.findViewById( R.id.tv_nav_fullname ),
-                   // header_email_tv = ( TextView ) navigationHeaderView.findViewById( R.id.nav_tvEmail ),
-                    header_tv_free_member = ( TextView ) navigationHeaderView.findViewById( R.id.tv_free_membership ),
-                    header_tv_validity_from = ( TextView ) navigationHeaderView.findViewById( R.id.tv_validity_from ),
-                    header_tv_validity_to = ( TextView ) navigationHeaderView.findViewById( R.id.tv_validity_to ),
-                    nav_header=navigationHeaderView.findViewById(R.id.TvseeProfile),
-                    nav_tv_upgrade=navigationHeaderView.findViewById(R.id.tv_upgrade),
-                    header_tv_rezq_plus_member= ( TextView ) navigationHeaderView.findViewById( R.id.tv_rezq_plus_member );
+                    header_name_tv = (TextView) navigationHeaderView.findViewById(R.id.tv_nav_fullname),
+                    // header_email_tv = ( TextView ) navigationHeaderView.findViewById( R.id.nav_tvEmail ),
+                    header_tv_free_member = (TextView) navigationHeaderView.findViewById(R.id.tv_free_membership),
+                    header_tv_validity_from = (TextView) navigationHeaderView.findViewById(R.id.tv_validity_from),
+                    header_tv_validity_to = (TextView) navigationHeaderView.findViewById(R.id.tv_validity_to),
+                    nav_header = navigationHeaderView.findViewById(R.id.iv_view_profile),
+                    nav_tv_upgrade = navigationHeaderView.findViewById(R.id.tv_upgrade),
+                    header_tv_rezq_plus_member = (TextView) navigationHeaderView.findViewById(R.id.tv_rezq_plus_member);
 
             ImageView
-                    header_app_iv = ( ImageView ) navigationHeaderView.findViewById( R.id.nav_profile_image);
+                    header_app_iv = (ImageView) navigationHeaderView.findViewById(R.id.nav_profile_image);
 
-                    nav_header.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                            drawer.closeDrawer(GravityCompat.START);
+            nav_header.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
 
-                            Intent intent = new Intent( mainContext, ProfileMainActivity.class );
-                            startActivity( intent );
+                    Intent intent = new Intent(mainContext, ProfileMainActivity.class);
+                    startActivity(intent);
 
-                        }
-                    });
-                    nav_tv_upgrade.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-                            drawer.closeDrawer(GravityCompat.START);
+                }
+            });
+            nav_tv_upgrade.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                    drawer.closeDrawer(GravityCompat.START);
 
-                            Intent intent = new Intent( mainContext, UpgradeMembershipListActivity.class );
-                            startActivity( intent );
-                        }
-                    });
+                    Intent intent = new Intent(mainContext, UpgradeMembershipListActivity.class);
+                    startActivity(intent);
+                }
+            });
 
 
-            ProfileModel profileModel = globalFunctions.getProfile( mainContext );
+            ProfileModel profileModel = globalFunctions.getProfile(mainContext);
             if (profileModel != null && mainContext != null) {
                 try {
                     String
                             fullName = profileModel.getFirstName() + " " + profileModel.getLastName();
-                            header_name_tv.setText( fullName != null ? fullName : getString( R.string.guest ) );
-                     String
-                            user_full_name=profileModel.getFullname();
-                          // header_name_tv.setText(user_full_name);
+                    header_name_tv.setText(fullName != null ? fullName : getString(R.string.guest));
+                    String
+                            user_full_name = profileModel.getFullname();
+                    // header_name_tv.setText(user_full_name);
 
                     try {
-                        if (profileModel.getProfileImg() != null || !profileModel.getProfileImg().equals( "null" ) || !profileModel.getProfileImg().equalsIgnoreCase( "" )) {
-                            Picasso.with( mainContext ).load(profileModel.getProfileImg() ).placeholder( R.drawable.ic_baseline_person_24 ).into( header_app_iv );
+                        if (profileModel.getProfileImg() != null || !profileModel.getProfileImg().equals("null") || !profileModel.getProfileImg().equalsIgnoreCase("")) {
+                            Picasso.with(mainContext).load(profileModel.getProfileImg()).placeholder(R.drawable.ic_baseline_person_24).into(header_app_iv);
                         }
                     } catch (Exception e) {
                     }
 
                 } catch (Exception exxx) {
-                    Log.e( TAG, exxx.getMessage() );
+                    Log.e(TAG, exxx.getMessage());
                 }
 
                 if (navigationHeaderView != null && mainContext != null) {
-                   // getMembershipDetails();
+                    // getMembershipDetails();
 
                 }
 
@@ -1025,44 +1006,46 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 if (mainContext != null) {
                     try {
                         //header_email_tv.setVisibility( View.GONE );
-                        header_name_tv.setText( mainContext.getString( R.string.guest ) );
+                        header_name_tv.setText(mainContext.getString(R.string.guest));
                     } catch (Exception exxx) {
-                        Log.e( TAG, exxx.getMessage());
+                        Log.e(TAG, exxx.getMessage());
                     }
                 }
             }
 
         }
     }
+
     public void RestartEntireApp(Context context, boolean isLanguageChange) {
         if (isLanguageChange) {
-            SharedPreferences shared_preference = PreferenceManager.getDefaultSharedPreferences( this
-                    .getApplicationContext() );
+            SharedPreferences shared_preference = PreferenceManager.getDefaultSharedPreferences(this
+                    .getApplicationContext());
 
             String mCustomerLanguage = shared_preference.getString(
-                    globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, "null" );
+                    globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, "null");
             String mCurrentlanguage;
-            if ((mCustomerLanguage.equalsIgnoreCase( "en" ))) {
-                globalFunctions.setLanguage( context, GlobalVariables.LANGUAGE.ARABIC );
+            if ((mCustomerLanguage.equalsIgnoreCase("en"))) {
+                globalFunctions.setLanguage(context, GlobalVariables.LANGUAGE.ARABIC);
 
                 mCurrentlanguage = "ar";
             } else {
                 mCurrentlanguage = "en";
-                globalFunctions.setLanguage( context, GlobalVariables.LANGUAGE.ENGLISH );
+                globalFunctions.setLanguage(context, GlobalVariables.LANGUAGE.ENGLISH);
 
             }
             SharedPreferences.Editor editor = shared_preference.edit();
-            editor.putString( globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, mCurrentlanguage );
+            editor.putString(globalVariables.SHARED_PREFERENCE_SELECTED_LANGUAGE, mCurrentlanguage);
             editor.commit();
         }
         globalFunctions.closeAllActivities();
-        Intent i = new Intent( this, SplashActivity.class );
-        i.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK );
-        startActivity( i );
-        System.exit( 0 );
+        Intent i = new Intent(this, SplashActivity.class);
+        i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(i);
+        System.exit(0);
     }
+
     public void stimulateOnResumeFunction() {
-        mainActivityFM.findFragmentById( R.id.container ).onResume();
+        mainActivityFM.findFragmentById(R.id.container).onResume();
     }
 
     public void releseFragments() {
@@ -1073,48 +1056,48 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState( outState );
+        super.onSaveInstanceState(outState);
     }
 
 
-    private void logoutUser(final  Context mainContext,final UpdateLanguageModel updateLanguageModel) {
-        GlobalFunctions.showProgress( mainContext, getString( R.string.logingout ) );
+    private void logoutUser(final Context mainContext, final UpdateLanguageModel updateLanguageModel) {
+        GlobalFunctions.showProgress(mainContext, getString(R.string.logingout));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
-        servicesMethodsManager.logout( mainContext,updateLanguageModel, new ServerResponseInterface() {
+        servicesMethodsManager.logout(mainContext, updateLanguageModel, new ServerResponseInterface() {
             @Override
             public void OnSuccessFromServer(Object arg0) {
                 GlobalFunctions.hideProgress();
-                Log.d( TAG, "Response : " + arg0.toString() );
-                validateOutput( arg0 );
+                Log.d(TAG, "Response : " + arg0.toString());
+                validateOutput(arg0);
             }
 
             @Override
             public void OnFailureFromServer(String msg) {
                 GlobalFunctions.hideProgress();
-                Toast.makeText( mainContext, msg, Toast.LENGTH_SHORT ).show();
+                Toast.makeText(mainContext, msg, Toast.LENGTH_SHORT).show();
                 //GlobalFunctions.displayMessaage(context, mainView, msg);
-                Log.d( TAG, "Failure : " + msg );
+                Log.d(TAG, "Failure : " + msg);
             }
 
             @Override
             public void OnError(String msg) {
                 GlobalFunctions.hideProgress();
-                Toast.makeText( mainContext, msg, Toast.LENGTH_SHORT ).show();
+                Toast.makeText(mainContext, msg, Toast.LENGTH_SHORT).show();
                 //GlobalFunctions.displayMessaage(context, mainView, msg);
-                Log.d( TAG, "Error : " + msg );
+                Log.d(TAG, "Error : " + msg);
             }
-        }, "Logout_User" );
+        }, "Logout_User");
     }
 
     private void validateOutput(Object arg0) {
         if (arg0 instanceof StatusModel) {
-            StatusModel statusModel = ( StatusModel ) arg0;
+            StatusModel statusModel = (StatusModel) arg0;
             //globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             if (statusModel.isStatus()) {
                 /*Logout success, Clear all cache and reload the home page*/
-                globalFunctions.logoutApplication( mainContext ,false);
+                globalFunctions.logoutApplication(mainContext, false);
                 GlobalFunctions.closeAllActivities();
-                RestartEntireApp( mainContext, false );
+                RestartEntireApp(mainContext, false);
 
             }
         }
@@ -1139,12 +1122,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_recentCoupon) {
             Intent intent = new Intent(activity, RecentCouponActivity.class);
             activity.startActivity(intent);
-        }
-        else if (id == R.id.nav_fav) {
+        } else if (id == R.id.nav_fav) {
             Intent intent = new Intent(activity, WishListActivity.class);
             activity.startActivity(intent);
-        }
-        else if (id == R.id.nav_membership) {
+        } else if (id == R.id.nav_membership) {
 
             if (profileMembershipModel != null) {
                 if (profileMembershipModel.getMembership_id() != null) {
@@ -1155,15 +1136,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(activity, FreeMembershipActivity.class);
                 activity.startActivity(intent);
             }
-        }
-        else if (id == R.id.nav_account) {
+        } else if (id == R.id.nav_account) {
             /*Intent intent = new Intent(activity, SwitchAccountActivity.class);
             activity.startActivity(intent);*/
 
-             Intent intent = new Intent(activity, ProfileMainActivity.class);
-             activity.startActivity(intent);
+            Intent intent = new Intent(activity, ProfileMainActivity.class);
+            activity.startActivity(intent);
 
-        }else if (id == R.id.nav_logout) {
+        } else if (id == R.id.nav_logout) {
             if (GlobalFunctions.isLoggedIn(activity)) {
                 logout();
             }
@@ -1178,12 +1158,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private void logout() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
-        final AlertDialog alertDialog = new AlertDialog( activity );
-        alertDialog.setCancelable( false );
-        alertDialog.setIcon( R.drawable.rezq_logo );
-        alertDialog.setTitle( activity.getString( R.string.app_name ) );
-        alertDialog.setMessage( activity.getResources().getString( R.string.appLogoutText ));
-        alertDialog.setPositiveButton( activity.getString( R.string.yes ), new View.OnClickListener() {
+        final AlertDialog alertDialog = new AlertDialog(activity);
+        alertDialog.setCancelable(false);
+        alertDialog.setIcon(R.drawable.rezq_logo);
+        alertDialog.setTitle(activity.getString(R.string.app_name));
+        alertDialog.setMessage(activity.getResources().getString(R.string.appLogoutText));
+        alertDialog.setPositiveButton(activity.getString(R.string.yes), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.dismiss();
@@ -1198,20 +1178,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                     logoutUser(mainContext, updateLanguageModel);
                 }
             }
-        } );
+        });
 
-        alertDialog.setNegativeButton( activity.getString( R.string.cancel ), new View.OnClickListener() {
+        alertDialog.setNegativeButton(activity.getString(R.string.cancel), new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 alertDialog.dismiss();
             }
-        } );
+        });
 
         alertDialog.show();
 
     }
-
 
 
     @Override
@@ -1236,7 +1215,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Location locations = locationManager.getLastKnownLocation(provider);
         List<String> providerList = locationManager.getAllProviders();
         if (null != locations && null != providerList && providerList.size() > 0) {
-            longitute= locations.getLongitude();
+            longitute = locations.getLongitude();
             latitute = locations.getLatitude();
             Geocoder geocoder = new Geocoder(this,
                     Locale.getDefault());
@@ -1310,40 +1289,39 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
 
-
     @Override
     public void onBackPressed() {
         if (mainActivityFM != null) {
-            String currentFragment = mainActivityFM.findFragmentById( R.id.container ).getClass().getName();
+            String currentFragment = mainActivityFM.findFragmentById(R.id.container).getClass().getName();
             String homeFragmentName = HomeFragment.class.getName();
-            DrawerLayout drawer = ( DrawerLayout ) findViewById( R.id.drawer_layout );
-            if (drawer.isDrawerOpen( GravityCompat.START )) {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
                 drawer.closeDrawers();
-            } else if (!currentFragment.equalsIgnoreCase( homeFragmentName )) {
+            } else if (!currentFragment.equalsIgnoreCase(homeFragmentName)) {
                 Fragment homeFragment = homeFragment = new HomeFragment();
-                replaceFragment( homeFragment, HomeFragment.TAG, getString( R.string.app_name ), 0, 0 );
-            } else if (currentFragment.equalsIgnoreCase( homeFragmentName )) {
+                replaceFragment(homeFragment, HomeFragment.TAG, getString(R.string.app_name), 0, 0);
+            } else if (currentFragment.equalsIgnoreCase(homeFragmentName)) {
                 /*Exit Alert Box*/
-                final AlertDialog alertDialog = new AlertDialog( mainContext );
-                alertDialog.setCancelable( false );
-                alertDialog.setIcon( R.drawable.rezq_logo );
-                alertDialog.setTitle( getString( R.string.app_name ) );
-                alertDialog.setMessage( getResources().getString( R.string.appExitText ) );
-                alertDialog.setPositiveButton( getString( R.string.yes ), new View.OnClickListener() {
+                final AlertDialog alertDialog = new AlertDialog(mainContext);
+                alertDialog.setCancelable(false);
+                alertDialog.setIcon(R.drawable.rezq_logo);
+                alertDialog.setTitle(getString(R.string.app_name));
+                alertDialog.setMessage(getResources().getString(R.string.appExitText));
+                alertDialog.setPositiveButton(getString(R.string.yes), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
                         GlobalFunctions.closeAllActivities();
                         finishAffinity();
-                        System.exit( 0 );
+                        System.exit(0);
                     }
-                } );
-                alertDialog.setNegativeButton( getString( R.string.cancel ), new View.OnClickListener() {
+                });
+                alertDialog.setNegativeButton(getString(R.string.cancel), new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
                     }
-                } );
+                });
 
                 alertDialog.show();
 
@@ -1376,8 +1354,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public void locationData(LocationData locationData) {
-        tvHeaderText.setText(locationData.getFull_address());
-        Log.d("address00","=="+locationData.getFull_address());
+        tvHeaderText.setText(locationData.getCity());
+        Log.d("address00", "==" + locationData.getFull_address());
 
     }
 }

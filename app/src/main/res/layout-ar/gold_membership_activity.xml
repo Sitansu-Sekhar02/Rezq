@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/tool_bar_detail" />
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_below="@+id/tool_bar"
+        android:layout_above="@+id/sub"
+        android:fillViewport="true">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+            <ImageView
+                android:id="@+id/iv_gold_member"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_181sdp"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_lazy_load"/>
+
+            <LinearLayout
+                android:id="@+id/lnrDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_gold_member"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="25dp"
+                android:orientation="vertical">
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_plan_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rezq_mem"
+                    android:textColor="#171717"
+                    android:textSize="24dp" />
+
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_desc_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:text="@string/rezq_mem"
+                    android:textColor="#171717"
+                    android:textSize="16dp" />
+
+                <LinearLayout
+                    android:visibility="gone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:orientation="vertical">
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/membership_child_list_recyclerview"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+    <RelativeLayout
+        android:id="@+id/sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+        <LinearLayout
+            android:id="@+id/amount"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#171717"
+                android:textSize="24dp" />
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tv_no_ofDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sar"
+                android:textColor="#171717"
+                android:textSize="24dp" />
+        </LinearLayout>
+
+        <com.sa.rezq.view.AppButton
+            android:id="@+id/btnSubscribe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/amount"
+            android:background="@color/red"
+            android:text="@string/subscribe"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>
+
+
+

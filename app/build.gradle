@@ -2,22 +2,20 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "28.0.3"
+    compileSdkVersion 31
+    buildToolsVersion "30.0.3"
     useLibrary 'org.apache.http.legacy'
 
 
     defaultConfig {
         applicationId "com.sa.rezq"
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-        }
-      //  testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -28,15 +26,12 @@ android {
 
         }
     }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
-    }
-    sourceSets {
+
+   /* sourceSets {
         main {
             jniLibs.srcDirs = ['src/main/jniLibs']
         }
-    }
+    }*/
 
     lintOptions {
         abortOnError false
@@ -62,6 +57,11 @@ android {
         exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/notice.txt'
         exclude 'META-INF/ASL2.0'
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
@@ -98,8 +98,7 @@ dependencies {
     implementation('com.facebook.android:facebook-android-sdk:4.7.0') {
         exclude group: 'com.parse.bolts', module: 'bolts-tasks'
     }
-
-
+    
     /*AWS libraries*/
     implementation 'com.amazonaws:aws-android-sdk-core:2.+'
     implementation 'com.amazonaws:aws-android-sdk-cognito:2.+'

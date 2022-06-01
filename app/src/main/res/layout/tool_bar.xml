@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/grey_light"
-    app:elevation="0dp"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:contentInsetStart="0dp"
     app:contentInsetStartWithNavigation="0dp"
+    app:elevation="0dp"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     <LinearLayout
@@ -16,97 +16,61 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp">
+        android:padding="@dimen/_5sdp">
 
         <RelativeLayout
             android:id="@+id/rr_header"
-            android:background="@color/grey_light"
             android:layout_width="match_parent"
-            android:layout_height="60dp">
+            android:layout_height="@dimen/_50sdp"
+            android:background="@color/grey_light">
 
-
-            <ImageView
-                android:visibility="gone"
-                android:id="@+id/iv_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:padding="@dimen/_7sdp"
-                android:tag="dw"
-                app:srcCompat="@drawable/ic_group_menu"
-                tools:ignore="VectorDrawableCompat" />
-
-            <com.sa.rezq.view.AppTextView
-                android:id="@+id/ivHomeText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/iv_menu"
-                android:layout_marginLeft="@dimen/_10sdp"
-                android:gravity="center_vertical"
-                android:visibility="gone"
-                android:textStyle="bold"
-                android:textSize="@dimen/_14sdp"
-                android:textColor="#171717" />
             <LinearLayout
                 android:id="@+id/ln_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_40sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_40sdp"
                 android:orientation="vertical">
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tvlocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="@string/currentlocation"
-                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:drawableLeft="@drawable/ic_location"
-                    android:drawablePadding="5dp"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:text="@string/currentlocation"
+                    android:textAppearance="@style/SmallMediumText"
                     android:textColor="@color/black"
-                    android:textSize="14dp"
                     android:visibility="visible" />
+
                 <com.sa.rezq.view.AppTextView
                     android:id="@+id/tvHeaderText"
-                    android:layout_width="200dp"
+                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text=""
+                    android:ellipsize="none"
                     android:gravity="center"
                     android:singleLine="true"
-                    android:name="com.google.android.libraries.places.widget.AutocompleteSupportFragment"
+                    android:text=""
+                    android:textAppearance="@style/MediumSizeText"
                     android:textColor="@color/black"
-                    android:textSize="16dp"
-                    android:ellipsize="none"
                     android:textStyle="bold"
                     android:visibility="visible" />
 
-
             </LinearLayout>
-
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_userProfile"
-                android:layout_width="42dp"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="5dp"
-                android:src="@drawable/ic_guest_profile"
-                android:layout_height="42dp">
+                android:layout_marginRight="@dimen/_5sdp"
+                android:src="@drawable/ic_guest_profile">
 
             </de.hdodenhof.circleimageview.CircleImageView>
 
         </RelativeLayout>
-
-
-        <SearchView
-            android:visibility="gone"
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_8sdp"
-            android:background="@color/white"
-            android:iconifiedByDefault="false"
-            app:queryBackground="@android:color/transparent"
-            android:queryHint="@string/search" />
     </LinearLayout>
 
 </androidx.appcompat.widget.Toolbar>

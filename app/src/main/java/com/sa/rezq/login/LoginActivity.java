@@ -41,7 +41,7 @@ import com.sa.rezq.services.model.StatusMainModel;
 import com.sa.rezq.services.model.StatusModel;
 import com.sa.rezq.view.AlertDialog;
 
-public class LoginActivity  extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     public static final String TAG = "LoginActivity";
 
@@ -61,7 +61,7 @@ public class LoginActivity  extends AppCompatActivity {
     RegisterModel registerModel = null;
 
     private EditText phone_number_etv;
-    private TextView continue_tv, skip_login, register_tv, login_with_otp_tv,login_with_password_tv;
+    private TextView continue_tv, skip_login, register_tv, login_with_otp_tv, login_with_password_tv;
     private CountryCodePicker country_code_picker;
     private EditText password_etv;
 
@@ -71,12 +71,12 @@ public class LoginActivity  extends AppCompatActivity {
     GlobalFunctions globalFunctions;
 
     Button login;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
 
 
         context = this;
@@ -96,33 +96,13 @@ public class LoginActivity  extends AppCompatActivity {
         phone_number_etv = (EditText) findViewById(R.id.etNumber);
         country_code_picker = (CountryCodePicker) findViewById(R.id.country_code_picker);
 
-        login=findViewById(R.id.btnLogin);
-        country_code_picker.setCountryForPhoneCode(+91);
+        login = findViewById(R.id.btnLogin);
 
         mainView = phone_number_etv;
 
+        country_code_picker.setCountryForPhoneCode(+91);
 
-
-        country_code_picker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
-            @Override
-            public void onCountrySelected() {
-                selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
-                phone_number_etv.setText("");
-            }
-        });
-
-        country_code_picker.registerCarrierNumberEditText(phone_number_etv);
-
-        country_code_picker.setPhoneNumberValidityChangeListener(new CountryCodePicker.PhoneNumberValidityChangeListener() {
-            @Override
-            public void onValidityChanged(boolean isValidNumber) {
-            }
-        });
-
-        selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
-
-
-         phone_number_etv.addTextChangedListener(new TextWatcher() {
+        phone_number_etv.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -146,14 +126,32 @@ public class LoginActivity  extends AppCompatActivity {
                     } else {
                         showSubmitButton(false);
                     }
-                } else if (digits.length() >= getResources().getInteger(R.integer.mobile_max_length)) {
+                }/* else if (digits.length() >= getResources().getInteger(R.integer.mobile_max_length)) {
                     globalFunctions.closeKeyboard(activity);
                     showSubmitButton(true);
                 } else {
                     showSubmitButton(false);
-                }
+                }*/
             }
         });
+        country_code_picker.setOnCountryChangeListener(new CountryCodePicker.OnCountryChangeListener() {
+            @Override
+            public void onCountrySelected() {
+                selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
+                phone_number_etv.setText("");
+            }
+        });
+
+        country_code_picker.registerCarrierNumberEditText(phone_number_etv);
+
+        country_code_picker.setPhoneNumberValidityChangeListener(new CountryCodePicker.PhoneNumberValidityChangeListener() {
+            @Override
+            public void onValidityChanged(boolean isValidNumber) {
+            }
+        });
+
+        selected_country_code = country_code_picker.getSelectedCountryCodeWithPlus();
+
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -166,13 +164,14 @@ public class LoginActivity  extends AppCompatActivity {
                 } else {
 
                 }*/
-               // Intent intent=new Intent(LoginActivity.this, ActivityOtpVerification.class);
-              //  startActivity(intent);
+                // Intent intent=new Intent(LoginActivity.this, ActivityOtpVerification.class);
+                //  startActivity(intent);
             }
         });
 
 
     }
+
     private void showSubmitButton(boolean isShown) {
 
 //        String pwd = password_etv.getText().toString().trim();
@@ -188,6 +187,7 @@ public class LoginActivity  extends AppCompatActivity {
         }
 
     }
+
     private void validateInput(String pageType) {
         if (phone_number_etv != null) {
             String
@@ -197,7 +197,7 @@ public class LoginActivity  extends AppCompatActivity {
                 phone_number_etv.setError(getString(R.string.enter_mobileno));
                 phone_number_etv.setFocusableInTouchMode(true);
                 phone_number_etv.requestFocus();
-            }else if (selected_country_code.isEmpty()) {
+            } else if (selected_country_code.isEmpty()) {
                 globalFunctions.displayMessaage(activity, mainView, getString(R.string.countryCodeNONotValid));
             } else if (!country_code_picker.isValidFullNumber()) {
 //                mobile_number_etv.setText("");
@@ -237,12 +237,13 @@ public class LoginActivity  extends AppCompatActivity {
                         model.setCountryCode(registerModel.getCountryCode());
                         model.setEmail_id(mobileNumber);
                         registerModel.setEmailId(mobileNumber);
-                        loginUser(context, model,registerModel);
+                        loginUser(context, model, registerModel);
                     }
                 }
             }
         }
     }
+
     private void checkMobileNumber(final Context context, final LoginModel loginModel, final RegisterModel registerModel, String pageType) {
         GlobalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
@@ -272,7 +273,8 @@ public class LoginActivity  extends AppCompatActivity {
             }
         }, "CheckMobileNumber");
     }
-    private void loginUser(final Context context, final LoginModel model,RegisterModel registerModel) {
+
+    private void loginUser(final Context context, final LoginModel model, RegisterModel registerModel) {
         globalFunctions.showProgress(activity, getString(R.string.loading));
         ServicesMethodsManager servicesMethodsManager = new ServicesMethodsManager();
         servicesMethodsManager.loginUser(context, model, new ServerResponseInterface() {
@@ -307,10 +309,10 @@ public class LoginActivity  extends AppCompatActivity {
             if (!statusMainModel.isStatusLogin()) {
                 globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             } else {
-                    GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
-                    getProfile();
+                GlobalFunctions.setSharedPreferenceString(context, GlobalVariables.SHARED_PREFERENCE_TOKEN, statusModel.getToken());
+                getProfile();
 
-                }
+            }
         }
 
     }
@@ -370,18 +372,17 @@ public class LoginActivity  extends AppCompatActivity {
         wlp.flags &= ~WindowManager.LayoutParams.FLAG_BLUR_BEHIND;
         window.setAttributes(wlp);
         dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.MATCH_PARENT);
-        dialog.show();
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
-        final Button  btn_ok = dialog.findViewById(R.id.btn_ok);
-        final TextView  tv_cancel = dialog.findViewById(R.id.tv_cancel);
+        final Button btn_ok = dialog.findViewById(R.id.btn_ok);
+        final TextView tv_cancel = dialog.findViewById(R.id.tv_cancel);
         btn_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 dialog.dismiss();
-                pageType=globalVariables.PAGE_FROM_REGISTRATION;
+                pageType = globalVariables.PAGE_FROM_REGISTRATION;
                 sendOtpToMyMobileNumber(registerModel1, pageType);
             }
         });
@@ -406,7 +407,7 @@ public class LoginActivity  extends AppCompatActivity {
                 Log.d(TAG, "Response : " + arg0.toString());
                 // globalFunctions.hideProgress();
                 if (arg0 instanceof ProfileMainModel) {
-                    ProfileMainModel profileMainModel=(ProfileMainModel) arg0;
+                    ProfileMainModel profileMainModel = (ProfileMainModel) arg0;
                     ProfileModel profileModel = profileMainModel.getProfileModel();
                     GlobalFunctions.setProfile(context, profileModel);
                     closeThisActivity();
@@ -448,11 +449,11 @@ public class LoginActivity  extends AppCompatActivity {
             if (statusMainModel.isStatus()) {
                 sendOtpToMyMobileNumber(registerModel, pageType);
             } else {
-                if (statusModel.getExtra().equalsIgnoreCase("1")){
-                    showAlertMessage(statusModel.getMessage(),registerModel);
-                } else  if (statusModel.getExtra().equalsIgnoreCase("2")){
+                if (statusModel.getExtra().equalsIgnoreCase("1")) {
+                    showAlertMessage(statusModel.getMessage(), registerModel);
+                } else if (statusModel.getExtra().equalsIgnoreCase("2")) {
                     sendOtpToMyMobileNumber(registerModel, pageType);
-                }else {
+                } else {
                     //registered user..
                     globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
                 }
@@ -486,7 +487,6 @@ public class LoginActivity  extends AppCompatActivity {
         if (activity != null) activity = null;
         super.onDestroy();
     }
-
 
 
 }

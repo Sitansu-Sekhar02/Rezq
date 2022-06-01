@@ -1,0 +1,471 @@
+<resources>
+    <string name="app_name">Rezq</string>
+    <string name="search">البحث عن العروض ,التصنيفات</string>
+    <string name="popular_category">التصنيفات الشائعة</string>
+    <string name="seeall">مشاهدة الكل</string>
+    <string name="food">Food</string>
+    <string name="bar">بار قهوة</string>
+    <string name="travel"> السفر</string>
+    <string name="cinema">سينما</string>
+    <string name="welcome">أهلا بك</string>
+    <string name="enter_mobileno">أدخل رقم الموبايل</string>
+    <string name="otpverify">رمز التحقق</string>
+    <string name="enter_otp">ادخل الرمز</string>
+    <string name="resendotp">إعادة إرسال الرمز</string>
+    <string name="verify">التحقق</string>
+    <string name="createnewaccount">إنشاء حساب جديد</string>
+    <string name="firstname">الأسم الأول</string>
+    <string name="enter_your_name">أدخل الأسم الأول</string>
+    <string name="lastname">الأسم الأخير</string>
+    <string name="enter_lastname">أدخل الأسم الأخير</string>
+    <string name="contact">اتصل</string>
+    <string name="enter_contact">رقم الإتصال</string>
+    <string name="email">أدخل معرف البريد الإلكتروني</string>
+    <string name="enter_email">أدخل معرف البريد الإلكتروني</string>
+    <string name="signup">متابعة</string>
+    <string name="freemember">عضو مجاني</string>
+    <string name="upgrade">تحديث</string>
+    <string name="home">الصفحة الرئيسية</string>
+    <string name="coupon">آخر الكوبونات</string>
+    <string name="favourite">المفضلة</string>
+    <string name="membership">عضوية</string>
+    <string name="accounts">حسابات</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="arabic">عربي</string>
+    <string name="english">English</string>
+    <string name="currentlocation">الموقع الحالي</string>
+    <string name="trending_now">المشتهرة حالياً</string>
+    <string name="popular_places">مناطق مشهورة بجانبك</string>
+    <string name="get_extra">كن عضوًا رئيسيًا وافتح العروض القوية</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="rezq_mem">رزق بلس</string>
+    <string name="from_to">من 10مارس الى10 يونيو</string>
+    <string name="free_membership">حاليا لديك</string>
+    <string name="membership_free">عضو مجاني</string>
+    <string name="validity">صلاحية</string>
+    <string name="days_left"> 360يوم متبقي</string>
+    <string name="valid_from">صالح من تاريخ</string>
+    <string name="valid_to">صالحة ل</string>
+    <string name="date_from">12 Aug 2021</string>
+    <string name="day_to">24 Aug 2022</string>
+    <string name="upgrate_to_premium">ترقية العضوية</string>
+    <string name="unblock_offer">فتح أفضل العروض</string>
+    <string name="subscribe">الإشتراك</string>
+    <string name="sar">Sar </string>
+    <string name="create_familacc">إنشاء حساب عائلي</string>
+    <string name="plus_previlegs">امتيازات إضافية</string>
+    <string name="nearby_km">Nearby distance 100km</string>
+    <string name="get_offer">Get best offers before others</string>
+    <string name="unblock_daily">Unlock 2 deals a day</string>
+    <string name="marina">Carlucciao\'s- Dubai Marina mall</string>
+    <string name="off_percent"></string>
+    <string name="dubai_mall">Urban Bar <br></br>Kitchen- UBK</string>
+    <string name="al_qaim">Al Mansalauun</string>
+    <string name="drink_on">First drink on the house</string>
+    <string name="pizza">Broccoli pizza &amp; pasta</string>
+    <string name="off">50% off</string>
+    <string name="buy_one_get">Buy 1 get 1</string>
+    <string name="reedemoffer">تخليص عرض</string>
+    <string name="enter_vendorcode">الرجاء إدخال رمز التحقق من البائع</string>
+    <string name="reedm">استرداد</string>
+    <string name="reating">التقييمات</string>
+    <string name="happy_hourse">Happy hours</string>
+    <string name="buy_two_get_one">Buy 2 and get one drink free</string>
+    <string name="applicable_onselectitem">Applicable on selected items</string>
+    <string name="code_coupon">KQI2817KD</string>
+    <string name="show_reception">يرجى إظهار هذا في الاستعلامات</string>
+    <string name="copy_coupon">نسخ كود الكوبون</string>
+    <string name="unlock_raza">افتح مع رزق بلس</string>
+    <string name="upto_50_off">Upto 50% off on special items</string>
+    <string name="premium_members_only">متاح للأعضاء المميزين فقط</string>
+    <string name="reedemoffer2">تخليص عرض</string>
+    <string name="save_in_recent">حفظ في الآونة الأخيرة</string>
+    <string name="rate_your_exp">قيم تجربتك في</string>
+    <string name="comments">التعليقات ( اختياري)</string>
+    <string name="submit">إرسال</string>
+    <string name="all_locked_offer">كل العروض المغلقة</string>
+    <string name="rezq_plus_offer">عروض رزق بلس</string>
+    <string name="prime_members">كن عضوا رئيسيا لفتح العروض</string>
+    <string name="prime_offer">عروض رزق الرئيسية</string>
+    <string name="dinner">Dinner | Takeaway | Bar</string>
+    <string name="dubai_marina">Carlucciaos- Dubai Marina mall</string>
+    <string name="Favourite">مفضلة</string>
+    <string name="address">عنوان</string>
+    <string name="Neque_porro">Neque porro quisquam est qui <br></br>dolorem ipsum quia dolor.</string>
+    <string name="open_map">أفتح الخريطة</string>
+    <string name="offers">عروض</string>
+    <string name="seeall_locked_offer">مشاهدة كامل العروض المغلقة</string>
+    <string name="ratings">تقييمات وآراء</string>
+    <string name="years_ago">7 months ago</string>
+    <string name="description">Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit</string>
+    <string name="popular_foods">الأطعمة المشهورة</string>
+    <string name="most_visited">الأكثر زيارة</string>
+    <string name="pizza_pasta">Broccoli Pizza &amp; Pasta</string>
+    <string name="one_offers">12 offers</string>
+    <string name="start_typing">إبدأ الكتابة</string>
+    <string name="recent_search">عمليات البحث الأخيرة</string>
+    <string name="clear">مسح الكل</string>
+    <string name="fishland">Fish Land</string>
+    <string name="recent_visited">تمت زيارته مؤخرًا</string>
+    <string name="top_offers">أفضل العروض والصفقات</string>
+    <string name="my_membership">عضويتي</string>
+    <string name="upgrade_membership">تحديث العضوية</string>
+    <string name="today">اليوم</string>
+    <string name="broklin">Broccoli pizza &amp; pasta</string>
+    <string name="yesterday">البارحة</string>
+    <string name="recent">الكوبونات الأخيرة</string>
+    <string name="favourites">المفضلة</string>
+    <string name="all">الكل</string>
+    <string name="whoisusing">من يستخدم</string>
+    <string name="select_account">حدد الحساب الذي تريد الدخول إليه</string>
+    <string name="abdul">Abdul</string>
+    <string name="add">إضافة</string>
+    <string name="addnewaccount">اضافة حساب جديد</string>
+    <string name="entername">إدخال الأسم</string>
+    <string name="coninue">متابعة</string>
+    <string name="phn_erro">رقم الاتصال مطلوب</string>
+    <string name="password_error">كلمة المرور مطلوبة</string>
+    <string name="CannotconnecttoInternet">تحقق من اتصالك بالإنترنت</string>
+    <string name="Theservercouldnotbefound">هنالك مشكلة في الإتصال بالمستخدم , الرجاء المحاولة لاحقاً</string>
+    <string name="Parsingerror">خطأ تحليلي</string>
+    <string name="ConnectionTimeOut">إنتهاء الإتصال</string>
+    <string name="pleasewait">الرجاء الإنتظار ... لتحميل البيانات</string>
+    <string name="loading">الإنتظار</string>
+    <!--Network Static messages-->
+    <string name="NetworkError">لايوجد شبكة متاحة</string>
+    <string name="ServerError">مهلة استجابة الخادم</string>
+    <string name="ServerInternalError">خطأ داخلي في الخادم</string>
+    <string name="AuthFailedError">فشلت مصادقة الخادم</string>
+    <string name="ParseError">خطأ تحليلي</string>
+    <string name="NoConnectionError">ا يوجد اتصال متاح للمضيفt</string>
+    <string name="TimeOutError">خطأ مهلة الخادم</string>
+    <string name="ErrorResponseData">خطأ إستجابة البيانات</string>
+    <string name="UnknownError">خطأ غير معروف</string>
+    <string name="UnexpectedResponse">استجابة غير متوقعة</string>
+
+    <string name="emailNotValid">البريد الإلكتروني غير صالح</string>
+
+    <!--
+        <string name="email">Email</string>
+    -->
+    <!--
+        <string name="mobile">Mobile</string>
+    -->
+    <string name="locationResponseFailure">فشل استجابة الموقع</string>
+
+    <string name="not_available">غير متاح</string>
+
+    <string name="for_registering">للتسجيل معنا!</string>
+    <string name="registration_successful">تم التسجيل بنجاح!</string>
+    <string name="one_of_our_experts_will_come">One of our experts will come and</string>
+    <string name="visit_you">visit you shortly!</string>
+
+    <string name="otp">رمز التحقق</string>
+
+    <string name="reject">Reject</string>
+    <string name="reject_booking">Reject Booking</string>
+
+    <string name="profile">حساب</string>
+
+    <string name="yes">نعم</string>
+    <string name="no">لا</string>
+    <!--
+        <string name="cancel">Cancel</string>
+    -->
+
+    <string name="view_details">عرض المعلومات</string>
+
+
+    <string name="mobile_number_country_code_error_message">يرجى إدخال صالح</string>
+    <string name="mobile_number_digit_error_message">رقم الهاتف المحمول</string>
+
+    <string name="mobile_number_error_message">يرجى إدخال رقم هاتف محمول صحيح</string>
+    <string name="pleaseFillMandatoryDetails">يرجى ملء الحقول الإلزامية</string>
+    <string name="pleaseFillpassword">يرجى إعطاء كلمة المرور</string>
+    <string name="pleaseFillmobileNo">يرجى إعطاء رقم الهاتف المحمول</string>
+    <!--
+        <string name="name">Name</string>
+    -->
+    <string name="massage_type">نوع الرسالة</string>
+    <string name="digit_mobile_number">الرجاء إدخال رقم الموبايل المتاح</string>
+    <string name="mobile_number">رقم الموبايل</string>
+    <string name="city">City</string>
+    <string name="change">Change</string>
+    <string name="changePassword">تغير كلمة المرور</string>
+    <!--
+        <string name="password">Password</string>
+    -->
+    <string name="confirm_password">تأكيد كلمة المرور</string>
+    <string name="passwordNotMatched">كلمة المرور التي تم إدخالها غير متطابقة</string>
+    <!-- <string name="passwordContainsError">*Password Should be minimum 6 characters length. Contains no special characters. Case Sensitive</string>-->
+    <string name="passwordContainsError">يجب ألا تقل كلمة المرور عن 6 أحرف</string>
+    <string name="phoneNONotValid">رقم الهاتف غير صالح</string>
+    <string name="check_terms_and_condition">يرجى التحقق من الشروط والأحكام للمتابعة</string>
+
+    <string name="your_old_password">كلمة السر القديمة لديك</string>
+
+    <string name="want_to_change_password"> عند تغيير كلمة المرور ، سيتم تسجيل خروجك من جميع الأجهزة. هل تريد الاستمرا</string>
+
+
+    <string name="user">User</string>
+
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="others">Others</string>
+
+    <string name="select_location">اختار الموقع</string>
+    <string name="pickup_location">Pickup Location</string>
+    <string name="drop_location">Drop Location</string>
+
+    <string name="permission_rationale_location">Access to the location service is required to demonstrate the \'my location\' feature, which shows your current location on the map.</string>
+    <string name="location_permission_denied">This sample requires location permission to enable the \'my location\' layer. Please try again and grant access to use the location.\nIf the permission has been permanently denied, it can be enabled from the System Settings &gt; Apps &gt; \'YIN\'.</string>
+    <string name="permission_required_toast">مطلوب إذن الموقع لهذا العرض التوضيحي.</string>
+
+    <string name="image_convertion_error">لا يمكن تحويل الصورة المحددة</string>
+
+    <string name="update">تحديث</string>
+    <string name="confirm">تأكيد</string>
+    <string name="send">إرسال</string>
+    <string name="logingin">تسجيل الدخول</string>
+    <!--
+        <string name="logout">Logout</string>
+    -->
+    <string name="logingout">تسجيل الخروج</string>
+    <string name="registering">التسجيل</string>
+    <string name="getting_profile">جاري استرداد ملف التعريف ...</string>
+    <string name="updatingProfile">تحديث الحساب</string>
+    <string name="updatingCity">Updating city...</string>
+    <string name="forgotPassword">نسيت كلمة المرور</string>
+    <string name="firstName">الأسم الأول</string>
+    <string name="lastName">الأسم الأخير</string>
+
+    <string name="acceptable_inputs_for_name_field">abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLMNOPQRSTUVWXYZ,.-</string>
+
+    <string name="appExitText">هل تريد الخروج؟</string>
+    <string name="appProfileUpdatedText">تم تحديث الحساب بنجاح</string>
+    <string name="cityUpdatedText">City Updated successfully</string>
+
+    <string name="appLogoutText">هل أنت متأكد ؟ تريد تسجيل الخروج ؟</string>
+
+    <string name="ok">حسناً</string>
+
+
+    <string name="otp_length_error">يرجى ملء الرمز الخاص بك الذي تلقيته</string>
+    <string name="error">خطأ</string>
+
+    <!--Exception Message-->
+    <string name="not_valid_model">نموذج غير صالح</string>
+
+    <!--Ratting Strings-->
+
+    <!--Loading Text-->
+    <!--
+        <string name="loading">Loading...</string>
+    -->
+    <string name="updatingPassword">تحديث كلمة المرور</string>
+
+    <!--Loader Messages-->
+    <string name="noConnection">لا إتصال</string>
+    <string name="noConnectionErrorMessage"> لم نتمكن من إنشاء اتصال مع خوادمنا. حاول مرة أخرى عندما تكون متصلاً بالإنترنت.</string>
+    <string name="tryAgain">حاول مرة أخرى</string>
+    <string name="emptyList">قائمة فارغة</string>
+    <string name="emptyListMessage">No records to display.</string>
+
+    <string name="location">الموقع</string>
+    <!--
+        <string name="pickup">Pickup</string>
+    -->
+    <string name="customer_request_list">Customer Request List</string>
+    <string name="mobileNoNotValid">رقم الموبايل غير متاح</string>
+
+    <!--City Selection Strings-->
+    <string name="guest">زائر</string>
+
+    <!--AWS Credentials-->
+    <string name="AWSAccessKeyId">AKIAJHTRLSWFV7ZBMCEA</string>
+    <string name="AWSSecretKey">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</string>
+    <string name="AWSBucket">صورة الحساب
+</string>
+
+    <!--CCAvenue Credentials-->
+
+    <!--Google API Keys-->
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="singleCar">Single Car</string>
+    <string name="multipleCar">Multiple Car</string>
+    <string name="apartment">Apartment</string>
+    <string name="independent_house">Independent House</string>
+    <string name="service_time">Service time:</string>
+
+    <string name="order_received">Order Placed</string>
+    <string name="payment_received">Payment Received</string>
+    <string name="order_packed">Order Packed</string>
+    <string name="order_shipped">Order Shipped</string>
+    <!--
+        <string name="order_delivered">Order Delivered</string>
+    -->
+
+    <!--Support Status Messages-->
+    <string name="support_status_initiated">Open</string>
+
+
+    <string name="ladies_only">Ladies Only</string>
+    <string name="accept_terms_and_condition">accept terms and conditions</string>
+    <string name="enter">أدخل</string>
+    <string name="login">دخول</string>
+    <string name="your_new_password">Your New Password</string>
+    <string name="register">يسجل</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="login_to_yin">Login to yin</string>
+    <string name="login_with_otp">الدخول مع الرمز</string>
+    <string name="recent_otp">إعادة إرسال الرمز</string>
+    <string name="forgot_password">نسيت كلمة المرور</string>
+    <string name="new_register_now">New? Register Now!</string>
+    <string name="thank_you">شكراً لك</string>
+    <string name="contact_us">أتصل بنا</string>
+    <string name="support">Support</string>
+    <string name="email_us">Email Us</string>
+    <string name="follow_us">Follow Us</string>
+    <string name="customer_id">CUSTOMER ID :</string>
+    <string name="GPS_settings">أعدادات ال GPS</string>
+    <string name="GPS_settings_unable">GPS غير ممكّن. هل تريد الذهاب إلى قائمة الإعدادات؟</string>
+    <string name="select_services">Select Services</string>
+    <string name="go_to_home">Go To Home</string>
+    <string name="your_password">Your Password</string>
+    <string name="appointment">Appointments</string>
+    <string name="account">حسابي</string>
+    <string name="confirmed">Confirmed</string>
+    <string name="date">Date</string>
+    <string name="time">Time</string>
+    <string name="empty">Empty</string>
+    <string name="emptyAppointmentsDescription">No list to show</string>
+    <string name="total">Total</string>
+    <string name="complete_booking">Complete Booking</string>
+    <string name="completed_bookings">Completed Bookings</string>
+    <string name="cancel_booking">Cancel Booking</string>
+    <string name="confirm_booking">Confirm Booking</string>
+    <string name="do_you_want_to_complete_booking">Do you want to complete  this booking ?</string>
+    <string name="do_you_want_to_cancel_booking">Do you want to cancel  this booking ?</string>
+    <string name="do_you_want_to_confirm_booking">Do you want to confirm  this booking ?</string>
+    <string name="emptyBookingsDescription">No bookings to display</string>
+    <string name="select_your_city">Select Your City</string>
+    <string name="select_your_country">Select Your Country</string>
+
+    <string name="empty_services_title">Currently no services available for this category!!</string>
+
+    <string name="empty_services">لا توجد خدمات متاحة!</string>
+
+    <!--weekdays...-->
+    <string name="edit_info">Edit Info</string>
+    <string name="registration_successfull">نجاح</string>
+    <string name="registration_success">تم التسجيل بنجاح</string>
+    <string name="cancel_city_updation">Cancel city updation ?</string>
+    <string name="select_city">--Select City--</string>
+    <string name="change_your_city">Change Your City</string>
+    <string name="sending_otp">إرسال الرمز</string>
+    <string name="no_list_to_display">No list to display</string>
+    <string name="confirm_your_new_password">Confirm Your New Password</string>
+    <string name="alert">Alert</string>
+    <string name="your_mobile_number">رقم الموبايل</string>
+    <string name="select_your_country_code">حدد رمز بلدك</string>
+    <string name="send_otp">أرسل الرمز</string>
+
+
+    <string name="log_in_to_yin">Log in to yin</string>
+    <string name="countryCodeNONotValid"> رمز بلدك غير متاح</string>
+    <string name="code">كود</string>
+    <string name="enter_email_id">أدخل  عنوانك البريدي</string>
+
+
+    <string name="start_ride">Start ride</string>
+    <string name="on_the_way">On the way</string>
+    <string name="reached_therapist">Reached Therapist</string>
+    <string name="on_the_way_to_customer">On the way to customer</string>
+    <string name="complete_task">Complete</string>
+    <!--
+        <string name="completed">Completed</string>
+    -->
+    <string name="please_enter_valid_otp">الرجاء أدخل الرمز الصالح</string>
+    <string name="sorry_u_have_not_register_with_us">Sorry,You Have Not Registered With Us</string>
+
+    <!--Google API Keys-->
+
+    <string name="GoogleAPIKey">AIzaSyB32cztSOS5gJtnyCxYnN9TOI89q5ANnnU</string>
+
+
+    <string name="loading_profile">إنتظار الحساب</string>
+    <string name="loggin">Logging...</string>
+    <string name="no_product">لم نعثر على المنتج</string>
+
+    <string name="no_internet">لا يوجد انترنت</string>
+    <string name="no_google_playservice_available">لا تتوفر خدمات google play</string>
+    <string name="permission_rationale">يرجى منح إذن الموقع لبدء الخدمة</string>
+    <string name="cancel">إلغاء</string>
+    <string name="edit">تعديل</string>
+    <string name="first_name">الاسم الأول</string>
+    <string name="last_name">الاسم الأخير</string>
+    <string name="mobile_no">رقم الهاتف</string>
+    <string name="email_id">عنوان البريد الإلكتروني</string>
+    <string name="my_profile">حسابي</string>
+    <string name="verification_code_sent_text">تم إرسال رمز التحقق إلى رقم هاتفك المحمول</string>
+    <string name="otp_max_attempt">لقد تجاوزت الحد الأقصى لمحاولة طلب الرمز. يرجى المحاولة بعد مرور بعض الوقت.</string>
+    <string name="invalid_otp">الرمز غير صحيح</string>
+    <string name="please_enetr_valid_number">الرجاء إدخال الرقم المتاح</string>
+    <string name="something_went_wrong_message">هناك خطأ ما</string>
+    <string name="please_continue">متابعة</string>
+    <string name="distance">مسافة</string>
+    <string name="uploading_image">تحميل الصورة</string>
+    <string name="failed_upload_image">الفشل في التحميل</string>
+    <string name="places">مناطق</string>
+    <string name="no_data_show">لاتوجد بيانات للعرض</string>
+    <string name="no_reviews">لم يتم العثور على مراجعة</string>
+    <string name="saerch_item">البحث</string>
+    <string name="no_offers">لا عروض</string>
+    <string name="enter_first_name">أدخل الاسم الأول</string>
+    <string name="show_warning">نعتذر! لايمكنك إضافة أكثر من 4 حسابات</string>
+
+    <string name="dialog_permission_title">منح الأذونات</string>
+    <string name="dialog_permission_message">يحتاج هذا التطبيق إلى إذن لاستخدام هذه الميزة. يمكنك منحهم في إعدادات التطبيق.</string>
+    <string name="go_to_settings">اذهب للاعدادات</string>
+    <string name="msg_error_unable_select_profile_pic">تعذر تعيين صورة الملف الشخصي. حاول مرة اخرى!</string>
+    <string name="lbl_set_profile_photo">أختر الصورة</string>
+    <string name="lbl_take_camera_picture">التقط صورة</string>
+    <string name="lbl_choose_from_gallery">اختار من معرض الصور</string>
+    <string name="toast_image_intent_null"></string>
+    <string name="select_image">أختار الصورة</string>
+    <string name="please_enter_valid_code">الرجاء إدخال رمز استرداد صالح</string>
+    <string name="switch_account">تبديل الحساب</string>
+    <string name="copy_coupon_code">"تم نسخ القسيمة"</string>
+    <string name="no_search_found">لا نتائج وجدت ل</string>
+    <string name="search_phrase_missing">اكتب شيئًا للبحث</string>
+    <string name="save_and_update">أحفظ وحدث</string>
+    <string name="edit_profile">تعديل الحساب</string>
+    <string name="enter_mendatory_field"> الرجاء إدخال الحقل الإلزامي</string>
+    <string name="updating_profile">تحديث الحساب</string>
+    <string name="month">الشهر</string>
+    <string name="days">اليوم</string>
+    <string name="no_offer_available">لابوجد عرض متاح الآن</string>
+    <string name="no_recent_coupons">لا توجد قسائم حديثة متاحة</string>
+    <string name="please_give_a_comment">يرجى إبداء الرأي</string>
+    <string name="thankyou_for_eedback">إنتظار الحساب</string>
+    <string name="no_favourite_item">لا تتوفر عناصر مفضلة</string>
+    <string name="get_gold_membership">كن عضوًا ذهبيًا &amp; amp أطلق العنان لعروض مثيرة</string>
+    <string name="in">"
+في"
+</string>
+    <string name="free">مجاناً</string>
+    <string name="profile_updated_success">نجاح تحديث الحساب</string>
+    <string name="hello_there">أهلا بك!</string>
+    <string name="sub_title">يبدو أنك جديد هنا. سجل معنا ، عروض رائعة في انتظارك.</string>
+    <string name="ok_sure">نعم بالتأكيد</string>
+    <string name="ok_thanks">لا شكرا</string>
+    <string name="golde_membership">كن عضوًا ذهبيًا وافتح عرضًا مثيرًا</string>
+    <string name="wrong_coupon">الرجاء إدخال قسيمة صالحة</string>
+    <string name="scroll_right_toseeMore">انتقل إلى اليمين لرؤية المزيد</string>
+    <string name="kilometer">Km</string>
+    <string name="lang_change">سيتم إعادة تشغيل التطبيق لتطبيق التغييرات</string>
+    <string name="add_location">أضف الموقع</string>
+
+</resources>

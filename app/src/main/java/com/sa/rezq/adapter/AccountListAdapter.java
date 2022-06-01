@@ -117,7 +117,6 @@ public class AccountListAdapter extends RecyclerView.Adapter<AccountListAdapter.
                         }
                       //  openInsertAccountInvoke.OnItemClickListener(model);
 
-
                     }else {
                          GlobalFunctions.setSharedPreferenceString(activity,GlobalVariables.SHARED_PREFERENCE_ACCOUNT_ID,model.getId());
                          Intent intent = new Intent(activity, MainActivity.class);

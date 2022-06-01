@@ -1,0 +1,176 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/black_trans">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center">
+
+        <RelativeLayout
+            android:background="@drawable/dialog_ratings"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tvAlertMsg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_marginTop="10dp"
+                android:text="@string/rate_your_exp"
+                android:textColor="#171717"
+                android:textSize="14dp" />
+            <LinearLayout
+                android:id="@+id/hotel"
+                android:layout_width="match_parent"
+                android:layout_below="@+id/tvAlertMsg"
+                android:orientation="vertical"
+                android:layout_marginTop="10dp"
+                android:gravity="center_horizontal"
+                android:layout_height="wrap_content">
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_55sdp"
+                    app:cardCornerRadius="5dp"
+                    android:layout_gravity="center"
+                    android:gravity="center">
+                    <ImageView
+                        android:id="@+id/iv_product_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
+                        android:background="@drawable/offer_border"
+                        android:src="@drawable/ic_lazy_load"/>
+                </androidx.cardview.widget.CardView>
+
+                <com.sa.rezq.view.AppTextView
+                    android:id="@+id/tv_product_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:text=""
+                    android:textColor="#171717"
+                    android:textSize="16dp" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/rr"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@+id/hotel">
+                <ImageView
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/ic_yellow_star"
+                    android:id="@+id/rating_iv1"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/ic_yellow_star"
+                    android:id="@+id/rating_iv2"/>
+                <ImageView
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/ic_yellow_star"
+                    android:id="@+id/rating_iv3"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/ic_yellow_star"
+                    android:id="@+id/rating_iv4"/>
+
+                <ImageView
+                    android:layout_width="@dimen/_26sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
+                    android:src="@drawable/ic_grey_star"
+                    android:id="@+id/rating_iv5"/>
+
+                <RatingBar
+                    android:visibility="gone"
+                    android:id="@+id/rt_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@color/transparent"
+                    android:progressBackgroundTint="@color/grey"
+                    android:secondaryProgressTint="@color/grey"
+                    android:numStars="5"
+                    android:isIndicator="true"
+                    android:progressTint="@color/yellow_deep"
+                    android:rating="4.0"
+                    android:stepSize="1.0" />
+
+            </LinearLayout>
+            <com.sa.rezq.view.AppTextView
+                android:id="@+id/tvComment"
+                android:visibility="gone"
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rr"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:text="@string/comments"/>
+
+            <com.sa.rezq.view.AppEditTextView
+                android:id="@+id/et_Comment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/rr"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="21dp"
+                android:layout_marginRight="25dp"
+                android:focusableInTouchMode="true"
+                android:hint="@string/comments"
+                android:gravity="right"
+                android:inputType="text"
+                android:padding="10dp"
+                android:textSize="@dimen/_12sdp" />
+
+            <com.sa.rezq.view.AppButton
+                android:layout_marginTop="@dimen/_25sdp"
+                android:id="@+id/btn_submit"
+                android:layout_width="match_parent"
+                android:layout_marginBottom="20dp"
+                android:layout_height="@dimen/_48sdp"
+                android:gravity="center"
+                android:layout_marginRight="40dp"
+                android:textAllCaps="true"
+                android:layout_marginLeft="40dp"
+                android:text="@string/submit"
+                android:background="@drawable/button_border"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:layout_below="@+id/et_Comment" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
