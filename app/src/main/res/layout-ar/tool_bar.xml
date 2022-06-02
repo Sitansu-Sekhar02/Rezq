@@ -39,8 +39,8 @@
                     android:drawableRight="@drawable/ic_location"
                     android:drawablePadding="@dimen/_5sdp"
                     android:text="@string/currentlocation"
-                    android:textColor="@color/black"
                     android:textAppearance="@style/SmallMediumText"
+                    android:textColor="@color/black"
                     android:visibility="visible" />
 
                 <com.sa.rezq.view.AppTextView
@@ -51,11 +51,10 @@
                     android:gravity="right|center"
                     android:singleLine="true"
                     android:text=""
-                    android:textColor="@color/black"
                     android:textAppearance="@style/MediumSizeText"
+                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:visibility="visible" />
-
             </LinearLayout>
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -64,9 +63,7 @@
                 android:layout_height="@dimen/_35sdp"
                 android:layout_alignParentEnd="true"
                 android:layout_centerInParent="true"
-                android:layout_marginRight="@dimen/_5sdp"
-                android:src="@drawable/ic_guest_profile">
-            </de.hdodenhof.circleimageview.CircleImageView>
+                android:layout_marginRight="@dimen/_5sdp" />
 
         </RelativeLayout>
     </LinearLayout>

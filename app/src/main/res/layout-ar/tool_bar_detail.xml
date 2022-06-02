@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_back_forword"
+            android:src="@drawable/ic_back_right"
             android:id="@+id/tool_bar_back_icon"
             android:layout_alignParentRight="true"
             android:layout_gravity="right"/>
@@ -36,10 +36,5 @@
             android:layout_gravity="center"
             android:id="@+id/toolbar_title"/>
 
-
-
-
     </RelativeLayout>
-
-
 </androidx.appcompat.widget.Toolbar>

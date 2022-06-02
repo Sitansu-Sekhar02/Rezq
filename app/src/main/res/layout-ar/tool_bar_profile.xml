@@ -23,7 +23,7 @@
             android:layout_centerVertical="true"
             android:layout_gravity="end"
             android:padding="@dimen/_10sdp"
-            android:src="@drawable/ic_forward_icon_ar" />
+            android:src="@drawable/ic_back_right" />
 
         <com.sa.rezq.view.AppTextView_Title
             android:id="@+id/toolbar_title"

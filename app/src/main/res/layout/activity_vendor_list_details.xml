@@ -21,14 +21,14 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:background="@color/app_fontBlackColor"
-                android:layout_height="204dp">
+                android:layout_height="204dp"
+                android:background="@color/app_fontBlackColor">
 
                 <ImageView
                     android:id="@+id/vendor_list_image"
                     android:layout_width="match_parent"
-                    android:scaleType="centerCrop"
-                    android:layout_height="@dimen/_160sdp" />
+                    android:layout_height="@dimen/_160sdp"
+                    android:scaleType="centerCrop" />
 
                 <com.sa.rezq.view.AppTextView
                     android:layout_width="match_parent"
@@ -43,9 +43,10 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_marginBottom="@dimen/_4sdp"
+                    android:alpha="0.4"
                     android:gravity="center"
                     android:text=""
-                    android:alpha="0.4"
+                    android:visibility="gone"
                     android:textSize="@dimen/_16sdp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -53,69 +54,70 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="15dp"
-                android:layout_gravity="center_vertical"
                 android:layout_marginRight="20dp"
+                android:gravity="center"
                 android:orientation="horizontal">
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true">
 
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tvRating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="5dp"
+                        android:gravity="center"
+                        android:text="4.8"
+                        android:textAppearance="@style/MediumSizeText"
+                        android:textColor="@color/yellow"
+                        android:textStyle="bold" />
 
-                <com.sa.rezq.view.AppTextView
-                    android:id="@+id/tvRating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="5dp"
-                    android:gravity="center"
-                    android:text=""
-                    android:textColor="@color/yellow"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/tv_star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="@dimen/_4sdp"
+                        android:layout_toRightOf="@+id/tvRating"
+                        android:src="@drawable/ic_rating_star" />
 
-                <ImageView
-                    android:id="@+id/tv_star"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/tvRating"
-                    android:layout_marginLeft="@dimen/_4sdp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_baseline_star_rate_24" />
+                    <com.sa.rezq.view.AppTextView
+                        android:id="@+id/tv_count_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_toRightOf="@+id/tv_star"
+                        android:gravity="center"
+                        android:text="5"
+                        android:textAllCaps="true"
+                        android:textColor="@color/app_text_color_common"
+                        android:textAppearance="@style/SmallMediumText" />
 
-                <com.sa.rezq.view.AppTextView
-                    android:id="@+id/tv_count_rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:layout_toRightOf="@+id/tv_star"
-                    android:gravity="center"
-                    android:text=""
-                    android:textAllCaps="true"
-                    android:textColor="#171717"
-                    android:textSize="14dp" />
-
-                <com.sa.rezq.view.AppTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="6dp"
-                    android:layout_toRightOf="@+id/tv_count_rating"
-                    android:layout_centerInParent="true"
-                    android:gravity="center"
-                    android:text="@string/reating"
-                    android:textAllCaps="true"
-                    android:textStyle="bold"
-                    android:textColor="#171717"
-                    android:textSize="12dp" />
+                    <com.sa.rezq.view.AppTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_toRightOf="@+id/tv_count_rating"
+                        android:gravity="center"
+                        android:text="@string/reating"
+                        android:textAllCaps="true"
+                        android:textColor="@color/app_text_color_common"
+                        android:textAppearance="@style/SmallerText"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:layout_alignParentRight="true">
+                    android:layout_alignParentRight="true"
+                    android:layout_centerInParent="true">
 
                     <ImageView
                         android:id="@+id/iv_favourite"
@@ -157,8 +159,8 @@
                     android:id="@+id/TvAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/address"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:text="@string/address"
                     android:textColor="#8D8D8D"
                     android:textSize="12dp" />
 
@@ -167,8 +169,8 @@
                     android:layout_width="211dp"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/TvAddress"
-                    android:layout_marginTop="5dp"
                     android:layout_marginLeft="@dimen/_10sdp"
+                    android:layout_marginTop="5dp"
                     android:text=""
                     android:textColor="#171717"
                     android:textSize="14dp" />
@@ -217,10 +219,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/offer"
-                    android:visibility="gone"
                     android:layout_marginLeft="12dp"
                     android:layout_marginTop="10dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:visibility="gone">
 
                     <com.vlonjatg.progressactivity.ProgressLinearLayout
                         android:id="@+id/details_progressActivity"
@@ -359,7 +361,6 @@
 
                         </androidx.recyclerview.widget.RecyclerView>
                     </com.vlonjatg.progressactivity.ProgressLinearLayout>
-
 
 
                 </LinearLayout>

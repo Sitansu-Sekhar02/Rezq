@@ -6,11 +6,13 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,6 +23,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -77,9 +80,9 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
     ImageView vendor_list_image;
     ImageView iv_favourite;
-    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers,empty_offer,tv_empty_locked_offer,tv_upgrade_title;
-    public  static RelativeLayout upgrade_prime_rl;
-    public  static RelativeLayout rl_rating;
+    TextView tv_vendor_name, tvRating, tv_address, tv_open_map, tv_rating_count, Tv_allLockedOffers, empty_offer, tv_empty_locked_offer, tv_upgrade_title;
+    public static RelativeLayout upgrade_prime_rl;
+    public static RelativeLayout rl_rating;
 
 
     public View mainView;
@@ -93,18 +96,18 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     static ImageView toolbar_logo, tool_bar_back_icon;
     BannerModel bannerModel = null;
     NearbyModel nearbyModel = null;
-    RecentCouponModel recentCouponModel=null;
+    RecentCouponModel recentCouponModel = null;
     LinearLayout hotel_ll;
 
-    String membership_id=null;
+    String membership_id = null;
 
     //int id = 100;
-    boolean isWishlisted=false;
+    boolean isWishlisted = false;
     String id = null;
     LayoutInflater layoutInflater;
 
-    String latitude=null;
-    String longitude=null;
+    String latitude = null;
+    String longitude = null;
 
 
     OfferListAdapter offerListAdapter;
@@ -135,7 +138,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
     String vendor_id = null;
     TrendingModel trendingModel = null;
-    WishModel wishModel=null;
+    WishModel wishModel = null;
     VendorStoreModel vendorStoreModel = null;
 
     FirebaseStorage storage;
@@ -223,10 +226,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
 
         vendor_list_image = findViewById(R.id.vendor_list_image);
-        // vendor_list_image.setAlpha(0.75f);
-
         iv_favourite = findViewById(R.id.iv_favourite);
-
         tv_vendor_name = findViewById(R.id.tv_vendor_name);
         tv_rating_count = findViewById(R.id.tv_count_rating);
         tvRating = findViewById(R.id.tvRating);
@@ -239,7 +239,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         offer_list_recyclerview.setAdapter(offerListAdapter);
 
         mainView = vendor_list_image;
-
 
         toolbar = (Toolbar) findViewById(R.id.tool_bar); // Attaching the layout to the toolbar object
         tool_bar_back_icon = (ImageView) toolbar.findViewById(R.id.tool_bar_back_icon);
@@ -255,6 +254,12 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         });
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.black_trans));
+        }
 
         if (getIntent().hasExtra(BUNDLE_VENDOR_LIST_DETAILS)) {
             trendingModel = (TrendingModel) getIntent().getSerializableExtra(BUNDLE_VENDOR_LIST_DETAILS);
@@ -345,8 +350,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
 
-        if (vendorModel==null){
-            vendorModel=new VendorModel();
+        if (vendorModel == null) {
+            vendorModel = new VendorModel();
             if (nearbyModel != null) {
                 if (GlobalFunctions.isNotNullValue(nearbyModel.getName())) {
                     vendorModel.setName(nearbyModel.getName());
@@ -362,8 +367,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
         }
 
-        if (vendorModel==null){
-            vendorModel=new VendorModel();
+        if (vendorModel == null) {
+            vendorModel = new VendorModel();
             if (trendingModel != null) {
                 if (GlobalFunctions.isNotNullValue(trendingModel.getName())) {
                     vendorModel.setName(trendingModel.getName());
@@ -378,22 +383,18 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
             }
         }
-
-
-
-       // setTitle(getString(R.string.offers), 0, 0);
+        // setTitle(getString(R.string.offers), 0, 0);
 
         loadVendorlistDetails();
 
-         iv_favourite.setOnClickListener(new View.OnClickListener() {
-             @Override
-             public void onClick(View v) {
+        iv_favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                 checkWishlist();
+                checkWishlist();
 
-
-             }
-         });
+            }
+        });
 
 
         getOfferList();
@@ -407,7 +408,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
 
             }
         });
-
 
     }
 
@@ -446,16 +446,16 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         if (arg0 instanceof StatusMainModel) {
             StatusMainModel statusMainModel = (StatusMainModel) arg0;
             StatusModel statusModel = statusMainModel.getStatusModel();
-           // globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
+            // globalFunctions.displayMessaage(activity, mainView, statusModel.getMessage());
             if (statusMainModel.isStatusLogin()) {
-                if (isWishlisted){
+                if (isWishlisted) {
                     //not wishlist icon
                     iv_favourite.setImageResource(R.drawable.ic_like);
-                    isWishlisted=false;
+                    isWishlisted = false;
 
-                }else {
+                } else {
                     //wishlist icon
-                    isWishlisted=true;
+                    isWishlisted = true;
                     iv_favourite.setImageResource(R.drawable.ic_favorite);
 
                 }
@@ -470,10 +470,10 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         alertView.setContentView(view);
         alertView.setCancelable(true);
         RecyclerView prime_offer = alertView.findViewById(R.id.recyclerview_Rezqplus_offer);
-        RelativeLayout upgrade_prime_rl=alertView.findViewById(R.id.upgrade_prime_rl);
-        tv_empty_locked_offer=alertView.findViewById(R.id.tv_empty_locked_offer);
-        tv_upgrade_title=alertView.findViewById(R.id.tv_upgrade_title);
-        Button btn_upgrade_prime_offer=alertView.findViewById(R.id.btn_upgrade_prime_offer);
+        RelativeLayout upgrade_prime_rl = alertView.findViewById(R.id.upgrade_prime_rl);
+        tv_empty_locked_offer = alertView.findViewById(R.id.tv_empty_locked_offer);
+        tv_upgrade_title = alertView.findViewById(R.id.tv_upgrade_title);
+        Button btn_upgrade_prime_offer = alertView.findViewById(R.id.btn_upgrade_prime_offer);
 
         if (offerListlocked.size() <= 0) {
             showEmptyPage();
@@ -483,8 +483,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         } else {
             showContent();
             setStatusRecyclerview(prime_offer);
-            ProfileMembershipModel profileMembershipModel=GlobalFunctions.getProfileMembership(context);
-            if (profileMembershipModel!=null) {
+            ProfileMembershipModel profileMembershipModel = GlobalFunctions.getProfileMembership(context);
+            if (profileMembershipModel != null) {
                 if (GlobalFunctions.isNotNullValue(profileMembershipModel.getUpgrade_id())) {
                     membership_id = profileMembershipModel.getUpgrade_id();
                 }
@@ -496,8 +496,8 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                        Intent intent = UpgradeParticularMembershipActivity.newInstance( activity, membership_id);
-                        startActivity( intent);
+                    Intent intent = UpgradeParticularMembershipActivity.newInstance(activity, membership_id);
+                    startActivity(intent);
 
                 }
             });
@@ -563,7 +563,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
         }, "Review List");
 
     }
-
 
 
     private void setReviewPage(ReviewListModel reviewListModel) {
@@ -663,9 +662,9 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 }
             }
 
-            if (offerListlocked.size()<=0){
+            if (offerListlocked.size() <= 0) {
                 Tv_allLockedOffers.setVisibility(View.GONE);
-            }else{
+            } else {
 
             }
 
@@ -682,7 +681,7 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     }
 
     private void showOfferEmptyPage() {
-       empty_offer.setVisibility(View.VISIBLE);
+        empty_offer.setVisibility(View.VISIBLE);
         hotel_ll.setVisibility(View.GONE);
     }
 
@@ -731,7 +730,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
                 VendorDetailsMainModel vendorMainModel = (VendorDetailsMainModel) arg0;
                 vendorModel = vendorMainModel.getVendorModel();
 
-
                 if (vendorModel != null) {
                     setVendorDetails(vendorModel);
                 }
@@ -761,26 +759,22 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             if (GlobalFunctions.isNotNullValue(vendorModel.getWishlist())) {
                 if (vendorModel.getWishlist().equalsIgnoreCase("0")) {
                     iv_favourite.setImageResource(R.drawable.ic_like);
-                    isWishlisted=false;
+                    isWishlisted = false;
                 } else {
                     iv_favourite.setImageResource(R.drawable.ic_favorite);
-                    isWishlisted=true;
+                    isWishlisted = true;
                 }
 
             }
-
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {
-                    toolbar_title.setText(vendorModel.getName());
+                toolbar_title.setText(vendorModel.getName());
             }
-
-
             if (GlobalFunctions.isNotNullValue(vendorModel.getImage())) {
                 Picasso.with(context).load(vendorModel.getImage()).placeholder(R.drawable.ic_lazy_load).into(vendor_list_image);
 
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getName())) {
                 tv_vendor_name.setText(vendorModel.getName());
-
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getAddress())) {
                 tv_address.setText(vendorModel.getAddress());
@@ -792,7 +786,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             }
             if (GlobalFunctions.isNotNullValue(vendorModel.getRating_count())) {
                 tv_rating_count.setText(vendorModel.getRating_count());
-
             }
             if (vendorModel != null) {
 
@@ -807,26 +800,24 @@ public class VendorListDetailsActivity extends AppCompatActivity {
             tv_open_map.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (vendorModel!=null){
-                        if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude()) || GlobalFunctions.isNotNullValue( vendorModel.getLongitude())) {
+                    if (vendorModel != null) {
+                        if (GlobalFunctions.isNotNullValue(vendorModel.getLatitude()) || GlobalFunctions.isNotNullValue(vendorModel.getLongitude())) {
 
                             try {
-                                String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude ;
+                                String strUri = "http://maps.google.com/maps?q=loc:" + latitude + "," + longitude;
                                 Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(strUri));
                                 intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
                                 startActivity(intent);
-                            }catch (ActivityNotFoundException e){
-                                Uri uri=Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
-                                Intent intent=new Intent(Intent.ACTION_VIEW,uri);
+                            } catch (ActivityNotFoundException e) {
+                                Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.google.android.apps,maps");
+                                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
-
                             }
                         }
                     }
                 }
             });
-
 
         }
     }
@@ -870,7 +861,6 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-
         closeThisActivity();
         super.onBackPressed();
     }
@@ -903,6 +893,5 @@ public class VendorListDetailsActivity extends AppCompatActivity {
     public void onDestroy() {
         super.onDestroy();
     }
-
 
 }
